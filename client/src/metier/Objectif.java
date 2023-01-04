@@ -1,4 +1,4 @@
-package src.metier;
+package client.src.metier;
 
 import java.io.File;
 

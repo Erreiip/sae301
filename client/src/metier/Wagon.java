@@ -1,4 +1,4 @@
-package src.metier;
+package client.src.metier;
 
 import java.io.File;
 import java.awt.Color;
@@ -20,6 +20,11 @@ public class Wagon
     public Color getCouleur() { return this.couleur; }
 
     public File getFileRecto() { return this.recto; }
+
+    public String toString()
+    {
+        return "Couleur : " + this.couleur.getRGB();
+    }
 
     public static void setFileVerso ( File f)
     {
