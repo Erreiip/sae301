@@ -20,7 +20,8 @@ public class FramePrincipale extends JFrame
         this.ctrl = ctrl;
 
         this.setTitle("Les Aventuriers du Rail");
-        this.setSize(800, 600);
+        this.setSize(1400, 800);
+        this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
 
         this.panelJoueurs     = new PanelJoueurs(ctrl);

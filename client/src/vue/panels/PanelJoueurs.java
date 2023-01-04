@@ -3,6 +3,8 @@ package client.src.vue.panels;
 import client.src.Controleur;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+
 import java.awt.*;
 
 public class PanelJoueurs extends JPanel
@@ -43,7 +45,7 @@ public class PanelJoueurs extends JPanel
             this.panelCouleurVous = new JPanel();
                 this.couleurVous = Color.RED; // Couleur du joueur
                 this.lblCouleurVous = new JLabel("Couleur");
-                this.lblCouleurVous.setForeground(Color.RED);
+                this.lblCouleurVous.setForeground(Color.BLUE);
             this.panelInfosVous = new JPanel(new GridLayout(3,1));
                 this.lblNomVous = new JLabel("Nom du joueur");
                 this.lblNbWagonsVous = new JLabel("Nombre de wagons : X");
@@ -62,6 +64,8 @@ public class PanelJoueurs extends JPanel
                 this.lblNbPvJActuel = new JLabel("Nombre de points de victoire : X");
 
         // --
+
+        Border blackline = BorderFactory.createLineBorder(Color.black);
 
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(1, 1, 1, 1);
@@ -90,7 +94,7 @@ public class PanelJoueurs extends JPanel
         c.gridy = 1;
         this.panelVous.add(this.panelInfosVous, c);
 
-        this.panelVous.setBackground(Color.BLUE);
+        this.panelVous.setBorder(blackline);
         this.add(this.panelVous);
 
         // --
@@ -119,7 +123,7 @@ public class PanelJoueurs extends JPanel
         c.gridy = 1;
         this.panelJActuel.add(this.panelInfosJActuel, c);
 
-        this.panelJActuel.setBackground(Color.RED);
+        this.panelJActuel.setBorder(blackline);
         this.add(this.panelJActuel);
 
         // -- 

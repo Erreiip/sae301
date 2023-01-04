@@ -19,7 +19,7 @@ public class PanelCartes extends JPanel
     {
         this.ctrl = ctrl;
 
-        ImageIcon imgVersoWagon = new ImageIcon(Wagon.getFileVerso().getAbsolutePath());
+        /*ImageIcon imgVersoWagon = new ImageIcon(Wagon.getFileVerso().getAbsolutePath());
         this.lblVersoWagon = new JLabel(imgVersoWagon);
         this.add(lblVersoWagon);
 
@@ -38,6 +38,6 @@ public class PanelCartes extends JPanel
         this.lblVersoObjectif = new JLabel(imgVersoObjectif);
         this.add(lblVersoObjectif);
 
-        this.setLayout(new GridLayout(7,1));
+        this.setLayout(new GridLayout(7,1));*/
     }
 }
