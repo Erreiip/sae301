@@ -20,6 +20,7 @@ public class FrameAcceuil extends JFrame implements ActionListener
         this.ctrl = ctrl;
 
         this.setTitle("Accueil");
+        this.setLocationRelativeTo(null);
         this.setSize(500, 500);
 
         this.btnJouer = new JButton("Jouer");
@@ -28,6 +29,7 @@ public class FrameAcceuil extends JFrame implements ActionListener
 
         this.btnJouer.addActionListener(this);
     
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 
@@ -44,6 +46,8 @@ public class FrameAcceuil extends JFrame implements ActionListener
             {
                 File f = chooser.getSelectedFile();
                 this.ctrl.lireXml(f);
+
+                // lancer frame principale
             }
             
         }
