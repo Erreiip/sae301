@@ -2,19 +2,18 @@ package client.src;
 
 import java.io.File;
 
-import client.src.metier.Metier;
-import client.src.metier.Wagon;
-import client.src.vue.FrameAcceuil;
+import client.src.metier.*;
+import client.src.vue.*;
 
 public class Controleur 
 {
-    private FrameAcceuil ihm;
+    private FramePrincipale ihm;
     private Metier          metier;
 
     public Controleur()
     {
         this.metier = new Metier(this);
-        this.ihm    = new FrameAcceuil(this);
+        this.ihm    = new FramePrincipale(this);
     }
 
     public void lireXml(File f)

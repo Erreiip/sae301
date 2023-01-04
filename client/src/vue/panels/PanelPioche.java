@@ -14,7 +14,6 @@ public class PanelPioche extends JPanel
         this.ctrl = ctrl;
 
         this.setLayout(new GridLayout(7,1));
-        this.setBackground(Color.RED);
 
         JLabel lbl = new JLabel("JLabel");
         this.add(lbl);
