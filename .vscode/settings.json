@@ -5,7 +5,6 @@
         "src/lib/jdom-2.0.6.jar",
         "src/lib/flatlaf-2.6.jar",
         "client/src/lib/flatlaf-2.6.jar",
-        "client/src/lib/commons-io-2.11.0.jar",
         "client/src/lib/jdom-2.0.6.jar"
     ]
 }
