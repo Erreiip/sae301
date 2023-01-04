@@ -1,7 +1,7 @@
-package src;
+package client.src;
 
-import src.metier.Metier;
-import src.vue.FramePrincipale;
+import client.src.metier.Metier;
+import client.src.vue.FramePrincipale;
 
 public class Controleur 
 {

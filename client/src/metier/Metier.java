@@ -1,6 +1,4 @@
-package src.metier;
-
-import src.Controleur;
+package client.src.metier;
 
 import java.awt.Color;
 
@@ -15,18 +13,26 @@ import org.apache.commons.io.FileUtils;
 import org.jdom2.*;
 import org.jdom2.input.*;
 
+import client.src.Controleur;
+
 public class Metier 
 {
-    private Controleur ctrl;
+    private Controleur           ctrl;
 
-    private ArrayList<Ville> alVilles;
-    private ArrayList<Objectif> alObjectifs;
-     
-    
+    private ArrayList<Ville>     alVilles;
+
+    private ArrayList<Objectif>  alObjectifs;
+
+    private ArrayList<Wagon>     alWagons;
+    private ArrayList<Wagon>     alDefausse;
+
     private HashMap<String,File> hsmFichiers;
 
-    private String[] tabReglesJoueurs;
-    private String[] tabReglesWagons;
+    private String[]             tabReglesJoueurs;
+    private String[]             tabReglesWagons;
+
+    private Joueur               joueur;
+
 
     public static String IMG_FOND  = "fond";
     public static String IMG_JOKER = "joker";
@@ -34,12 +40,16 @@ public class Metier
 
     public Metier(Controleur ctrl)
     {
-        this.ctrl = ctrl;
+        this.ctrl             = ctrl;
 
-        this.alVilles    = new ArrayList<Ville>();
-        this.alObjectifs = new ArrayList<Objectif>();
+        this.joueur           = new Joueur("Joueur", 0);
 
-        this.hsmFichiers = new HashMap<String,File>();
+        this.alVilles         = new ArrayList<Ville>   ();
+        this.alObjectifs      = new ArrayList<Objectif>();
+        this.alWagons         = new ArrayList<Wagon>   ();
+        this.alDefausse       = new ArrayList<Wagon>   ();
+
+        this.hsmFichiers      = new HashMap<String,File>();
         this.tabReglesJoueurs = null;
         this.tabReglesWagons  = null;
     }
@@ -148,8 +158,6 @@ public class Metier
             } catch (Exception e) {
             }
         }
-
-        // Export paramètres 
 
         // ListeVille
         Element listeVille       = racine.getChild("listeVille");

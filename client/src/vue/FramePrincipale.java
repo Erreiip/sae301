@@ -1,7 +1,7 @@
-package src.vue;
+package client.src.vue;
 
-import src.Controleur;
-import src.vue.panels.*;
+import client.src.Controleur;
+import client.src.vue.panels.*;
 
 import javax.swing.*;
 import java.awt.*;
