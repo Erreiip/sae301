@@ -134,7 +134,7 @@ public class Metier
 
         String[]  cWagons            = new String[16];
         String[]  iRectoWagons       = new String[16];
-        File  []  fWagons            = new File[16];
+        File  []  fWagons            = new File  [16];
         for (int i = 0; i < iRectoWagons.length; i++) {
             try {
                 cWagons[i]      = couleursWagons.getAttributeValue("c" + (i + 1));
