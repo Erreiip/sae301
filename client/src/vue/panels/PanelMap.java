@@ -1,11 +1,11 @@
 package client.src.vue.panels;
 
-import src.Controleur;
+import client.src.Controleur;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class PanelMap 
+public class PanelMap extends JPanel
 {
     private Controleur ctrl;
 
