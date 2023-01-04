@@ -1,9 +1,8 @@
 package client.src.vue.panels;
 
 import client.src.Controleur;
-import client.src.metier.commom.Wagon;
-import client.src.metier.commom.Objectif;
-
+import client.src.metier.common.Objectif;
+import client.src.metier.common.Wagon;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +33,7 @@ public class PanelCartes extends JPanel
             this.add(this.lblCartesWagon[index]);
             index++;
         }
-
+        
         ImageIcon imgVersoObjectif = new ImageIcon(Objectif.getFile().getAbsolutePath());
         this.lblVersoObjectif = new JLabel(imgVersoObjectif);
         this.add(lblVersoObjectif);
