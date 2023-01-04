@@ -14,6 +14,12 @@ import org.jdom2.*;
 import org.jdom2.input.*;
 
 import client.src.Controleur;
+import client.src.metier.common.Joueur;
+import client.src.metier.common.Objectif;
+import client.src.metier.common.Regles;
+import client.src.metier.common.Route;
+import client.src.metier.common.Ville;
+import client.src.metier.common.Wagon;
 import server.src.Serveur;
 
 public class Metier 

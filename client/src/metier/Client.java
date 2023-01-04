@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import com.esotericsoftware.kryo.Kryo;
 
 import client.src.common.ListenerClient;
+import client.src.metier.common.Regles;
 import server.src.Serveur;
 
 public class Client extends com.esotericsoftware.kryonet.Client
