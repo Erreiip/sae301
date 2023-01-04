@@ -12,6 +12,11 @@ public class PanelMap extends JPanel
     public PanelMap(Controleur ctrl)
     {
         this.ctrl = ctrl;
+
+        this.setLayout(null);
         this.setBackground(Color.RED);
+        
+        JLabel lbl = new JLabel("JLabel");
+        this.add(lbl);
     }    
 }

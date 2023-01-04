@@ -12,6 +12,11 @@ public class PanelCartes extends JPanel
     public PanelCartes(Controleur ctrl)
     {
         this.ctrl = ctrl;
+
+        this.setLayout(new GridLayout(2,1));
         this.setBackground(Color.RED);
+
+        JLabel lbl = new JLabel("JLabel");
+        this.add(lbl);
     }
 }
