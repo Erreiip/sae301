@@ -11,27 +11,23 @@ import server.src.common.ListenerServer;
 
 public class Serveur extends Server 
 {
-    public static int PORT_TCP = 7777;
-    public static int PORT_UDP = 7778;
+    public static int PORT_TCP = 7779;
+    public static int PORT_UDP = 7780;
 
     private Regles regles;
+
+    private Joueur  joueurActif;
 
 
     public Serveur()
     {
         super();
 
-        this.regles = null;
+        this.joueurActif = null;
+        this.regles      = null;
 
         Kryo kryo = this.getKryo();
-        kryo.register(String.class);
-        kryo.register(Regles.class);
-        kryo.register(Joueur.class);
-        kryo.register(Wagon.class);
-        kryo.register(Objectif.class);
-
-
-
+        Serveur.kryoClass(kryo);
 
         try 
         {
@@ -47,7 +43,20 @@ public class Serveur extends Server
         this.regles = r;
     }
 
+
     public Regles getRegles() { return this.regles; }
+
     
-    
+    public static void kryoClass(Kryo kryo)
+    {
+        kryo.register(String.class);
+        kryo.register(Float.class);
+        kryo.register(Integer.class);
+        kryo.register(Regles.class);
+        kryo.register(Joueur.class);
+        kryo.register(Wagon.class);
+        kryo.register(Objectif.class);
+        kryo.register(java.util.ArrayList.class);
+        kryo.register(Integer[].class);
+    }
 }

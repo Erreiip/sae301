@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 
 import client.src.metier.*;
 import client.src.metier.common.Objectif;
+import client.src.metier.common.Route;
 import client.src.metier.common.Wagon;
 import client.src.vue.*;
 
@@ -41,14 +42,19 @@ public class Controleur
         return this.metier.getMainJoueur();
     }
 
-    public void setAlObjectif(ArrayList<Objectif> alObj) 
+    public void supprimerObj(ArrayList<Objectif> alObj) 
     {
-        this.metier.setAlObjectif(alObj);
+        this.metier.supprimerObj(alObj);
     }
 
-    public void setAlWagons(ArrayList<Wagon> alWagons) 
+    public void supprimerWagons(ArrayList<Wagon> alWagons) 
     {
-        this.metier.setAlWagons(alWagons);
+        this.metier.supprimerWagons(alWagons);
+    }
+
+    public void routePrise(ArrayList<Route> alRoute) 
+    {
+        this.metier.routePrise(alRoute);
     }
 
 }

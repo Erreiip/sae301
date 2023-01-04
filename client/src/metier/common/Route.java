@@ -10,6 +10,8 @@ public class Route implements Comparable<Route>
     private Color couleurVoie1;
     private Color couleurVoie2;
 
+    public Route(){}
+
     public Route(Ville v1, Ville v2, int cout, Color c)
     {
         this(v1,v2,cout,c,null);

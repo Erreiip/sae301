@@ -10,6 +10,8 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+
+import java.io.File;
 import java.io.IOException;
 
 public class PanelPioche extends JPanel
@@ -34,8 +36,8 @@ public class PanelPioche extends JPanel
         BufferedImage imgVersoWagon = null;
         BufferedImage imgVersoObjectif = null;
         try {
-            imgVersoWagon = ImageIO.read(Wagon.getFileVerso());
-            imgVersoObjectif = ImageIO.read(Objectif.getFile());
+            imgVersoWagon = ImageIO.read(new File(Wagon.getFileVerso()));
+            imgVersoObjectif = ImageIO.read(new File(Objectif.getFileVerso()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -56,7 +58,7 @@ public class PanelPioche extends JPanel
         {
             BufferedImage imgRectoWagon = null;
             try {
-                imgRectoWagon = ImageIO.read(w.getFileRecto());
+                imgRectoWagon = ImageIO.read(new File(w.getFileRecto()));
             } catch (IOException e) {
                 e.printStackTrace();
             }

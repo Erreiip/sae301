@@ -8,9 +8,10 @@ public class Objectif
     private Ville v2;
     private int nbPoints;
 
-    private static File versoObjectif = null;
-    private static File rectoObjectif = null;
+    private static String versoObjectif = null;
+    private static String rectoObjectif = null;
 
+    public Objectif(){}
 
     public Objectif(Ville v1, Ville v2, int nbPoints)
     {
@@ -29,18 +30,23 @@ public class Objectif
     public int getNbPoints()    {return nbPoints;}
 
 
-    public static void setFileVerso ( File f)
+    public static void setFileVerso ( String f)
     {
         Objectif.versoObjectif = f;
     }
 
-    public static void setFileRecto ( File f)
+    public static void setFileRecto ( String f)
     {
-        Objectif.versoObjectif = f;
+        Objectif.rectoObjectif = f;
     }
 
-    public static File getFile ()
+    public static String getFileRecto ()
     {
         return Objectif.versoObjectif;
+    }
+
+    public static String getFileVerso()
+    {
+        return Objectif.rectoObjectif;
     }
 }

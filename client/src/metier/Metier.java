@@ -29,8 +29,12 @@ public class Metier
     private ArrayList<Ville>     alVilles;
 
     private ArrayList<Objectif>  alObjectifs;
+    private ArrayList<Objectif>  alDefausseO;
+
 
     private ArrayList<Wagon>     alWagons;
+    private ArrayList<Wagon>     alDefausseW;
+
 
     private HashMap<String,File> hsmFichiers;
 
@@ -89,7 +93,7 @@ public class Metier
             Wagon w = this.alWagons.get(cpt);
             int taille2;
 
-            if ( w.getCouleur() != Color.LIGHT_GRAY ) taille2 = Metier.COULEUR;
+            if ( w.getCouleur() != Color.LIGHT_GRAY.getRGB() ) taille2 = Metier.COULEUR;
             else                                      taille2 = Metier.JOKER;
             
             for ( int cpt2 = 0; cpt2 < taille2; cpt2++)
@@ -98,7 +102,6 @@ public class Metier
             }
         }   
 
-        this.regles.ajouterAlWagons(this.alWagons);
     }
 
 
@@ -119,15 +122,28 @@ public class Metier
     }
 
 
-    public void setAlObjectif(ArrayList<Objectif> alObj) 
+    public void supprimerObj(ArrayList<Objectif> alObj) 
     {
-        this.alObjectifs = alObj;
+        for ( Objectif o : alObj )
+        {
+            this.alObjectifs.remove(o);
+            this.alDefausseO.add(o);
+        }
     }
 
 
-    public void setAlWagons(ArrayList<Wagon> alWagons) 
+    public void supprimerWagons(ArrayList<Wagon> alWagons) 
     {
-        this.alWagons = alWagons;
+        for ( Wagon w : alWagons )
+        {
+            this.alWagons.remove(w);
+            this.alDefausseW.add(w);
+        }
+    }
+
+    public void routePrise(ArrayList<Route> alRoute)
+    {
+        //a faire
     }
 
 
@@ -348,21 +364,19 @@ public class Metier
         this.hsmFichiers.put("fond",fichierFond);
         this.hsmFichiers.put("joker", fImageJoker);
 
-        Objectif.setFileVerso(fVersoObjectifs);
-        Objectif.setFileRecto(fRectoObjectif);
-        Wagon   .setFileVerso(fVersoWagons);
+        Objectif.setFileVerso(fVersoObjectifs.getAbsolutePath());
+        Objectif.setFileRecto(fRectoObjectif.getAbsolutePath());
+        Wagon   .setFileVerso(fVersoWagons.getAbsolutePath());
 
         for ( int cpt = 0; cpt < fWagons.length; cpt++ )
         {
             if ( fWagons[cpt] != null )
-                this.alWagons.add(new Wagon(new Color(Integer.parseInt(cWagons[cpt])), fWagons[cpt]));
+                this.alWagons.add(new Wagon(Integer.parseInt(cWagons[cpt]), fWagons[cpt].getAbsolutePath()));
         }
 
         this.regles = new Regles(nbWagonsFinParties, tabReglesJoueur);
 
         this.initCarteWagons();
-        this.regles.ajouterAlObjectifs(this.alObjectifs);
-        this.joueur.setNbMarqueurs(nbWagonsParJoueur);
 
         new Serveur();
         this.client = new Client(this.regles, this.ctrl);

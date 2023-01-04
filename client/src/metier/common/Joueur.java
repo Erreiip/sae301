@@ -11,6 +11,8 @@ public class Joueur
     private ArrayList<Objectif> alObjectifs;
     private ArrayList<Ville>    alVilles;
 
+    public Joueur(){}
+
     public Joueur(String nom, int nbMarqueurs)
     {
         this.nom = nom;

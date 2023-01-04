@@ -6,32 +6,32 @@ import java.awt.Color;
 
 public class Wagon
 {
-    public static File verso = null;
-    public File recto;
+    public static String verso = null;
+    public String recto;
 
-    public Color couleur;
+    public int couleur;
 
-    public Wagon(Color c, File f)
+    public Wagon(int couleur, String f)
     {
-        this.couleur = c;
+        this.couleur = couleur;
         this.recto   = f;
     }
 
-    public Color getCouleur() { return this.couleur; }
+    public int getCouleur() { return this.couleur; }
 
-    public File getFileRecto() { return this.recto; }
+    public String getFileRecto() { return this.recto; }
 
     public String toString()
     {
-        return "Couleur : " + this.couleur.getRGB();
+        return "Couleur : " + this.couleur;
     }
 
-    public static void setFileVerso ( File f)
+    public static void setFileVerso ( String f)
     {
         Wagon.verso = f;
     }
 
-    public static File getFileVerso ()
+    public static String getFileVerso ()
     {
         return Wagon.verso;
     }

@@ -5,11 +5,8 @@ import java.net.InetAddress;
 import com.esotericsoftware.kryo.Kryo;
 
 import client.src.Controleur;
-import client.src.metier.common.Joueur;
-import client.src.metier.common.ListenerClient;
-import client.src.metier.common.Objectif;
-import client.src.metier.common.Regles;
-import client.src.metier.common.Wagon;
+import client.src.metier.common.*;
+import common.Action;
 import server.src.Serveur;
 
 public class Client extends com.esotericsoftware.kryonet.Client
@@ -20,7 +17,7 @@ public class Client extends com.esotericsoftware.kryonet.Client
     {
         this(ctrl);
         
-        sendTCP(regles);        
+        sendTCP(regles);     
     }
 
     public Client (Controleur ctrl)
@@ -29,11 +26,8 @@ public class Client extends com.esotericsoftware.kryonet.Client
 
 
         Kryo kryo = this.getKryo();
-        kryo.register(String.class);
-        kryo.register(Regles.class);
-        kryo.register(Joueur.class);
-        kryo.register(Wagon.class);
-        kryo.register(Objectif.class);
+        Serveur.kryoClass(kryo);
+
 
         this.start();
 
@@ -46,9 +40,10 @@ public class Client extends com.esotericsoftware.kryonet.Client
         this.addListener( new ListenerClient(this));
     }
 
-    public void setRegles(Regles regles)
+    public void setAction(Action act)
     {
-        this.ctrl.setAlWagons(regles.getAlWagons());
-        this.ctrl.setAlObjectif(regles.getAlObjectifs());
+        this.ctrl.supprimerWagons(act.getAlWAgons());
+        this.ctrl.supprimerObj    (act.getAlObjectifs());
+        this.ctrl.routePrise      (act.getAlRoutes());
     }
 }

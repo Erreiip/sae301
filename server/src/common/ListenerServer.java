@@ -23,9 +23,11 @@ public class ListenerServer extends Listener
     }
 
     public void connected (Connection connection) {
-        if ( this.serveur.getRegles() != null )
+        //envoyer le xml
+
+        if ( this.serveur.getRegles() != null && connection.getID() > this.serveur.getRegles().getNbJoueursMini() )
         {
-            this.serveur.sendToTCP(connection.getID(), this.serveur.getRegles());
+            this.serveur.sendToAllTCP("vous pouvez mettre pret");
         }
 	}
 

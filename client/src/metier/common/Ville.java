@@ -2,10 +2,6 @@ package client.src.metier.common;
 
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
-
-import client.src.common.RectangleNom;
-
-
 import java.awt.Color;
 
 public class Ville extends Ellipse2D.Double implements Comparable<Ville>
