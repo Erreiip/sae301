@@ -1,7 +1,8 @@
-package src.common;
+package client.src.common;
 
 import java.awt.geom.Rectangle2D;
-import src.metier.Ville;
+
+import client.src.metier.Ville;
 
 public class RectangleNom extends Rectangle2D.Double
 {

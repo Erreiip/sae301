@@ -37,6 +37,9 @@ public class Metier
     public static String IMG_FOND  = "fond";
     public static String IMG_JOKER = "joker";
 
+    public static int COULEUR = 12;
+    public static int JOKER   = 14;
+
 
     public Metier(Controleur ctrl)
     {
@@ -70,11 +73,26 @@ public class Metier
 
         new Route (v1, v2, cout, c, c2);
     }
+
     
     public void initCarteWagons()
     {
+        int taille = this.alWagons.size();
+        for ( int cpt = 0; cpt < taille; cpt++ )
+        {
+            Wagon w = this.alWagons.get(cpt);
+            int taille2;
 
+            if ( alWagons.get(cpt).getCouleur() != Color.LIGHT_GRAY ) taille2 = Metier.COULEUR;
+            else                                                      taille2 = Metier.JOKER;
+            
+            for ( int cpt2 = 1; cpt2 < taille2; cpt2++)
+            {
+                this.alWagons.add(new Wagon(w.getCouleur(), w.getFileRecto()));
+            }
+        }
     }
+    
 
     public void lectureXML(String path)
     {
@@ -303,7 +321,7 @@ public class Metier
         for ( int cpt = 0; cpt < fWagons.length; cpt++ )
         {
             if ( fWagons[cpt] != null )
-                this.hsmFichiers.put("rectoWagon" + cpt, fWagons[cpt]);
+                this.alWagons.add(new Wagon(new Color(Integer.parseInt(cWagons[cpt])), fWagons[cpt]));
         }
 
         this.tabReglesWagons  = tabRegleWagons;
