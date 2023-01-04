@@ -20,15 +20,6 @@ public class Ville extends Ellipse2D.Double implements Comparable<Ville>
     private boolean modifiable;
 
 
-    private static ArrayList<String> alNomsVilles = new ArrayList<String>();
-    private static int numVille = 0;
-
-    static
-    {
-        Ville.initAlNoms();
-    }
-
-
     public Ville(Color couleur, String nom, int x, int y, int taille)
     {
         super(x,y,taille,taille);
@@ -50,11 +41,6 @@ public class Ville extends Ellipse2D.Double implements Comparable<Ville>
     public Ville ( Color c, int x, int y, int taille)
     {
         this(c, "", x, y, taille);
-        
-        if (Ville.numVille > Ville.alNomsVilles.size() - 1)
-            Ville.numVille = 0;
-
-        this.setNom(Ville.alNomsVilles.get(Ville.numVille++));
     }
 
     public ArrayList<Route> getAlRoutes()
@@ -107,20 +93,6 @@ public class Ville extends Ellipse2D.Double implements Comparable<Ville>
     {
         return this.nom;
     }
-
-
-    private static void initAlNoms()
-    {
-        try {
-            Scanner sc = new Scanner(new File("./src/data/villes.data"));
-
-            while ( sc.hasNextLine() )
-            {
-                Ville.alNomsVilles.add(sc.nextLine());
-            }
-        }catch(Exception e ) { e.printStackTrace(); }
-    }
-
     @Override
     public int compareTo(Ville o) {
         return this.nom.compareTo(o.nom);

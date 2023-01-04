@@ -28,8 +28,8 @@ public class Metier
 
     private HashMap<String,File> hsmFichiers;
 
-    private String[]             tabReglesJoueurs;
-    private String[]             tabReglesWagons;
+    private Integer[]            tabReglesJoueurs;
+    private Integer              nbWagonsFinParties;
 
     private Joueur               joueur;
 
@@ -43,18 +43,18 @@ public class Metier
 
     public Metier(Controleur ctrl)
     {
-        this.ctrl             = ctrl;
+        this.ctrl                = ctrl;
+   
+        this.joueur              = new Joueur("Joueur", 0);
+   
+        this.alVilles            = new ArrayList<Ville>   ();
+        this.alObjectifs         = new ArrayList<Objectif>();
+        this.alWagons            = new ArrayList<Wagon>   ();
+        this.alDefausse          = new ArrayList<Wagon>   ();
 
-        this.joueur           = new Joueur("Joueur", 0);
-
-        this.alVilles         = new ArrayList<Ville>   ();
-        this.alObjectifs      = new ArrayList<Objectif>();
-        this.alWagons         = new ArrayList<Wagon>   ();
-        this.alDefausse       = new ArrayList<Wagon>   ();
-
-        this.hsmFichiers      = new HashMap<String,File>();
-        this.tabReglesJoueurs = null;
-        this.tabReglesWagons  = null;
+        this.hsmFichiers         = new HashMap<String,File>();
+        this.tabReglesJoueurs    = null;
+        this.nbWagonsFinParties  = null;
     }
 
 
@@ -83,14 +83,14 @@ public class Metier
             Wagon w = this.alWagons.get(cpt);
             int taille2;
 
-            if ( alWagons.get(cpt).getCouleur() != Color.LIGHT_GRAY ) taille2 = Metier.COULEUR;
-            else                                                      taille2 = Metier.JOKER;
+            if ( w.getCouleur() != Color.LIGHT_GRAY ) taille2 = Metier.COULEUR;
+            else                                      taille2 = Metier.JOKER;
             
-            for ( int cpt2 = 1; cpt2 < taille2; cpt2++)
+            for ( int cpt2 = 0; cpt2 < taille2; cpt2++)
             {
                 this.alWagons.add(new Wagon(w.getCouleur(), w.getFileRecto()));
             }
-        }
+        }   
     }
 
 
@@ -134,13 +134,10 @@ public class Metier
         int nbJoueurVoieDouble  = Integer.parseInt(reglesJP.getChild("nbJoueursVoiesDoubles").getText());
 
         //Set des reglesJoueurs
-        String[] tabRegleJoueur = {String.valueOf(nbJoueursMin), String.valueOf(nbJoueursMax), String.valueOf(nbJoueurVoieDouble)};
+        Integer[] tabRegleJoueur = { nbJoueursMin, nbJoueursMax, nbJoueurVoieDouble};
 
         int nbWagonsParJoueur   = Integer.parseInt(reglesJP.getChild("wagonsParJoueur").getText());
         int nbWagonsFinParties  = Integer.parseInt(reglesJP.getChild("nbWagonsFinParties").getText());
-
-        //Set des reglesWagons
-        String[] tabRegleWagons = {String.valueOf(nbWagonsParJoueur), String.valueOf(nbWagonsFinParties)};
         
         Element ptParRoute      = reglesJP.getChild("ptParRoute");
         String[] ppWagons       = new String[6];
@@ -324,10 +321,11 @@ public class Metier
                 this.alWagons.add(new Wagon(new Color(Integer.parseInt(cWagons[cpt])), fWagons[cpt]));
         }
 
-        this.tabReglesWagons  = tabRegleWagons;
-        this.tabReglesJoueurs = tabRegleJoueur;
+        this.nbWagonsFinParties = nbWagonsFinParties;
+        this.tabReglesJoueurs   = tabRegleJoueur;
 
         this.initCarteWagons();
+        this.joueur.setNbMarqueurs(nbWagonsParJoueur);
     }
 
 
