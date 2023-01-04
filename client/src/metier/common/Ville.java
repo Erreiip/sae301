@@ -1,11 +1,10 @@
-package client.src.metier;
+package client.src.metier.common;
 
 import java.awt.geom.Ellipse2D;
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import client.src.common.RectangleNom;
+
 
 import java.awt.Color;
 
