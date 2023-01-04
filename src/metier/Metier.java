@@ -21,6 +21,7 @@ public class Metier
 
     private ArrayList<Ville> alVilles;
     private ArrayList<Objectif> alObjectifs;
+     
     
     private HashMap<String,File> hsmFichiers;
 
@@ -44,22 +45,26 @@ public class Metier
     }
 
 
-    public Route creerTrajet(Ville v1, Ville v2, int cout, Color c)
+    public void creerTrajet(Ville v1, Ville v2, int cout, Color c)
     {
-        return this.creerTrajet(v1, v2, cout, c, null);
+        this.creerTrajet(v1, v2, cout, c, null);
     }
 
 
-    public Route creerTrajet(Ville v1, Ville v2, int cout, Color c, Color c2)
+    public void creerTrajet(Ville v1, Ville v2, int cout, Color c, Color c2)
     {
         for ( Route r : v1.getAlRoutes())
         {
-            if ( r.getVille2() == v2 || r.getVille1() == v2 ) return null;
+            if ( r.getVille2() == v2 || r.getVille1() == v2 ) return;
         }
 
-        return new Route (v1, v2, cout, c, c2);
+        new Route (v1, v2, cout, c, c2);
     }
+    
+    public void initCarteWagons()
+    {
 
+    }
 
     public void lectureXML(String path)
     {
@@ -285,7 +290,7 @@ public class Metier
 
         Objectif.setFileVerso(fVersoObjectifs);
         Objectif.setFileRecto(fRectoObjectif);
-        Wagon   .setFile     (fVersoWagons);
+        Wagon   .setFileVerso(fVersoWagons);
 
         for ( int cpt = 0; cpt < fWagons.length; cpt++ )
         {
@@ -295,6 +300,8 @@ public class Metier
 
         this.tabReglesWagons  = tabRegleWagons;
         this.tabReglesJoueurs = tabRegleJoueur;
+
+        this.initCarteWagons();
     }
 
 
