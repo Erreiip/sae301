@@ -31,7 +31,6 @@ public class Metier
     private ArrayList<Objectif>  alObjectifs;
 
     private ArrayList<Wagon>     alWagons;
-    private ArrayList<Wagon>     alDefausse;
 
     private HashMap<String,File> hsmFichiers;
 
@@ -39,6 +38,7 @@ public class Metier
 
     private Regles                regles;
 
+    private Client                 client;
 
     public static String IMG_FOND  = "fond";
     public static String IMG_JOKER = "joker";
@@ -56,10 +56,10 @@ public class Metier
         this.alVilles            = new ArrayList<Ville>   ();
         this.alObjectifs         = new ArrayList<Objectif>();
         this.alWagons            = new ArrayList<Wagon>   ();
-        this.alDefausse          = new ArrayList<Wagon>   ();
 
         this.hsmFichiers         = new HashMap<String,File>();
         this.regles              = null;
+        this.client              = null;
 
     }
 
@@ -97,6 +97,8 @@ public class Metier
                 this.alWagons.add(new Wagon(w.getCouleur(), w.getFileRecto()));
             }
         }   
+
+        this.regles.ajouterAlWagons(this.alWagons);
     }
 
 
@@ -109,6 +111,23 @@ public class Metier
         }
 
         return tabWagonVisible;
+    }
+
+    public ArrayList<Wagon> getMainJoueur()
+    {
+        return this.joueur.getMain();
+    }
+
+
+    public void setAlObjectif(ArrayList<Objectif> alObj) 
+    {
+        this.alObjectifs = alObj;
+    }
+
+
+    public void setAlWagons(ArrayList<Wagon> alWagons) 
+    {
+        this.alWagons = alWagons;
     }
 
 
@@ -342,10 +361,11 @@ public class Metier
         this.regles = new Regles(nbWagonsFinParties, tabReglesJoueur);
 
         this.initCarteWagons();
+        this.regles.ajouterAlObjectifs(this.alObjectifs);
         this.joueur.setNbMarqueurs(nbWagonsParJoueur);
 
         new Serveur();
-        new Client(this.regles);
+        this.client = new Client(this.regles, this.ctrl);
     }
 
 

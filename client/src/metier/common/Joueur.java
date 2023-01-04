@@ -6,6 +6,7 @@ public class Joueur
 {
     private String              nom;
     private int                 nbMarqueurs;
+    private int                 nbPv;
     private ArrayList<Wagon>    alWagons;
     private ArrayList<Objectif> alObjectifs;
     private ArrayList<Ville>    alVilles;
@@ -14,12 +15,15 @@ public class Joueur
     {
         this.nom = nom;
         this.nbMarqueurs = nbMarqueurs;
+        this.nbPv = 0;
 
         this.alObjectifs = new ArrayList<Objectif>();
         this.alWagons = new ArrayList<Wagon>();
         this.alVilles = new ArrayList<Ville>();
     }
 
+
+    public ArrayList<Wagon> getMain() { return this.alWagons; }
     public String getNom        () {return nom;}
     public int    getNbMarqueurs() {return nbMarqueurs;}
 
@@ -27,6 +31,6 @@ public class Joueur
 
     public void ajouterWagon   (Wagon wagon)  { this.alWagons.add(wagon); }
     public void ajouterObjectif(Objectif obj) { this.alObjectifs.add(obj);}
-    public void ajouterVille   (Ville ville)  {this.alVilles.add(ville);  }
+    public void ajouterPV      (Integer pv )  { this.nbPv += pv;  } 
     
 }
