@@ -47,7 +47,8 @@ public class FrameAcceuil extends JFrame implements ActionListener
                 File f = chooser.getSelectedFile();
                 this.ctrl.lireXml(f);
 
-                // lancer frame principale
+                this.dispose();
+                this.ctrl.setIhm(new FramePrincipale(this.ctrl));
             }
             
         }

@@ -43,7 +43,7 @@ public class PanelJoueurs extends JPanel
             this.panelCouleurVous = new JPanel();
                 this.couleurVous = Color.RED; // Couleur du joueur
                 this.lblCouleurVous = new JLabel("Couleur");
-                this.lblCouleurVous.setBackground(this.couleurVous);
+                this.lblCouleurVous.setForeground(Color.RED);
             this.panelInfosVous = new JPanel(new GridLayout(3,1));
                 this.lblNomVous = new JLabel("Nom du joueur");
                 this.lblNbWagonsVous = new JLabel("Nombre de wagons : X");
@@ -55,7 +55,7 @@ public class PanelJoueurs extends JPanel
             this.panelCouleurJActuel = new JPanel();
                 this.couleurJActuel = Color.GREEN; // Couleur du joueur actuel
                 this.lblCouleurJActuel = new JLabel("Couleur");
-                this.lblCouleurJActuel.setBackground(this.couleurVous);
+                this.lblCouleurJActuel.setForeground(Color.RED);
             this.panelInfosJActuel = new JPanel(new GridLayout(3,1));
                 this.lblNomJActuel = new JLabel("Nom du joueur");
                 this.lblNbWagonsJActuel = new JLabel("Nombre de wagons : X");

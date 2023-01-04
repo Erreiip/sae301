@@ -16,7 +16,7 @@ public class Controleur
     public Controleur()
     {
         this.metier = new Metier(this);
-        this.ihm    = new FramePrincipale(this);
+        this.ihm    = new FrameAcceuil(this);
     }
 
     public void setIhm(JFrame frame)
