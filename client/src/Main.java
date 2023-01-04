@@ -1,4 +1,4 @@
-package src;
+package client.src;
 
 import com.formdev.flatlaf.FlatLightLaf;
 

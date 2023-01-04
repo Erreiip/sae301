@@ -1,4 +1,4 @@
-package src.vue.panels;
+package client.src.vue.panels;
 
 public class PanelMain {
     
