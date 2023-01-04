@@ -14,6 +14,7 @@ import org.jdom2.*;
 import org.jdom2.input.*;
 
 import client.src.Controleur;
+import server.src.Serveur;
 
 public class Metier 
 {
@@ -55,6 +56,9 @@ public class Metier
         this.hsmFichiers         = new HashMap<String,File>();
         this.tabReglesJoueurs    = null;
         this.nbWagonsFinParties  = null;
+
+        new Serveur();
+        new Client();
     }
 
 
@@ -91,6 +95,22 @@ public class Metier
                 this.alWagons.add(new Wagon(w.getCouleur(), w.getFileRecto()));
             }
         }   
+    }
+
+    public int getNbJoueursMini      () { return this.tabReglesJoueurs[0]; }
+    public int getNbJoueursMaxi      () { return this.tabReglesJoueurs[1]; }
+    public int getNbJoueursVoieDouble() { return this.tabReglesJoueurs[2]; }
+    public int getNbWagonsFinParties () { return this.nbWagonsFinParties;  }
+
+    public Wagon[] getPiocheVisible  () 
+    { 
+        Wagon[] tabWagonVisible = new Wagon[5];
+        for ( int cpt = 0; cpt < tabWagonVisible.length; cpt++ )
+        {
+            tabWagonVisible[cpt] = this.alWagons.get(cpt);
+        }
+
+        return tabWagonVisible;
     }
 
 
