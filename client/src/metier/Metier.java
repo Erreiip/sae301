@@ -92,15 +92,15 @@ public class Metier
             }
         }
     }
-    
 
-    public void lectureXML(String path)
+
+    public void lectureXML(File f)
     {
 
         /* Création du système */
         SAXBuilder sxb              = new SAXBuilder();
         org.jdom2.Document document = null;
-        File file                   = new File(path);
+        File file                   = f;
 
         try 
         {
