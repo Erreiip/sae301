@@ -29,10 +29,9 @@ public class Metier
 
     private HashMap<String,File> hsmFichiers;
 
-    private Integer[]            tabReglesJoueurs;
-    private Integer              nbWagonsFinParties;
-
     private Joueur               joueur;
+
+    private Regles                regles;
 
 
     public static String IMG_FOND  = "fond";
@@ -54,11 +53,8 @@ public class Metier
         this.alDefausse          = new ArrayList<Wagon>   ();
 
         this.hsmFichiers         = new HashMap<String,File>();
-        this.tabReglesJoueurs    = null;
-        this.nbWagonsFinParties  = null;
+        this.regles              = null;
 
-        new Serveur();
-        new Client();
     }
 
 
@@ -97,10 +93,6 @@ public class Metier
         }   
     }
 
-    public int getNbJoueursMini      () { return this.tabReglesJoueurs[0]; }
-    public int getNbJoueursMaxi      () { return this.tabReglesJoueurs[1]; }
-    public int getNbJoueursVoieDouble() { return this.tabReglesJoueurs[2]; }
-    public int getNbWagonsFinParties () { return this.nbWagonsFinParties;  }
 
     public Wagon[] getPiocheVisible  () 
     { 
@@ -154,7 +146,7 @@ public class Metier
         int nbJoueurVoieDouble  = Integer.parseInt(reglesJP.getChild("nbJoueursVoiesDoubles").getText());
 
         //Set des reglesJoueurs
-        Integer[] tabRegleJoueur = { nbJoueursMin, nbJoueursMax, nbJoueurVoieDouble};
+        Integer[] tabReglesJoueur = { nbJoueursMin, nbJoueursMax, nbJoueurVoieDouble};
 
         int nbWagonsParJoueur   = Integer.parseInt(reglesJP.getChild("wagonsParJoueur").getText());
         int nbWagonsFinParties  = Integer.parseInt(reglesJP.getChild("nbWagonsFinParties").getText());
@@ -341,11 +333,13 @@ public class Metier
                 this.alWagons.add(new Wagon(new Color(Integer.parseInt(cWagons[cpt])), fWagons[cpt]));
         }
 
-        this.nbWagonsFinParties = nbWagonsFinParties;
-        this.tabReglesJoueurs   = tabRegleJoueur;
+        this.regles = new Regles(nbWagonsFinParties, tabReglesJoueur);
 
         this.initCarteWagons();
         this.joueur.setNbMarqueurs(nbWagonsParJoueur);
+
+        new Serveur();
+        new Client(this.regles);
     }
 
 
