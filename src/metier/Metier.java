@@ -24,6 +24,13 @@ public class Metier
     
     private HashMap<String,File> hsmFichiers;
 
+    private String[] tabReglesJoueurs;
+    private String[] tabReglesWagons;
+
+    public static String IMG_FOND  = "fond";
+    public static String IMG_JOKER = "joker";
+
+
     public Metier(Controleur ctrl)
     {
         this.ctrl = ctrl;
@@ -32,6 +39,8 @@ public class Metier
         this.alObjectifs = new ArrayList<Objectif>();
 
         this.hsmFichiers = new HashMap<String,File>();
+        this.tabReglesJoueurs = null;
+        this.tabReglesWagons  = null;
     }
 
 
@@ -237,8 +246,8 @@ public class Metier
             }
             
         }
-        //Liste Objectif
 
+        //Liste Objectif
         Element listeCarteObjectif   = racine.getChild("listeCarteObjectif");
         List<Element> objectifs      = listeCarteObjectif.getChildren("objectif");
         Iterator<Element> iObjectif  =  objectifs.iterator();
@@ -273,15 +282,19 @@ public class Metier
         //ajout
         this.hsmFichiers.put("fond",fichierFond);
         this.hsmFichiers.put("joker", fImageJoker);
-        this.hsmFichiers.put("versoObjectif", fVersoObjectifs);
-        this.hsmFichiers.put("rectoObjectif", fRectoObjectif);
-        this.hsmFichiers.put("versoWagon", fVersoWagons);
 
-        for ( int cpt = 0; cpt < fWagons; )
+        Objectif.setFileVerso(fVersoObjectifs);
+        Objectif.setFileRecto(fRectoObjectif);
+        Wagon   .setFile     (fVersoWagons);
 
+        for ( int cpt = 0; cpt < fWagons.length; cpt++ )
+        {
+            if ( fWagons[cpt] != null )
+                this.hsmFichiers.put("rectoWagon" + cpt, fWagons[cpt]);
+        }
 
-
-        
+        this.tabReglesWagons  = tabRegleWagons;
+        this.tabReglesJoueurs = tabRegleJoueur;
     }
 
 
@@ -295,4 +308,5 @@ public class Metier
         catch (Exception e) { e.printStackTrace(); }
         return file;
     }
+
 }
