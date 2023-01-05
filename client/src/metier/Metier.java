@@ -21,6 +21,7 @@ import client.src.metier.common.Route;
 import client.src.metier.common.Ville;
 import client.src.metier.common.Wagon;
 import client.src.metier.reseau.Client;
+import common.Action;
 import server.src.Serveur;
 
 public class Metier 
@@ -44,6 +45,7 @@ public class Metier
 
 
     private Regles               regles;
+    private Action               action;
 
     private Client               client;
 
@@ -148,6 +150,11 @@ public class Metier
         {
             r.setJoueur(this.joueur);
         }
+    }
+
+    public boolean ajouterRoute(Route r)
+    {
+        this.joueur.enleverMarqueurs(r.getCout());
     }
 
     public boolean actionPossible() { return this.joueur == joueurActif; }
