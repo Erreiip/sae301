@@ -1,13 +1,12 @@
 package client.src.vue.panels;
 
 import client.src.Controleur;
-import client.src.metier.common.Objectif;
 import client.src.metier.common.Wagon;
 import client.src.vue.common.ImageRenderer;
 import client.src.vue.common.ModelTableObjectifs;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.border.Border;
 
 import java.awt.*;
 
@@ -81,6 +80,8 @@ public class PanelCartesInteraction extends JPanel
 
         // --
 
+        Border blackline = BorderFactory.createLineBorder(Color.black);
+        this.tpCartes.setBorder(blackline);
         this.add(this.tpCartes);
     }   
 
