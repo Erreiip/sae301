@@ -13,7 +13,7 @@ public class FramePrincipale extends JFrame
     private PanelJoueurs panelJoueurs;
     private PanelPioche  panelPioche;
     private PanelMap     panelMap;
-    private PanelCartes  panelCartes;
+    private PanelCartesInteraction  panelCartesInteraction;
 
     public FramePrincipale(Controleur ctrl)
     {
@@ -26,12 +26,12 @@ public class FramePrincipale extends JFrame
         this.panelJoueurs     = new PanelJoueurs(ctrl);
         this.panelPioche      = new PanelPioche(ctrl);
         this.panelMap         = new PanelMap(ctrl);
-        this.panelCartes      = new PanelCartes(ctrl);
+        this.panelCartesInteraction      = new PanelCartesInteraction(ctrl);
 
         this.add(this.panelJoueurs, BorderLayout.NORTH);
         this.add(this.panelPioche , BorderLayout.WEST);
         this.add(this.panelMap    , BorderLayout.CENTER);
-        this.add(this.panelCartes , BorderLayout.EAST);
+        this.add(this.panelCartesInteraction , BorderLayout.EAST);
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         this.setLocationRelativeTo(null);

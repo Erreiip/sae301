@@ -7,7 +7,7 @@ import client.src.metier.common.Wagon;
 import javax.swing.*;
 import java.awt.*;
 
-public class PanelCartes extends JPanel
+public class PanelCartesInteraction extends JPanel
 {
     private Controleur ctrl;
 
@@ -15,7 +15,7 @@ public class PanelCartes extends JPanel
     private JLabel[] lblCartesWagon;
     private JLabel   lblVersoObjectif;
 
-    public PanelCartes(Controleur ctrl)
+    public PanelCartesInteraction(Controleur ctrl)
     {
         this.ctrl = ctrl;
 
