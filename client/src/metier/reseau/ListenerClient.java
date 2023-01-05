@@ -31,7 +31,7 @@ public class ListenerClient extends Listener
             if ( s.contains("xml"))
             {
                 String[] tabString = s.split(":");
-                new ClientFile(tabString[1], tabString[2]);
+                new ClientFile(tabString[1]);
             }
         }
     }

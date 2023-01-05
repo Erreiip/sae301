@@ -39,6 +39,7 @@ public class ServeurFile {
         } catch (Exception e){
             e.printStackTrace();
         }
+
     }
 
     private static void sendFile(String path) throws Exception{
@@ -54,10 +55,7 @@ public class ServeurFile {
             out.write(bytes, 0, count);
         }
 
+        in.close();
         out.close();
-        in.close();
-        in.close();
-        dataInputStream.close();
-        dataOutputStream.close();
     }
 }
