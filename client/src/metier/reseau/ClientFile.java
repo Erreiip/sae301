@@ -12,6 +12,8 @@ public class ClientFile
 
     public ClientFile(String adr)
     {
+        System.out.println(adr);
+        
         try(Socket socket = new Socket(adr,Serveur.PORT_TRANSFERT)) {
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
