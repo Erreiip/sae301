@@ -34,4 +34,9 @@ public class PanelMap extends JPanel
 
         g.drawImage(this.fond, this.x, this.y, this.fond.getWidth(), this.fond.getHeight(), null);
     }
+
+    public Dimension getPreferredSize() 
+    {
+        return new Dimension(this.fond.getWidth(), this.fond.getHeight());
+    }
 }
