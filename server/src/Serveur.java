@@ -1,6 +1,8 @@
 package server.src;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryonet.*;
@@ -22,6 +24,7 @@ public class Serveur extends Server
     private File    xml;
 
     private Joueur  joueurActif;
+    private ArrayList<Joueur>  alJoueurs;
 
 
     public Serveur()
@@ -52,6 +55,24 @@ public class Serveur extends Server
     public void setXml(String path)
     {
         this.xml = new File(path);
+    }
+
+    public void initJoueurs()
+    {
+        for ( Connection c : this.getConnections())
+        {
+            Joueur j = new Joueur();
+            this.alJoueurs.add(j);
+            this.sendToTCP(c.getID(), j);
+        }
+
+        Collections.shuffle(alJoueurs);
+    }
+
+    public void lancer()
+    {
+        this.initJoueurs();
+        this.sendToAllTCP(joueurActif);
     }
 
     public Regles getRegles() { return this.regles; }

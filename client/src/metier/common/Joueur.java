@@ -20,12 +20,14 @@ public class Joueur
         this.nbPv = 0;
 
         this.alObjectifs = new ArrayList<Objectif>();
-        this.alWagons = new ArrayList<Wagon>();
-        this.alVilles = new ArrayList<Ville>();
+        this.alWagons    = new ArrayList<Wagon>();
+        this.alVilles    = new ArrayList<Ville>();
     }
 
 
-    public ArrayList<Wagon> getMain() { return this.alWagons; }
+    public ArrayList<Wagon>    getMain()      { return this.alWagons; }
+    public ArrayList<Objectif> getObjectifs() { return this.alObjectifs; }
+
     public String getNom        () {return nom;}
     public int    getNbMarqueurs() {return nbMarqueurs;}
 

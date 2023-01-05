@@ -3,6 +3,9 @@ package client.src.metier.reseau;
 import common.Action;
 
 import com.esotericsoftware.kryonet.Listener;
+
+import client.src.metier.common.Joueur;
+
 import com.esotericsoftware.kryonet.Connection;
 
 
@@ -33,5 +36,10 @@ public class ListenerClient extends Listener
                 new ClientFile(tabString[1]);
             }
         }
+
+        if (object instanceof Joueur)
+        {
+            this.ctrl.setJoueurActif((Joueur) object);
+        } 
     }
 }

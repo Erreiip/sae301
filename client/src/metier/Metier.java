@@ -122,6 +122,11 @@ public class Metier
         return this.joueur.getMain();
     }
 
+    public ArrayList<Objectif> getObjectifsJoueur()
+    {
+        return this.joueur.getObjectifs();
+    }
+
 
     public void supprimerObj(ArrayList<Objectif> alObj) 
     {
@@ -392,6 +397,10 @@ public class Metier
         //a enlever 
         for ( int cpt = 0; cpt < 10; cpt++)
             this.joueur.ajouterWagon(this.alWagons.get(cpt));
+        
+        for ( Objectif o : this.alObjectifs)
+            this.joueur.ajouterObjectif(o);
+            
 
         new Serveur();
         this.client = new Client(this.regles, fichierFond.getAbsolutePath(), this.ctrl);
