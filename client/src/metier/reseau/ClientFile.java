@@ -12,7 +12,6 @@ public class ClientFile
 
     public ClientFile(String adr)
     {
-        System.out.println("client : lancé");
         
         try(Socket socket = new Socket(adr,Serveur.PORT_TRANSFERT)) {
             dataInputStream = new DataInputStream(socket.getInputStream());
@@ -20,7 +19,7 @@ public class ClientFile
 
             receiveFile("file.xml");
             
-            dataInputStream.close();
+            dataOutputStream.close();
             dataInputStream.close();
         }catch (Exception e){
             e.printStackTrace();
@@ -38,6 +37,7 @@ public class ClientFile
             fileOutputStream.write(buffer,0,bytes);
             size -= bytes;      // read upto file size
         }
+
         fileOutputStream.close();
     }
 }
