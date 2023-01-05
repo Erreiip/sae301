@@ -16,6 +16,8 @@ public class ListenerClient extends Listener
     }
 
     public void received (Connection connection, Object object) {
+        System.out.println("Client : " + object);
+
         if ( object instanceof Action )
         {
             Action jeu = (Action) object;

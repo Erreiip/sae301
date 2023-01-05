@@ -7,7 +7,7 @@ import com.esotericsoftware.kryonet.*;
 import client.src.metier.common.Regles;
 import server.src.Serveur;
 
-public class ListenerServer extends Listener 
+public class ListenerServer extends Listener implements Runnable
 {
     private Serveur serveur;
 
@@ -34,9 +34,12 @@ public class ListenerServer extends Listener
         if ( connection.getID() != 1)
         {
             try{
+                Thread thread =  new Thread() ;
+                thread.start() ;
+
                 InetAddress adr = InetAddress.getLocalHost();
-                new ServeurFile(this.serveur);
-                this.serveur.sendToTCP(connection.getID(), "xml:" + adr );
+                System.out.println(adr.getHostAddress());
+                this.serveur.sendToTCP(connection.getID(), "xml:" + adr.getHostAddress() );
             } catch (Exception e) { e.printStackTrace(); }
         }
         
@@ -45,5 +48,12 @@ public class ListenerServer extends Listener
             this.serveur.sendToAllTCP("vous pouvez mettre pret");
         }
 	}
+
+    @Override
+    public void run() 
+    {
+        new ServeurFile(this.serveur);
+        System.out.println("fin");
+    }
 
 }
