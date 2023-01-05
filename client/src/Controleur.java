@@ -60,7 +60,7 @@ public class Controleur
 
     public void setJoueurActif(Joueur j)
     {
-        return this.metier.setJoueurActif(j);
+        this.metier.setJoueurActif(j);
     }
 
 
