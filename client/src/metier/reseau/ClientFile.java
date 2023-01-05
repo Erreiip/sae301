@@ -24,6 +24,7 @@ public class ClientFile
             
             dataOutputStream.close();
             dataInputStream.close();
+            socket.close();
         }catch (Exception e){
             e.printStackTrace();
         }

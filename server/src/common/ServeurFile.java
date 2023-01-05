@@ -35,7 +35,12 @@ public class ServeurFile {
 
             dataInputStream.close();
             dataOutputStream.close();
-            clientSocket.close();
+
+            while (true )
+            {
+                if ( clientSocket.isClosed() ) clientSocket.close();
+            }
+
         } catch (Exception e){
             e.printStackTrace();
         }

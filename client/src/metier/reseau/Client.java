@@ -25,10 +25,8 @@ public class Client extends com.esotericsoftware.kryonet.Client
     {
         super();
 
-
         Kryo kryo = this.getKryo();
         Serveur.kryoClass(kryo);
-
 
         this.start();
 
