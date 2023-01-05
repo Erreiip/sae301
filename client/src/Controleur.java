@@ -9,6 +9,7 @@ import client.src.metier.*;
 import client.src.metier.common.Joueur;
 import client.src.metier.common.Objectif;
 import client.src.metier.common.Route;
+import client.src.metier.common.Ville;
 import client.src.metier.common.Wagon;
 import client.src.vue.*;
 
@@ -54,6 +55,7 @@ public class Controleur
     public void supprimerObjToDef(ArrayList<Objectif> alObj) { this.metier.supprimerObjToDef(alObj);       }
     public void supprimerObj     (ArrayList<Objectif> alObj) { this.metier.supprimerObj(alObj);            }
 
+    public ArrayList<Ville> getAlVille() { return this.metier.getAlVilles(); }
 
     public Joueur getJoueurActif()
     {
