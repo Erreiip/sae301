@@ -40,7 +40,7 @@ public class Objectif
         Objectif.rectoObjectif = f;
     }
 
-    public static String getFileRecto ()
+    public String getFileRecto ()
     {
         return Objectif.rectoObjectif;
     }
