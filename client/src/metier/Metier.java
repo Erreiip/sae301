@@ -58,7 +58,11 @@ public class Metier
     {
         this.ctrl                = ctrl;
    
-        this.joueur              = new Joueur("Joueur", 0);
+        //this.joueur              = null;
+        this.joueur              = new Joueur(1111, 0); // a remplacer
+
+        this.joueurActif         = null;
+
    
         this.alVilles            = new ArrayList<Ville>   ();
         this.alObjectifs         = new ArrayList<Objectif>();
@@ -407,7 +411,7 @@ public class Metier
                 this.alWagons.add(new Wagon(Integer.parseInt(cWagons[cpt]), fWagons[cpt].getAbsolutePath()));
         }
 
-        this.regles = new Regles(nbWagonsFinParties, tabReglesJoueur);
+        this.regles = new Regles(nbWagonsParJoueur, nbWagonsFinParties, tabReglesJoueur);
 
         this.initCarteWagons();
         
@@ -415,6 +419,7 @@ public class Metier
         for ( int cpt = 0; cpt < 10; cpt++)
             this.joueur.ajouterWagon(this.alWagons.get(cpt));
         
+        //a enlever
         for ( Objectif o : this.alObjectifs)
             this.joueur.ajouterObjectif(o);
 

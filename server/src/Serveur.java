@@ -1,6 +1,7 @@
 package server.src;
 
 import java.io.File;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -11,6 +12,7 @@ import client.src.metier.common.Joueur;
 import client.src.metier.common.Objectif;
 import client.src.metier.common.Regles;
 import client.src.metier.common.Wagon;
+import common.Action;
 import server.src.common.ListenerServer;
 
 public class Serveur extends Server 
@@ -62,6 +64,8 @@ public class Serveur extends Server
         for ( Connection c : this.getConnections())
         {
             Joueur j = new Joueur();
+            j.setNbMarqueurs(this.regles.getNbWagonsParJoueurs());
+            j.setCouleur( new Color( (int) (Math.random() * 1000)).getRGB() ) ;
             this.alJoueurs.add(j);
             this.sendToTCP(c.getID(), j);
         }
@@ -73,6 +77,11 @@ public class Serveur extends Server
     {
         this.initJoueurs();
         this.sendToAllTCP(joueurActif);
+    }
+
+    public void envoyerAction(Action a)
+    {
+        this.sendToAllTCP(a);
     }
 
     public Regles getRegles() { return this.regles; }

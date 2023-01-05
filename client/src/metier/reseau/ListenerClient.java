@@ -39,7 +39,7 @@ public class ListenerClient extends Listener
 
         if (object instanceof Joueur)
         {
-            this.ctrl.setJoueurActif((Joueur) object);
-        } 
+            this.client.setJoueurActif((Joueur) object);
+        }
     }
 }

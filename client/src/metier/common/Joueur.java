@@ -4,34 +4,35 @@ import java.util.ArrayList;
 
 public class Joueur
 {
-    private String              nom;
+    private Integer             couleur;
+
     private int                 nbMarqueurs;
     private int                 nbPv;
     private ArrayList<Wagon>    alWagons;
     private ArrayList<Objectif> alObjectifs;
-    private ArrayList<Ville>    alVilles;
 
     public Joueur(){}
 
-    public Joueur(String nom, int nbMarqueurs)
+    public Joueur(Integer couleur, int nbMarqueurs)
     {
-        this.nom = nom;
+        this.couleur = couleur;
         this.nbMarqueurs = nbMarqueurs;
         this.nbPv = 0;
 
         this.alObjectifs = new ArrayList<Objectif>();
         this.alWagons    = new ArrayList<Wagon>();
-        this.alVilles    = new ArrayList<Ville>();
     }
 
 
     public ArrayList<Wagon>    getMain()      { return this.alWagons; }
     public ArrayList<Objectif> getObjectifs() { return this.alObjectifs; }
 
-    public String getNom        () {return nom;}
-    public int    getNbMarqueurs() {return nbMarqueurs;}
+    public Integer getCouleur        () {return couleur;}
+    public int     getNbMarqueurs    () {return nbMarqueurs;}
 
     public void setNbMarqueurs(int nbMarqueurs) { this.nbMarqueurs = nbMarqueurs; }
+    public void setCouleur    (Integer couleur) { this.couleur = couleur;         }
+
 
     public void ajouterWagon   (Wagon wagon)  { this.alWagons.add(wagon); }
     public void ajouterObjectif(Objectif obj) { this.alObjectifs.add(obj);}

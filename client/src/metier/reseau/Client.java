@@ -38,6 +38,11 @@ public class Client extends com.esotericsoftware.kryonet.Client
 
         this.addListener( new ListenerClient(this));
     }
+    
+    public void setJoueurActif(Joueur j)
+    {
+        this.ctrl.setJoueurActif(j);
+    }
 
     public void setAction(Action act)
     {

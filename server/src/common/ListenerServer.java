@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import com.esotericsoftware.kryonet.*;
 
 import client.src.metier.common.Regles;
+import common.Action;
 import server.src.Serveur;
 
 public class ListenerServer extends Listener implements Runnable
@@ -28,9 +29,20 @@ public class ListenerServer extends Listener implements Runnable
             if ( connection.getID() == 1 )
                 this.serveur.setXml((String) object);
         }
+
+        if ( object instanceof Action )
+        {
+            this.serveur.envoyerAction((Action) object);
+        }
     }
 
     public void connected (Connection connection) {
+        if ( this.serveur.getRegles() != null && connection.getID() > this.serveur.getRegles().getNbJoueursMaxi() )
+        {
+            connection.close();
+        }
+
+
         if ( connection.getID() != 1)
         {
             try{
@@ -50,7 +62,6 @@ public class ListenerServer extends Listener implements Runnable
 	}
 
     
-
     @Override
     public void run() 
     {
