@@ -45,7 +45,5 @@ public class ClientFile
         out.close();
         in.close();
         fileInputStream.close();
-        dataInputStream.close();
-        dataOutputStream.close();
     }
 }
