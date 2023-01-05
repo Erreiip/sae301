@@ -58,6 +58,12 @@ public class Controleur
         return this.metier.getJoueur();
     }
 
+    public void setJoueurActif(Joueur j)
+    {
+        return this.metier.setJoueurActif(j);
+    }
+
+
     public void supprimerObj(ArrayList<Objectif> alObj) 
     {
         this.metier.supprimerObj(alObj);

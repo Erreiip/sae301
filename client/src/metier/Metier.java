@@ -169,6 +169,11 @@ public class Metier
         return this.joueur;
     }
 
+    public void setJoueurActif(Joueur j)
+    {
+        return this.joueurActif = joueur;
+    }
+
     public Joueur getJoueurActif()
     {
         return this.joueurActif;
