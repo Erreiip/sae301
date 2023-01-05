@@ -43,6 +43,9 @@ public class Controleur
         this.metier.supprimerClient();
     }
 
+    public File getFond    () { return this.metier.getFond(); }
+    //public File getImgJoker() { return this.metier.getImgJoker(); }
+
     public Wagon[] getPiocheVisible                       () { return this.metier.getPiocheVisible();  }
     public void supprimerWagonsToDef(ArrayList<Wagon> alObj) { this.metier.supprimerWagonsToDef(alObj);}
     public void supprimerWagons     (ArrayList<Wagon> alObj) { this.metier.supprimerWagons     (alObj);}
