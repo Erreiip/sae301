@@ -389,6 +389,9 @@ public class Metier
 
         this.initCarteWagons();
 
+        for ( int cpt = 0; cpt < 10; cpt++)
+            this.joueur.ajouterWagon(this.alWagons.get(cpt));
+            
         new Serveur();
         this.client = new Client(this.regles, fichierFond.getAbsolutePath(), this.ctrl);
     }
