@@ -7,12 +7,14 @@ import server.src.Serveur;
 
 public class ClientFile
 {
+    private static OutputStream  output = null;
     private static DataOutputStream dataOutputStream = null;
     private static DataInputStream dataInputStream = null;
 
     public ClientFile(String adr)
     {
         try(Socket socket = new Socket(adr,Serveur.PORT_TRANSFERT)) {
+            output           = socket.getOutputStream();
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
@@ -29,12 +31,13 @@ public class ClientFile
     {
         int bytesRead;  
         FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+        output = fileOutputStream;
         
         long size = dataInputStream.readLong();     // read file size
         byte[] buffer = new byte[4*1024];  
         while (size > 0 && (bytesRead = dataInputStream.read(buffer, 0, (int)Math.min(buffer.length, size))) != -1)   
         {   
-            fileOutputStream.write(buffer, 0, bytesRead);   
+            output.write(buffer, 0, bytesRead);   
             size -= bytesRead;   
         }
 
