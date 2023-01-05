@@ -121,10 +121,36 @@ public class Metier
         }
 
         return tabWagonVisible;
-    }    
+    } 
+    
+    public Objectif[] getPiocheVisibleObj() 
+    { 
+        Objectif[] tabObjectif = new Objectif[3];
+        for ( int cpt = 0; cpt < tabObjectif.length; cpt++ )
+        {
+            tabObjectif[cpt] =this.alObjectifs.get(cpt);
+        }
 
+        return tabObjectif;
+    }
 
     public void supprimerObj(ArrayList<Objectif> alObj) 
+    {
+        for ( Objectif o : alObj )
+        {
+            this.alObjectifs.remove(o);
+        }
+    }
+
+    public void supprimerWagons(ArrayList<Wagon> alWagons) 
+    {
+        for ( Wagon w : alWagons )
+        {
+            this.alWagons.remove(w);
+        }
+    }
+
+    public void supprimerObjToDef(ArrayList<Objectif> alObj) 
     {
         for ( Objectif o : alObj )
         {
@@ -134,7 +160,7 @@ public class Metier
     }
 
 
-    public void supprimerWagons(ArrayList<Wagon> alWagons) 
+    public void supprimerWagonsToDef(ArrayList<Wagon> alWagons) 
     {
         for ( Wagon w : alWagons )
         {
