@@ -29,6 +29,7 @@ public class Joueur
 
     public Integer getCouleur        () {return couleur;}
     public int     getNbMarqueurs    () {return nbMarqueurs;}
+    public int     getNbPv           () {return nbPv;}
 
     public void setNbMarqueurs(int nbMarqueurs) { this.nbMarqueurs = nbMarqueurs; }
     public void setCouleur    (Integer couleur) { this.couleur = couleur;         }

@@ -19,7 +19,7 @@ public class ImageRenderer extends JLabel implements TableCellRenderer
     {
         ImageIcon icon = new ImageIcon(model.getObjectif(row).getFileRecto());
         Image image = icon.getImage();
-        Image newImg = image.getScaledInstance(82, 50, java.awt.Image.SCALE_SMOOTH);
+        Image newImg = image.getScaledInstance(75, 45, java.awt.Image.SCALE_SMOOTH);
         icon = new ImageIcon(newImg);
 
         setIcon(icon);
