@@ -9,6 +9,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Iterator;
 
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.awt.geom.Ellipse2D;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+
 import org.apache.commons.io.FileUtils;
 import org.jdom2.*;
 import org.jdom2.input.*;
@@ -49,11 +56,13 @@ public class Metier
 
     private Client               client;
 
-    public static String IMG_FOND  = "fond";
-    public static String IMG_JOKER = "joker";
+    public final static String IMG_FOND  = "fond";
+    public final static String IMG_JOKER = "joker";
 
-    public static int COULEUR = 12;
-    public static int JOKER   = 14;
+    public final static int COULEUR = 12;
+    public final static int JOKER   = 14;
+
+    private static int nbRecto = 0;
 
 
     public Metier(Controleur ctrl)
@@ -422,9 +431,9 @@ public class Metier
         this.hsmFichiers.put("fond",fichierFond);
         this.hsmFichiers.put("joker", fImageJoker);
 
-        Objectif.setFileVerso(fVersoObjectifs.getAbsolutePath());
-        Objectif.setFileRecto(fRectoObjectif.getAbsolutePath());
-        Wagon   .setFileVerso(fVersoWagons.getAbsolutePath());
+        Objectif.setFileVerso (fVersoObjectifs.getAbsolutePath());
+        Objectif.setFileRectoS(fRectoObjectif.getAbsolutePath());
+        Wagon   .setFileVerso (fVersoWagons.getAbsolutePath());
 
         for ( int cpt = 0; cpt < fWagons.length; cpt++ )
         {
@@ -442,7 +451,10 @@ public class Metier
         
         //a enlever
         for ( Objectif o : this.alObjectifs)
+        {
+            Metier.colorier(o, ctrl);
             this.joueur.ajouterObjectif(o);
+        }
 
 
         new Serveur();
@@ -459,6 +471,57 @@ public class Metier
 		}
         catch (Exception e) { e.printStackTrace(); }
         return file;
+    }
+
+    private static void colorier(Objectif obj, Controleur ctrl)
+    {
+        BufferedImage img = null, fond = null;
+
+        Ville v1 = obj.getV1();
+        Ville v2 = obj.getV2();
+
+
+
+        try{
+            img = ImageIO.read(new File(Objectif.getFileRectoS()));
+            fond = ImageIO.read(ctrl.getFond());
+        }catch (Exception e) { e.printStackTrace();  }
+
+        int widthFond  = fond.getWidth();
+        int heightFond = fond.getHeight();
+
+        int widthRecto  = img.getWidth();
+        int heightRecto = img.getHeight();
+
+        double propotionsWidth  = (widthFond  + 0d) / widthRecto;
+        double propotionsHeight = (heightFond + 0d) / heightRecto;  
+
+        double v1X = v1.getCenterX() / propotionsWidth;
+        double v1Y = v1.getCenterY() / propotionsHeight;
+
+        double v2X = v2.getCenterX() / propotionsWidth;
+        double v2Y = v1.getCenterY() / propotionsHeight;
+
+        double taille = v1.getWidth() / propotionsWidth;
+
+
+        Ellipse2D ville1 = new Ellipse2D.Double(v1X, v1Y, taille, taille );
+        Ellipse2D ville2 = new Ellipse2D.Double(v2X, v2Y, taille, taille );
+
+        String coutObj = obj.getNbPoints() + "";
+
+        Graphics2D g = (Graphics2D) img.getGraphics();
+        g.drawString(coutObj, widthRecto - 20 , heightRecto - 10);
+        g.draw(ville1);
+        g.draw(ville2);
+
+        File file = new File("assets/recto" + Metier.nbRecto + ".png");
+        try {
+            ImageIO.write(img, "png", file);
+        } catch (Exception e ) { e.printStackTrace(); }
+
+        obj.setFileRecto(file.getAbsolutePath());
+        
     }
 
 }

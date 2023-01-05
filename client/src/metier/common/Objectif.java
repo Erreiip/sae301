@@ -1,6 +1,6 @@
 package client.src.metier.common;
 
-import java.io.File;
+import client.src.Controleur;
 
 public class Objectif
 {
@@ -9,7 +9,10 @@ public class Objectif
     private int nbPoints;
 
     private static String versoObjectif = null;
-    private static String rectoObjectif = null;
+    private static String rectoObjectifS = null;
+
+    
+    private String rectoObjectif;
 
     public Objectif(){}
 
@@ -18,6 +21,8 @@ public class Objectif
         this.v1 = v1;
         this.v2 = v2;
         this.nbPoints = nbPoints;
+
+        this.rectoObjectif = null;        
     }
 
     public boolean contains( Ville v)
@@ -30,28 +35,13 @@ public class Objectif
     public int getNbPoints()    {return nbPoints;}
 
 
-    public static void setFileVerso ( String f)
-    {
-        Objectif.versoObjectif = f;
-    }
+    public void setFileRecto ( String f) { this.rectoObjectif = f; }
+    public String getFileRecto () { return this.rectoObjectif; }
 
-    public static void setFileRecto ( String f)
-    {
-        Objectif.rectoObjectif = f;
-    }
+    public static void   setFileRectoS  ( String f ) { Objectif.rectoObjectifS = f; }
+    public static String getFileRectoS  ()           { return Objectif.rectoObjectifS; }
 
-    public String getFileRecto ()
-    {
-        return Objectif.rectoObjectif;
-    }
 
-    public static String getFileVerso()
-    {
-        return Objectif.versoObjectif;
-    }
-
-    private static void colorier(Ville v1, Ville v2, int cout, Objectif obj)
-    {
-
-    }
+    public static void   setFileVerso ( String f ) { Objectif.versoObjectif = f; }
+    public static String getFileVerso ()          { return Objectif.versoObjectif; }
 }
