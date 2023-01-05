@@ -23,6 +23,15 @@ public class Joueur
         this.alWagons    = new ArrayList<Wagon>();
     }
 
+    public boolean enleverMarqueurs(int nbMarqueurs) 
+    { 
+        if ( (this.nbMarqueurs -= nbMarqueurs) < 0) return false;
+        
+        this.nbMarqueurs -= nbMarqueurs;  
+        return true;
+    }
+
+
 
     public ArrayList<Wagon>    getMain()      { return this.alWagons; }
     public ArrayList<Objectif> getObjectifs() { return this.alObjectifs; }

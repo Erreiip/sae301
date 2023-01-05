@@ -154,7 +154,15 @@ public class Metier
 
     public boolean ajouterRoute(Route r)
     {
-        this.joueur.enleverMarqueurs(r.getCout());
+        if ( r.estPrise() ) return false;
+
+        if ( this.joueur.enleverMarqueurs(r.getCout()) ) 
+        {
+            r.setJoueur(this.joueur);
+            return true;
+        }
+
+        return false;
     }
 
     public boolean actionPossible() { return this.joueur == joueurActif; }
