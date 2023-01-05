@@ -17,7 +17,7 @@ public class ClientFile
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
-            receiveFile("file.xml");
+            receiveFile("jeu.xml");
             
             dataOutputStream.close();
             dataInputStream.close();
