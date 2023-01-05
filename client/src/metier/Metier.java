@@ -1,7 +1,7 @@
 package client.src.metier;
 
 import java.awt.Color;
-
+import java.awt.Font;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -515,15 +515,14 @@ public class Metier
 
         double v2X = v2.getCenterX() / propotionsWidth;
         double v2Y = v1.getCenterY() / propotionsHeight;
-        /*
-        if ( v2X > widthRecto - 20 ) { v2X = widthRecto - 20; }
-        if ( v1X > widthRecto - 20 ) { v1X = widthRecto - 20; }
+        
+        if ( v2X > widthRecto - 230 ) { v2X = widthRecto - 230; }
+        if ( v1X > widthRecto - 230 ) { v1X = widthRecto - 230; }
 
-        if ( v2Y < heightRecto + 20 ) { v2Y = heightRecto + 20; }
-        if ( v1Y < heightRecto + 20 ) { v1Y = heightRecto + 20; }
-        */
-        double taille = v1.getWidth() / propotionsWidth;
-
+        if ( v2Y < 50 ) { v2Y = 50; }
+        if ( v1Y < 50 ) { v1Y = 50; }
+        
+        double taille = v1.getWidth() / (propotionsWidth / 2);
 
         Ellipse2D ville1 = new Ellipse2D.Double(v1X, v1Y, taille, taille );
         Ellipse2D ville2 = new Ellipse2D.Double(v2X, v2Y, taille, taille );
@@ -532,9 +531,15 @@ public class Metier
 
         Graphics2D g = (Graphics2D) img.getGraphics();
         g.setColor(Color.BLACK);
-        g.drawString(coutObj, widthRecto - 100 , heightRecto - 100);
+        
         g.fill(ville1);
         g.fill(ville2);
+
+        ((Graphics)g).setFont(new Font("TimesRoman", Font.PLAIN, 120)); 
+        g.drawString(coutObj, widthRecto - 160 , heightRecto - 70);
+        ((Graphics)g).setFont(new Font("TimesRoman", Font.PLAIN, 30)); 
+        String s = v1.getNom() + " - " + v2.getNom();
+        g.drawString(s, 80, 80);
 
         File file = new File("./assets/recto" + Metier.nbRecto++ + ".png");
         try {
