@@ -32,6 +32,11 @@ public class Controleur
         this.metier.lectureXML(f);
     }
 
+    public void creerClient()
+    {
+        this.metier.creerClient();
+    }
+
     public Wagon[] getPiocheVisible()
     {
         return this.metier.getPiocheVisible();

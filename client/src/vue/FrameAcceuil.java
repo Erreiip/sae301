@@ -5,6 +5,8 @@ import client.src.Controleur;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import com.esotericsoftware.kryonet.Client;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -13,21 +15,28 @@ public class FrameAcceuil extends JFrame implements ActionListener
 {
     private Controleur ctrl;
     
-    private JButton btnJouer;
+    private JButton btnCreerServeur;
+    private JButton btnRejoindre;
+
 
     public FrameAcceuil(Controleur ctrl)
     {
         this.ctrl = ctrl;
 
+        this.setLayout(new GridLayout(2,1));
         this.setTitle("Accueil");
         this.setLocationRelativeTo(null);
         this.setSize(500, 500);
 
-        this.btnJouer = new JButton("Jouer");
+        this.btnCreerServeur = new JButton("Créer");
+        this.btnRejoindre = new JButton("Rejoindre");
 
-        this.add(this.btnJouer);
 
-        this.btnJouer.addActionListener(this);
+        this.add(this.btnCreerServeur);
+        this.add(this.btnRejoindre);
+
+        this.btnCreerServeur.addActionListener(this);
+        this.btnRejoindre   .addActionListener(this);
     
         this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         this.setLocationRelativeTo(null);
@@ -37,7 +46,7 @@ public class FrameAcceuil extends JFrame implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getSource() == this.btnJouer)
+        if (e.getSource() == this.btnCreerServeur)
         {
             JFileChooser chooser = new JFileChooser();
             FileNameExtensionFilter filter = new FileNameExtensionFilter("XML Files", "xml");
@@ -53,6 +62,11 @@ public class FrameAcceuil extends JFrame implements ActionListener
                 this.ctrl.setIhm(new FramePrincipale(this.ctrl));
             }
             
+        }
+
+        if (e.getSource() == this.btnCreerServeur)
+        {
+            this.ctrl.creerClient();
         }
     }
 }

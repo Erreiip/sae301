@@ -147,6 +147,11 @@ public class Metier
         //a faire
     }
 
+    public void creerClient()
+    {
+        this.client = new Client(this.ctrl);
+    }
+
 
     public void lectureXML(File f)
     {
