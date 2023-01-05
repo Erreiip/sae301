@@ -12,11 +12,10 @@ import java.net.Socket;
 
 import com.jcraft.jsch.*;
 
+import client.src.metier.reseau.ClientFile;
 import server.src.Serveur;
 
 public class ServeurFile {
-    private static OutputStream     out = null;
-    private static InputStream      in = null;
 
     private static DataOutputStream dataOutputStream = null;
     private static DataInputStream dataInputStream = null;
@@ -24,24 +23,35 @@ public class ServeurFile {
     public ServeurFile(Serveur s) 
     {
         try(ServerSocket serverSocket = new ServerSocket(Serveur.PORT_TRANSFERT)){
-            Socket clientSocket = serverSocket.accept();
+            Socket socket = serverSocket.accept();
 
-            in  = clientSocket.getInputStream();
-            out = clientSocket.getOutputStream();
-            dataInputStream = new DataInputStream(clientSocket.getInputStream());
-            dataOutputStream = new DataOutputStream(clientSocket.getOutputStream());
+            File file = new File(s.getXml().getAbsolutePath());
+            // Get the size of the file
+            long length = file.length();
+            byte[] bytes = new byte[16 * 1024];
+            InputStream in = new FileInputStream(file);
+            OutputStream out = socket.getOutputStream();
+            
+            int count;
+            while ((count = in.read(bytes)) > 0) {
+                out.write(bytes, 0, count);
+            }
 
-            sendFile(s.getXml().getAbsolutePath());
-
+            ClientFile.setBoolean(true);
+            
+            out.close();
+            in.close();
+            socket.close();
             
 
             while (true )
             {
-                if ( clientSocket.isClosed() ) 
+                if ( socket.isClosed() ) 
                 {
                     dataInputStream.close();
                     dataOutputStream.close();
-                    clientSocket.close();
+                    socket.close();
+                    serverSocket.close();
                 }
             }
 
@@ -49,22 +59,5 @@ public class ServeurFile {
             e.printStackTrace();
         }
 
-    }
-
-    private static void sendFile(String path) throws Exception{
-        File file = new File(path);
-
-        byte[] bytes = new byte[16 * 1024];
-
-        InputStream in = new FileInputStream(file);
-        
-        int count;
-        while ((count = in.read(bytes)) > 0) 
-        {
-            out.write(bytes, 0, count);
-        }
-
-        out.close();
-        in.close();
     }
 }
