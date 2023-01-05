@@ -16,6 +16,8 @@ import server.src.Serveur;
 
 public class ServeurFile {
     private static OutputStream     out = null;
+    private static InputStream      in = null;
+
     private static DataOutputStream dataOutputStream = null;
     private static DataInputStream dataInputStream = null;
 
@@ -41,9 +43,9 @@ public class ServeurFile {
 
     private static void sendFile(String path) throws Exception{
         File file = new File(path);
-        // Get the size of the file
-        long length = file.length();
+
         byte[] bytes = new byte[16 * 1024];
+
         InputStream in = new FileInputStream(file);
         
         int count;
@@ -53,6 +55,7 @@ public class ServeurFile {
         }
 
         out.close();
+        in.close();
         in.close();
         dataInputStream.close();
         dataOutputStream.close();
