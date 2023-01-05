@@ -34,7 +34,7 @@ public class ListenerServer extends Listener implements Runnable
         if ( connection.getID() != 1)
         {
             try{
-                Thread thread =  new Thread() ;
+                Thread thread =  new Thread(this) ;
                 thread.start() ;
 
                 InetAddress adr = InetAddress.getLocalHost();
