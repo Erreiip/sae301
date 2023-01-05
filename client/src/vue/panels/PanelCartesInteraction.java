@@ -65,7 +65,7 @@ public class PanelCartesInteraction extends JPanel
         // PANEL OBJECTIFS ---
         this.alObjectifs = this.ctrl.getObjectifsJoueur();
 
-        String[] columnsName = {"Image", "Ville 1", "Ville 2", "Points de Victoire"};
+        String[] columnsName = {"Image", "Ville 1", "Ville 2", "PV"};
 
         String[][] data = {};
 
@@ -89,11 +89,13 @@ public class PanelCartesInteraction extends JPanel
         table.setRowHeight(50);
 
         JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new Dimension(280, 550));
         this.panelObjectifs.add(scrollPane);
 
         this.tpCartes.addTab("Objectifs", this.panelObjectifs);
 
         // --
+
         this.add(this.tpCartes);
     }   
 
