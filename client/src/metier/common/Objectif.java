@@ -47,6 +47,6 @@ public class Objectif
 
     public static String getFileVerso()
     {
-        return Objectif.versooObjectif;
+        return Objectif.versoObjectif;
     }
 }
