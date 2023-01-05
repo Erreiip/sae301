@@ -1,15 +1,12 @@
 package client.src.metier.common;
 
-import java.io.File;
-import java.awt.Color;
-
 
 public class Wagon
 {
     public static String verso = null;
-    public String recto;
+    private String recto;
 
-    public int couleur;
+    private int couleur;
 
     public Wagon(int couleur, String f)
     {
@@ -18,7 +15,6 @@ public class Wagon
     }
 
     public int getCouleur() { return this.couleur; }
-
     public String getFileRecto() { return this.recto; }
 
     public String toString()
