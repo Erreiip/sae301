@@ -29,6 +29,7 @@ public class FrameAcceuil extends JFrame implements ActionListener
 
         this.btnJouer.addActionListener(this);
     
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);

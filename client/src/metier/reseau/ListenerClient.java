@@ -1,6 +1,5 @@
-package client.src.metier.common;
+package client.src.metier.reseau;
 
-import  client.src.metier.Client;
 import common.Action;
 
 import com.esotericsoftware.kryonet.Listener;
@@ -23,6 +22,15 @@ public class ListenerClient extends Listener
             this.client.setAction(jeu);
         }
 
-        System.out.println(object);
+        if ( object instanceof String)
+        {
+            String s = (String) object;
+
+            if ( s.contains("xml"))
+            {
+                String[] tabString = s.split(":");
+                new ClientFile(tabString[1]);
+            }
+        }
     }
 }

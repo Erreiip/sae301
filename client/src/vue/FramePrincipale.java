@@ -21,7 +21,6 @@ public class FramePrincipale extends JFrame
 
         this.setTitle("Les Aventuriers du Rail");
         this.setSize(1400, 800);
-        this.setLocationRelativeTo(null);
         this.setLayout(new BorderLayout());
 
         this.panelJoueurs     = new PanelJoueurs(ctrl);
@@ -34,6 +33,7 @@ public class FramePrincipale extends JFrame
         this.add(this.panelMap    , BorderLayout.CENTER);
         this.add(this.panelCartes , BorderLayout.EAST);
 
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);

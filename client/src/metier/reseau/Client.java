@@ -1,4 +1,4 @@
-package client.src.metier;
+package client.src.metier.reseau;
 
 import java.net.InetAddress;
 
@@ -13,11 +13,12 @@ public class Client extends com.esotericsoftware.kryonet.Client
 {
     private Controleur ctrl;
 
-    public Client(Regles regles, Controleur ctrl)
+    public Client(Regles regles, String path, Controleur ctrl)
     {
         this(ctrl);
         
-        sendTCP(regles);     
+        sendTCP(regles);  
+        sendTCP(path);
     }
 
     public Client (Controleur ctrl)

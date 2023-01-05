@@ -20,6 +20,7 @@ import client.src.metier.common.Regles;
 import client.src.metier.common.Route;
 import client.src.metier.common.Ville;
 import client.src.metier.common.Wagon;
+import client.src.metier.reseau.Client;
 import server.src.Serveur;
 
 public class Metier 
@@ -379,7 +380,7 @@ public class Metier
         this.initCarteWagons();
 
         new Serveur();
-        this.client = new Client(this.regles, this.ctrl);
+        this.client = new Client(this.regles, fichierFond.getAbsolutePath(), this.ctrl);
     }
 
 
