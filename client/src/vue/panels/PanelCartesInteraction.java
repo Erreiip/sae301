@@ -67,7 +67,7 @@ public class PanelCartesInteraction extends JPanel
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
         {
             JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            imageMap.get((index + "")).getImage().flush();
+            //imageMap.get((index + "")).getImage().flush();
             label.setIcon(imageMap.get((index + "")));
             label.setHorizontalTextPosition(JLabel.LEFT);
             return label;
