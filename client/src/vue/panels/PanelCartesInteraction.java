@@ -17,10 +17,7 @@ public class PanelCartesInteraction extends JPanel
         private JPanel panelWagons;
             private ArrayList<Wagon> alWagons;
         private JPanel panelObjectifs;
-
-    private JLabel   lblVersoWagon;
-    private JLabel[] lblCartesWagon;
-    private JLabel   lblVersoObjectif;
+            private ArrayList<Objectif> alObjectifs;
 
     public PanelCartesInteraction(Controleur ctrl)
     {
