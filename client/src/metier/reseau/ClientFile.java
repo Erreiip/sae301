@@ -7,7 +7,7 @@ import server.src.Serveur;
 
 public class ClientFile
 {
-    private static OutputStream  out = null;
+
     private static InputStream      in = null;
     private static DataOutputStream dataOutputStream = null;
     private static DataInputStream dataInputStream = null;
@@ -15,7 +15,6 @@ public class ClientFile
     public ClientFile(String adr)
     {
         try(Socket socket = new Socket(adr,Serveur.PORT_TRANSFERT)) {
-            out           = socket.getOutputStream();
             in            = socket.getInputStream();
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
@@ -34,7 +33,8 @@ public class ClientFile
     {
         File file = new File(fileName);
         file.createNewFile();
-        FileInputStream fileInputStream = new FileInputStream(file);
+        FileOutputStream out = new FileOutputStream(file);
+
         
         byte[] bytes = new byte[16*1024];
 
@@ -45,6 +45,5 @@ public class ClientFile
 
         out.close();
         in.close();
-        fileInputStream.close();
     }
 }

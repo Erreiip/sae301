@@ -41,7 +41,6 @@ public class ServeurFile {
                 {
                     dataInputStream.close();
                     dataOutputStream.close();
-                    
                     clientSocket.close();
                 }
             }
