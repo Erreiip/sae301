@@ -42,11 +42,11 @@ public class Objectif
 
     public static String getFileRecto ()
     {
-        return Objectif.versoObjectif;
+        return Objectif.rectoObjectif;
     }
 
     public static String getFileVerso()
     {
-        return Objectif.rectoObjectif;
+        return Objectif.versooObjectif;
     }
 }

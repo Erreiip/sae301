@@ -9,15 +9,16 @@ public class Route implements Comparable<Route>
     private Integer cout;
     private Color couleurVoie1;
     private Color couleurVoie2;
+    private Joueur joueur;
 
     public Route(){}
 
     public Route(Ville v1, Ville v2, int cout, Color c)
     {
-        this(v1,v2,cout,c,null);
+        this(v1,v2,cout,c,null, null);
     }
 
-    public Route(Ville v1, Ville v2, int cout, Color c1, Color c2)
+    public Route(Ville v1, Ville v2, int cout, Color c1, Color c2, Joueur j)
     {
         this.v1 = v1;
         this.v2 = v2;
@@ -25,6 +26,8 @@ public class Route implements Comparable<Route>
         this.couleurVoie2 = c2;
 
         this.cout = cout;
+
+        this.joueur = j;
 
         v1.ajouterRoute(this);
         v2.ajouterRoute(this);
@@ -34,13 +37,23 @@ public class Route implements Comparable<Route>
     public Ville getVille2   () { return this.v2;                   }
     public Color getCouleur1 () { return this.couleurVoie1;         }
     public Color getCouleur2 () { return this.couleurVoie2;         }
-    public Integer getCout   () { return this.cout;                 } 
+    public Integer getCout   () { return this.cout;                 }
+    public Joueur  getJoueur () { return this.joueur;               } 
+
     public boolean estDouble () { return this.couleurVoie2 != null; } 
+    public boolean estPrise  () { return this.joueur != null; } 
+
 
     public void setCout(int cout)
     {
         this.cout = cout;
     }
+
+    public void setJoueur(Joueur j)
+    {
+        this.joueur = j;
+    }
+
 
     public void setCouleur1(Color c) {
         this.couleurVoie1 = c;

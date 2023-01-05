@@ -43,9 +43,9 @@ public class Metier
     private Joueur               joueurActif;
 
 
-    private Regles                regles;
+    private Regles               regles;
 
-    private Client                 client;
+    private Client               client;
 
     public static String IMG_FOND  = "fond";
     public static String IMG_JOKER = "joker";
@@ -71,7 +71,6 @@ public class Metier
         this.hsmFichiers         = new HashMap<String,File>();
         this.regles              = null;
         this.client              = null;
-
     }
 
 
@@ -88,7 +87,7 @@ public class Metier
             if ( r.getVille2() == v2 || r.getVille1() == v2 ) return;
         }
 
-        new Route (v1, v2, cout, c, c2);
+        new Route (v1, v2, cout, c, c2, null);
     }
 
     
@@ -108,7 +107,6 @@ public class Metier
                 this.alWagons.add(new Wagon(w.getCouleur(), w.getFileRecto()));
             }
         }   
-
     }
 
 
@@ -121,17 +119,7 @@ public class Metier
         }
 
         return tabWagonVisible;
-    }
-
-    public ArrayList<Wagon> getMainJoueur()
-    {
-        return this.joueur.getMain();
-    }
-
-    public ArrayList<Objectif> getObjectifsJoueur()
-    {
-        return this.joueur.getObjectifs();
-    }
+    }    
 
 
     public void supprimerObj(ArrayList<Objectif> alObj) 
@@ -153,35 +141,23 @@ public class Metier
         }
     }
 
+
     public void routePrise(ArrayList<Route> alRoute)
     {
-        //a faire
+        for ( Route r : alRoute)
+        {
+            r.setJoueur(this.joueur);
+        }
     }
 
-    public void creerClient()
-    {
-        this.client = new Client(this.ctrl);
-    }
+    public boolean actionPossible() { return this.joueur == joueurActif; }
 
-    public void supprimerClient()
-    {
-        this.client = null;
-    }
+    public Joueur getJoueurActif() { return this.joueurActif; }
+    public Joueur getJoueur() { return this.joueur; }
 
-    public Joueur getJoueur()
-    {
-        return this.joueur;
-    }
-
-    public void setJoueurActif(Joueur j)
-    {
-        this.joueurActif = joueur;
-    }
-
-    public Joueur getJoueurActif()
-    {
-        return this.joueurActif;
-    }
+    public void creerClient           () { this.client = new Client(this.ctrl); }
+    public void supprimerClient       () { this.client = null; }
+    public void setJoueurActif(Joueur j) { this.joueurActif = joueur; }
 
 
     public void lectureXML(File f)
