@@ -515,7 +515,13 @@ public class Metier
 
         double v2X = v2.getCenterX() / propotionsWidth;
         double v2Y = v1.getCenterY() / propotionsHeight;
+        /*
+        if ( v2X > widthRecto - 20 ) { v2X = widthRecto - 20; }
+        if ( v1X > widthRecto - 20 ) { v1X = widthRecto - 20; }
 
+        if ( v2Y < heightRecto + 20 ) { v2Y = heightRecto + 20; }
+        if ( v1Y < heightRecto + 20 ) { v1Y = heightRecto + 20; }
+        */
         double taille = v1.getWidth() / propotionsWidth;
 
 
@@ -525,17 +531,18 @@ public class Metier
         String coutObj = obj.getNbPoints() + "";
 
         Graphics2D g = (Graphics2D) img.getGraphics();
-        g.drawString(coutObj, widthRecto - 20 , heightRecto - 10);
-        g.draw(ville1);
-        g.draw(ville2);
+        g.setColor(Color.BLACK);
+        g.drawString(coutObj, widthRecto - 100 , heightRecto - 100);
+        g.fill(ville1);
+        g.fill(ville2);
 
-        File file = new File("assets/recto" + Metier.nbRecto + ".png");
+        File file = new File("./assets/recto" + Metier.nbRecto++ + ".png");
         try {
+            file.createNewFile();
             ImageIO.write(img, "png", file);
         } catch (Exception e ) { e.printStackTrace(); }
 
         obj.setFileRecto(file.getAbsolutePath());
-        
     }
 
 }
