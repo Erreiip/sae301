@@ -37,6 +37,11 @@ public class Controleur
         this.metier.creerClient();
     }
 
+    public void supprimerClient()
+    {
+        this.metier.supprimerClient();
+    }
+
     public Wagon[] getPiocheVisible()
     {
         return this.metier.getPiocheVisible();

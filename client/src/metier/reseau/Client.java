@@ -36,7 +36,7 @@ public class Client extends com.esotericsoftware.kryonet.Client
             
             InetAddress address = this.discoverHost(Serveur.PORT_UDP, 5000);
             this.connect(5000, address, Serveur.PORT_TCP, Serveur.PORT_UDP);
-        }catch (Exception e) { e.printStackTrace(); }
+        }catch (Exception e) { ctrl.supprimerClient(); return; }
 
         this.addListener( new ListenerClient(this));
     }

@@ -5,8 +5,6 @@ import client.src.Controleur;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.esotericsoftware.kryonet.Client;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -64,7 +62,7 @@ public class FrameAcceuil extends JFrame implements ActionListener
             
         }
 
-        if (e.getSource() == this.btnCreerServeur)
+        if (e.getSource() == this.btnRejoindre)
         {
             this.ctrl.creerClient();
         }

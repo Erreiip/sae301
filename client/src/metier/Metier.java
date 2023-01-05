@@ -152,6 +152,11 @@ public class Metier
         this.client = new Client(this.ctrl);
     }
 
+    public void supprimerClient()
+    {
+        this.client = null;
+    }
+
 
     public void lectureXML(File f)
     {
