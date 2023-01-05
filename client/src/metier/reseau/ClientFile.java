@@ -7,14 +7,16 @@ import server.src.Serveur;
 
 public class ClientFile
 {
-    private static OutputStream  output = null;
+    private static OutputStream  out = null;
+    private static InputStream      in = null;
     private static DataOutputStream dataOutputStream = null;
     private static DataInputStream dataInputStream = null;
 
-    public ClientFile(String adr)
+    public ClientFile(String adr, String path)
     {
         try(Socket socket = new Socket(adr,Serveur.PORT_TRANSFERT)) {
-            output           = socket.getOutputStream();
+            out           = socket.getOutputStream();
+            in            = socket.getInputStream();
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
@@ -29,19 +31,19 @@ public class ClientFile
 
     private static void receiveFile(String fileName) throws Exception
     {
-        int bytesRead;  
-        FileOutputStream fileOutputStream = new FileOutputStream(fileName);
-        output = fileOutputStream;
+        File file = new File(fileName);
+        FileInputStream fileInputStream = new FileInputStream(file);
         
-        long size = dataInputStream.readLong();     // read file size
-        byte[] buffer = new byte[4*1024];  
-        while (size > 0 && (bytesRead = dataInputStream.read(buffer, 0, (int)Math.min(buffer.length, size))) != -1)   
-        {   
-            output.write(buffer, 0, bytesRead);   
-            size -= bytesRead;   
+        byte[] bytes = new byte[16*1024];
+
+        int count;
+        while ((count = in.read(bytes)) > 0) {
+            out.write(bytes, 0, count); 
         }
 
-        fileOutputStream.close();
+        out.close();
+        in.close();
+        fileInputStream.close();
         dataInputStream.close();
         dataOutputStream.close();
     }

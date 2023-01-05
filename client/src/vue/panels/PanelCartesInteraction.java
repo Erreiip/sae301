@@ -16,7 +16,7 @@ public class PanelCartesInteraction extends JPanel
 {
     private Controleur ctrl;
 
-    //private final Map<String, ImageIcon> imageMap;
+    private final Map<String, ImageIcon> imageMap;
 
     private JTabbedPane tpCartes;
         private JPanel panelWagons;
@@ -47,7 +47,7 @@ public class PanelCartesInteraction extends JPanel
             strWagons[this.alWagons.indexOf(w)] = w.toString();
         }
         
-        //imageMap = WagonListRenderer.createImageMap(this.alWagons);
+        imageMap = createImageMap(this.alWagons);
         JList<String> listWagons = new JList<String>(strWagons);
         listWagons.setCellRenderer(new WagonListRenderer());
 
@@ -57,6 +57,16 @@ public class PanelCartesInteraction extends JPanel
         this.tpCartes.addTab("Objectifs", this.panelObjectifs);
 
         this.add(this.tpCartes);
+    }
+
+    private Map<String, ImageIcon> createImageMap(ArrayList<Wagon> list)
+    {
+        Map<String, ImageIcon> map = new HashMap<>();
+        for (Wagon w : list)
+        {
+            map.put(String.valueOf(w.couleur), new ImageIcon(w.getFileRecto()));
+        }
+        return map;
     }
 
     public class WagonListRenderer extends DefaultListCellRenderer
@@ -69,14 +79,6 @@ public class PanelCartesInteraction extends JPanel
             return label;
         }
 
-        private Map<String, ImageIcon> createImageMap(ArrayList<Wagon> list)
-        {
-            Map<String, ImageIcon> map = new HashMap<>();
-            for (Wagon w : list)
-            {
-                map.put(String.valueOf(w.couleur), new ImageIcon(w.getFileRecto()));
-            }
-            return map;
-        }
+        
     }
 }
