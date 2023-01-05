@@ -55,7 +55,9 @@ public class Controleur
     public void supprimerObjToDef(ArrayList<Objectif> alObj) { this.metier.supprimerObjToDef(alObj);       }
     public void supprimerObj     (ArrayList<Objectif> alObj) { this.metier.supprimerObj(alObj);            }
 
-    public ArrayList<Ville> getAlVille() { return this.metier.getAlVilles(); }
+    public ArrayList<Ville> getAlVilles() { return this.metier.getAlVilles(); }
+    public ArrayList<Route> getAlRoutes() { return this.metier.getAlRoutes(); }
+
 
     public Joueur getJoueurActif()
     {

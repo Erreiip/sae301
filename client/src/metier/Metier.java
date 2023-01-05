@@ -209,6 +209,20 @@ public class Metier
     public Joueur getJoueurActif() { return this.joueurActif; }
     public Joueur getJoueur() { return this.joueur; }
 
+    public ArrayList<Ville> getAlVilles() { return this.alVilles; }
+    public ArrayList<Route> getAlRoutes() 
+    {
+        ArrayList<Route> alRet = new ArrayList<Route>();
+
+        for ( Ville v : this.alVilles )
+        {
+            for ( Route r : v.getAlRoutes())
+                if ( !alRet.contains(r) ) alRet.add(r);
+        }
+
+        return alRet;
+    }
+
     public void creerClient           () { this.client = new Client(this.ctrl); }
     public void supprimerClient       () { this.client = null; }
     public void setJoueurActif(Joueur j) { this.joueurActif = joueur; }
