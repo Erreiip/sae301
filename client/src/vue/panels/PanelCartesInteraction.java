@@ -4,9 +4,12 @@ import client.src.Controleur;
 import client.src.metier.common.Objectif;
 import client.src.metier.common.Wagon;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,7 +19,7 @@ public class PanelCartesInteraction extends JPanel
 {
     private Controleur ctrl;
 
-    //private final Map<String, ImageIcon> imageMap;
+    private final Map<String, ImageIcon> imageMap;
 
     private JTabbedPane tpCartes;
         private JPanel panelWagons;
@@ -37,9 +40,9 @@ public class PanelCartesInteraction extends JPanel
 
         this.alWagons = this.ctrl.getMainJoueur();
 
-        this.alWagons.add(new Wagon(1, "wagon1"));
-        this.alWagons.add(new Wagon(2, "wagon2"));
-        this.alWagons.add(new Wagon(3, "wagon3"));
+        this.alWagons.add(new Wagon(0, "wagon1"));
+        this.alWagons.add(new Wagon(1, "wagon2"));
+        this.alWagons.add(new Wagon(2, "wagon3"));
 
         String[] strWagons = new String[this.alWagons.size()];
         for (Wagon w : this.alWagons)
@@ -47,17 +50,20 @@ public class PanelCartesInteraction extends JPanel
             strWagons[this.alWagons.indexOf(w)] = w.toString();
         }
         
-        //imageMap = WagonListRenderer.createImageMap(this.alWagons);
+        imageMap = createImageMap(this.alWagons);
         JList<String> listWagons = new JList<String>(strWagons);
         listWagons.setCellRenderer(new WagonListRenderer());
 
-        this.panelWagons.add(listWagons);
+        JScrollPane scroll = new JScrollPane(listWagons);
+        scroll.setPreferredSize(new Dimension(280, 550));
+
+        this.panelWagons.add(scroll);
 
         this.tpCartes.addTab("Wagons", this.panelWagons);
         this.tpCartes.addTab("Objectifs", this.panelObjectifs);
 
         this.add(this.tpCartes);
-    }
+    }   
 
     public class WagonListRenderer extends DefaultListCellRenderer
     {
@@ -65,18 +71,22 @@ public class PanelCartesInteraction extends JPanel
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
         {
             JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            label.setIcon(new ImageIcon("client/src/vue/images/wagon1.png"));
+            imageMap.get((index + "")).getImage().flush();
+            System.out.println(imageMap.get((index + "")));
+            label.setIcon(imageMap.get((index + "")));
+            label.setHorizontalTextPosition(JLabel.LEFT);
             return label;
         }
+    }
 
-        private Map<String, ImageIcon> createImageMap(ArrayList<Wagon> list)
+    private Map<String, ImageIcon> createImageMap(ArrayList<Wagon> list)
+    {
+        Map<String, ImageIcon> map = new HashMap<>();
+
+        for (Wagon w : list)
         {
-            Map<String, ImageIcon> map = new HashMap<>();
-            for (Wagon w : list)
-            {
-                map.put(String.valueOf(w.couleur), new ImageIcon(w.getFileRecto()));
-            }
-            return map;
+            map.put(String.valueOf(w.getCouleur()), new ImageIcon(w.getFileRecto()));
         }
+        return map;
     }
 }
