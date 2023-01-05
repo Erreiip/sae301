@@ -45,11 +45,9 @@ public class PanelJoueurs extends JPanel
             this.panelCouleurVous = new JPanel();
                 this.couleurVous = Color.RED; // Couleur du joueur
                 this.lblCouleurVous = new JLabel("Couleur");
-                this.lblCouleurVous.setForeground(Color.BLUE);
             this.panelInfosVous = new JPanel(new GridLayout(3,1));
-                this.lblNomVous = new JLabel("Nom du joueur");
-                this.lblNbWagonsVous = new JLabel("Nombre de wagons : X");
-                this.lblNbPvVous = new JLabel("Nombre de points de victoire : X");
+                this.lblNbWagonsVous = new JLabel("Nombre de wagons : " + this.ctrl.getJoueur().getNbMarqueurs());
+                this.lblNbPvVous = new JLabel("Nombre de points de victoire : " + this.ctrl.getJoueur().getNbPv());
 
         this.panelJActuel = new JPanel(new GridBagLayout());
             this.panelLblJActuel = new JPanel();
@@ -57,11 +55,9 @@ public class PanelJoueurs extends JPanel
             this.panelCouleurJActuel = new JPanel();
                 this.couleurJActuel = Color.GREEN; // Couleur du joueur actuel
                 this.lblCouleurJActuel = new JLabel("Couleur");
-                this.lblCouleurJActuel.setForeground(Color.RED);
             this.panelInfosJActuel = new JPanel(new GridLayout(3,1));
-                this.lblNomJActuel = new JLabel("Nom du joueur");
-                this.lblNbWagonsJActuel = new JLabel("Nombre de wagons : X");
-                this.lblNbPvJActuel = new JLabel("Nombre de points de victoire : X");
+                this.lblNbWagonsJActuel = new JLabel("Nombre de wagons : " + this.ctrl.getJoueur().getNbMarqueurs());
+                this.lblNbPvJActuel = new JLabel("Nombre de points de victoire : " + this.ctrl.getJoueur().getNbPv());
 
         // --
 
@@ -72,7 +68,6 @@ public class PanelJoueurs extends JPanel
 
         this.panelLblVous.add(this.lblVous);
         this.panelCouleurVous.add(this.lblCouleurVous);
-        this.panelInfosVous.add(this.lblNomVous);
         this.panelInfosVous.add(this.lblNbWagonsVous);
         this.panelInfosVous.add(this.lblNbPvVous);
 
@@ -101,7 +96,6 @@ public class PanelJoueurs extends JPanel
 
         this.panelLblJActuel.add(this.lblJActuel);
         this.panelCouleurJActuel.add(this.lblCouleurJActuel);
-        this.panelInfosJActuel.add(this.lblNomJActuel);
         this.panelInfosJActuel.add(this.lblNbWagonsJActuel);
         this.panelInfosJActuel.add(this.lblNbPvJActuel);
 
@@ -127,5 +121,17 @@ public class PanelJoueurs extends JPanel
         this.add(this.panelJActuel);
 
         // -- 
+    }
+
+    public void majInfosJoueur()
+    {
+        this.lblNbWagonsVous.setText(this.lblNbWagonsVous.getText() + "" + this.ctrl.getJoueur().getNbMarqueurs());
+        this.lblNbPvVous.setText(this.lblNbPvVous.getText() + "" + this.ctrl.getJoueur().getNbPv());
+    }
+
+    public void majInfosJoueurActuel()
+    {
+        this.lblNbWagonsJActuel.setText(this.lblNbWagonsJActuel.getText() + "" + this.ctrl.getJoueurActif().getNbMarqueurs());
+        this.lblNbPvJActuel.setText(this.lblNbPvJActuel.getText() + "" + this.ctrl.getJoueurActif().getNbPv());
     }
 }

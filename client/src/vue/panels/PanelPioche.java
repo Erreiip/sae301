@@ -36,13 +36,13 @@ public class PanelPioche extends JPanel
         BufferedImage imgVersoWagon = null;
         BufferedImage imgVersoObjectif = null;
         try {
-            imgVersoWagon = ImageIO.read(new File(Wagon.getFileVerso()));
+            imgVersoWagon    = ImageIO.read(new File(Wagon.getFileVerso()));
             imgVersoObjectif = ImageIO.read(new File(Objectif.getFileVerso()));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        Image dImgVersoWagon = imgVersoWagon.getScaledInstance(170, 85, Image.SCALE_SMOOTH);
+        Image dImgVersoWagon    = imgVersoWagon.getScaledInstance(170, 85, Image.SCALE_SMOOTH);
         Image dImgVersoObjectif = imgVersoObjectif.getScaledInstance(170, 85, Image.SCALE_SMOOTH);
 
         this.lblVersoWagon = new JLabel(new ImageIcon(dImgVersoWagon));
