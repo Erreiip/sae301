@@ -40,6 +40,8 @@ public class Metier
     private HashMap<String,File> hsmFichiers;
 
     private Joueur               joueur;
+    private Joueur               joueurActif;
+
 
     private Regles                regles;
 
@@ -160,6 +162,16 @@ public class Metier
     public void supprimerClient()
     {
         this.client = null;
+    }
+
+    public Joueur getJoueur()
+    {
+        return this.joueur;
+    }
+
+    public Joueur getJoueurActif()
+    {
+        return this.joueurActif;
     }
 
 
@@ -400,7 +412,7 @@ public class Metier
         
         for ( Objectif o : this.alObjectifs)
             this.joueur.ajouterObjectif(o);
-            
+
 
         new Serveur();
         this.client = new Client(this.regles, fichierFond.getAbsolutePath(), this.ctrl);

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import client.src.metier.*;
+import client.src.metier.common.Joueur;
 import client.src.metier.common.Objectif;
 import client.src.metier.common.Route;
 import client.src.metier.common.Wagon;
@@ -47,14 +48,14 @@ public class Controleur
         return this.metier.getPiocheVisible();
     }
 
-    public ArrayList<Wagon> getMainJoueur()
+    public Joueur getJoueurActif()
     {
-        return this.metier.getMainJoueur();
+        return this.metier.getJoueurActif();
     }
 
-    public ArrayList<Objectif> getObjectifsJoueur()
+    public Joueur getJoueur()
     {
-        return this.metier.getObjectifsJoueur();
+        return this.metier.getJoueur();
     }
 
     public void supprimerObj(ArrayList<Objectif> alObj) 
