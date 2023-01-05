@@ -103,11 +103,6 @@ public class PanelCartesInteraction extends JPanel
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
         {
             JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-<<<<<<< Updated upstream
-            //imageMap.get((index + "")).getImage().flush();
-            label.setIcon(imageMap.get((index + "")));
-            label.setHorizontalTextPosition(JLabel.LEFT);
-=======
             // imageMap.get((index + "")).getImage().flush();
             // label.setIcon(imageMap.get((index + "")));
             ImageIcon icon = new ImageIcon("./assets/i2.png");
@@ -118,7 +113,6 @@ public class PanelCartesInteraction extends JPanel
             label.setIcon(icon);
             label.setPreferredSize(new Dimension(200, 60));
             label.setHorizontalTextPosition(JLabel.RIGHT);
->>>>>>> Stashed changes
             return label;
         }
     }
