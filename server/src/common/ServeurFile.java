@@ -41,6 +41,7 @@ public class ServeurFile {
                 if ( clientSocket.isClosed() ) 
                 {
                     System.out.println("shesh");
+                    out.close();
                     clientSocket.close();
                 }
             }
@@ -65,6 +66,5 @@ public class ServeurFile {
         }
 
         in.close();
-        out.close();
     }
 }
