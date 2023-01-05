@@ -3,17 +3,15 @@ package client.src.vue.panels;
 import client.src.Controleur;
 import client.src.metier.common.Objectif;
 import client.src.metier.common.Wagon;
+import client.src.vue.common.ImageRenderer;
+import client.src.vue.common.ModelTableObjectifs;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,13 +25,15 @@ public class PanelCartesInteraction extends JPanel
         private JPanel panelWagons;
             private ArrayList<Wagon> alWagons;
         private JPanel panelObjectifs;
-            private ArrayList<Objectif> alObjectifs;
+            private JScrollPane spTabObjectifs;
+            private JTable tableObjectifs;
+            private ModelTableObjectifs md;
 
     public PanelCartesInteraction(Controleur ctrl)
     {
         this.ctrl = ctrl;
 
-        this.setPreferredSize(new Dimension(300,600));
+        this.setPreferredSize(new Dimension(350,600));
         this.setLayout(new GridLayout(2, 1));
 
         this.tpCartes = new JTabbedPane();
@@ -41,7 +41,7 @@ public class PanelCartesInteraction extends JPanel
         this.panelObjectifs = new JPanel();
 
         // PANEL WAGONS ---
-        this.alWagons = this.ctrl.getMainJoueur();
+        this.alWagons = this.ctrl.getJoueur().getMain();
 
         String[] strWagons = new String[this.alWagons.size()];
         for (Wagon w : this.alWagons)
@@ -54,7 +54,7 @@ public class PanelCartesInteraction extends JPanel
         listWagons.setCellRenderer(new WagonListRenderer());
 
         JScrollPane scroll = new JScrollPane(listWagons);
-        scroll.setPreferredSize(new Dimension(280, 550));
+        scroll.setPreferredSize(new Dimension(330, 550));
 
         this.panelWagons.add(scroll);
 
@@ -63,34 +63,19 @@ public class PanelCartesInteraction extends JPanel
 
 
         // PANEL OBJECTIFS ---
-        this.alObjectifs = this.ctrl.getObjectifsJoueur();
+        this.spTabObjectifs = new JScrollPane();
+        this.tableObjectifs = new JTable();
+        this.md = new ModelTableObjectifs(this.ctrl);
+        this.tableObjectifs.setModel(this.md);
+        this.tableObjectifs.setShowVerticalLines(false);
+        this.tableObjectifs.getColumn("Image").setCellRenderer(new ImageRenderer(this.md));
 
-        String[] columnsName = {"Image", "Ville 1", "Ville 2", "PV"};
+        this.tableObjectifs.setRowHeight(50);
 
-        String[][] data = {};
+        this.spTabObjectifs.setViewportView(this.tableObjectifs);
+        this.spTabObjectifs.setPreferredSize(new Dimension(330, 550));
 
-        DefaultTableModel model = new DefaultTableModel(data, columnsName);
-
-        JTable table = new JTable(model)
-        {
-            public Class getColumnClass(int column)
-            {
-                switch (column)
-                {
-                    case 0:  return ImageIcon.class;
-                    case 1:  return String.class;
-                    case 2:  return String.class;
-                    case 3:  return Integer.class;
-                    default: return String.class;
-                }
-            }
-        };
-
-        table.setRowHeight(50);
-
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setPreferredSize(new Dimension(280, 550));
-        this.panelObjectifs.add(scrollPane);
+        this.panelObjectifs.add(this.spTabObjectifs);
 
         this.tpCartes.addTab("Objectifs", this.panelObjectifs);
 
