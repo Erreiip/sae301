@@ -49,4 +49,9 @@ public class Objectif
     {
         return Objectif.versoObjectif;
     }
+
+    private static void colorier(Ville v1, Ville v2, int cout, Objectif obj)
+    {
+
+    }
 }

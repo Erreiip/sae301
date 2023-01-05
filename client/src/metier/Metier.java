@@ -191,6 +191,10 @@ public class Metier
         return false;
     }
 
+    public File getFond    () { return this.hsmFichiers.get(Metier.IMG_FOND ); }
+    public File getImgJoker() { return this.hsmFichiers.get(Metier.IMG_JOKER); }
+
+
     public boolean actionPossible() { return this.joueur == joueurActif; }
 
     public Joueur getJoueurActif() { return this.joueurActif; }
