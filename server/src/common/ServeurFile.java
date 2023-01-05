@@ -38,7 +38,11 @@ public class ServeurFile {
 
             while (true )
             {
-                if ( clientSocket.isClosed() ) clientSocket.close();
+                if ( clientSocket.isClosed() ) 
+                {
+                    System.out.println("shesh");
+                    clientSocket.close();
+                }
             }
 
         } catch (Exception e){
