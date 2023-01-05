@@ -8,9 +8,6 @@ import server.src.Serveur;
 public class ClientFile
 {
 
-    private static DataOutputStream dataOutputStream = null;
-    private static DataInputStream dataInputStream = null;
-
     public static boolean bPause = false;
 
 
@@ -22,7 +19,8 @@ public class ClientFile
 
         try(Socket socket = new Socket(adr,Serveur.PORT_TRANSFERT)) {
             
-            while ( bPause )
+            while ( bPause ) {}
+
             in = socket.getInputStream();
         
             out = new FileOutputStream("jeu.xml");
@@ -39,6 +37,7 @@ public class ClientFile
             out.close();
             in.close();
             socket.close();
+            
         }catch (Exception e){
             e.printStackTrace();
         }

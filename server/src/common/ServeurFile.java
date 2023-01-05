@@ -17,8 +17,6 @@ import server.src.Serveur;
 
 public class ServeurFile {
 
-    private static DataOutputStream dataOutputStream = null;
-    private static DataInputStream dataInputStream = null;
 
     public ServeurFile(Serveur s) 
     {
@@ -26,9 +24,9 @@ public class ServeurFile {
             Socket socket = serverSocket.accept();
 
             File file = new File(s.getXml().getAbsolutePath());
-            // Get the size of the file
-            long length = file.length();
+
             byte[] bytes = new byte[16 * 1024];
+
             InputStream in = new FileInputStream(file);
             OutputStream out = socket.getOutputStream();
             
@@ -37,19 +35,16 @@ public class ServeurFile {
                 out.write(bytes, 0, count);
             }
 
-            ClientFile.setBoolean(true);
+            ClientFile.setBoolean(false);
             
             out.close();
             in.close();
             socket.close();
             
-
             while (true )
             {
                 if ( socket.isClosed() ) 
                 {
-                    dataInputStream.close();
-                    dataOutputStream.close();
                     socket.close();
                     serverSocket.close();
                 }
