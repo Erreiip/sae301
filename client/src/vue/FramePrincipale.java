@@ -34,6 +34,7 @@ public class FramePrincipale extends JFrame
         this.add(this.panelMap    , BorderLayout.CENTER);
         this.add(this.panelCartes , BorderLayout.EAST);
 
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
