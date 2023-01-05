@@ -33,15 +33,15 @@ public class ServeurFile {
 
             sendFile(s.getXml().getAbsolutePath());
 
-            dataInputStream.close();
-            dataOutputStream.close();
+            
 
             while (true )
             {
                 if ( clientSocket.isClosed() ) 
                 {
-                    System.out.println("shesh");
-                    out.close();
+                    dataInputStream.close();
+                    dataOutputStream.close();
+                    
                     clientSocket.close();
                 }
             }
@@ -65,6 +65,7 @@ public class ServeurFile {
             out.write(bytes, 0, count);
         }
 
+        out.close();
         in.close();
     }
 }
