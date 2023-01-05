@@ -27,7 +27,8 @@ public class Serveur extends Server
 
     private Joueur  joueurActif;
     private ArrayList<Joueur>  alJoueurs;
-    private int index;
+    private Integer index;
+    private Integer indexDernier;
 
 
     public Serveur()
@@ -38,6 +39,8 @@ public class Serveur extends Server
         this.xml         = null;
         this.regles      = null;
         this.index       = 0;
+        this.indexDernier= null;
+
 
         Kryo kryo = this.getKryo();
         Serveur.kryoClass(kryo);
@@ -74,7 +77,7 @@ public class Serveur extends Server
 
         Collections.shuffle(alJoueurs);
 
-        this.joueurActif = this.alJoueurs.get(this.index++);
+        this.joueurActif = this.alJoueurs.get(this.index);
     }
 
     public void lancer()
@@ -86,7 +89,26 @@ public class Serveur extends Server
     public void envoyerAction(Action a)
     {
         this.sendToAllTCP(a);
-        
+
+        if ( indexDernier != null)
+        {
+            for ( Joueur j : this.alJoueurs )
+            {
+                if ( this.regles.getNbWagonsFinParties() < j.getNbMarqueurs() )
+                {
+                    this.indexDernier = this.index;
+                }
+            }
+        } else
+        {
+            if ( this.index+1 == indexDernier)
+            {
+                this.sendToAllTCP("fini");
+            }
+        }
+
+        this.index++;
+
         if ( this.index == this.alJoueurs.size() )
             this.index = 0;
 
