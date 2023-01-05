@@ -6,6 +6,8 @@ import client.src.metier.common.Wagon;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -38,6 +40,7 @@ public class PanelCartesInteraction extends JPanel
         this.panelWagons = new JPanel();
         this.panelObjectifs = new JPanel();
 
+        // PANEL WAGONS ---
         this.alWagons = this.ctrl.getMainJoueur();
 
         String[] strWagons = new String[this.alWagons.size()];
@@ -56,8 +59,41 @@ public class PanelCartesInteraction extends JPanel
         this.panelWagons.add(scroll);
 
         this.tpCartes.addTab("Wagons", this.panelWagons);
+
+
+
+        // PANEL OBJECTIFS ---
+        this.alObjectifs = this.ctrl.getObjectifsJoueur();
+
+        String[] columnsName = {"Image", "Ville 1", "Ville 2", "Points de Victoire"};
+
+        String[][] data = {};
+
+        DefaultTableModel model = new DefaultTableModel(data, columnsName);
+
+        JTable table = new JTable(model)
+        {
+            public Class getColumnClass(int column)
+            {
+                switch (column)
+                {
+                    case 0:  return ImageIcon.class;
+                    case 1:  return String.class;
+                    case 2:  return String.class;
+                    case 3:  return Integer.class;
+                    default: return String.class;
+                }
+            }
+        };
+
+        table.setRowHeight(50);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        this.panelObjectifs.add(scrollPane);
+
         this.tpCartes.addTab("Objectifs", this.panelObjectifs);
 
+        // --
         this.add(this.tpCartes);
     }   
 
@@ -67,9 +103,22 @@ public class PanelCartesInteraction extends JPanel
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
         {
             JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+<<<<<<< Updated upstream
             //imageMap.get((index + "")).getImage().flush();
             label.setIcon(imageMap.get((index + "")));
             label.setHorizontalTextPosition(JLabel.LEFT);
+=======
+            // imageMap.get((index + "")).getImage().flush();
+            // label.setIcon(imageMap.get((index + "")));
+            ImageIcon icon = new ImageIcon("./assets/i2.png");
+            Image image = icon.getImage();
+            Image newImg = image.getScaledInstance(80, 50,  java.awt.Image.SCALE_SMOOTH);
+            icon = new ImageIcon(newImg);
+            
+            label.setIcon(icon);
+            label.setPreferredSize(new Dimension(200, 60));
+            label.setHorizontalTextPosition(JLabel.RIGHT);
+>>>>>>> Stashed changes
             return label;
         }
     }
