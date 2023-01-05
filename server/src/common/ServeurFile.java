@@ -38,9 +38,9 @@ public class ServeurFile {
 
             while (true )
             {
-                if ( !clientSocket.getKeepAlive() ) clientSocket.close();
+                if ( clientSocket.isClosed() ) clientSocket.close();
             }
-            
+
         } catch (Exception e){
             e.printStackTrace();
         }
