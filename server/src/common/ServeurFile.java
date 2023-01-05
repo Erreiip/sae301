@@ -17,7 +17,7 @@ public class ServeurFile {
     public ServeurFile(Serveur s) 
     {
         System.out.println("serveur : lancé");
-        
+
         try(ServerSocket serverSocket = new ServerSocket(Serveur.PORT_TRANSFERT)){
             Socket clientSocket = serverSocket.accept();
 
@@ -35,18 +35,18 @@ public class ServeurFile {
     }
 
     private static void sendFile(String path) throws Exception{
-        int bytes = 0;
         File file = new File(path);
         FileInputStream fileInputStream = new FileInputStream(file);
         
-        // send file size
         dataOutputStream.writeLong(file.length());  
-        // break file into chunks
-        byte[] buffer = new byte[4*1024];
-        while ((bytes=fileInputStream.read(buffer))!=-1){
-            dataOutputStream.write(buffer,0,bytes);
-            dataOutputStream.flush();
+
+        int count;
+        byte[] buffer = new byte[8192]; // or 4096, or more
+        while ((count = dataInputStream.read(buffer)) > 0)
+        {
+            dataOutputStream.write(buffer, 0, count);
         }
+
         fileInputStream.close();
     }
 }
