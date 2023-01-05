@@ -171,7 +171,7 @@ public class Metier
 
     public void setJoueurActif(Joueur j)
     {
-        return this.joueurActif = joueur;
+        this.joueurActif = joueur;
     }
 
     public Joueur getJoueurActif()
