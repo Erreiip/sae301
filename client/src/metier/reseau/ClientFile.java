@@ -12,7 +12,7 @@ public class ClientFile
     private static DataOutputStream dataOutputStream = null;
     private static DataInputStream dataInputStream = null;
 
-    public ClientFile(String adr, String path)
+    public ClientFile(String adr)
     {
         try(Socket socket = new Socket(adr,Serveur.PORT_TRANSFERT)) {
             out           = socket.getOutputStream();
@@ -32,6 +32,7 @@ public class ClientFile
     private static void receiveFile(String fileName) throws Exception
     {
         File file = new File(fileName);
+        file.createNewFile();
         FileInputStream fileInputStream = new FileInputStream(file);
         
         byte[] bytes = new byte[16*1024];
