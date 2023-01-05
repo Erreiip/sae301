@@ -43,10 +43,14 @@ public class Controleur
         this.metier.supprimerClient();
     }
 
-    public Wagon[] getPiocheVisible()
-    {
-        return this.metier.getPiocheVisible();
-    }
+    public Wagon[] getPiocheVisible                       () { return this.metier.getPiocheVisible();  }
+    public void supprimerWagonsToDef(ArrayList<Wagon> alObj) { this.metier.supprimerWagonsToDef(alObj);}
+    public void supprimerWagons     (ArrayList<Wagon> alObj) { this.metier.supprimerWagons     (alObj);}
+
+    public Objectif[] getPiocheVisibleObj                 () { return this.metier.getPiocheVisibleObj();   }
+    public void supprimerObjToDef(ArrayList<Objectif> alObj) { this.metier.supprimerObjToDef(alObj);       }
+    public void supprimerObj     (ArrayList<Objectif> alObj) { this.metier.supprimerObj(alObj);            }
+
 
     public Joueur getJoueurActif()
     {
@@ -61,17 +65,6 @@ public class Controleur
     public void setJoueurActif(Joueur j)
     {
         this.metier.setJoueurActif(j);
-    }
-
-
-    public void supprimerObj(ArrayList<Objectif> alObj) 
-    {
-        this.metier.supprimerObj(alObj);
-    }
-
-    public void supprimerWagons(ArrayList<Wagon> alWagons) 
-    {
-        this.metier.supprimerWagons(alWagons);
     }
 
     public void routePrise(ArrayList<Route> alRoute) 
