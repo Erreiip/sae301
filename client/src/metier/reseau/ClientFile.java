@@ -12,7 +12,7 @@ public class ClientFile
 
     public ClientFile(String adr)
     {
-        System.out.println(adr);
+        System.out.println("client : lancé");
         
         try(Socket socket = new Socket(adr,Serveur.PORT_TRANSFERT)) {
             dataInputStream = new DataInputStream(socket.getInputStream());

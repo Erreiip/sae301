@@ -16,6 +16,8 @@ public class ServeurFile {
 
     public ServeurFile(Serveur s) 
     {
+        System.out.println("serveur : lancé");
+        
         try(ServerSocket serverSocket = new ServerSocket(Serveur.PORT_TRANSFERT)){
             Socket clientSocket = serverSocket.accept();
 
