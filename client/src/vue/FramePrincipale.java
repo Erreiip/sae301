@@ -29,6 +29,7 @@ public class FramePrincipale extends JFrame
         this.panelCartesInteraction      = new PanelCartesInteraction(ctrl);
 
         JScrollPane jspMap = new JScrollPane(this.panelMap);
+        jspMap.getVerticalScrollBar().setUnitIncrement(10);
 
         this.add(this.panelJoueurs, BorderLayout.NORTH);
         this.add(this.panelPioche , BorderLayout.WEST);
