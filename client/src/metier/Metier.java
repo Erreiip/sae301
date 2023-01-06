@@ -75,7 +75,7 @@ public class Metier
         this.ctrl                = ctrl;
    
         //this.joueur              = null;
-        this.joueur              = new Joueur(11111, 0); 
+        this.joueur              = new Joueur(11111, 40); 
 
         this.joueurActif         = null;
 
