@@ -27,6 +27,8 @@ public class MouseAdapterVersoWagon extends MouseAdapter
                 if(!ctrl.secondWagon())
                 {
                     ctrl.setActionEnCours(false);
+                    this.ctrl.tourTermine(); // fin tour (3.1)
+                    System.out.println("Fin du tour (Carte wagons)");
                 }
                 ctrl.genererInteractionWagon(wagon);
                 ctrl.majPioche();

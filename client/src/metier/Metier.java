@@ -214,7 +214,8 @@ public class Metier
         if ( this.joueur.enleverMarqueurs(r.getCout()) ) 
         {
             r.setJoueur(this.joueur);
-            this.tourTermine();
+            this.tourTermine(); // fin tour (1)
+            System.out.println("Fin du tour (Route prise)");
             return true;
         }
 
@@ -383,7 +384,7 @@ public class Metier
     //   MAJ        //
     //--------------//
 
-    private void tourTermine() { this.ctrl.maj(); }
+    private void tourTermine() { this.ctrl.tourTermine(); }
 
 
     //--------------//

@@ -83,7 +83,7 @@ public class Controleur
     public void genererInteractionWagon(Wagon w)  { ((FramePrincipale)this.ihm).genererInteractionWagon(w); }
     public void majPioche               ()        { ((FramePrincipale)this.ihm).majPioche();                }
 
-    public void    setActionEnCours(boolean action) { this.metier.setActionEnCours(action);; }
+    public void    setActionEnCours(boolean action) { this.metier.setActionEnCours(action);  }
     public boolean getActionEnCours()               { return this.metier.getActionEnCours(); }
 
     public boolean verifierObjectif(Objectif o)
@@ -97,6 +97,10 @@ public class Controleur
         return false;
     }
 
-    public void maj() { ((FramePrincipale)this.ihm).maj(); }
+    public void tourTermine() 
+    { 
+        ((FramePrincipale)this.ihm).maj(); 
+        System.out.println("Tour termine");
+    }
 
 }

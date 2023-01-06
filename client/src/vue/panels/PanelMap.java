@@ -64,7 +64,6 @@ public class PanelMap extends JPanel
             int largeur =  18;
 
             Point n1,n3;
-            Point n2,n4;
 
             double angle = Math.atan((double) (r.getVille2().getY() - r.getVille1().getY()) / 
                                               (r.getVille2().getX() - r.getVille1().getX())  );
@@ -74,9 +73,6 @@ public class PanelMap extends JPanel
 
             n1 = new Point((int)r.getVille1().getX() + adj, (int)r.getVille1().getY() + opp );
             n3 = new Point((int)r.getVille1().getX() - adj, (int)r.getVille1().getY() - opp );
-
-            n2 = new Point((int)(r.getVille2().getX() + adj), (int)(r.getVille2().getY() + opp));
-            n4 = new Point((int)(r.getVille2().getX() - adj), (int)(r.getVille2().getY() - opp));
 
             g.setColor(r.getCouleur1());
 
@@ -203,7 +199,7 @@ public class PanelMap extends JPanel
         public void mouseClicked(MouseEvent e)
         { 
 
-            if ( PanelMap.this.ctrl.getActionEnCours() == true)
+            if ( PanelMap.this.ctrl.getActionEnCours() || PanelMap.this.ctrl.actionPossible() )
                 return;
 
             int x = e.getX();
@@ -218,9 +214,9 @@ public class PanelMap extends JPanel
                         if ( PanelMap.this.ctrl.getActionEnCours() == false)
                             PanelMap.this.ctrl.setActionEnCours(true);
 
-                        if ( r.estDouble() ) System.out.print("(Route double) ");
-                        else                 System.out.print("(Route simple) ");
-                        System.out.println(r.getVille1().getNom() + " - " + r.getVille2().getNom());
+                        //if ( r.estDouble() ) System.out.print("(Route double) ");
+                        //else                 System.out.print("(Route simple) ");
+                        //System.out.println(r.getVille1().getNom() + " - " + r.getVille2().getNom());
 
                         PanelMap.this.ctrl.ajouterRoute(r);
 

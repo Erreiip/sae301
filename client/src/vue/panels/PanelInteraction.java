@@ -132,6 +132,8 @@ public class PanelInteraction extends JPanel implements ActionListener
                 if(this.alCheckBox.get(index).isSelected())
                 {
                     ctrl.getJoueur().ajouterObjectif(alObjectifs[index]);
+                    this.ctrl.tourTermine(); // fin tour (2)
+                    System.out.println("Fin du tour (Carte objectif)");
                     alObjectifsGardes.add(alObjectifs[index]);
                 }
                 // Sinon on l'ajoute a la defausse
@@ -162,10 +164,5 @@ public class PanelInteraction extends JPanel implements ActionListener
                 }
             }
         }
-    }
-
-    public void maj()
-    {
-        //maj
     }
 }
