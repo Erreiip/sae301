@@ -184,6 +184,7 @@ public class PanelMap extends JPanel
 
     public void colorier(Ville v1, Ville v2)
     {
+        this.colorier();
         this.alVilleAColorier.add(v1);
         this.alVilleAColorier.add(v2);
         this.repaint();

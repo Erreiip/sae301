@@ -8,6 +8,8 @@ import client.src.vue.common.ModelTableObjectifs;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -18,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class PanelCarte extends JPanel implements ListSelectionListener
+public class PanelCarte extends JPanel implements ListSelectionListener, ChangeListener
 {
     private Controleur ctrl;
 
@@ -80,6 +82,7 @@ public class PanelCarte extends JPanel implements ListSelectionListener
 
         ListSelectionModel selModel = this.tableObjectifs.getSelectionModel();
         selModel.addListSelectionListener(this);        
+        this.tpCartes.addChangeListener(this);
     }
 
     public void majListWagon()
@@ -111,19 +114,23 @@ public class PanelCarte extends JPanel implements ListSelectionListener
     public void valueChanged(ListSelectionEvent e) 
     {
         System.out.println(e);
-        
-        if ( this.tableObjectifs.getSelectedRow() != -1)
+        if ( !e.getValueIsAdjusting() )
         {
-            ModelTableObjectifs md = (ModelTableObjectifs) this.tableObjectifs.getModel();
-            Objectif o = md.getObjectif(this.tableObjectifs.getSelectedRow());
-            this.ctrl.colorier(o.getV1(), o.getV2());
-            System.out.println("colorie");
-        } else
-        {
-            System.out.println("colorie pas");
-            this.ctrl.colorier();
+            if ( this.tableObjectifs.getSelectedRow() != -1)
+            {
+                ModelTableObjectifs md = (ModelTableObjectifs) this.tableObjectifs.getModel();
+                Objectif o = md.getObjectif(this.tableObjectifs.getSelectedRow());
+                this.ctrl.colorier(o.getV1(), o.getV2());
+                System.out.println("colorie");
+            }
         }
     }
+
+    @Override
+    public void stateChanged(ChangeEvent e) 
+    {
+        this.ctrl.colorier();        
+    }   
 
     public class WagonListRenderer extends DefaultListCellRenderer
     {
