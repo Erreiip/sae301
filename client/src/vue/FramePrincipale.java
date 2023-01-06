@@ -58,4 +58,9 @@ public class FramePrincipale extends JFrame
     {
         this.panelCartesInteraction.genererInteractionWagon(wagonCorrespondant);
     }
+
+    public void majMap()
+    {
+        this.panelMap.majMap();
+    }
 }

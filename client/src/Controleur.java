@@ -94,4 +94,9 @@ public class Controleur
 
         return false;
     }
+
+    public void majMap()
+    {
+        ((FramePrincipale)this.ihm).majMap();
+    }
 }
