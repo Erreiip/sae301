@@ -28,9 +28,7 @@ public class PanelCartesInteraction extends JPanel
     {
         this.setLayout(new GridLayout(2, 1));
         this.setPreferredSize(new Dimension(350,600));
-
-
-
+        
         this.ctrl = ctrl;
 
         this.panelCarte       = new PanelCarte(this.ctrl);
@@ -49,5 +47,10 @@ public class PanelCartesInteraction extends JPanel
     {
         this.panelInteraction.genererInteractionWagon(wagonCorrespondant);
     }
-   
+
+    public void maj()
+    {
+        this.panelCarte.maj();
+        this.panelInteraction.maj();
+    } 
 }

@@ -111,15 +111,21 @@ public class PanelJoueurs extends JPanel
         // -- 
     }
 
-    public void majInfosJoueur()
+    public void majInfos()
     {
-        this.lblNbWagonsVous.setText(this.lblNbWagonsVous.getText() + "" + this.ctrl.getJoueur().getNbMarqueurs());
-        this.lblNbPvVous.setText(this.lblNbPvVous.getText() + "" + this.ctrl.getJoueur().getNbPv());
+        this.majInfosJoueur();
+        this.majInfosJoueurActif();
     }
 
-    public void majInfosJoueurActuel()
+    public void majInfosJoueur()
     {
-        this.lblNbWagonsJActuel.setText(this.lblNbWagonsJActuel.getText() + "" + this.ctrl.getJoueurActif().getNbMarqueurs());
-        this.lblNbPvJActuel.setText(this.lblNbPvJActuel.getText() + "" + this.ctrl.getJoueurActif().getNbPv());
+        this.lblNbWagonsVous.setText("Nombre de wagons : " + this.ctrl.getJoueur().getNbMarqueurs());
+        this.lblNbPvVous.setText("Nombre de points de victoire : " + this.ctrl.getJoueur().getNbPv());
+    }
+
+    public void majInfosJoueurActif()
+    {
+        this.lblNbWagonsJActuel.setText("Nombre de wagons : " + this.ctrl.getJoueurActif().getNbMarqueurs());
+        this.lblNbPvJActuel.setText("Nombre de points de victoire : " + this.ctrl.getJoueurActif().getNbPv());
     }
 }
