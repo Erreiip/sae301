@@ -106,8 +106,20 @@ public class PanelMap extends JPanel
                 g2d.setColor(r.getCouleur1());
                 g2d.fill(fig3);
 
-                g2d.setColor(Color.BLACK);
-                g2d.draw(fig3);
+                if ( r.estPrise() )
+                {
+                    g2d.setColor(new Color(r.getJoueur().getCouleur()));
+                    g2d.setStroke(new BasicStroke(5));
+                    g2d.draw(fig3);
+                }
+                else
+                {
+                    g2d.setColor(Color.BLACK);
+                    g2d.draw(fig3);
+                }
+
+                g2d.setStroke(new BasicStroke(1));
+
 
                 this.hmRoutesShapes.get(r).add(fig3);
 
@@ -181,6 +193,11 @@ public class PanelMap extends JPanel
         return new Dimension(this.fond.getWidth(), this.fond.getHeight());
     }
 
+    public void majMap()
+    {
+        this.repaint();
+    }
+
     private class RouteClicked extends MouseAdapter
     {
         public void mouseClicked(MouseEvent e)
@@ -206,7 +223,7 @@ public class PanelMap extends JPanel
                         System.out.println(r.getVille1().getNom() + " - " + r.getVille2().getNom());
 
                         PanelMap.this.ctrl.ajouterRoute(r);
-                        
+
                         PanelMap.this.ctrl.setActionEnCours(false);
                     }
                 }
