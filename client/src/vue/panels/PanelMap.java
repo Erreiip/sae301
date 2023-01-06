@@ -5,15 +5,15 @@ import client.src.metier.common.RectangleNom;
 import client.src.metier.common.Route;
 import client.src.metier.common.Ville;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.geom.AffineTransform;
 
-public class PanelMap extends JPanel
+public class PanelMap extends JPanel implements MouseListener
 {
     private Controleur ctrl;
 
@@ -21,12 +21,17 @@ public class PanelMap extends JPanel
     private int x = 0;
     private int y = 0;
 
+    private HashMap<Route, Polygon> hmRoutesPolygons;
+
     public PanelMap(Controleur ctrl)
     {
         this.ctrl = ctrl;
 
         this.fond = this.ctrl.getFond();
 
+        this.hmRoutesPolygons = new HashMap<Route, Polygon>();
+
+        this.addMouseListener(this);
 
         this.setLayout(null);
     }  
@@ -39,6 +44,7 @@ public class PanelMap extends JPanel
 
         g.drawImage(this.fond, this.x, this.y, this.fond.getWidth(), this.fond.getHeight(), null);
 
+        // ROUTE
         for (Route r : this.ctrl.getAlRoutes())
         {
             g.setColor(r.getCouleur1());
@@ -54,6 +60,7 @@ public class PanelMap extends JPanel
             int largeur =  18;
 
             Point n1,n3;
+            Point n2,n4;
 
             double angle = Math.atan((double) (r.getVille2().getY() - r.getVille1().getY()) / 
                                             (r.getVille2().getX() - r.getVille1().getX())  );
@@ -62,8 +69,39 @@ public class PanelMap extends JPanel
             int opp = (int) (12 * Math.sin(angle + 1.57));
 
             n1 = new Point((int)r.getVille1().getX() + adj, (int)r.getVille1().getY() + opp );
-
             n3 = new Point((int)r.getVille1().getX() - adj, (int)r.getVille1().getY() - opp );
+
+            n2 = new Point((int)(r.getVille2().getX() + adj), (int)(r.getVille2().getY() + opp));
+            n4 = new Point((int)(r.getVille2().getX() - adj), (int)(r.getVille2().getY() - opp));
+
+            // -- Polygon pour identifier la route
+            g.setColor(new Color(0,0,0,0));
+        
+            int[] tabx = new int[4];
+            int[] taby = new int[4];
+            
+            int tailleVille = (int)(r.getVille1().getTaille())/2;
+
+            tabx[0] = (int)n1.getX() + tailleVille;
+            tabx[1] = (int)n2.getX() + tailleVille;
+            tabx[2] = (int)n4.getX() + tailleVille;
+            tabx[3] = (int)n3.getX() + tailleVille;
+
+            taby[0] = (int)n1.getY() + tailleVille;
+            taby[1] = (int)n2.getY() + tailleVille;
+            taby[2] = (int)n4.getY() + tailleVille;
+            taby[3] = (int)n3.getY() + tailleVille;
+
+            int nbPoints = 4;
+            
+            Polygon p = new Polygon(tabx, taby, nbPoints);
+
+            g.drawPolygon(tabx, taby, nbPoints);
+
+            this.hmRoutesPolygons.put( r, p );
+            // --
+
+            g.setColor(r.getCouleur1());
 
             Ville v = r.getVille1();
 
@@ -143,5 +181,39 @@ public class PanelMap extends JPanel
     public Dimension getPreferredSize() 
     {
         return new Dimension(this.fond.getWidth(), this.fond.getHeight());
+    }
+
+    public void mouseClicked(MouseEvent e)
+    {
+        int x = e.getX();
+        int y = e.getY();
+
+        for (Route r : this.hmRoutesPolygons.keySet())
+        {
+            if ( this.hmRoutesPolygons.get(r).contains(x, y) )
+            {
+                System.out.println("Route : " + r.getVille1().getNom() + " - " + r.getVille2().getNom());
+            }
+        }
+    }
+
+    public void mouseEntered(MouseEvent e)
+    {
+
+    }
+
+    public void mouseExited(MouseEvent e)
+    {
+
+    }
+
+    public void mousePressed(MouseEvent e)
+    {
+
+    }
+
+    public void mouseReleased(MouseEvent e)
+    {
+
     }
 }
