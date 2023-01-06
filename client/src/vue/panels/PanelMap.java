@@ -17,15 +17,17 @@ public class PanelMap extends JPanel
 {
     private Controleur ctrl;
 
+    private ArrayList<Ville> alVilleAColorier;
+
     private BufferedImage fond;
-    private int x = 0;
-    private int y = 0;
 
     public PanelMap(Controleur ctrl)
     {
         this.ctrl = ctrl;
 
         this.fond = this.ctrl.getFond();
+        this.alVilleAColorier = new ArrayList<Ville>();
+
 
 
         this.setLayout(null);

@@ -68,10 +68,6 @@ public class Controleur
 
     public void routePrise(ArrayList<Route> alRoute) { this.metier.routePrise(alRoute); }
 
-    public void colorier( Ville v1, Ville v2)
-    {
-
-    }
-
-    public void colorier( Ville v1, Ville v2) { }
+    public void colorier( Ville v1, Ville v2) { this.ihm.colorier(v1,v2); }
+    public void colorier()                    { this.ihm.colorier(); }
 }
