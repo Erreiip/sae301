@@ -117,6 +117,33 @@ public class Metier
 
 
     //--------------//
+    //   OBJECTIF   //
+    //--------------//
+
+    public boolean verifierObjectif(Objectif obj)
+    {
+        Ville v1 = obj.getV1();
+        Ville v2 = obj.getV2();
+        ArrayList<Ville> alVillesVisitees = new ArrayList<Ville>();
+
+        return rechercheObjectif(v1, v2, alVillesVisitees);
+    }
+
+    public boolean rechercheObjectif(Ville v, Ville vRecherchee, ArrayList<Ville> alVillesVisitees)
+    {
+        boolean retour = false;
+        alVillesVisitees.add(v);
+        if( v == vRecherchee ) return true;
+        for ( Route r : v.getAlRoutes())
+        {
+            if ( r.getVille1() == v && r.getJoueur() == getJoueur() && !alVillesVisitees.contains(r.getVille2())) retour = rechercheObjectif(r.getVille2(), vRecherchee, alVillesVisitees);
+            if ( r.getVille2() == v && r.getJoueur() == getJoueur() && !alVillesVisitees.contains(r.getVille1()) && !retour) retour = rechercheObjectif(r.getVille1(), vRecherchee, alVillesVisitees);
+        }
+        return retour;
+    }
+
+    
+    //--------------//
     //   ROUTE      //
     //--------------//
 
