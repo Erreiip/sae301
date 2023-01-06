@@ -197,6 +197,8 @@ public class PanelMap extends JPanel
                         if ( r.estDouble() ) System.out.print("(Route double) ");
                         else                 System.out.print("(Route simple) ");
                         System.out.println(r.getVille1().getNom() + " - " + r.getVille2().getNom());
+
+                        PanelMap.this.ctrl.ajouterRoute(r);
                     }
                 }
             }

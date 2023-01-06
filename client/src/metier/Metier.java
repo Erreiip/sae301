@@ -78,7 +78,8 @@ public class Metier
    
         //this.joueur              = null;
         this.joueur              = new Joueur(11111, 0); 
-        this.joueurActif         = this.joueur;
+
+        this.joueurActif         = null;
 
    
         this.alVilles            = new ArrayList<Ville>   ();

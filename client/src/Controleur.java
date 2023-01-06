@@ -66,7 +66,9 @@ public class Controleur
 
     public void setJoueurActif(Joueur j) { this.metier.setJoueurActif(j); }
 
-    public void routePrise(ArrayList<Route> alRoute) { this.metier.routePrise(alRoute); }
+    public void routePrise(ArrayList<Route> alRoute) { this.metier.routePrise(alRoute);    }
+    public boolean ajouterRoute(Route r)             { return this.metier.ajouterRoute(r); }
+
 
     public void colorier( Ville v1, Ville v2) { ((FramePrincipale)this.ihm).colorier(v1,v2); }
     public void colorier()                    { ((FramePrincipale)this.ihm).colorier(); }
