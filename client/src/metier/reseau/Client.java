@@ -46,8 +46,9 @@ public class Client extends com.esotericsoftware.kryonet.Client
 
     public void setAction(Action act)
     {
-        this.ctrl.supprimerWagons(act.getAlWAgons());
-        this.ctrl.supprimerObj    (act.getAlObjectifs());
+        this.ctrl.supprimerWagons(act.getAlWAgonsSuppr());
+        this.ctrl.supprimerObjToDef(act.getAlObjectifsDef());
+        this.ctrl.supprimerObj(act.getAlObjectifsSuppr());
         this.ctrl.routePrise      (act.getAlRoutes());
     }
 }

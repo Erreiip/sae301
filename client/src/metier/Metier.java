@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Iterator;
@@ -79,11 +80,19 @@ public class Metier
         this.alObjectifs         = new ArrayList<Objectif>();
         this.alWagons            = new ArrayList<Wagon>   ();
 
+        this.alDefausseO         = new ArrayList<Objectif>();
+        this.alDefausseW         = new ArrayList<Wagon>   ();
+
+
         this.hsmFichiers         = new HashMap<String,File>();
         this.regles              = null;
         this.client              = null;
     }
 
+
+    //--------------//
+    //   TRAJET     //
+    //--------------//
 
     public void creerTrajet(Ville v1, Ville v2, int cout, Color c)
     {
@@ -101,7 +110,37 @@ public class Metier
         new Route (v1, v2, cout, c, c2, null);
     }
 
-    
+
+    //--------------//
+    //   ROUTE      //
+    //--------------//
+
+    public void routePrise(ArrayList<Route> alRoute)
+    {
+        for ( Route r : alRoute)
+        {
+            r.setJoueur(this.joueur);
+        }
+    }
+
+    public boolean ajouterRoute(Route r)
+    {
+        if ( r.estPrise() ) return false;
+
+        if ( this.joueur.enleverMarqueurs(r.getCout()) ) 
+        {
+            r.setJoueur(this.joueur);
+            return true;
+        }
+
+        return false;
+    }
+
+
+    //--------------//
+    //   INIT       //
+    //--------------//
+
     public void initCarteWagons()
     {
         int taille = this.alWagons.size();
@@ -121,8 +160,14 @@ public class Metier
     }
 
 
+    //--------------//
+    //   PIOCHE     //
+    //--------------//
+
     public Wagon[] getPiocheVisible  () 
     { 
+        if ( this.alWagons.size() < 5 ) { rajouterDefausseW(); }        
+        
         Wagon[] tabWagonVisible = new Wagon[5];
         for ( int cpt = 0; cpt < tabWagonVisible.length; cpt++ )
         {
@@ -142,6 +187,38 @@ public class Metier
 
         return tabObjectif;
     }
+
+
+    //--------------//
+    //   DEFAUSSE   //
+    //--------------//
+
+    public void rajouterDefausseW()
+    {
+        for ( Wagon w : this.alWagons )
+        {
+            this.alDefausseW.add(w);
+        }
+
+        Collections.shuffle(this.alDefausseW);
+        this.alWagons = new ArrayList<Wagon>(this.alDefausseW);
+    }
+
+    public void rajouterDefausseO()
+    {
+        for ( Objectif o : this.alObjectifs )
+        {
+            this.alDefausseO.add(o);
+        }
+
+        Collections.shuffle(this.alDefausseO);
+        this.alObjectifs = new ArrayList<Objectif>(this.alDefausseO);
+    }
+    
+
+    //--------------//
+    //   SUPPRIMER  //
+    //--------------//
 
     public void supprimerObj(ArrayList<Objectif> alObj) 
     {
@@ -179,26 +256,9 @@ public class Metier
     }
 
 
-    public void routePrise(ArrayList<Route> alRoute)
-    {
-        for ( Route r : alRoute)
-        {
-            r.setJoueur(this.joueur);
-        }
-    }
-
-    public boolean ajouterRoute(Route r)
-    {
-        if ( r.estPrise() ) return false;
-
-        if ( this.joueur.enleverMarqueurs(r.getCout()) ) 
-        {
-            r.setJoueur(this.joueur);
-            return true;
-        }
-
-        return false;
-    }
+    //--------------//
+    //   GETTERS  //
+    //--------------//
 
     public File getFond    () { return this.hsmFichiers.get(Metier.IMG_FOND ); }
     public File getImgJoker() { return this.hsmFichiers.get(Metier.IMG_JOKER); }
@@ -227,6 +287,10 @@ public class Metier
     public void supprimerClient       () { this.client = null; }
     public void setJoueurActif(Joueur j) { this.joueurActif = joueur; }
 
+
+    //--------------//
+    //   XML        //
+    //--------------//
 
     public void lectureXML(File f)
     {
@@ -487,14 +551,13 @@ public class Metier
         return file;
     }
 
+
     private static void colorier(Objectif obj, Controleur ctrl)
     {
         BufferedImage img = null, fond = null;
 
         Ville v1 = obj.getV1();
         Ville v2 = obj.getV2();
-
-
 
         try{
             img = ImageIO.read(new File(Objectif.getFileRectoS()));
