@@ -110,6 +110,8 @@ public class PanelCarte extends JPanel implements ListSelectionListener
     @Override
     public void valueChanged(ListSelectionEvent e) 
     {
+        System.out.println(e);
+        
         if ( this.tableObjectifs.getSelectedRow() != -1)
         {
             ModelTableObjectifs md = (ModelTableObjectifs) this.tableObjectifs.getModel();
