@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.geom.AffineTransform;
 
-public class PanelMap extends JPanel implements MouseListener
+public class PanelMap extends JPanel
 {
     private Controleur ctrl;
 
@@ -33,7 +33,7 @@ public class PanelMap extends JPanel implements MouseListener
 
         this.hmRoutesPolygons = new HashMap<Route, Polygon>();
 
-        this.addMouseListener(this);
+        this.addMouseListener(new RouteClicked());
 
         this.setLayout(null);
     }  
@@ -65,7 +65,7 @@ public class PanelMap extends JPanel implements MouseListener
             Point n2,n4;
 
             double angle = Math.atan((double) (r.getVille2().getY() - r.getVille1().getY()) / 
-                                            (r.getVille2().getX() - r.getVille1().getX())  );
+                                              (r.getVille2().getX() - r.getVille1().getX())  );
 
             int adj = (int) (12 * Math.cos(angle + 1.57)); //90° = 1.57
             int opp = (int) (12 * Math.sin(angle + 1.57));
@@ -164,7 +164,6 @@ public class PanelMap extends JPanel implements MouseListener
         }
 
         // RECTANGLE NOM
-
         for ( Ville v : this.ctrl.getAlVilles())
         {
             RectangleNom r = v.getRectangle();
@@ -202,37 +201,20 @@ public class PanelMap extends JPanel implements MouseListener
         return new Dimension(this.fond.getWidth(), this.fond.getHeight());
     }
 
-    public void mouseClicked(MouseEvent e)
+    private class RouteClicked extends MouseAdapter
     {
-        int x = e.getX();
-        int y = e.getY();
-
-        for (Route r : this.hmRoutesPolygons.keySet())
+        public void mouseClicked(MouseEvent e)
         {
-            if ( this.hmRoutesPolygons.get(r).contains(x, y) )
+            int x = e.getX();
+            int y = e.getY();
+
+            for (Route r : hmRoutesPolygons.keySet())
             {
-                System.out.println("Route : " + r.getVille1().getNom() + " - " + r.getVille2().getNom());
+                if ( hmRoutesPolygons.get(r).contains(x, y) )
+                {
+                    System.out.println("Route : " + r.getVille1().getNom() + " - " + r.getVille2().getNom());
+                }
             }
         }
-    }
-
-    public void mouseEntered(MouseEvent e)
-    {
-
-    }
-
-    public void mouseExited(MouseEvent e)
-    {
-
-    }
-
-    public void mousePressed(MouseEvent e)
-    {
-
-    }
-
-    public void mouseReleased(MouseEvent e)
-    {
-
     }
 }
