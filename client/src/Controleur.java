@@ -71,11 +71,19 @@ public class Controleur
     public void colorier( Ville v1, Ville v2) { ((FramePrincipale)this.ihm).colorier(v1,v2); }
     public void colorier()                    { ((FramePrincipale)this.ihm).colorier(); }
 
+    public Wagon getWagonVerso        ()        { return this.metier.getWagonVerso(); }
+    public boolean ajouterWagonAJoueur(Wagon w) { return this.metier.piocherWagon(w); }
+    public boolean secondWagon        ()        { return this.metier.secondWagon  (); }
+
+    public void genererInteractionObj   ()        { ((FramePrincipale)this.ihm).genererInteractionObj();    }
+    public void genererInteractionWagon(Wagon w)  { ((FramePrincipale)this.ihm).genererInteractionWagon(w); }
+    public void majPioche               ()        { ((FramePrincipale)this.ihm).majPioche();                }
+
     public boolean verifierObjectif(Objectif o)
     {
         if ( this.metier.verifierObjectif(o) ) 
         {
-            ((FramePrincipale) this.ihm).majIHM();
+            //((FramePrincipale) this.ihm).majIHM();
             return true;
         }
 

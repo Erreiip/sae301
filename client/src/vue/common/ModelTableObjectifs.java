@@ -18,13 +18,7 @@ public class ModelTableObjectifs extends AbstractTableModel
     public ModelTableObjectifs(Controleur ctrl)
     {
         this.ctrl = ctrl;
-        this.alObjectifs = this.ctrl.getJoueur().getObjectifs();    
-
-        //test
-        /*for (int i=0; i<5; i++)
-            this.alObjectifs.add(new Objectif(new Ville(new Color(154,255,100),"Ville"+(i+1)+"",400,400,30), 
-                                              new Ville(new Color(200,100, 50),"Ville2"+(i+2)+"",400,700,30), 
-                                              i*2));*/
+        this.alObjectifs = this.ctrl.getJoueur().getObjectifs();  
     }
 
     public int getColumnCount()

@@ -2,6 +2,7 @@ package client.src.vue;
 
 import client.src.Controleur;
 import client.src.metier.common.Ville;
+import client.src.metier.common.Wagon;
 import client.src.vue.panels.*;
 
 import javax.swing.*;
@@ -43,11 +44,18 @@ public class FramePrincipale extends JFrame
         this.setVisible(true);
     }
 
-    public void majIHM()
-    {
-        
-    }
+    public void majPioche() { this.panelPioche.majPioche(); }
 
     public void colorier( Ville v1, Ville v2) { this.panelMap.colorier(v1,v2); }
     public void colorier()                    { this.panelMap.colorier(); }
+
+    public void genererInteractionObj() 
+    {
+        this.panelCartesInteraction.genererInteractionObj();
+    }
+
+    public void genererInteractionWagon(Wagon wagonCorrespondant) 
+    {
+        this.panelCartesInteraction.genererInteractionWagon(wagonCorrespondant);
+    }
 }

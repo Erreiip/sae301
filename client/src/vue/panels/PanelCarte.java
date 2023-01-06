@@ -120,7 +120,6 @@ public class PanelCarte extends JPanel implements ListSelectionListener, ChangeL
                 ModelTableObjectifs md = (ModelTableObjectifs) this.tableObjectifs.getModel();
                 Objectif o = md.getObjectif(this.tableObjectifs.getSelectedRow());
                 this.ctrl.colorier(o.getV1(), o.getV2());
-                System.out.println("colorie");
             }
         }
     }
@@ -128,8 +127,9 @@ public class PanelCarte extends JPanel implements ListSelectionListener, ChangeL
     @Override
     public void stateChanged(ChangeEvent e) 
     {
-        this.ctrl.colorier();        
-    }   
+        this.ctrl.colorier(); 
+        this.tableObjectifs.clearSelection();     
+    }
 
     public class WagonListRenderer extends DefaultListCellRenderer
     {
