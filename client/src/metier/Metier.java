@@ -385,7 +385,7 @@ public class Metier
     //   MAJ        //
     //--------------//
 
-    private void tourTermine() { this.ctrl.maj(); }
+    private void tourTermine() { this.ctrl.tourTermine(); }
 
 
     //--------------//
