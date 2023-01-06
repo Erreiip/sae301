@@ -96,4 +96,7 @@ public class Controleur
 
         return false;
     }
+
+    private void tourTermine() { ((FramePrincipale)this.ihm).maj(); }
+
 }

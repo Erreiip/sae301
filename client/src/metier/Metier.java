@@ -380,6 +380,11 @@ public class Metier
     public void    setActionEnCours(boolean action) { this.actionEnCours = action; }
     public boolean getActionEnCours()               { return this.actionEnCours; }
 
+    //--------------//
+    //   MAJ        //
+    //--------------//
+
+    private void tourTermine() { this.ctrl.maj(); }
 
 
     //--------------//
