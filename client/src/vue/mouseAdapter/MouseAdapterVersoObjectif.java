@@ -17,7 +17,7 @@ public class MouseAdapterVersoObjectif extends MouseAdapter
     @Override
     public void mouseClicked(MouseEvent e) 
     {
-        if(!ctrl.getActionEnCours()) 
+        if(!ctrl.getActionEnCours() && ctrl.actionPossible()) 
         {
             ctrl.setActionEnCours(true);
             ctrl.genererInteractionObj();
