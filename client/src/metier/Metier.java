@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import java.awt.geom.Ellipse2D;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 
 
 import org.apache.commons.io.FileUtils;
@@ -46,10 +47,13 @@ public class Metier
     private ArrayList<Wagon>     alDefausseW;
 
 
-    private HashMap<String,File> hsmFichiers;
+    private BufferedImage        fond;
+    private File                 imgJoker;
 
     private Joueur               joueur;
     private Joueur               joueurActif;
+
+
 
 
     private Regles               regles;
@@ -71,7 +75,7 @@ public class Metier
         this.ctrl                = ctrl;
    
         //this.joueur              = null;
-        this.joueur              = new Joueur(1111, 0); // a remplacer
+        this.joueur              = new Joueur(11111, 0); 
 
         this.joueurActif         = null;
 
@@ -84,7 +88,8 @@ public class Metier
         this.alDefausseW         = new ArrayList<Wagon>   ();
 
 
-        this.hsmFichiers         = new HashMap<String,File>();
+        this.fond                = null;
+        this.imgJoker            = null;
         this.regles              = null;
         this.client              = null;
     }
@@ -260,8 +265,8 @@ public class Metier
     //   GETTERS  //
     //--------------//
 
-    public File getFond    () { return this.hsmFichiers.get(Metier.IMG_FOND ); }
-    public File getImgJoker() { return this.hsmFichiers.get(Metier.IMG_JOKER); }
+    public BufferedImage getFond    () { return this.fond;     }
+    public File          getImgJoker() { return this.imgJoker; }
 
 
     public boolean actionPossible() { return this.joueur == joueurActif; }
@@ -504,10 +509,29 @@ public class Metier
             this.alObjectifs.add(new Objectif(villeObj1, villeObj2, nbPoint));
         }
 
+        BufferedImage fichierFondTaille = null;
+        if(dimensions[0] != "" && dimensions[1] != "")
+        {
+            int width  = Integer.parseInt(dimensions[0]);
+            int height = Integer.parseInt(dimensions[1]);
+
+            try
+            {
+                BufferedImage img = ImageIO.read(fichierFond);
+                Image tmp = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+                fichierFondTaille = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+
+                Graphics2D g2d = fichierFondTaille.createGraphics();
+                g2d.drawImage(tmp, 0, 0, null);
+                g2d.dispose();
+
+            } catch (Exception e) { e.printStackTrace(); }
+        }
+
 
         //ajout
-        this.hsmFichiers.put("fond",fichierFond);
-        this.hsmFichiers.put("joker", fImageJoker);
+        this.fond     = fichierFondTaille;
+        this.imgJoker = fImageJoker;
 
         Objectif.setFileVerso (fVersoObjectifs.getAbsolutePath());
         Objectif.setFileRectoS(fRectoObjectif.getAbsolutePath());
@@ -522,7 +546,7 @@ public class Metier
         this.regles = new Regles(nbWagonsParJoueur, nbWagonsFinParties, tabReglesJoueur);
 
         this.initCarteWagons();
-        
+
         //a enlever 
         for ( int cpt = 0; cpt < 10; cpt++)
             this.joueur.ajouterWagon(this.alWagons.get(cpt));
@@ -561,7 +585,7 @@ public class Metier
 
         try{
             img = ImageIO.read(new File(Objectif.getFileRectoS()));
-            fond = ImageIO.read(ctrl.getFond());
+            fond = ctrl.getFond();
         }catch (Exception e) { e.printStackTrace();  }
 
         int widthFond  = fond.getWidth();

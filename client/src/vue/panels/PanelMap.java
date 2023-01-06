@@ -25,11 +25,10 @@ public class PanelMap extends JPanel
     {
         this.ctrl = ctrl;
 
-        this.setLayout(null);
+        this.fond = this.ctrl.getFond();
 
-        try{
-            this.fond = ImageIO.read(this.ctrl.getFond());
-        } catch(Exception e) { e.printStackTrace(); }
+
+        this.setLayout(null);
     }  
     
     public void paintComponent(Graphics g)
@@ -127,7 +126,7 @@ public class PanelMap extends JPanel
         for ( Ville v : this.ctrl.getAlVilles())
         {
             RectangleNom r = v.getRectangle();
-            
+
             r.maj();
 
             g.setColor(Color.WHITE);

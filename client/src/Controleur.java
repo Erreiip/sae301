@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import java.awt.image.BufferedImage;
+
 
 import client.src.metier.*;
 import client.src.metier.common.Joueur;
@@ -44,7 +46,7 @@ public class Controleur
         this.metier.supprimerClient();
     }
 
-    public File getFond    () { return this.metier.getFond(); }
+    public BufferedImage getFond    () { return this.metier.getFond(); }
     //public File getImgJoker() { return this.metier.getImgJoker(); }
 
     public Wagon[] getPiocheVisible                       () { return this.metier.getPiocheVisible();  }
@@ -59,23 +61,14 @@ public class Controleur
     public ArrayList<Route> getAlRoutes() { return this.metier.getAlRoutes(); }
 
 
-    public Joueur getJoueurActif()
-    {
-        return this.metier.getJoueurActif();
-    }
 
-    public Joueur getJoueur()
-    {
-        return this.metier.getJoueur();
-    }
+    public Joueur getJoueurActif() { return this.metier.getJoueurActif(); }
 
-    public void setJoueurActif(Joueur j)
-    {
-        this.metier.setJoueurActif(j);
-    }
+    public Joueur getJoueur() { return this.metier.getJoueur(); }
 
-    public void routePrise(ArrayList<Route> alRoute) 
-    {
-        this.metier.routePrise(alRoute);
-    }
+    public void setJoueurActif(Joueur j) { this.metier.setJoueurActif(j); }
+
+    public void routePrise(ArrayList<Route> alRoute) { this.metier.routePrise(alRoute); }
+
+
 }
