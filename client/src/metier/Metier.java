@@ -157,9 +157,12 @@ public class Metier
 
     public boolean piocherWagon(Wagon w)
     {
+        ArrayList<Wagon> alWAgon = new ArrayList<Wagon>();
+        alWAgon.add(w);
         if ( derniereCartePioche == null )
         {
             this.joueur.ajouterWagon(w);
+            this.supprimerWagons(alWAgon);
             this.derniereCartePioche = w;
             this.nbCartePioche++;
             return true;
@@ -167,7 +170,8 @@ public class Metier
 
         if ( derniereCartePioche != null && w.getCouleur() != Color.LIGHT_GRAY.getRGB() )
         {
-            
+            this.joueur.ajouterWagon(w);
+            this.supprimerWagons(alWAgon);
             derniereCartePioche = w;
             this.nbCartePioche++;
             return true;
