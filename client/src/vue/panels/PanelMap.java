@@ -184,7 +184,11 @@ public class PanelMap extends JPanel
     private class RouteClicked extends MouseAdapter
     {
         public void mouseClicked(MouseEvent e)
-        {
+        { 
+
+            if ( PanelMap.this.ctrl.getActionEnCours() == true)
+                return;
+
             int x = e.getX();
             int y = e.getY();
 
@@ -194,11 +198,16 @@ public class PanelMap extends JPanel
                 {
                     if ( s.contains(x, y) )
                     {
+                        if ( PanelMap.this.ctrl.getActionEnCours() == false)
+                            PanelMap.this.ctrl.setActionEnCours(true);
+
                         if ( r.estDouble() ) System.out.print("(Route double) ");
                         else                 System.out.print("(Route simple) ");
                         System.out.println(r.getVille1().getNom() + " - " + r.getVille2().getNom());
 
                         PanelMap.this.ctrl.ajouterRoute(r);
+                        
+                        PanelMap.this.ctrl.setActionEnCours(false);
                     }
                 }
             }
