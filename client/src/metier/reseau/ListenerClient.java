@@ -26,7 +26,6 @@ public class ListenerClient extends Listener
             this.client.setAction(jeu);
         }
 
-        /*
         if ( object instanceof String)
         {
             String s = (String) object;
@@ -37,7 +36,6 @@ public class ListenerClient extends Listener
                 new ClientFile(tabString[1]);
             }
         }
-        */
 
         if (object instanceof Joueur)
         {
