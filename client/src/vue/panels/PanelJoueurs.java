@@ -54,7 +54,7 @@ public class PanelJoueurs extends JPanel
         Border blackline = BorderFactory.createLineBorder(Color.black);
 
         GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(1, 1, 1, 50);
+        c.insets = new Insets(1, 1, 1, 10);
 
         this.panelLblVous.add(this.lblVous);
         this.panelInfosVous.add(this.lblNbWagonsVous);
