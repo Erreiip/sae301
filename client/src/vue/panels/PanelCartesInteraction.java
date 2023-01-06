@@ -18,101 +18,23 @@ public class PanelCartesInteraction extends JPanel
 {
     private Controleur ctrl;
 
-    private final Map<String, ImageIcon> imageMap;
-
-    private JTabbedPane tpCartes;
-        private JPanel panelWagons;
-            private ArrayList<Wagon> alWagons;
-        private JPanel panelObjectifs;
-            private JScrollPane spTabObjectifs;
-            private JTable tableObjectifs;
-            private ModelTableObjectifs md;
+    private PanelCarte panelCarte;
+        
 
     public PanelCartesInteraction(Controleur ctrl)
     {
+        this.setLayout(new GridLayout(2, 1));
+        this.setPreferredSize(new Dimension(350,600));
+
+
+
         this.ctrl = ctrl;
 
-        this.setPreferredSize(new Dimension(350,600));
-        this.setLayout(new GridLayout(2, 1));
+        this.panelCarte = new PanelCarte(this.ctrl);
 
-        this.tpCartes = new JTabbedPane();
-        this.panelWagons = new JPanel();
-        this.panelObjectifs = new JPanel();
-
-        // PANEL WAGONS ---
-        this.alWagons = this.ctrl.getJoueur().getMain();
-
-        String[] strWagons = new String[this.alWagons.size()];
-        for (Wagon w : this.alWagons)
-        {
-            strWagons[this.alWagons.indexOf(w)] = w.toString();
-        }
-        
-        imageMap = createImageMap(this.alWagons);
-        JList<String> listWagons = new JList<String>(strWagons);
-        listWagons.setCellRenderer(new WagonListRenderer());
-
-        JScrollPane scroll = new JScrollPane(listWagons);
-        scroll.setPreferredSize(new Dimension(330, 550));
-
-        this.panelWagons.add(scroll);
-
-        this.tpCartes.addTab("Wagons", this.panelWagons);
-
-
-
-        // PANEL OBJECTIFS ---
-        this.spTabObjectifs = new JScrollPane();
-        this.tableObjectifs = new JTable();
-        this.md = new ModelTableObjectifs(this.ctrl);
-        this.tableObjectifs.setModel(this.md);
-        this.tableObjectifs.setShowVerticalLines(false);
-        this.tableObjectifs.getColumn("Image").setCellRenderer(new ImageRenderer(this.md));
-
-        this.tableObjectifs.setRowHeight(50);
-
-        this.spTabObjectifs.setViewportView(this.tableObjectifs);
-        this.spTabObjectifs.setPreferredSize(new Dimension(330, 550));
-
-        this.panelObjectifs.add(this.spTabObjectifs);
-
-        this.tpCartes.addTab("Objectifs", this.panelObjectifs);
-
-        // --
-
-        Border blackline = BorderFactory.createLineBorder(Color.black);
-        this.tpCartes.setBorder(blackline);
-        this.add(this.tpCartes);
+        this.add(this.panelCarte);
+        this.add(new JLabel("shesh"));        
     }   
 
-    public class WagonListRenderer extends DefaultListCellRenderer
-    {
-        @Override
-        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
-        {
-            JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            // imageMap.get((index + "")).getImage().flush();
-            // label.setIcon(imageMap.get((index + "")));
-            ImageIcon icon = new ImageIcon("./assets/i2.png");
-            Image image = icon.getImage();
-            Image newImg = image.getScaledInstance(80, 50,  java.awt.Image.SCALE_SMOOTH);
-            icon = new ImageIcon(newImg);
-            
-            label.setIcon(icon);
-            label.setPreferredSize(new Dimension(200, 60));
-            label.setHorizontalTextPosition(JLabel.RIGHT);
-            return label;
-        }
-    }
-
-    private Map<String, ImageIcon> createImageMap(ArrayList<Wagon> list)
-    {
-        Map<String, ImageIcon> map = new HashMap<>();
-
-        for (Wagon w : list)
-        {
-            map.put(String.valueOf(w.getCouleur()), new ImageIcon(w.getFileRecto()));
-        }
-        return map;
-    }
+   
 }

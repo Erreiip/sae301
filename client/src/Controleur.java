@@ -60,8 +60,6 @@ public class Controleur
     public ArrayList<Ville> getAlVilles() { return this.metier.getAlVilles(); }
     public ArrayList<Route> getAlRoutes() { return this.metier.getAlRoutes(); }
 
-
-
     public Joueur getJoueurActif() { return this.metier.getJoueurActif(); }
 
     public Joueur getJoueur() { return this.metier.getJoueur(); }
@@ -70,5 +68,10 @@ public class Controleur
 
     public void routePrise(ArrayList<Route> alRoute) { this.metier.routePrise(alRoute); }
 
+    public void colorier( Ville v1, Ville v2)
+    {
 
+    }
+
+    public void colorier( Ville v1, Ville v2) { }
 }
