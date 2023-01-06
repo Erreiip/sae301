@@ -69,6 +69,8 @@ public class Controleur
     public void routePrise(ArrayList<Route> alRoute) { this.metier.routePrise(alRoute);    }
     public boolean ajouterRoute(Route r)             { return this.metier.ajouterRoute(r); }
 
+    public boolean actionPossible() { return this.metier.actionPossible(); }
+
 
     public void colorier( Ville v1, Ville v2) { ((FramePrincipale)this.ihm).colorier(v1,v2); }
     public void colorier()                    { ((FramePrincipale)this.ihm).colorier(); }

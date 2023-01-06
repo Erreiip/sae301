@@ -18,17 +18,21 @@ public class MouseAdapterVersoWagon extends MouseAdapter
     @Override
     public void mouseClicked(MouseEvent e) 
     {
-        System.out.println("shesh");
-
-        Wagon wagon = ctrl.getWagonVerso();
-        if(ctrl.ajouterWagonAJoueur(wagon));
+        if( ctrl.actionPossible() && (ctrl.secondWagon() || ! ctrl.getActionEnCours()))
         {
-            if(!ctrl.secondWagon())
+            Wagon wagon = ctrl.getWagonVerso();
+            if(ctrl.ajouterWagonAJoueur(wagon));
             {
-                ctrl.genererInteractionWagon(wagon);
+                if(!ctrl.secondWagon())
+                {
+                    ctrl.genererInteractionWagon(wagon);
+                    ctrl.setActionEnCours(true);
+                }else
+                {
+                    ctrl.setActionEnCours(false);
+                }
+                ctrl.majPioche();
             }
-            
-            ctrl.majPioche();
         }
     }
 }

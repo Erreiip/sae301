@@ -157,8 +157,12 @@ public class Metier
 
     public boolean piocherWagon(Wagon w)
     {
+        ArrayList<Wagon> alWAgon = new ArrayList<Wagon>();
+        alWAgon.add(w);
         if ( derniereCartePioche == null )
         {
+            this.joueur.ajouterWagon(w);
+            this.supprimerWagons(alWAgon);
             this.derniereCartePioche = w;
             this.nbCartePioche++;
             return true;
@@ -166,6 +170,8 @@ public class Metier
 
         if ( derniereCartePioche != null && w.getCouleur() != Color.LIGHT_GRAY.getRGB() )
         {
+            this.joueur.ajouterWagon(w);
+            this.supprimerWagons(alWAgon);
             derniereCartePioche = w;
             this.nbCartePioche++;
             return true;
@@ -188,7 +194,6 @@ public class Metier
     { 
         return this.nbCartePioche == 1; 
     }
-
 
 
     //--------------//
@@ -238,6 +243,8 @@ public class Metier
                 this.alWagons.add(new Wagon(w.getCouleur(), w.getFileRecto()));
             }
         }   
+
+        Collections.shuffle(this.alWagons);
     }
 
 
@@ -349,6 +356,7 @@ public class Metier
 
     public boolean actionPossible() { return this.joueur == joueurActif; }
 
+    public void setJoueurActif(Joueur j) { this.joueurActif = joueur; this.nbCartePioche = 0; }
     public Joueur getJoueurActif() { return this.joueurActif; }
     public Joueur getJoueur() { return this.joueur; }
 
@@ -367,10 +375,8 @@ public class Metier
     }
 
 
-
     public void creerClient           () { this.client = new Client(this.ctrl); }
     public void supprimerClient       () { this.client = null; }
-    public void setJoueurActif(Joueur j) { this.joueurActif = joueur; this.nbCartePioche = 0; }
 
     public void    setActionEnCours(boolean action) { this.actionEnCours = action; }
     public boolean getActionEnCours()               { return this.actionEnCours; }

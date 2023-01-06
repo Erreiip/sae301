@@ -156,7 +156,7 @@ public class PanelInteraction extends JPanel implements ActionListener
             this.repaint();
             ctrl.supprimerObj(alObjectifsGardes);
             ctrl.supprimerObjToDef(alObjectifsDefausse);
-            this.ctrl.setActionEnCours(true);
+            this.ctrl.setActionEnCours(false);
         }
 
         if(e.getSource() instanceof JCheckBox)

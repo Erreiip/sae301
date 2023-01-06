@@ -23,26 +23,29 @@ public class MouseAdapterWagonsListener extends MouseAdapter
     @Override
     public void mouseClicked(MouseEvent e) 
     {
-
-        Wagon[] wagons = ctrl.getPiocheVisible();
-        int indexLabel = 0;
-
-        
-
-        for(int i = 0; i < this.lblCartesWagon.length; i++)
+        if(ctrl.actionPossible() && (ctrl.secondWagon() || ! ctrl.getActionEnCours()))
         {
-            if((this.lblCartesWagon[i] == e.getSource())){ indexLabel = i; }
-        }
-
-        Wagon wagonCorrespondant = wagons[indexLabel];
-        if(ctrl.ajouterWagonAJoueur(wagonCorrespondant))
-        {
-            if(!ctrl.secondWagon())
+            Wagon[] wagons = ctrl.getPiocheVisible();
+            int indexLabel = 0;
+    
+            for(int i = 0; i < this.lblCartesWagon.length; i++)
             {
-                ctrl.genererInteractionWagon(wagonCorrespondant);
+                if((this.lblCartesWagon[i] == e.getSource())){ indexLabel = i; }
             }
-            
-            ctrl.majPioche();
+    
+            Wagon wagonCorrespondant = wagons[indexLabel];
+            if(ctrl.ajouterWagonAJoueur(wagonCorrespondant))
+            {
+                if(!ctrl.secondWagon())
+                {
+                    ctrl.genererInteractionWagon(wagonCorrespondant);
+                    ctrl.setActionEnCours(true);
+                }else
+                {
+                    ctrl.setActionEnCours(false);
+                }
+                ctrl.majPioche();
+            }
         }
     }    
 }
