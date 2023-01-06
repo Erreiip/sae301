@@ -43,6 +43,11 @@ public class FramePrincipale extends JFrame
         this.setVisible(true);
     }
 
+    public void majIHM()
+    {
+        
+    }
+
     public void colorier( Ville v1, Ville v2) { this.panelMap.colorier(v1,v2); }
     public void colorier()                    { this.panelMap.colorier(); }
 }

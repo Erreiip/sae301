@@ -70,4 +70,15 @@ public class Controleur
 
     public void colorier( Ville v1, Ville v2) { ((FramePrincipale)this.ihm).colorier(v1,v2); }
     public void colorier()                    { ((FramePrincipale)this.ihm).colorier(); }
+
+    public boolean verifierObjectif(Objectif o)
+    {
+        if ( this.metier.verifierObjectif(o) ) 
+        {
+            ((FramePrincipale) this.ihm).majIHM();
+            return true;
+        }
+
+        return false;
+    }
 }

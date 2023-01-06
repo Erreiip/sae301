@@ -113,7 +113,6 @@ public class PanelCarte extends JPanel implements ListSelectionListener, ChangeL
     @Override
     public void valueChanged(ListSelectionEvent e) 
     {
-        System.out.println(e);
         if ( !e.getValueIsAdjusting() )
         {
             if ( this.tableObjectifs.getSelectedRow() != -1)
