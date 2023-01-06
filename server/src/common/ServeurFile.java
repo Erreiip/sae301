@@ -6,6 +6,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -26,12 +27,19 @@ public class ServeurFile {
         try(ServerSocket serverSocket = new ServerSocket(Serveur.PORT_TRANSFERT)){
             Socket socket = serverSocket.accept();
 
-            File file = new File(s.getXml().getAbsolutePath());
+            FileReader file = new FileReader(new File(s.getXml().getAbsolutePath()));
             
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in  = new BufferedReader( new InputStreamReader(socket.getInputStream()));
 
-            String m1 = in.readLine();
+            //String m1 = in.readLine();
+            BufferedReader br=new BufferedReader(file);
+            int c = 0;             
+            while((c = br.read()) != -1) 
+            {
+                  char character = (char) c;        
+                  System.out.println(character);  
+            }
             
             
             socket.close();
