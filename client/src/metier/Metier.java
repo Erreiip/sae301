@@ -383,7 +383,11 @@ public class Metier
     //   MAJ        //
     //--------------//
 
-    private void tourTermine() { this.ctrl.maj(); }
+    private void tourTermine() 
+    { 
+        this.ctrl.maj(); 
+        this.joueurActif = new Joueur(55555, 40);
+    }
 
 
     //--------------//
