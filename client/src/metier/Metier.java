@@ -78,8 +78,7 @@ public class Metier
    
         //this.joueur              = null;
         this.joueur              = new Joueur(33333, 40); 
-
-        this.joueurActif         = null;
+        this.joueurActif         = joueur;
 
    
         this.alVilles            = new ArrayList<Ville>   ();
@@ -187,7 +186,7 @@ public class Metier
 
     public boolean secondWagon () 
     { 
-        return this.nbCartePioche == 2; 
+        return this.nbCartePioche == 1; 
     }
 
 

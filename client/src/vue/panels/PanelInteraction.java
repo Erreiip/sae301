@@ -66,21 +66,26 @@ public class PanelInteraction extends JPanel implements ActionListener
             }
             catch (Exception e) { e.printStackTrace(); }
 
-            // Déclare l'image dans un label et le redimentionne
+            // DÃ©clare l'image dans un label et le redimentionne
             Image img = bImgRectoObjectif.getScaledInstance(60, 40, Image.SCALE_SMOOTH);
             JLabel imgLabel = new JLabel(new ImageIcon(img));
             imgLabel.setBounds(25, cpt*42 + 160 , 60, 40);
 
             // Ajout texte de l'objectif
-            JLabel texteObjectif = new JLabel(alObjectifs[cpt].getV1().getNom() + " "
-                                            + alObjectifs[cpt].getV2().getNom() + " "
-                                            + alObjectifs[cpt].getNbPoints());
-            texteObjectif.setBounds(90,cpt*42 + 160,250,40);
+            JLabel texteVille1 = new JLabel(alObjectifs[cpt].getV1().getNom());
+            JLabel texteVille2 = new JLabel(alObjectifs[cpt].getV2().getNom());
+            JLabel textePoints = new JLabel("("+alObjectifs[cpt].getNbPoints()+")");
+
+            texteVille1.setBounds(90,cpt*42 + 160,120,40);
+            texteVille2.setBounds(215,cpt*42 + 160,120,40);
+            textePoints.setBounds(320,cpt*42 + 160,30,40);
 
             // Les ajoute au panel
             this.add(choix);
             this.add(imgLabel);
-            this.add(texteObjectif);
+            this.add(texteVille1);
+            this.add(texteVille2);
+            this.add(textePoints);
         }
 
         // Declare et place le bouton valider
@@ -151,6 +156,7 @@ public class PanelInteraction extends JPanel implements ActionListener
             this.repaint();
             ctrl.supprimerObj(alObjectifsGardes);
             ctrl.supprimerObjToDef(alObjectifsDefausse);
+            this.ctrl.setActionEnCours(true);
         }
 
         if(e.getSource() instanceof JCheckBox)

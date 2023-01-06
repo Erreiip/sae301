@@ -17,7 +17,10 @@ public class MouseAdapterVersoObjectif extends MouseAdapter
     @Override
     public void mouseClicked(MouseEvent e) 
     {
-        System.out.println("shesh");
-        ctrl.genererInteractionObj();
+        if(!ctrl.getActionEnCours()) 
+        {
+            ctrl.setActionEnCours(true);
+            ctrl.genererInteractionObj();
+        }
     }
 }
