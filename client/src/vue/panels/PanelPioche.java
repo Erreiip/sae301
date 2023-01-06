@@ -81,6 +81,9 @@ public class PanelPioche extends JPanel
         for (JLabel lbl : this.lblCartesWagon)
             this.add(lbl);
 
+        this.add(this.lblVersoObjectif);
+        
+
         this.lblVersoObjectif.addMouseListener(new MouseAdapterVersoObjectif(this.ctrl));
         this.lblVersoWagon.addMouseListener(new MouseAdapterVersoWagon(ctrl));
 
