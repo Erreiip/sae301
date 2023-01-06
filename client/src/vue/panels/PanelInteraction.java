@@ -20,11 +20,9 @@ public class PanelInteraction extends JPanel implements ActionListener
 {
     Controleur ctrl;
 
-    private JPanel panelInteraction;
     private JButton btnValider;
     private ArrayList<JCheckBox> alCheckBox;
     private Objectif[] alObjectifs;
-    private JLabel lblWagon;
     
     public PanelInteraction(Controleur ctrl)
     {
@@ -45,6 +43,7 @@ public class PanelInteraction extends JPanel implements ActionListener
 
     public void genererInteractionObj()
     {
+        this.removeAll();
         // Variable contenant les 3 premieres cartes objectif
         this.alObjectifs = ctrl.getPiocheVisibleObj();
 
@@ -104,6 +103,8 @@ public class PanelInteraction extends JPanel implements ActionListener
 
     public void genererInteractionWagon(Wagon w)
     {
+        this.removeAll();
+        JLabel lblWagon = new JLabel();
         BufferedImage imgRectoWagon = null;
         try {
             imgRectoWagon = ImageIO.read(new File(w.getFileRecto()));
@@ -112,20 +113,9 @@ public class PanelInteraction extends JPanel implements ActionListener
         }
         Image dImgRectoWagon = imgRectoWagon.getScaledInstance(170, 85, Image.SCALE_SMOOTH);
         ImageIcon imgIcon = new ImageIcon(dImgRectoWagon);
-        if(this.lblWagon == null)
-        {
-            lblWagon = new JLabel(imgIcon);
-            lblWagon.setBounds(150, 150, 175, 110);
-            this.add(lblWagon);
-        }else{
-            lblWagon.setIcon(imgIcon);
-        }
-        this.repaint();
-    }
-
-    public void finGenerer()
-    {
-        this.removeAll();
+        lblWagon = new JLabel(imgIcon);
+        lblWagon.setBounds(150, 150, 175, 110);
+        this.add(lblWagon);
         this.repaint();
     }
 

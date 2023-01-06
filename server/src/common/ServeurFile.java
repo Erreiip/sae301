@@ -1,12 +1,15 @@
 package server.src.common;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -24,21 +27,13 @@ public class ServeurFile {
             Socket socket = serverSocket.accept();
 
             File file = new File(s.getXml().getAbsolutePath());
-
-            byte[] bytes = new byte[16 * 1024];
-
-            InputStream in = new FileInputStream(file);
-            OutputStream out = socket.getOutputStream();
             
-            int count;
-            while ((count = in.read(bytes)) > 0) {
-                out.write(bytes, 0, count);
-            }
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader in  = new BufferedReader( new InputStreamReader(socket.getInputStream()));
 
-            ClientFile.setBoolean(false);
+            String m1 = in.readLine();
             
-            out.close();
-            in.close();
+            
             socket.close();
             
             while (true )

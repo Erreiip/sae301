@@ -215,7 +215,6 @@ public class Metier
         if ( this.joueur.enleverMarqueurs(r.getCout()) ) 
         {
             r.setJoueur(this.joueur);
-            this.ctrl.majMap();
             return true;
         }
 

@@ -25,6 +25,8 @@ public class MouseAdapterWagonsListener extends MouseAdapter
     {
         if(ctrl.actionPossible() && (ctrl.secondWagon() || ! ctrl.getActionEnCours()))
         {
+            ctrl.setActionEnCours(true);
+
             Wagon[] wagons = ctrl.getPiocheVisible();
             int indexLabel = 0;
     
@@ -36,14 +38,14 @@ public class MouseAdapterWagonsListener extends MouseAdapter
             Wagon wagonCorrespondant = wagons[indexLabel];
             if(ctrl.ajouterWagonAJoueur(wagonCorrespondant))
             {
+                ctrl.genererInteractionWagon(wagonCorrespondant);
+
                 if(!ctrl.secondWagon())
-                {
-                    ctrl.genererInteractionWagon(wagonCorrespondant);
-                    ctrl.setActionEnCours(true);
-                }else
                 {
                     ctrl.setActionEnCours(false);
                 }
+                
+                ctrl.genererInteractionWagon(wagonCorrespondant);
                 ctrl.majPioche();
             }
         }
