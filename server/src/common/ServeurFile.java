@@ -13,10 +13,14 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Scanner;
 
 import com.jcraft.jsch.*;
 
-import client.src.metier.reseau.ClientFile;
 import server.src.Serveur;
 
 public class ServeurFile {
@@ -26,23 +30,16 @@ public class ServeurFile {
     {
         try(ServerSocket serverSocket = new ServerSocket(Serveur.PORT_TRANSFERT)){
             Socket socket = serverSocket.accept();
-
-            FileReader file = new FileReader(new File(s.getXml().getAbsolutePath()));
             
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in  = new BufferedReader( new InputStreamReader(socket.getInputStream()));
 
             //String m1 = in.readLine();
-            BufferedReader br=new BufferedReader(file);
-            int c = 0;             
-            while((c = br.read()) != -1) 
-            {
-                  char character = (char) c;        
-                  System.out.println(character);  
-            }
+            
             
             
             socket.close();
+            serverSocket.close();
             
             while (true )
             {

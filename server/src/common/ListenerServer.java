@@ -46,10 +46,11 @@ public class ListenerServer extends Listener implements Runnable
         if ( connection.getID() != 1)
         {
             try{
-                
                 Thread thread =  new Thread(this) ;
                 thread.start() ;
-                
+
+               
+
                 InetAddress adr = InetAddress.getLocalHost();
                 this.serveur.sendToTCP(connection.getID(), "xml:" + adr.getHostName() );
             } catch (Exception e) { e.printStackTrace(); }

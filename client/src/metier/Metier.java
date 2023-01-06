@@ -48,7 +48,6 @@ public class Metier
 
 
     private BufferedImage        fond;
-    private File                 imgJoker;
 
     private Joueur               joueur;
     private Joueur               joueurActif;
@@ -94,7 +93,6 @@ public class Metier
         this.derniereCartePioche = null;
 
         this.fond                = null;
-        this.imgJoker            = null;
         this.regles              = null;
         this.client              = null;
     }
@@ -145,7 +143,8 @@ public class Metier
         for ( Route r : v.getAlRoutes())
         {
             if ( r.getVille1() == v && r.getJoueur() == getJoueur() && !alVillesVisitees.contains(r.getVille2())) retour = rechercheObjectif(r.getVille2(), vRecherchee, alVillesVisitees);
-            if ( r.getVille2() == v && r.getJoueur() == getJoueur() && !alVillesVisitees.contains(r.getVille1()) && !retour) retour = rechercheObjectif(r.getVille1(), vRecherchee, alVillesVisitees);
+            if ( r.getVille2() == v && r.getJoueur() == getJoueur() && !alVillesVisitees.contains(r.getVille1())) retour = rechercheObjectif(r.getVille1(), vRecherchee, alVillesVisitees);
+            if(retour) break;
         }
         return retour;
     }
@@ -351,7 +350,6 @@ public class Metier
     //--------------//
 
     public BufferedImage getFond    () { return this.fond;     }
-    public File          getImgJoker() { return this.imgJoker; }
 
 
     public boolean actionPossible() { return this.joueur == joueurActif; }
@@ -626,7 +624,6 @@ public class Metier
 
         //ajout
         this.fond     = fichierFondTaille;
-        this.imgJoker = fImageJoker;
 
         Objectif.setFileVerso (fVersoObjectifs.getAbsolutePath());
         Objectif.setFileRectoS(fRectoObjectif.getAbsolutePath());
@@ -637,6 +634,7 @@ public class Metier
             if ( fWagons[cpt] != null )
                 this.alWagons.add(new Wagon(Integer.parseInt(cWagons[cpt]), fWagons[cpt].getAbsolutePath()));
         }
+        this.alWagons.add(new Wagon(Color.LIGHT_GRAY.getRGB(), fImageJoker.getAbsolutePath()));
 
         this.regles = new Regles(nbWagonsParJoueur, nbWagonsFinParties, tabReglesJoueur);
 
@@ -651,7 +649,6 @@ public class Metier
         {
             Metier.colorier(o, ctrl);
         }
-
 
         new Serveur();
         this.client = new Client(this.regles, fichierFond.getAbsolutePath(), this.ctrl);
