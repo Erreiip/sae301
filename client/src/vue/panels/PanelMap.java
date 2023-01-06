@@ -22,7 +22,7 @@ public class PanelMap extends JPanel
 
     private BufferedImage fond;
 
-    private HashMap<Route, Polygon> hmRoutesPolygons;
+    private HashMap<Route, ArrayList<Shape>> hmRoutesShapes;
 
     public PanelMap(Controleur ctrl)
     {
@@ -31,7 +31,7 @@ public class PanelMap extends JPanel
         this.fond = this.ctrl.getFond();
         this.alVilleAColorier = new ArrayList<Ville>();
 
-        this.hmRoutesPolygons = new HashMap<Route, Polygon>();
+        this.hmRoutesShapes = new HashMap<Route, ArrayList<Shape>>();
 
         this.addMouseListener(new RouteClicked());
 
@@ -49,6 +49,8 @@ public class PanelMap extends JPanel
         // ROUTE
         for (Route r : this.ctrl.getAlRoutes())
         {
+            this.hmRoutesShapes.put(r, new ArrayList<Shape>());
+
             g.setColor(r.getCouleur1());
             
             int tailleX = Math.subtractExact((int) (r.getVille1().getCenterX() + r.getVille1().getTaille()), (int) (r.getVille2().getCenterX() + r.getVille1().getTaille()));
@@ -75,33 +77,6 @@ public class PanelMap extends JPanel
 
             n2 = new Point((int)(r.getVille2().getX() + adj), (int)(r.getVille2().getY() + opp));
             n4 = new Point((int)(r.getVille2().getX() - adj), (int)(r.getVille2().getY() - opp));
-
-            // -- Polygon pour identifier la route
-            g.setColor(new Color(0,0,0,0));
-        
-            int[] tabx = new int[4];
-            int[] taby = new int[4];
-            
-            int tailleVille = (int)(r.getVille1().getTaille())/2;
-
-            tabx[0] = (int)n1.getX() + tailleVille;
-            tabx[1] = (int)n2.getX() + tailleVille;
-            tabx[2] = (int)n4.getX() + tailleVille;
-            tabx[3] = (int)n3.getX() + tailleVille;
-
-            taby[0] = (int)n1.getY() + tailleVille;
-            taby[1] = (int)n2.getY() + tailleVille;
-            taby[2] = (int)n4.getY() + tailleVille;
-            taby[3] = (int)n3.getY() + tailleVille;
-
-            int nbPoints = 4;
-            
-            Polygon p = new Polygon(tabx, taby, nbPoints);
-
-            g.drawPolygon(tabx, taby, nbPoints);
-
-            this.hmRoutesPolygons.put( r, p );
-            // --
 
             g.setColor(r.getCouleur1());
 
@@ -134,6 +109,8 @@ public class PanelMap extends JPanel
                 g2d.setColor(Color.BLACK);
                 g2d.draw(fig3);
 
+                this.hmRoutesShapes.get(r).add(fig3);
+
                 if ( r.estDouble() )
                 {
                     AffineTransform t2 = new AffineTransform();
@@ -145,6 +122,8 @@ public class PanelMap extends JPanel
                     
                     g2d.setColor(Color.BLACK);
                     g2d.draw(fig3);
+
+                    this.hmRoutesShapes.get(r).add(fig3);
                 }
 
                 x += width;
@@ -209,11 +188,16 @@ public class PanelMap extends JPanel
             int x = e.getX();
             int y = e.getY();
 
-            for (Route r : hmRoutesPolygons.keySet())
+            for (Route r : hmRoutesShapes.keySet())
             {
-                if ( hmRoutesPolygons.get(r).contains(x, y) )
+                for ( Shape s : PanelMap.this.hmRoutesShapes.get(r) )
                 {
-                    System.out.println("Route : " + r.getVille1().getNom() + " - " + r.getVille2().getNom());
+                    if ( s.contains(x, y) )
+                    {
+                        if ( r.estDouble() ) System.out.print("(Route double) ");
+                        else                 System.out.print("(Route simple) ");
+                        System.out.println(r.getVille1().getNom() + " - " + r.getVille2().getNom());
+                    }
                 }
             }
         }
