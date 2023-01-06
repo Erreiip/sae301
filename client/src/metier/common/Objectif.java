@@ -8,6 +8,8 @@ public class Objectif
     private Ville v2;
     private int nbPoints;
 
+    private boolean estPrit;
+
     private static String versoObjectif = null;
     private static String rectoObjectifS = null;
 
@@ -22,6 +24,8 @@ public class Objectif
         this.v2 = v2;
         this.nbPoints = nbPoints;
 
+        this.estPrit = false;
+
         this.rectoObjectif = null;        
     }
 
@@ -30,13 +34,15 @@ public class Objectif
         return v.equals(this.v1) || v.equals(this.v2);
     }
 
-    public Ville getV1()        {return v1;      }
-    public Ville getV2()        {return v2;      }
+    public Ville getV1    ()    {return v1;      }
+    public Ville getV2    ()    {return v2;      }
     public int getNbPoints()    {return nbPoints;}
 
+    public boolean isPrit ()               { return estPrit;      }
+    public void    setPrit(boolean prit)   { this.estPrit = prit; }
 
-    public void setFileRecto ( String f) { this.rectoObjectif = f; }
-    public String getFileRecto () { return this.rectoObjectif; }
+    public void   setFileRecto ( String f) { this.rectoObjectif = f;    }
+    public String getFileRecto ()          { return this.rectoObjectif; }
 
     public static void   setFileRectoS  ( String f ) { Objectif.rectoObjectifS = f; }
     public static String getFileRectoS  ()           { return Objectif.rectoObjectifS; }

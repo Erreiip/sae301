@@ -53,8 +53,7 @@ public class Metier
     private Joueur               joueur;
     private Joueur               joueurActif;
 
-
-
+    private Wagon                derniereCartePioche;
 
     private Regles               regles;
     private Action               action;
@@ -75,7 +74,7 @@ public class Metier
         this.ctrl                = ctrl;
    
         //this.joueur              = null;
-        this.joueur              = new Joueur(11111, 40); 
+        this.joueur              = new Joueur(11111, 0); 
 
         this.joueurActif         = null;
 
@@ -87,7 +86,7 @@ public class Metier
         this.alDefausseO         = new ArrayList<Objectif>();
         this.alDefausseW         = new ArrayList<Wagon>   ();
 
-
+        this.derniereCartePioche = null;
         this.fond                = null;
         this.imgJoker            = null;
         this.regles              = null;
@@ -126,7 +125,10 @@ public class Metier
         Ville v2 = obj.getV2();
         ArrayList<Ville> alVillesVisitees = new ArrayList<Ville>();
 
-        return rechercheObjectif(v1, v2, alVillesVisitees);
+        boolean b = rechercheObjectif(v1, v2, alVillesVisitees);
+
+        obj.setPrit(b); 
+        return b;
     }
 
     public boolean rechercheObjectif(Ville v, Ville vRecherchee, ArrayList<Ville> alVillesVisitees)
@@ -142,7 +144,30 @@ public class Metier
         return retour;
     }
 
+
+    //--------------//
+    //   ROUTE      //
+    //--------------//
+
+    public boolean piocherWagon(Wagon w)
+    {
+        if ( derniereCartePioche == null )
+        {
+            derniereCartePioche = w;
+            return true;
+        }
+
+        if ( derniereCartePioche != null && derniereCartePioche.getCouleur() != Color.LIGHT_GRAY.getRGB() )
+        {
+            derniereCartePioche = w;
+            return true;
+        }
     
+        return false;
+    } 
+
+
+
     //--------------//
     //   ROUTE      //
     //--------------//
@@ -198,7 +223,7 @@ public class Metier
 
     public Wagon[] getPiocheVisible  () 
     { 
-        if ( this.alWagons.size() < 5 ) { rajouterDefausseW(); }        
+        if ( this.alWagons.size() < 7 ) { rajouterDefausseW(); }        
         
         Wagon[] tabWagonVisible = new Wagon[5];
         for ( int cpt = 0; cpt < tabWagonVisible.length; cpt++ )
@@ -211,6 +236,8 @@ public class Metier
     
     public Objectif[] getPiocheVisibleObj() 
     { 
+        if ( this.alObjectifs.size() < 5 ) { rajouterDefausseO(); } 
+
         Objectif[] tabObjectif = new Objectif[3];
         for ( int cpt = 0; cpt < tabObjectif.length; cpt++ )
         {
@@ -314,6 +341,20 @@ public class Metier
 
         return alRet;
     }
+
+    public Wagon getWagonVerso        ()        
+    { 
+        if ( this.alWagons.size() >= 6)
+        {
+            return this.alWagons.get(5);
+        }
+
+        return null;
+    }
+
+    public boolean secondWagon () { return this.derniereCartePioche != null; }
+
+
 
     public void creerClient           () { this.client = new Client(this.ctrl); }
     public void supprimerClient       () { this.client = null; }

@@ -3,12 +3,16 @@ package client.src.vue.panels;
 import client.src.Controleur;
 import client.src.metier.common.Objectif;
 import client.src.metier.common.Wagon;
+import client.src.vue.mouseAdapter.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.imageio.ImageIO;
 
 import java.io.File;
@@ -47,6 +51,7 @@ public class PanelPioche extends JPanel
 
         this.lblVersoWagon = new JLabel(new ImageIcon(dImgVersoWagon));
         this.lblVersoObjectif = new JLabel(new ImageIcon(dImgVersoObjectif));
+        
 
         // Images rectos Wagons
         Wagon[] piocheVisible = this.ctrl.getPiocheVisible();
@@ -66,15 +71,54 @@ public class PanelPioche extends JPanel
             Image dImgRectoWagon = imgRectoWagon.getScaledInstance(170, 85, Image.SCALE_SMOOTH);
 
             this.lblCartesWagon[index] = new JLabel(new ImageIcon(dImgRectoWagon));
+            this.lblCartesWagon[index].addMouseListener(new MouseAdapterWagonsListener(ctrl, lblCartesWagon));
             index++;
         }
+
         
         this.add(this.lblVersoWagon);
 
         for (JLabel lbl : this.lblCartesWagon)
             this.add(lbl);
 
-        this.add(this.lblVersoObjectif);
+        this.lblVersoObjectif.addMouseListener(new MouseAdapterVersoObjectif(this.ctrl));
+        this.lblVersoWagon.addMouseListener(new MouseAdapterVersoWagon(ctrl));
 
+    }
+
+    public void majPioche()
+    {
+        Wagon[] piocheVisible = this.ctrl.getPiocheVisible();
+
+        int index = 0;
+        for (JLabel l : lblCartesWagon)
+        {
+            if(index>piocheVisible.length-1)
+            {
+                if(l.getMouseListeners().length>0)
+                {
+                    l.setIcon(null);
+                    l.removeMouseListener(l.getMouseListeners()[0]);
+                }
+            }else
+            {
+                BufferedImage imgRectoWagon = null;
+                try {
+                    imgRectoWagon = ImageIO.read(new File(piocheVisible[index].getFileRecto()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                
+                Image dImgRectoWagon = imgRectoWagon.getScaledInstance(170, 85, Image.SCALE_SMOOTH);
+    
+                l.setIcon(new ImageIcon(dImgRectoWagon));
+            }
+            index++;
+        }
+
+        if(ctrl.getWagonVerso() == null && lblVersoWagon.getMouseListeners().length>0){ 
+            lblVersoWagon.setIcon(null);
+            lblVersoWagon.removeMouseListener(lblVersoWagon.getMouseListeners()[0]);
+        }
     }
 }
