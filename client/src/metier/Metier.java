@@ -650,7 +650,6 @@ public class Metier
         for ( Objectif o : this.alObjectifs)
         {
             Metier.colorier(o, ctrl);
-            this.joueur.ajouterObjectif(o);
         }
 
 
