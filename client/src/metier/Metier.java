@@ -54,6 +54,9 @@ public class Metier
     private Joueur               joueurActif;
 
     private Wagon                derniereCartePioche;
+    private int                  nbCartePioche;
+
+    private boolean              actionEnCours;
 
     private Regles               regles;
     private Action               action;
@@ -85,7 +88,9 @@ public class Metier
         this.alDefausseO         = new ArrayList<Objectif>();
         this.alDefausseW         = new ArrayList<Wagon>   ();
 
+        this.nbCartePioche       = 0;
         this.derniereCartePioche = null;
+
         this.fond                = null;
         this.imgJoker            = null;
         this.regles              = null;
@@ -145,25 +150,42 @@ public class Metier
 
 
     //--------------//
-    //   ROUTE      //
+    //   WAGON      //
     //--------------//
 
     public boolean piocherWagon(Wagon w)
     {
         if ( derniereCartePioche == null )
         {
-            derniereCartePioche = w;
+            this.derniereCartePioche = w;
+            this.nbCartePioche++;
             return true;
         }
 
-        if ( derniereCartePioche != null && derniereCartePioche.getCouleur() != Color.LIGHT_GRAY.getRGB() )
+        if ( derniereCartePioche != null && w.getCouleur() != Color.LIGHT_GRAY.getRGB() )
         {
             derniereCartePioche = w;
+            this.nbCartePioche++;
             return true;
         }
     
         return false;
     } 
+
+    public Wagon getWagonVerso        ()        
+    { 
+        if ( this.alWagons.size() >= 6)
+        {
+            return this.alWagons.get(5);
+        }
+
+        return null;
+    }
+
+    public boolean secondWagon () 
+    { 
+        return this.nbCartePioche == 2; 
+    }
 
 
 
@@ -341,23 +363,11 @@ public class Metier
         return alRet;
     }
 
-    public Wagon getWagonVerso        ()        
-    { 
-        if ( this.alWagons.size() >= 6)
-        {
-            return this.alWagons.get(5);
-        }
-
-        return null;
-    }
-
-    public boolean secondWagon () { return this.derniereCartePioche != null; }
-
 
 
     public void creerClient           () { this.client = new Client(this.ctrl); }
     public void supprimerClient       () { this.client = null; }
-    public void setJoueurActif(Joueur j) { this.joueurActif = joueur; }
+    public void setJoueurActif(Joueur j) { this.joueurActif = joueur; this.nbCartePioche = 0; }
 
 
     //--------------//
