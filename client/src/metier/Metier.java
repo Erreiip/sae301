@@ -88,6 +88,8 @@ public class Metier
         this.alDefausseO         = new ArrayList<Objectif>();
         this.alDefausseW         = new ArrayList<Wagon>   ();
 
+        this.actionEnCours       = false;
+
         this.nbCartePioche       = 0;
         this.derniereCartePioche = null;
 
@@ -368,6 +370,10 @@ public class Metier
     public void creerClient           () { this.client = new Client(this.ctrl); }
     public void supprimerClient       () { this.client = null; }
     public void setJoueurActif(Joueur j) { this.joueurActif = joueur; this.nbCartePioche = 0; }
+
+    public void    setActionEnCours(boolean action) { this.actionEnCours = action; }
+    public boolean getActionEnCours()               { return this.actionEnCours; }
+
 
 
     //--------------//
