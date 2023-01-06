@@ -51,6 +51,5 @@ public class PanelCartesInteraction extends JPanel
     public void maj()
     {
         this.panelCarte.maj();
-        this.panelInteraction.maj();
     } 
 }

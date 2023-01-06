@@ -83,5 +83,11 @@ public class ModelTableObjectifs extends AbstractTableModel
     {
         return this.alObjectifs.get(row);
     }
+
+    public void maj()
+    {
+        this.alObjectifs = this.ctrl.getJoueur().getObjectifs();
+        fireTableDataChanged();
+    }
 }
 

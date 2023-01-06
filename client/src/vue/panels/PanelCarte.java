@@ -158,5 +158,6 @@ public class PanelCarte extends JPanel implements ListSelectionListener, ChangeL
     public void maj()
     {
         majListWagon();
+        this.md.maj();
     }
 }
