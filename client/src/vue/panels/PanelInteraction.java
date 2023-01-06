@@ -163,4 +163,9 @@ public class PanelInteraction extends JPanel implements ActionListener
             }
         }
     }
+
+    public void maj()
+    {
+        //maj
+    }
 }
