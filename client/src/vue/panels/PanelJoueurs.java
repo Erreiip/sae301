@@ -12,20 +12,20 @@ public class PanelJoueurs extends JPanel
     private Controleur ctrl;
 
     private JPanel panelVous;
-        private JPanel panelLblVous;
-            private JLabel lblVous;
-        private PanelCouleur panelCouleurVous;
-        private JPanel panelInfosVous;
-            private JLabel lblNbWagonsVous;
-            private JLabel lblNbPvVous;
+    private JPanel panelLblVous;
+    private JLabel lblVous;
+    private PanelCouleur panelCouleurVous;
+    private JPanel panelInfosVous;
+    private JLabel lblNbWagonsVous;
+    private JLabel lblNbPvVous;
 
     private JPanel panelJActuel;
-        private JPanel panelLblJActuel;
-            private JLabel lblJActuel;
-        private PanelCouleur panelCouleurJActuel;
-        private JPanel panelInfosJActuel;
-            private JLabel lblNbWagonsJActuel;
-            private JLabel lblNbPvJActuel;
+    private JPanel panelLblJActuel;
+    private JLabel lblJActuel;
+    private PanelCouleur panelCouleurJActuel;
+    private JPanel panelInfosJActuel;
+    private JLabel lblNbWagonsJActuel;
+    private JLabel lblNbPvJActuel;
    
     public PanelJoueurs(Controleur ctrl)
     {
@@ -44,10 +44,10 @@ public class PanelJoueurs extends JPanel
         this.panelJActuel = new JPanel(new GridBagLayout());
             this.panelLblJActuel = new JPanel();
                 this.lblJActuel = new JLabel("Joueur actuel :");
-            this.panelCouleurJActuel = new PanelCouleur(new Color(this.ctrl.getJoueur().getCouleur()));
+            this.panelCouleurJActuel = new PanelCouleur(new Color(this.ctrl.getJoueurActif().getCouleur()));
             this.panelInfosJActuel = new JPanel(new GridLayout(3,1));
-                this.lblNbWagonsJActuel = new JLabel("Nombre de wagons : " + this.ctrl.getJoueur().getNbMarqueurs()); //joueur actif
-                this.lblNbPvJActuel = new JLabel("Nombre de points de victoire : " + this.ctrl.getJoueur().getNbPv()); // joueur actif
+                this.lblNbWagonsJActuel = new JLabel("Nombre de wagons : " + this.ctrl.getJoueurActif().getNbMarqueurs()); //joueur actif
+                this.lblNbPvJActuel = new JLabel("Nombre de points de victoire : " + this.ctrl.getJoueurActif().getNbPv()); // joueur actif
 
         // --
 
