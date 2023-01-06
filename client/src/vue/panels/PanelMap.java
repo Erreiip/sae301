@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.geom.AffineTransform;
@@ -30,7 +31,6 @@ public class PanelMap extends JPanel implements MouseListener
         this.fond = this.ctrl.getFond();
         this.alVilleAColorier = new ArrayList<Ville>();
 
-
         this.hmRoutesPolygons = new HashMap<Route, Polygon>();
 
         this.addMouseListener(this);
@@ -44,7 +44,7 @@ public class PanelMap extends JPanel implements MouseListener
         
         Graphics2D g2d = (Graphics2D) g;
 
-        g.drawImage(this.fond, this.x, this.y, this.fond.getWidth(), this.fond.getHeight(), null);
+        g.drawImage(this.fond, 0, 0, this.fond.getWidth(), this.fond.getHeight(), null);
 
         // ROUTE
         for (Route r : this.ctrl.getAlRoutes())
@@ -155,10 +155,12 @@ public class PanelMap extends JPanel implements MouseListener
         // ELLIPSE VILLE
         for (Ville v : this.ctrl.getAlVilles())
         {
-            g2d.setColor(v.getCouleur());
-            g2d.fillOval((int)v.getX(), (int)v.getY(), 20, 20);
+            if ( this.alVilleAColorier.contains(v) ) g2d.setColor(Color.GREEN); 
+            else                                     g2d.setColor(v.getCouleur()); 
+
+            g2d.fill(v);
             g2d.setColor(Color.BLACK);
-            g2d.drawOval((int)v.getX(), (int)v.getY(), 20, 20);
+            g2d.draw(v);
         }
 
         // RECTANGLE NOM
@@ -179,6 +181,21 @@ public class PanelMap extends JPanel implements MouseListener
             g2d.drawString(r.getNom(), r.getPosX()+2, (int) r.getCenterY() + 5);
         }
     }
+
+
+    public void colorier(Ville v1, Ville v2)
+    {
+        this.alVilleAColorier.add(v1);
+        this.alVilleAColorier.add(v2);
+        this.repaint();
+    }
+
+    public void colorier()
+    {
+        this.alVilleAColorier = new ArrayList<Ville>();
+        this.repaint();
+    }
+
 
     public Dimension getPreferredSize() 
     {

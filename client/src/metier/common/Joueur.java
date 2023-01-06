@@ -25,7 +25,7 @@ public class Joueur
 
     public boolean enleverMarqueurs(int nbMarqueurs) 
     { 
-        if ( (this.nbMarqueurs -= nbMarqueurs) < 0) return false;
+        if ( (this.nbMarqueurs - nbMarqueurs) < 0) return false;
         
         this.nbMarqueurs -= nbMarqueurs;  
         return true;

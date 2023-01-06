@@ -115,8 +115,10 @@ public class PanelCarte extends JPanel implements ListSelectionListener
             ModelTableObjectifs md = (ModelTableObjectifs) this.tableObjectifs.getModel();
             Objectif o = md.getObjectif(this.tableObjectifs.getSelectedRow());
             this.ctrl.colorier(o.getV1(), o.getV2());
+            System.out.println("colorie");
         } else
         {
+            System.out.println("colorie pas");
             this.ctrl.colorier();
         }
     }
