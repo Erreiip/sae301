@@ -24,10 +24,11 @@ public class PanelCarte extends JPanel implements ListSelectionListener, ChangeL
 {
     private Controleur ctrl;
 
-    private ArrayList<Wagon>  alWagons;
+
     private Map<Color, ArrayList<Wagon>> hsmWagonCouleur;
 
     private JList<Wagon> lstWagon;
+    private DefaultListModel<Wagon> model;
 
     private JTabbedPane tpCartes;
     private JPanel panelWagons;
@@ -40,7 +41,6 @@ public class PanelCarte extends JPanel implements ListSelectionListener, ChangeL
     {
         this.ctrl            = ctrl;
         this.hsmWagonCouleur = new HashMap<Color, ArrayList<Wagon>>();
-        this.alWagons        = this.ctrl.getJoueur().getMain();
 
         this.tpCartes        = new JTabbedPane();
         this.panelWagons     = new JPanel();
@@ -49,7 +49,7 @@ public class PanelCarte extends JPanel implements ListSelectionListener, ChangeL
         Border blackline = BorderFactory.createLineBorder(Color.BLACK);
         this.tpCartes.setBorder(blackline);
 
-        majListWagon();
+        initListWagon();
 
 
         JScrollPane spTabObjectifs = new JScrollPane();
@@ -85,29 +85,50 @@ public class PanelCarte extends JPanel implements ListSelectionListener, ChangeL
         this.tpCartes.addChangeListener(this);
     }
 
-    public void majListWagon()
+    public void initListWagon()
     {
-        for ( Wagon w : this.alWagons)
-        {
+        ArrayList<Wagon> alWagons = this.ctrl.getJoueur().getMain();
+
+        for (Wagon w : alWagons) {
             Color c = new Color(w.getCouleur());
 
-            if ( !this.hsmWagonCouleur.containsKey(c) )
-            {
+            if (!this.hsmWagonCouleur.containsKey(c)) {
                 this.hsmWagonCouleur.put(c, new ArrayList<Wagon>());
             }
 
             this.hsmWagonCouleur.get(c).add(w);
         }
 
-        Wagon[] strWagons = new Wagon[this.hsmWagonCouleur.keySet().size()];
-        int cpt = 0;
-        for (Color c : this.hsmWagonCouleur.keySet())
-        {
-            strWagons[cpt++] = this.hsmWagonCouleur.get(c).get(0); 
+        
+        this.model = new DefaultListModel<Wagon>();
+        for (Color c : this.hsmWagonCouleur.keySet()) {
+            model.addElement(this.hsmWagonCouleur.get(c).get(0));
         }
 
-        this.lstWagon = new JList<Wagon>(strWagons);
+        this.lstWagon = new JList<Wagon>(model);
         this.lstWagon.setCellRenderer(new WagonListRenderer());
+    }
+    
+    public void majListeWagon()
+    {
+        this.model.removeAllElements();
+
+        this.hsmWagonCouleur = new HashMap<Color, ArrayList<Wagon>>();
+        ArrayList<Wagon> alWagons = this.ctrl.getJoueur().getMain();
+
+        for (Wagon w : alWagons) {
+            Color c = new Color(w.getCouleur());
+
+            if (!this.hsmWagonCouleur.containsKey(c)) {
+                this.hsmWagonCouleur.put(c, new ArrayList<Wagon>());
+            }
+
+            this.hsmWagonCouleur.get(c).add(w);
+        }
+
+        for (Color c : this.hsmWagonCouleur.keySet()) {
+            model.addElement(this.hsmWagonCouleur.get(c).get(0));
+        }
     }
 
     @Override
@@ -157,7 +178,7 @@ public class PanelCarte extends JPanel implements ListSelectionListener, ChangeL
 
     public void maj()
     {
-        majListWagon();
+        this.majListeWagon();
         this.md.maj();
     }
 }

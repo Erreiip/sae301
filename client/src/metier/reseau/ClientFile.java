@@ -13,30 +13,37 @@ public class ClientFile
 
     public ClientFile(String adr)
     {
-        InputStream in = null;
-        OutputStream out = null;
-
-
-        try(Socket socket = new Socket(adr,Serveur.PORT_TRANSFERT)) {
+        try(Socket socket = new Socket(adr, Serveur.PORT_TRANSFERT)) {
             
-            while ( bPause ) {}
+            BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+    
 
-            in = socket.getInputStream();
-        
-            out = new FileOutputStream("jeu.xml");
-    
-            byte[] bytes = new byte[16*1024];
-    
-            int count;
-            while ((count = in.read(bytes)) > 0) {
-                out.write(bytes, 0, count);
+            String ligne;
+            int nbLignes = Integer.parseInt(in.readLine());
+            String[] tabLigne = new String[nbLignes];
+
+            int cpt = 0;
+            while ( (ligne = in.readLine()) != null && cpt < nbLignes)
+            {
+                tabLigne[cpt++] = ligne;
             }
-            
-            bPause = false;
 
+            out.println();
             out.close();
             in.close();
             socket.close();
+
+            FileWriter fileWriter = new FileWriter("./jeu.xml");
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+            
+            for (cpt = 0; cpt < nbLignes; cpt++)
+            {
+                printWriter.println(tabLigne[cpt]);
+            }
+
+
+            printWriter.close();
             
         }catch (Exception e){
             e.printStackTrace();

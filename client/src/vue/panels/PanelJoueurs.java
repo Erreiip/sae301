@@ -36,7 +36,7 @@ public class PanelJoueurs extends JPanel
         this.panelVous = new JPanel(new GridBagLayout());
         this.panelLblVous = new JPanel();   
         this.lblVous = new JLabel("Vous :", SwingConstants.CENTER);
-        this.panelCouleurVous = new PanelCouleur(new Color(this.ctrl.getJoueur().getCouleur()));
+        this.panelCouleurVous = new PanelCouleur(0, this.ctrl);
         this.panelInfosVous = new JPanel(new GridLayout(3,1));
         this.lblNbWagonsVous = new JLabel("Nombre de wagons : " + this.ctrl.getJoueur().getNbMarqueurs());
         this.lblNbPvVous = new JLabel("Nombre de points de victoire : " + this.ctrl.getJoueur().getNbPv());
@@ -44,7 +44,7 @@ public class PanelJoueurs extends JPanel
         this.panelJActuel = new JPanel(new GridBagLayout());
         this.panelLblJActuel = new JPanel();
         this.lblJActuel = new JLabel("Joueur actuel :");
-        this.panelCouleurJActuel = new PanelCouleur(new Color(this.ctrl.getJoueurActif().getCouleur()));
+        this.panelCouleurJActuel = new PanelCouleur(1, this.ctrl);
         this.panelInfosJActuel = new JPanel(new GridLayout(3,1));
         this.lblNbWagonsJActuel = new JLabel("Nombre de wagons : " + this.ctrl.getJoueurActif().getNbMarqueurs()); //joueur actif
         this.lblNbPvJActuel = new JLabel("Nombre de points de victoire : " + this.ctrl.getJoueurActif().getNbPv()); // joueur actif
@@ -115,6 +115,12 @@ public class PanelJoueurs extends JPanel
     {
         this.majInfosJoueur();
         this.majInfosJoueurActif();
+        this.majPanel();
+    }
+
+    public void majPanel()
+    {
+        this.panelCouleurJActuel.repaint();
     }
 
     public void majInfosJoueur()

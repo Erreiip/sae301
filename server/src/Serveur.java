@@ -90,7 +90,7 @@ public class Serveur extends Server
     {
         this.sendToAllTCP(a);
 
-        if ( indexDernier != null)
+        if ( indexDernier == null)
         {
             for ( Joueur j : this.alJoueurs )
             {

@@ -349,43 +349,54 @@ public class Metier
     //   GETTERS  //
     //--------------//
 
-    public BufferedImage getFond    () { return this.fond;     }
-
-
-    public boolean actionPossible() { return this.joueur == joueurActif; }
-
-    public void setJoueurActif(Joueur j) { this.joueurActif = joueur; this.nbCartePioche = 0; }
-    public Joueur getJoueurActif() { return this.joueurActif; }
-    public Joueur getJoueur() { return this.joueur; }
+    public BufferedImage getFond    () { return this.fond;     }    
 
     public ArrayList<Ville> getAlVilles() { return this.alVilles; }
     public ArrayList<Route> getAlRoutes() 
     {
         ArrayList<Route> alRet = new ArrayList<Route>();
 
-        for ( Ville v : this.alVilles )
-        {
-            for ( Route r : v.getAlRoutes())
-                if ( !alRet.contains(r) ) alRet.add(r);
+        for (Ville v : this.alVilles) {
+            for (Route r : v.getAlRoutes())
+                if (!alRet.contains(r))
+                    alRet.add(r);
         }
 
         return alRet;
     }
+    
+    public void setJoueurActif(Joueur j) 
+    {
+        this.joueurActif = j;
+        this.nbCartePioche = 0;
+    }
+    
+    
+    public boolean actionPossible() { return this.joueur.equals(this.joueurActif); }
 
-
+    public Joueur getJoueurActif() { return this.joueurActif; }
+    public Joueur getJoueur() { return this.joueur; }
+    
     public void creerClient           () { this.client = new Client(this.ctrl); }
     public void supprimerClient       () { this.client = null; }
 
-    public void    setActionEnCours(boolean action) { this.actionEnCours = action; }
     public boolean getActionEnCours()               { return this.actionEnCours; }
+
+    public void setActionEnCours(boolean action) 
+    {
+        if (action == false) this.tourTermine();
+        
+        this.actionEnCours = action;
+    }
+    
 
     //--------------//
     //   MAJ        //
     //--------------//
 
     private void tourTermine() 
-    { 
-        this.setJoueurActif( new Joueur(55555, 40));
+    {
+        this.setJoueurActif( new Joueur(99999, 40));
         this.ctrl.tourTermine();
     }
 

@@ -28,27 +28,25 @@ public class ServeurFile {
 
     public ServeurFile(Serveur s) 
     {
-        try(ServerSocket serverSocket = new ServerSocket(Serveur.PORT_TRANSFERT)){
+        try (ServerSocket serverSocket = new ServerSocket(Serveur.PORT_TRANSFERT)) {
             Socket socket = serverSocket.accept();
+
             
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader in  = new BufferedReader( new InputStreamReader(socket.getInputStream()));
 
-            //String m1 = in.readLine();
             
+            String xml = Files.readString(Path.of(s.getXml().getAbsolutePath()));
             
-            
+            out.println(xml.split("\n").length);
+            out.println(xml);
+
+            in.readLine();
+
+            in.close();
+            out.close();
             socket.close();
             serverSocket.close();
-            
-            while (true )
-            {
-                if ( socket.isClosed() ) 
-                {
-                    socket.close();
-                    serverSocket.close();
-                }
-            }
 
         } catch (Exception e){
             e.printStackTrace();

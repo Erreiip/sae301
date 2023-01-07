@@ -49,8 +49,6 @@ public class ListenerServer extends Listener implements Runnable
                 Thread thread =  new Thread(this) ;
                 thread.start() ;
 
-               
-
                 InetAddress adr = InetAddress.getLocalHost();
                 this.serveur.sendToTCP(connection.getID(), "xml:" + adr.getHostName() );
             } catch (Exception e) { e.printStackTrace(); }

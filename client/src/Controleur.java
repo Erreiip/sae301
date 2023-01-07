@@ -99,8 +99,7 @@ public class Controleur
 
     public void tourTermine() 
     { 
-        ((FramePrincipale)this.ihm).maj(); 
-        System.out.println("Tour termine");
+        ((FramePrincipale)this.ihm).maj();
     }
 
 }
