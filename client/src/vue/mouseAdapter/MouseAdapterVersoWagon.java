@@ -21,17 +21,18 @@ public class MouseAdapterVersoWagon extends MouseAdapter
         if( ctrl.actionPossible() && (ctrl.secondWagon() || ! ctrl.getActionEnCours()))
         {
             ctrl.setActionEnCours(true);
+            
             Wagon wagon = ctrl.getWagonVerso();
-            if(ctrl.ajouterWagonAJoueur(wagon));
+            this.ctrl.ajouterWagon(wagon);
+            ctrl.genererInteractionWagon(wagon);
+            ctrl.majPioche();
+
+            if(!ctrl.secondWagon())
             {
-                if(!ctrl.secondWagon())
-                {
-                    ctrl.setActionEnCours(false);
-                }
-                
-                ctrl.genererInteractionWagon(wagon);
-                ctrl.majPioche();
+                ctrl.setActionEnCours(false);
             }
-        }
+            
+            
+         }
     }
 }

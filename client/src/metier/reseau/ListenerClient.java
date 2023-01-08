@@ -1,10 +1,14 @@
 package client.src.metier.reseau;
 
-import common.Action;
+import common.ActionDef;
+import common.ActionRoute;
+import common.ActionSuppr;
 
 import com.esotericsoftware.kryonet.Listener;
 
 import client.src.metier.common.Joueur;
+
+import java.io.File;
 
 import com.esotericsoftware.kryonet.Connection;
 
@@ -20,9 +24,21 @@ public class ListenerClient extends Listener
 
     public void received (Connection connection, Object object) {
 
-        if ( object instanceof Action )
+        if ( object instanceof ActionSuppr )
         {
-            Action jeu = (Action) object;
+            ActionSuppr jeu = (ActionSuppr) object;
+            this.client.setAction(jeu);
+        }
+
+        if ( object instanceof ActionDef )
+        {
+            ActionDef jeu = (ActionDef) object;
+            this.client.setAction(jeu);
+        }
+
+        if ( object instanceof ActionRoute )
+        {
+            ActionRoute jeu = (ActionRoute) object;
             this.client.setAction(jeu);
         }
 
@@ -34,12 +50,13 @@ public class ListenerClient extends Listener
             {
                 String[] tabString = s.split(":");
                 new ClientFile(tabString[1]);
+                this.client.lireXml(new File("./jeu.xml"), false);
             }
         }
 
         if (object instanceof Joueur)
         {
-            this.client.setJoueurActif((Joueur) object);
+            this.client.setJoueur((Joueur) object);
         }
     }
 }

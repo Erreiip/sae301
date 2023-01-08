@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Joueur
 {
     private Integer             couleur;
+    
+    private int                 id;
 
     private int                 nbMarqueurs;
     private int                 nbPv;
@@ -13,11 +15,13 @@ public class Joueur
 
     public Joueur(){}
 
-    public Joueur(Integer couleur, int nbMarqueurs)
+    public Joueur(Integer couleur, int nbMarqueurs, int id)
     {
         this.couleur = couleur;
         this.nbMarqueurs = nbMarqueurs;
         this.nbPv = 0;
+
+        this.id = id;
 
         this.alObjectifs = new ArrayList<Objectif>();
         this.alWagons    = new ArrayList<Wagon>();
@@ -47,5 +51,7 @@ public class Joueur
     public void ajouterWagon   (Wagon wagon)  { this.alWagons.add(wagon); }
     public void ajouterObjectif(Objectif obj) { this.alObjectifs.add(obj);}
     public void ajouterPV      (Integer pv )  { this.nbPv += pv;  } 
+    
+    public int getId() { return this.id; }
     
 }

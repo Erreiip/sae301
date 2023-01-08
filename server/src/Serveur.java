@@ -10,9 +10,10 @@ import com.esotericsoftware.kryonet.*;
 
 import client.src.metier.common.Joueur;
 import client.src.metier.common.Objectif;
+import client.src.metier.common.RectangleNom;
 import client.src.metier.common.Regles;
 import client.src.metier.common.Wagon;
-import common.Action;
+import common.*;
 import server.src.common.ListenerServer;
 
 public class Serveur extends Server 
@@ -33,9 +34,10 @@ public class Serveur extends Server
 
     public Serveur()
     {
-        super();
+        super(1024*1024,2024*1024);
 
         this.joueurActif = null;
+        this.alJoueurs = new ArrayList<Joueur>();
         this.xml         = null;
         this.regles      = null;
         this.index       = 0;
@@ -68,8 +70,7 @@ public class Serveur extends Server
     {
         for ( Connection c : this.getConnections())
         {
-            Joueur j = new Joueur();
-            j.setNbMarqueurs(this.regles.getNbWagonsParJoueurs());
+            Joueur j = new Joueur(11111, this.regles.getNbWagonsParJoueurs(), c.getID());
             j.setCouleur( new Color( (int) (Math.random() * 1000)).getRGB() ) ;
             this.alJoueurs.add(j);
             this.sendToTCP(c.getID(), j);
@@ -78,6 +79,7 @@ public class Serveur extends Server
         Collections.shuffle(alJoueurs);
 
         this.joueurActif = this.alJoueurs.get(this.index);
+        this.sendToAllTCP(this.joueurActif);
     }
 
     public void lancer()
@@ -86,9 +88,18 @@ public class Serveur extends Server
         this.sendToAllTCP(this.joueurActif);
     }
 
-    public void envoyerAction(Action a)
+    public void envoyerAction(ActionDef a)
     {
         this.sendToAllTCP(a);
+    }
+
+    public void envoyerAction(ActionSuppr a)
+    {
+        this.sendToAllTCP(a);
+    }
+
+    public void envoyerAction(ActionRoute a)
+    {
 
         if ( indexDernier == null)
         {
@@ -114,7 +125,9 @@ public class Serveur extends Server
 
         this.joueurActif = this.alJoueurs.get(this.index);
 
+        this.sendToAllTCP(a);
         this.sendToAllTCP(this.joueurActif);
+        
     }
 
     public Regles getRegles() { return this.regles; }
@@ -132,5 +145,13 @@ public class Serveur extends Server
         kryo.register(Objectif.class);
         kryo.register(java.util.ArrayList.class);
         kryo.register(Integer[].class);
+        kryo.register(common.ActionRoute.class);
+        kryo.register(common.ActionDef.class);
+        kryo.register(common.ActionSuppr.class);
+
+        kryo.register(client.src.metier.common.Route.class);
+        kryo.register(client.src.metier.common.Ville.class);
+        kryo.register(client.src.metier.common.RectangleNom.class);
+
     }
 }

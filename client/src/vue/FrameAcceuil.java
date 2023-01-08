@@ -27,14 +27,14 @@ public class FrameAcceuil extends JFrame implements ActionListener
         this.setSize(500, 500);
 
         this.btnCreerServeur = new JButton("Créer");
-        this.btnRejoindre = new JButton("Rejoindre");
+        //this.btnRejoindre = new JButton("Rejoindre");
 
 
         this.add(this.btnCreerServeur);
-        this.add(this.btnRejoindre);
+        //this.add(this.btnRejoindre);
 
         this.btnCreerServeur.addActionListener(this);
-        this.btnRejoindre   .addActionListener(this);
+        //this.btnRejoindre   .addActionListener(this);
     
         this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         this.setLocationRelativeTo(null);
@@ -54,10 +54,10 @@ public class FrameAcceuil extends JFrame implements ActionListener
             if(returnVal == JFileChooser.APPROVE_OPTION) 
             {
                 File f = chooser.getSelectedFile();
-                this.ctrl.lireXml(f);
+                this.ctrl.lireXml(f, true);
 
+                this.ctrl.setIhm(new FramePret(this.ctrl));
                 this.dispose();
-                this.ctrl.setIhm(new FramePrincipale(this.ctrl));
             }
             
         }

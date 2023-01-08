@@ -2,11 +2,10 @@ package client.src.metier.common;
 
 import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
-import java.awt.Color;
 
 public class Ville extends Ellipse2D.Double implements Comparable<Ville>
 {
-    private Color couleur;
+    private Integer couleur;
     private String nom;
 
     private RectangleNom rectangleNom;
@@ -14,8 +13,9 @@ public class Ville extends Ellipse2D.Double implements Comparable<Ville>
 
     private boolean modifiable;
 
+    public Ville() {}
 
-    public Ville(Color couleur, String nom, int x, int y, int taille)
+    public Ville(Integer couleur, String nom, int x, int y, int taille)
     {
         super(x,y,taille,taille);
         this.couleur = couleur;
@@ -33,7 +33,7 @@ public class Ville extends Ellipse2D.Double implements Comparable<Ville>
         this(null, nom, 0, 0, 0);
     }
     
-    public Ville ( Color c, int x, int y, int taille)
+    public Ville ( Integer c, int x, int y, int taille)
     {
         this(c, "", x, y, taille);
     }
@@ -48,7 +48,7 @@ public class Ville extends Ellipse2D.Double implements Comparable<Ville>
         this.alRoute.add(r);
     }
 
-    public Color getCouleur() { return couleur;}
+    public Integer getCouleur() { return couleur;}
     public String getNom   () { return this.nom; }
     
 
@@ -61,7 +61,7 @@ public class Ville extends Ellipse2D.Double implements Comparable<Ville>
     
 
     public void setNom(String nom)          {this.nom = nom; }
-    public void setCouleur(Color couleur)   {this.couleur = couleur;}
+    public void setCouleur(Integer couleur)   {this.couleur = couleur;}
     
     public void setModifiable (boolean modif) { this.modifiable = modif; }
 
@@ -74,7 +74,7 @@ public class Ville extends Ellipse2D.Double implements Comparable<Ville>
         super.width  = taille;
     }
     
-    public void setCoordonnee(int x, int y, int taille, Color couleur) 
+    public void setCoordonnee(int x, int y, int taille, Integer couleur) 
     {
         super.height = taille;
         super.width = taille;

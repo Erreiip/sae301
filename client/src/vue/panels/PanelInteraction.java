@@ -131,9 +131,6 @@ public class PanelInteraction extends JPanel implements ActionListener
                 // Si la case est cochee, on ajoute l'objectif au joueur
                 if(this.alCheckBox.get(index).isSelected())
                 {
-                    ctrl.getJoueur().ajouterObjectif(alObjectifs[index]);
-                    this.ctrl.tourTermine(); // fin tour (2)
-                    System.out.println("Fin du tour (Carte objectif)");
                     alObjectifsGardes.add(alObjectifs[index]);
                 }
                 // Sinon on l'ajoute a la defausse
@@ -146,8 +143,8 @@ public class PanelInteraction extends JPanel implements ActionListener
             this.removeAll();
             this.validate();
             this.repaint();
-            ctrl.supprimerObj(alObjectifsGardes);
-            ctrl.supprimerObjToDef(alObjectifsDefausse);
+
+            this.ctrl.piocheObjectif(alObjectifsGardes, alObjectifsDefausse);
             this.ctrl.setActionEnCours(false);
         }
 

@@ -10,7 +10,9 @@ public class RectangleNom extends Rectangle2D.Double
 
     private boolean bAcrroche;
 
-    private static final int MULT = 8; 
+    private static final int MULT = 8;
+    
+    public RectangleNom() {}
 
     public RectangleNom(Ville v, int decalageX, int decalageY)
     {

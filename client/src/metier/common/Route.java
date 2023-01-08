@@ -1,24 +1,23 @@
 package client.src.metier.common;
 
-import java.awt.Color;
 
 public class Route implements Comparable<Route>
 {
     private Ville v1;
     private Ville v2;
     private Integer cout;
-    private Color couleurVoie1;
-    private Color couleurVoie2;
+    private Integer couleurVoie1;
+    private Integer couleurVoie2;
     private Joueur joueur;
 
     public Route(){}
 
-    public Route(Ville v1, Ville v2, int cout, Color c)
+    public Route(Ville v1, Ville v2, int cout, Integer c)
     {
         this(v1,v2,cout,c,null, null);
     }
 
-    public Route(Ville v1, Ville v2, int cout, Color c1, Color c2, Joueur j)
+    public Route(Ville v1, Ville v2, int cout, Integer c1, Integer c2, Joueur j)
     {
         this.v1 = v1;
         this.v2 = v2;
@@ -35,8 +34,8 @@ public class Route implements Comparable<Route>
 
     public Ville getVille1   () { return this.v1;                   }
     public Ville getVille2   () { return this.v2;                   }
-    public Color getCouleur1 () { return this.couleurVoie1;         }
-    public Color getCouleur2 () { return this.couleurVoie2;         }
+    public Integer getCouleur1 () { return this.couleurVoie1;         }
+    public Integer getCouleur2 () { return this.couleurVoie2;         }
     public Integer getCout   () { return this.cout;                 }
     public Joueur  getJoueur () { return this.joueur;               } 
 
@@ -55,11 +54,11 @@ public class Route implements Comparable<Route>
     }
 
 
-    public void setCouleur1(Color c) {
+    public void setCouleur1(Integer c) {
         this.couleurVoie1 = c;
     }
 
-    public void setCouleur2(Color c) {
+    public void setCouleur2(Integer c) {
         this.couleurVoie2 = c;
     }
 
@@ -75,7 +74,7 @@ public class Route implements Comparable<Route>
 
     @Override
     public int compareTo(Route o) {
-        return this.couleurVoie1.getRGB() - o.couleurVoie1.getRGB();
+        return this.couleurVoie1- o.couleurVoie1;
     }
 
     

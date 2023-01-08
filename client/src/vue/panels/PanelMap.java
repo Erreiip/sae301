@@ -51,7 +51,7 @@ public class PanelMap extends JPanel
         {
             this.hmRoutesShapes.put(r, new ArrayList<Shape>());
 
-            g.setColor(r.getCouleur1());
+            g.setColor(new Color(r.getCouleur1()));
             
             int tailleX = Math.subtractExact((int) (r.getVille1().getCenterX() + r.getVille1().getTaille()), (int) (r.getVille2().getCenterX() + r.getVille1().getTaille()));
             int tailleY = Math.subtractExact((int) (r.getVille1().getCenterY() + r.getVille1().getTaille()), (int) (r.getVille2().getCenterY() + r.getVille1().getTaille()));
@@ -74,7 +74,7 @@ public class PanelMap extends JPanel
             n1 = new Point((int)r.getVille1().getX() + adj, (int)r.getVille1().getY() + opp );
             n3 = new Point((int)r.getVille1().getX() - adj, (int)r.getVille1().getY() - opp );
 
-            g.setColor(r.getCouleur1());
+            g.setColor(new Color(r.getCouleur1()));
 
             Ville v = r.getVille1();
 
@@ -99,7 +99,7 @@ public class PanelMap extends JPanel
                 t.rotate(angle, fig1.getCenterX(), fig1.getCenterY());
                 fig3 = t.createTransformedShape(fig1);
 
-                g2d.setColor(r.getCouleur1());
+                g2d.setColor(new Color(r.getCouleur1()));
                 g2d.fill(fig3);
 
                 if ( r.estPrise() )
@@ -125,7 +125,7 @@ public class PanelMap extends JPanel
                     t2.rotate(angle, fig2.getCenterX(), fig2.getCenterY());
                     fig3 = t2.createTransformedShape(fig2);
                     
-                    g2d.setColor(r.getCouleur2());
+                    g2d.setColor(new Color(r.getCouleur2()));
                     g2d.fill(fig3);
                     
                     g2d.setColor(Color.BLACK);
@@ -143,7 +143,7 @@ public class PanelMap extends JPanel
         for (Ville v : this.ctrl.getAlVilles())
         {
             if ( this.alVilleAColorier.contains(v) ) g2d.setColor(Color.GREEN); 
-            else                                     g2d.setColor(v.getCouleur()); 
+            else                                     g2d.setColor(new Color(v.getCouleur())); 
 
             g2d.fill(v);
             g2d.setColor(Color.BLACK);
@@ -213,12 +213,7 @@ public class PanelMap extends JPanel
                 {
                     if ( s.contains(x, y) )
                     {
-                        if ( PanelMap.this.ctrl.getActionEnCours() == false)
-                            PanelMap.this.ctrl.setActionEnCours(true);
-
-                        //if ( r.estDouble() ) System.out.print("(Route double) ");
-                        //else                 System.out.print("(Route simple) ");
-                        //System.out.println(r.getVille1().getNom() + " - " + r.getVille2().getNom());
+                        PanelMap.this.ctrl.setActionEnCours(true);
 
                         PanelMap.this.ctrl.ajouterRoute(r);
 

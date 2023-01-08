@@ -8,6 +8,8 @@ public class Wagon
 
     private int couleur;
 
+    public Wagon(){}
+    
     public Wagon(int couleur, String f)
     {
         this.couleur = couleur;

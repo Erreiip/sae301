@@ -10,10 +10,14 @@ import java.awt.image.BufferedImage;
 import client.src.metier.*;
 import client.src.metier.common.Joueur;
 import client.src.metier.common.Objectif;
+import client.src.metier.common.Regles;
 import client.src.metier.common.Route;
 import client.src.metier.common.Ville;
 import client.src.metier.common.Wagon;
 import client.src.vue.*;
+import common.ActionDef;
+import common.ActionRoute;
+import common.ActionSuppr;
 
 public class Controleur 
 {
@@ -31,9 +35,9 @@ public class Controleur
         this.ihm = frame;
     }
 
-    public void lireXml(File f)
+    public void lireXml(File f, boolean creeServeurClient)
     {
-        this.metier.lectureXML(f);
+        this.metier.lectureXML(f, creeServeurClient);
     }
 
     public void creerClient()
@@ -65,8 +69,9 @@ public class Controleur
     public Joueur getJoueur() { return this.metier.getJoueur(); }
 
     public void setJoueurActif(Joueur j) { this.metier.setJoueurActif(j); }
+    public void setJoueur    (Joueur j) { this.metier.setJoueur(j); }
+    
 
-    public void routePrise(ArrayList<Route> alRoute) { this.metier.routePrise(alRoute);    }
     public boolean ajouterRoute(Route r)             { return this.metier.ajouterRoute(r); }
 
     public boolean actionPossible() { return this.metier.actionPossible(); }
@@ -77,6 +82,7 @@ public class Controleur
 
     public Wagon getWagonVerso        ()        { return this.metier.getWagonVerso(); }
     public boolean ajouterWagonAJoueur(Wagon w) { return this.metier.piocherWagon(w); }
+    public void    ajouterWagon       (Wagon w) { this.metier.ajouterWagon(w);        }
     public boolean secondWagon        ()        { return this.metier.secondWagon  (); }
 
     public void genererInteractionObj   ()        { ((FramePrincipale)this.ihm).genererInteractionObj();    }
@@ -95,6 +101,60 @@ public class Controleur
         }
 
         return false;
+    }
+    
+    public void piocheObjectif( ArrayList<Objectif> ajoutJoueur, ArrayList<Objectif> ajoutDefausse)
+    {
+        this.metier.piocheObjectif(ajoutJoueur, ajoutDefausse);
+    }
+
+    public void setNbJoueurs(Integer i)
+    {
+        this.metier.setNbJoueurs(i);
+    }
+
+    public Regles getRegles()
+    {
+        return this.metier.getRegles();
+    }
+
+    public void setAction(ActionDef d)
+    {
+        if (actionPossible()) {
+            this.tourTermine();
+            return;
+        }
+
+        this.supprimerWagonsToDef(d.getAlWAgonsDef());
+        this.supprimerObjToDef(d.getAlObjectifsDef());
+
+        this.tourTermine();
+    }
+    
+    public void setAction(ActionSuppr d)
+    {
+        if (actionPossible()) {
+            this.tourTermine();
+            return;
+        }
+
+        this.supprimerWagons(d.getAlWAgonsSuppr());
+        this.supprimerObj(d.getAlObjectifsSuppr());
+
+        this.tourTermine();
+    }
+    
+    public void setAction(ActionRoute d)
+    {   
+        if (actionPossible())
+        {
+            this.tourTermine();
+            return;
+        } 
+        
+        this.metier.routePrise(d.getRoute());
+
+        this.tourTermine();
     }
 
     public void tourTermine() 
