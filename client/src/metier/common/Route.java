@@ -81,10 +81,6 @@ public class Route implements Comparable<Route>
     
     public static void setPpWagon(Integer[] tabPPwagon)
     {
-        for ( int cpt = 0 ; cpt < tabPPwagon.length; cpt++)
-        {
-            System.out.println(tabPPwagon[cpt]);
-        }
         Route.ppWagons = tabPPwagon;
     }
 
