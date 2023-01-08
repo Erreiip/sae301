@@ -7,14 +7,15 @@ import client.src.Controleur;
 
 public class PanelCouleur extends JPanel
 {
-    private int type;
     private Controleur ctrl;
+    
+    private Integer couleur;
 
-
-    public PanelCouleur(int type, Controleur ctrl)
+    public PanelCouleur(Controleur ctrl, Integer couleur)
     {
         this.ctrl = ctrl;
-        this.type = type;
+
+        this.couleur = couleur;
 
         this.setLayout(null);
         this.setPreferredSize(new Dimension(50, 50));
@@ -26,14 +27,15 @@ public class PanelCouleur extends JPanel
 
         Color c;
 
-        if (type == 0) c = new Color(this.ctrl.getJoueur().getCouleur());
-        else           c = new Color(this.ctrl.getJoueurActif().getCouleur());
+        c = new Color(this.couleur);
         
         Graphics2D g2d = (Graphics2D) g;
 
-        g2d.setStroke(new BasicStroke(2));
+        g2d.setStroke(new BasicStroke(1));
 
         g.setColor(c);
-        g.fillOval(0, 0, 50, 50);
+        g.fillOval(0, 0, 49, 49);
+        g.setColor(Color.BLACK);
+        g.drawOval(0, 0, 49, 49);
     }
 }

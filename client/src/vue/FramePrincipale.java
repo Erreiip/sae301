@@ -32,6 +32,7 @@ public class FramePrincipale extends JFrame
 
         JScrollPane jspMap = new JScrollPane(this.panelMap);
         jspMap.getVerticalScrollBar().setUnitIncrement(10);
+        jspMap.getHorizontalScrollBar().setUnitIncrement(10);
 
         this.add(this.panelJoueurs, BorderLayout.NORTH);
         this.add(this.panelPioche , BorderLayout.WEST);

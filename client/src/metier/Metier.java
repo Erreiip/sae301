@@ -404,7 +404,7 @@ public class Metier
     
         return alRet;
     }
-    
+
     public void setJoueurActif(Joueur j) 
     {
         this.joueurActif = j;
@@ -420,23 +420,27 @@ public class Metier
         */
     }
 
-    public void setNbJoueurs( int nbJoueurs)
+    public void setNbJoueurs(int nbJoueurs)
     {
         this.alJoueur = new ArrayList<Joueur>();
 
         for ( int cpt = 0; cpt < nbJoueurs; cpt++)
         {
-            Random alea = new java.util.Random(System.currentTimeMillis());
+            int r = (int)(Math.random() * 256);
+            int g = (int)(Math.random() * 256);
+            int b = (int)(Math.random() * 256);
 
-            Color couleur = new Color(Math.abs(alea.nextInt()) % 256,
-                    Math.abs(alea.nextInt()) % 256,
-                    Math.abs(alea.nextInt()) % 256);
+            Color couleur = new Color(r, g, b);
 
             this.alJoueur.add(new Joueur(couleur.getRGB(), this.regles.getNbWagonsParJoueurs(), cpt));
         }
         
         this.joueurActif = this.alJoueur.get(this.index);
     }
+
+    public int getNbJoueur() { return this.alJoueur.size(); } //nz
+
+    public ArrayList<Joueur> getAlJoueurs() { return this.alJoueur; } // nz
         
     public boolean actionPossible() { return true;/*this.joueur.getId() == this.joueurActif.getId();*/ }
         

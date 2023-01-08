@@ -113,6 +113,16 @@ public class Controleur
         this.metier.setNbJoueurs(i);
     }
 
+    public int getNbJoueur() // nz
+    {
+        return this.metier.getNbJoueur();
+    }
+
+    public ArrayList<Joueur> getAlJoueurs()
+    {
+        return this.metier.getAlJoueurs();
+    }
+
     public Regles getRegles()
     {
         return this.metier.getRegles();
