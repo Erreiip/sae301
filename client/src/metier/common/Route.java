@@ -10,6 +10,8 @@ public class Route implements Comparable<Route>
     private Integer couleurVoie2;
     private Joueur joueur;
 
+    private static Integer[] ppWagons;
+
     public Route(){}
 
     public Route(Ville v1, Ville v2, int cout, Integer c)
@@ -74,7 +76,21 @@ public class Route implements Comparable<Route>
 
     @Override
     public int compareTo(Route o) {
-        return this.couleurVoie1- o.couleurVoie1;
+        return this.couleurVoie1 - o.couleurVoie1;
+    }
+    
+    public static void setPpWagon(Integer[] tabPPwagon)
+    {
+        for ( int cpt = 0 ; cpt < tabPPwagon.length; cpt++)
+        {
+            System.out.println(tabPPwagon[cpt]);
+        }
+        Route.ppWagons = tabPPwagon;
+    }
+
+    public static int getPoints(int i)
+    {
+        return Route.ppWagons[i];
     }
 
     

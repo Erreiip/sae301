@@ -255,6 +255,7 @@ public class Metier
         if ( this.joueurActif.enleverMarqueurs(r.getCout()) ) 
         {
             r.setJoueur(this.joueurActif);
+            this.joueurActif.ajouterPV(Route.getPoints(r.getCout()));
             //this.actionRoute.setRoute(r);
             return true;
         }
@@ -544,8 +545,8 @@ public class Metier
         int nbWagonsFinParties  = Integer.parseInt(reglesJP.getChild("nbWagonsFinParties").getText());
         
         Element ptParRoute      = reglesJP.getChild("ptParRoute");
-        String[] ppWagons       = new String[6];
-        for (int i = 0; i < 6; i++) ppWagons[i] = ptParRoute.getAttributeValue("p" + (i+1));
+        Integer[] ppWagons       = new Integer[6];
+        for (int i = 0; i < 6; i++) ppWagons[i] = Integer.parseInt(ptParRoute.getAttributeValue("p" + (i+1)));
 
         //Set RegleNbPoints
 
@@ -754,6 +755,7 @@ public class Metier
             Metier.colorier(o, ctrl);
         }
 
+        Route.setPpWagon(ppWagons);
         /*
         if (creerServeurClient)
         {
