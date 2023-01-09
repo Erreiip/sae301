@@ -257,6 +257,19 @@ public class Metier
         //route.setJoueur1(this.joueurActif);
     }
 
+    public int chercherPlusGrand()
+    {
+        HashMap <Color, Integer> hmCount = this.getJetonsCouleurJoueur();
+
+        int max = 0;
+        for ( Color c : hmCount.keySet() )
+        {
+            if ( max < hmCount.get(c) ) max = hmCount.get(c);
+        }
+
+        return max;
+    }
+
     public  HashMap <Color, Integer> getJetonsCouleurJoueur()
     {
         HashMap <Color, Integer> hmCount         = new HashMap<Color, Integer>();
@@ -274,6 +287,7 @@ public class Metier
 
         return hmCount;
     }
+
 
     public boolean peutPrendreRoute(Route r, int nb)
     {
@@ -297,16 +311,34 @@ public class Metier
         if ( nb == 1)
         {
             if ( r.estPrise1() ) return false;
-            if ( !hmCount.containsKey(new Color(r.getCouleur1()))) return false;
-            if ( hmCount.get(new Color(r.getCouleur1())) < r.getCout() ) return false;
+            
+            if ( r.getCouleur1() == Color.LIGHT_GRAY.getRGB())
+            {
+                int max = this.chercherPlusGrand();
+                if ( max < r.getCout() ) return false;
+            } else 
+            {
+                if ( !hmCount.containsKey(new Color(r.getCouleur1()))) return false;
+                if ( hmCount.get(new Color(r.getCouleur1())) < r.getCout() ) return false;
+            }
+            
             if ( r.estDouble() && r.getJoueur2() == this.joueurActif ) return false;
             return this.joueurActif.getNbMarqueurs() >=  r.getCout();
         }
         else 
         {
             if ( r.estPrise2() ) return false;
-            if ( !hmCount.containsKey(new Color(r.getCouleur2()))) return false;
-            if ( hmCount.get(new Color(r.getCouleur2())) < r.getCout() ) return false;
+
+            if ( r.getCouleur1() == Color.LIGHT_GRAY.getRGB())
+            {
+                int max = this.chercherPlusGrand();
+                if ( max < r.getCout() ) return false;
+            } else 
+            {
+                if ( !hmCount.containsKey(new Color(r.getCouleur2()))) return false;
+                if ( hmCount.get(new Color(r.getCouleur2())) < r.getCout() ) return false;
+            }
+
             if ( r.getJoueur1() == this.joueurActif ) return false;
             return this.joueurActif.getNbMarqueurs() >=  r.getCout();
         }
