@@ -509,7 +509,9 @@ public class Metier
         {
             Wagon w = alWagons.get(0);
             this.alWagons.remove(w);
-            this.alWagons.add(cpt, w);
+
+            if ( alWagons.size() == 0 ) this.alWagons.add(w);
+            else                        this.alWagons.add(cpt, w);
         }
     }
     
