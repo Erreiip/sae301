@@ -195,6 +195,19 @@ public class Metier
     //   WAGON      //
     //--------------//
     
+    public Wagon getWagonCouleur ( Color c)
+    {
+        ArrayList<Wagon> alWagon = this.joueurActif.getMain();
+
+        for ( Wagon w : alWagon)
+        {
+            if (w.getCouleur() == c.getRGB()) return w;
+        }
+
+        return null;
+    }
+    
+
     public boolean piocherWagon(Wagon w)
     {
         ArrayList<Wagon> alWAgon = new ArrayList<Wagon>();

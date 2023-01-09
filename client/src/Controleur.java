@@ -147,6 +147,9 @@ public class Controleur
         ((FramePrincipale)this.ihm).suppBtnPiocheObj();
     }
 
+    public Wagon getWagonCouleur ( Color c) { return this.metier.getWagonCouleur(c); }
+    
+
     public void setAction(ActionDef d)
     {
         if (actionPossible()) {
