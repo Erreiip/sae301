@@ -102,9 +102,9 @@ public class PanelMap extends JPanel
                 g2d.setColor(new Color(r.getCouleur1()));
                 g2d.fill(fig3);
 
-                if ( r.estPrise() )
+                if ( r.estPrise1() )
                 {
-                    g2d.setColor(new Color(r.getJoueur().getCouleur()));
+                    g2d.setColor(new Color(r.getJoueur1().getCouleur()));
                     g2d.setStroke(new BasicStroke(5));
                     g2d.draw(fig3);
                 }
@@ -116,10 +116,9 @@ public class PanelMap extends JPanel
 
                 g2d.setStroke(new BasicStroke(1));
 
-
                 this.hmRoutesShapes.get(r).add(fig3);
 
-                if ( r.estDouble() )
+                if ( r.estDouble() && this.ctrl.peutDessinerDouble() )
                 {
                     AffineTransform t2 = new AffineTransform();
                     t2.rotate(angle, fig2.getCenterX(), fig2.getCenterY());
@@ -128,8 +127,20 @@ public class PanelMap extends JPanel
                     g2d.setColor(new Color(r.getCouleur2()));
                     g2d.fill(fig3);
                     
-                    g2d.setColor(Color.BLACK);
-                    g2d.draw(fig3);
+                    if ( r.estPrise2() )
+                    {
+                        g2d.setColor(new Color(r.getJoueur2().getCouleur()));
+                        g2d.setStroke(new BasicStroke(5));
+                        g2d.draw(fig3);
+                    }
+                    else
+                    {
+                        g2d.setStroke(new BasicStroke(1));
+                        g2d.setColor(Color.BLACK);
+                        g2d.draw(fig3);
+                    }
+
+                    g2d.setStroke(new BasicStroke(1));
 
                     this.hmRoutesShapes.get(r).add(fig3);
                 }
@@ -209,16 +220,55 @@ public class PanelMap extends JPanel
 
             for (Route r : hmRoutesShapes.keySet())
             {
+                int cpt = 0;
                 for ( Shape s : PanelMap.this.hmRoutesShapes.get(r) )
                 {
                     if ( s.contains(x, y) )
                     {
-                        PanelMap.this.ctrl.setActionEnCours(true);
+                        if ( r.estDouble() )
+                        {
+                            if ( cpt % 2 == 0)
+                            {
 
-                        PanelMap.this.ctrl.ajouterRoute(r);
+                                if ( PanelMap.this.ctrl.peutPrendreRoute(r, 1) )
+                                {
+                                    PanelMap.this.ctrl.setActionEnCours(true);
+                                
+                                    PanelMap.this.ctrl.ajouterRoute(r, 1);
 
-                        PanelMap.this.ctrl.setActionEnCours(false);
+                                    PanelMap.this.ctrl.setActionEnCours(false);
+                                }
+                            }
+                            else
+                            {
+
+                                if ( PanelMap.this.ctrl.peutPrendreRoute(r, 2) )
+                                {
+                                    PanelMap.this.ctrl.setActionEnCours(true);
+                                
+                                    PanelMap.this.ctrl.ajouterRoute(r, 2);
+
+                                    PanelMap.this.ctrl.setActionEnCours(false);
+                                }
+                            }
+                        }
+                        else 
+                        {
+                            if ( PanelMap.this.ctrl.peutPrendreRoute(r, 1) )
+                            {
+                                PanelMap.this.ctrl.setActionEnCours(true);
+                                
+                                PanelMap.this.ctrl.ajouterRoute(r, 1);
+
+                                PanelMap.this.ctrl.setActionEnCours(false);
+                            }
+                        }
+                        
+
+                        
                     }
+
+                    cpt++;
                 }
             }
         }

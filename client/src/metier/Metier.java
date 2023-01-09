@@ -13,6 +13,8 @@ import java.util.Iterator;
 
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+
 import java.awt.geom.Ellipse2D;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -136,15 +138,13 @@ public class Metier
         for ( Objectif o : ajoutJoueur)
         {
             this.joueurActif.getObjectifs().add(o);
+            this.alObjectifs.remove(o);
             //this.actionSuppr.getAlObjectifsSuppr().add(o);
         }
     
-        for ( Objectif o : ajoutDefausse)
-        {
-            //this.actionDef.getAlObjectifsDef().add(o);
-        }
-    
         this.supprimerObjToDef(ajoutDefausse);
+
+        Collections.shuffle(this.alObjectifs);
     }
     
     public boolean verifierObjectif(Objectif obj)
@@ -166,8 +166,8 @@ public class Metier
         if( v == vRecherchee ) return true;
         for ( Route r : v.getAlRoutes())
         {
-            if ( r.getVille1() == v && r.getJoueur() == getJoueur() && !alVillesVisitees.contains(r.getVille2())) retour = rechercheObjectif(r.getVille2(), vRecherchee, alVillesVisitees);
-            if ( r.getVille2() == v && r.getJoueur() == getJoueur() && !alVillesVisitees.contains(r.getVille1())) retour = rechercheObjectif(r.getVille1(), vRecherchee, alVillesVisitees);
+            if ( r.getVille1() == v && r.getJoueur1() == getJoueur() && !alVillesVisitees.contains(r.getVille2())) retour = rechercheObjectif(r.getVille2(), vRecherchee, alVillesVisitees);
+            if ( r.getVille2() == v && r.getJoueur1() == getJoueur() && !alVillesVisitees.contains(r.getVille1())) retour = rechercheObjectif(r.getVille1(), vRecherchee, alVillesVisitees);
             if(retour) break;
         }
         return retour;
@@ -245,18 +245,37 @@ public class Metier
     
     public void routePrise(Route route)
     {
-        route.setJoueur(this.joueurActif);
+        route.setJoueur1(this.joueurActif);
+    }
+
+    public boolean peutPrendreRoute(Route r, int nb)
+    {
+        if ( r.sontPrises() ) return false;
+
+        if ( nb == 1)
+        {
+            if ( r.estPrise1() ) return false;
+            return this.joueurActif.getNbMarqueurs() >=  r.getCout();
+        }
+        else 
+        {
+            if ( r.estPrise2() ) return false;
+            return this.joueurActif.getNbMarqueurs() >=  r.getCout();
+        }
+        
     }
     
-    public boolean ajouterRoute(Route r)
+    public boolean ajouterRoute(Route r, int nb)
     {
-        if ( r.estPrise() ) return false;
+        if ( r.sontPrises() ) return false;
         
         if ( this.joueurActif.enleverMarqueurs(r.getCout()) ) 
         {
-            r.setJoueur(this.joueurActif);
+            if (nb == 1) r.setJoueur1(this.joueurActif);
+            else         r.setJoueur2(this.joueurActif);
+            
             this.joueurActif.ajouterPV(Route.getPoints(r.getCout()));
-            //this.actionRoute.setRoute(r);
+
             return true;
         }
     
@@ -407,9 +426,7 @@ public class Metier
 
     public void setJoueurActif(Joueur j) 
     {
-        this.joueurActif = j;
-        this.nbCartePioche = 0;
-    
+        //this.joueurActif = j;    
         //this.tourTermine();
     }
     
@@ -432,13 +449,15 @@ public class Metier
 
             Color couleur = new Color(r, g, b);
 
-            this.alJoueur.add(new Joueur(couleur.getRGB(), this.regles.getNbWagonsParJoueurs(), cpt));
+            this.alJoueur.add(new Joueur(couleur.getRGB(), this.regles.getNbWagonsParJoueurs(), cpt+1));
         }
         
         this.joueurActif = this.alJoueur.get(this.index);
     }
 
     public int getNbJoueur() { return this.alJoueur.size(); } //nz
+    public boolean peutDessinerDouble()  { return this.alJoueur.size() >= this.regles.getNbJoueursVoieDouble(); }
+
 
     public ArrayList<Joueur> getAlJoueurs() { return this.alJoueur; } // nz
         
@@ -488,12 +507,37 @@ public class Metier
 
     private void tourTermine() 
     {
+        ArrayList<Route> alRoute = this.getAlRoutes();
+        boolean bPartieFini = true;
+        for ( Route r : alRoute)
+        {
+            if ( r.estDouble() ) 
+            {
+                if ( !r.sontPrises() ) bPartieFini = false;
+            }
+            else
+            {
+                if ( !r.estPrise1() ) bPartieFini = false;
+            } 
+        }
+
+        if ( bPartieFini ) 
+        {
+            System.out.println("Paartie fini");
+            this.ctrl.setIhm(new JFrame());
+            return;
+        }
+
+
+
         this.index++;
 
         if ( this.index == this.alJoueur.size() )
             this.index = 0;
 
         this.joueurActif = this.alJoueur.get(this.index);
+
+        this.nbCartePioche = 0;
 
         this.ctrl.tourTermine();
     }

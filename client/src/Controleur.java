@@ -32,6 +32,7 @@ public class Controleur
 
     public void setIhm(JFrame frame)
     {
+        this.ihm.dispose();
         this.ihm = frame;
     }
 
@@ -72,7 +73,10 @@ public class Controleur
     public void setJoueur    (Joueur j) { this.metier.setJoueur(j); }
     
 
-    public boolean ajouterRoute(Route r)             { return this.metier.ajouterRoute(r); }
+    public boolean ajouterRoute    (Route r, int nb)  { return this.metier.ajouterRoute(r, nb);    }
+    public boolean peutPrendreRoute(Route r, int nb)  { return this.metier.peutPrendreRoute(r, nb);}
+    public boolean peutDessinerDouble()  { return this.metier.peutDessinerDouble();}
+
 
     public boolean actionPossible() { return this.metier.actionPossible(); }
 

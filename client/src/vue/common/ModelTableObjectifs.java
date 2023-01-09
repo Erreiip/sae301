@@ -87,6 +87,11 @@ public class ModelTableObjectifs extends AbstractTableModel
     public void maj()
     {
         this.alObjectifs = this.ctrl.getJoueur().getObjectifs();
+        for ( Objectif o : this.alObjectifs)
+        {
+            this.ctrl.verifierObjectif(o);
+        }
+        
         fireTableDataChanged();
     }
 }
