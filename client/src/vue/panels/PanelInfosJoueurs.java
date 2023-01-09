@@ -32,7 +32,9 @@ public class PanelInfosJoueurs extends JPanel
         this.ctrl = ctrl;
         this.joueur = j;
 
-        this.panelGridBag = new JPanel(new GridBagLayout());      // GridBagLayout pour 1 joueur
+        this.setPreferredSize(new Dimension(200,135));
+
+        this.panelGridBag = new JPanel(new GridBagLayout());          // GridBagLayout pour 1 joueur
         this.panelLbl     = new JPanel();                             // Panel pour nom/numéro du joueur
 
         this.border = BorderFactory.createLineBorder(Color.BLACK,3);
@@ -45,11 +47,11 @@ public class PanelInfosJoueurs extends JPanel
         else
             this.setBorder(null);    
 
-        this.lbl = new JLabel("Joueur " + j.getId() + "", SwingConstants.CENTER); // nom/numéro du joueur
-        this.panelCouleur = new PanelCouleur(this.ctrl, j.getCouleur()); // Panel pour la couleur du joueur
-        this.panelInfos = new JPanel(new GridLayout(2,1));        // Panel pour les infos du joueur
-        this.lblNbWagons = new JLabel("Nb wagons : " + j.getNbMarqueurs()); // Nombre de wagons du joueur
-        this.lblNbPv = new JLabel("Nb PV : " + j.getNbPv());      // Nombre de points de victoire du joueur
+        this.lbl = new JLabel("Joueur " + j.getId() + "", SwingConstants.CENTER); // Numéro du joueur
+        this.panelCouleur = new PanelCouleur(this.ctrl, j.getCouleur());          // Panel pour la couleur du joueur
+        this.panelInfos = new JPanel(new GridLayout(2,1));             // Panel pour les infos du joueur
+        this.lblNbWagons = new JLabel("Nb wagons : " + j.getNbMarqueurs());       // Nombre de wagons du joueur
+        this.lblNbPv = new JLabel("Nb PV : " + j.getNbPv());                      // Nombre de points de victoire du joueur
 
         this.panelLbl.add(this.lbl);
 

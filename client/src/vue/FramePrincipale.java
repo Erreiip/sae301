@@ -30,13 +30,15 @@ public class FramePrincipale extends JFrame
         this.panelMap         = new PanelMap(ctrl);
         this.panelCartesInteraction      = new PanelCartesInteraction(ctrl);
 
+        JScrollPane jspJoueurs = new JScrollPane(this.panelJoueurs);
+
         JScrollPane jspMap = new JScrollPane(this.panelMap);
         jspMap.getVerticalScrollBar().setUnitIncrement(10);
         jspMap.getHorizontalScrollBar().setUnitIncrement(10);
 
-        this.add(this.panelJoueurs, BorderLayout.NORTH);
-        this.add(this.panelPioche , BorderLayout.WEST);
-        this.add(jspMap    , BorderLayout.CENTER);
+        this.add(jspJoueurs                  , BorderLayout.NORTH);
+        this.add(this.panelPioche            , BorderLayout.WEST);
+        this.add(jspMap                      , BorderLayout.CENTER);
         this.add(this.panelCartesInteraction , BorderLayout.EAST);
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
