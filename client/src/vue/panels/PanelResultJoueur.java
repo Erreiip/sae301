@@ -12,6 +12,8 @@ public class PanelResultJoueur extends JPanel implements ActionListener
     private Controleur ctrl;
 
     private Joueur joueur;
+
+    private JPanel panelObjectifs;
     private JLabel lblImage;
 
     private int indexObjectif;
@@ -21,6 +23,9 @@ public class PanelResultJoueur extends JPanel implements ActionListener
         this.ctrl = ctrl;
 
         this.joueur = j;
+
+        this.panelObjectifs = new JPanel(new BorderLayout());
+        this.lblImage = null;
 
         this.indexObjectif = 0;
 
@@ -39,10 +44,20 @@ public class PanelResultJoueur extends JPanel implements ActionListener
         this.add(new JLabel("Joueur " + this.joueur.getId()   , SwingConstants.CENTER)); // Joueur X
         this.add(new JLabel("" + this.joueur.getNbPv() , SwingConstants.CENTER));        // Point de victoire
 
-        JPanel panelObjectifs = new JPanel(new BorderLayout());
-            JButton btnGauche = new JButton("<");
-            this.lblImage = new JLabel(new ImageIcon(this.joueur.getObjectifs().get(this.indexObjectif).getFileRecto()));
-            JButton btnDroite = new JButton(">");
+        JButton btnGauche = new JButton("<");
+
+        ImageIcon icon = new ImageIcon(this.joueur.getObjectifs().get(this.indexObjectif).getFileRecto());
+        Image image = icon.getImage();
+        Image newimg = image.getScaledInstance(150, 80,  java.awt.Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newimg);
+        this.lblImage = new JLabel(icon);
+
+        if (this.joueur.getObjectifs().get(this.indexObjectif).isPrit())
+            this.panelObjectifs.setBackground(new Color(0,215,0));
+        else
+            this.panelObjectifs.setBackground(new Color(215,0,0));
+
+        JButton btnDroite = new JButton(">");
 
         panelObjectifs.add(btnGauche, BorderLayout.WEST  );
         panelObjectifs.add(lblImage , BorderLayout.CENTER);
@@ -73,9 +88,17 @@ public class PanelResultJoueur extends JPanel implements ActionListener
                 else                                                          { this.indexObjectif++;   }
             }
 
-            this.lblImage.setIcon(null);
+            ImageIcon icon = new ImageIcon(this.joueur.getObjectifs().get(this.indexObjectif).getFileRecto());
+            Image image = icon.getImage();
+            Image newimg = image.getScaledInstance(150, 80,  java.awt.Image.SCALE_SMOOTH);
+            icon = new ImageIcon(newimg);
 
-            System.out.println(this.indexObjectif);
+            if (this.joueur.getObjectifs().get(this.indexObjectif).isPrit())
+                this.panelObjectifs.setBackground(new Color(0,215,0));
+            else
+                this.panelObjectifs.setBackground(new Color(215,0,0));
+
+            this.lblImage.setIcon(icon);
         }
     }
 }

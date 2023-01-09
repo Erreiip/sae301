@@ -23,7 +23,7 @@ public class FrameFin extends JFrame
         this.ctrl = ctrl;
 
         this.setTitle("Fin de la partie");
-        this.setSize(1200,500);
+        this.setSize(1200, (this.ctrl.getNbJoueur() * 100));
         this.setLayout(new BorderLayout());
 
         this.panelHaut = new JPanel(new GridLayout(1, 4));
