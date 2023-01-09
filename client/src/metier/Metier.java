@@ -505,13 +505,23 @@ public class Metier
 
         Collections.shuffle(this.alWagons);
 
+        boolean bBon = false;
+        if ( alWagons.size() == 0 ) bBon = true;
+
         for ( int cpt = 0; cpt < alWagons.size(); cpt++)
         {
             Wagon w = alWagons.get(0);
             this.alWagons.remove(w);
 
-            if ( alWagons.size() == 0 ) this.alWagons.add(w);
-            else                        this.alWagons.add(cpt, w);
+            if ( bBon && cpt == 0) this.alWagons.add(w);
+            else if ( bBon )      
+            {
+                this.alWagons.add(cpt-1, w);
+            }
+            else
+            {
+                this.alWagons.add(cpt, w);
+            }
         }
     }
     
