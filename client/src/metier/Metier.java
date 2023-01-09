@@ -145,6 +145,7 @@ public class Metier
         this.supprimerObjToDef(ajoutDefausse);
 
         Collections.shuffle(this.alObjectifs);
+        
     }
     
     public boolean verifierObjectif(Objectif obj)
@@ -217,6 +218,7 @@ public class Metier
         alWAgon.add(w);
     
         this.joueurActif.ajouterWagon(w);
+        this.derniereCartePioche = w;
         this.nbCartePioche++;
     
         this.supprimerWagons(alWAgon);
@@ -245,21 +247,58 @@ public class Metier
     
     public void routePrise(Route route)
     {
-        route.setJoueur1(this.joueurActif);
+        //route.setJoueur1(this.joueurActif);
+    }
+
+    public  HashMap <Color, Integer> getJetonsCouleurJoueur()
+    {
+        HashMap <Color, Integer> hmCount         = new HashMap<Color, Integer>();
+
+        for( Wagon w : this.joueurActif.getMain())
+        {
+            Color  c = new Color(w.getCouleur());
+
+            if (hmCount.containsKey(c)){
+                hmCount.put(c, hmCount.get(c) + 1);
+            }else{
+                hmCount.put(c, 1);
+            }
+        }
+
+        return hmCount;
     }
 
     public boolean peutPrendreRoute(Route r, int nb)
     {
         if ( r.sontPrises() ) return false;
 
+        HashMap <Color, Integer> hmCount = this.getJetonsCouleurJoueur();
+
+        if ( hmCount.containsKey(Color.LIGHT_GRAY) )
+        {
+            int nbJetons = hmCount.get(Color.LIGHT_GRAY);
+            for ( int cpt2 = 0; cpt2 < nbJetons; cpt2++)
+            {
+                for ( Color c : hmCount.keySet())
+                {
+                    hmCount.replace(c, hmCount.get(c) + 1);
+                }
+            }
+            hmCount.remove(Color.LIGHT_GRAY);
+        }
+
         if ( nb == 1)
         {
             if ( r.estPrise1() ) return false;
+            if ( !hmCount.containsKey(new Color(r.getCouleur1()))) return false;
+            if ( hmCount.get(new Color(r.getCouleur1())) < r.getCout() ) return false;
             return this.joueurActif.getNbMarqueurs() >=  r.getCout();
         }
         else 
         {
             if ( r.estPrise2() ) return false;
+            if ( !hmCount.containsKey(new Color(r.getCouleur2()))) return false;
+            if ( hmCount.get(new Color(r.getCouleur2())) < r.getCout() ) return false;
             return this.joueurActif.getNbMarqueurs() >=  r.getCout();
         }
         
@@ -271,8 +310,18 @@ public class Metier
         
         if ( this.joueurActif.enleverMarqueurs(r.getCout()) ) 
         {
-            if (nb == 1) r.setJoueur1(this.joueurActif);
-            else         r.setJoueur2(this.joueurActif);
+
+            if (nb == 1) 
+            {
+                r.setJoueur1(this.joueurActif);
+                this.joueurActif.enleverJetons(r.getCouleur1(), r.getCout());
+            }
+            else        
+            {
+                r.setJoueur2(this.joueurActif);
+                this.joueurActif.enleverJetons(r.getCouleur2(), r.getCout());
+
+            }
             
             this.joueurActif.ajouterPV(Route.getPoints(r.getCout()));
 
@@ -317,22 +366,31 @@ public class Metier
         if ( this.alWagons.size() < 7 ) { rajouterDefausseW(); }        
         
         Wagon[] tabWagonVisible = new Wagon[5];
-        for ( int cpt = 0; cpt < tabWagonVisible.length; cpt++ )
+        int nbJoker;
+        do 
         {
-            tabWagonVisible[cpt] = this.alWagons.get(cpt);
-        }
+            nbJoker = 0;
+            for ( int cpt = 0; cpt < tabWagonVisible.length; cpt++ )
+            {
+                if ( this.alWagons.get(cpt).getCouleur() == Color.LIGHT_GRAY.getRGB() ) nbJoker++;
+
+                tabWagonVisible[cpt] = this.alWagons.get(cpt);
+            }
+        }while(nbJoker >= 3);
     
         return tabWagonVisible;
     } 
     
     public Objectif[] getPiocheVisibleObj() 
     { 
-        if ( this.alObjectifs.size() < 5 ) { rajouterDefausseO(); } 
+        if ( this.alObjectifs.size() < 4 ) { rajouterDefausseO(); } 
     
         Objectif[] tabObjectif = new Objectif[3];
         for ( int cpt = 0; cpt < tabObjectif.length; cpt++ )
         {
-            tabObjectif[cpt] =this.alObjectifs.get(cpt);
+            if ( cpt > this.alObjectifs.size() -1) continue;
+            
+            tabObjectif[cpt] = this.alObjectifs.get(cpt);
         }
     
         return tabObjectif;
@@ -351,6 +409,7 @@ public class Metier
         }
     
         this.alWagons = new ArrayList<Wagon>(this.alDefausseW);
+        this.alDefausseW= new ArrayList<Wagon>();
     }
     
     public void rajouterDefausseO()
@@ -361,6 +420,7 @@ public class Metier
         }
     
         this.alObjectifs = new ArrayList<Objectif>(this.alDefausseO);
+        this.alDefausseO = new ArrayList<Objectif>();
     }
     
     
@@ -511,7 +571,7 @@ public class Metier
         boolean bPartieFini = true;
         for ( Route r : alRoute)
         {
-            if ( r.estDouble() ) 
+            if ( r.estDouble() && this.ctrl.peutDessinerDouble()) 
             {
                 if ( !r.sontPrises() ) bPartieFini = false;
             }
@@ -538,6 +598,7 @@ public class Metier
         this.joueurActif = this.alJoueur.get(this.index);
 
         this.nbCartePioche = 0;
+        this.derniereCartePioche = null;
 
         this.ctrl.tourTermine();
     }

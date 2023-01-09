@@ -225,7 +225,7 @@ public class PanelMap extends JPanel
                 {
                     if ( s.contains(x, y) )
                     {
-                        if ( r.estDouble() )
+                        if ( r.estDouble() && PanelMap.this.ctrl.peutDessinerDouble() )
                         {
                             if ( cpt % 2 == 0)
                             {

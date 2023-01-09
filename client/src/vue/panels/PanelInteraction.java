@@ -27,7 +27,6 @@ public class PanelInteraction extends JPanel implements ActionListener
     public PanelInteraction(Controleur ctrl)
     {
         this.ctrl = ctrl;
-        this.setLayout(null);
     }
 
     public void afficherWagon(Icon icon)
@@ -44,6 +43,7 @@ public class PanelInteraction extends JPanel implements ActionListener
     public void genererInteractionObj()
     {
         this.removeAll();
+        this.setLayout(null);
         // Variable contenant les 3 premieres cartes objectif
         this.alObjectifs = ctrl.getPiocheVisibleObj();
 
@@ -51,6 +51,8 @@ public class PanelInteraction extends JPanel implements ActionListener
 
         for(int cpt = 0; cpt < alObjectifs.length; cpt++)
         {
+            if ( alObjectifs[cpt] == null) continue;
+
             // Ajout case a cocher
             JCheckBox choix = new JCheckBox();
             choix.addActionListener(this);
@@ -103,7 +105,11 @@ public class PanelInteraction extends JPanel implements ActionListener
 
     public void genererInteractionWagon(Wagon w)
     {
-        this.removeAll();
+        this.setLayout(new GridLayout(2,1));
+        if(this.ctrl.secondWagon())
+        {
+            this.removeAll();
+        }
         JLabel lblWagon = new JLabel();
         BufferedImage imgRectoWagon = null;
         try {
@@ -114,10 +120,14 @@ public class PanelInteraction extends JPanel implements ActionListener
         Image dImgRectoWagon = imgRectoWagon.getScaledInstance(170, 85, Image.SCALE_SMOOTH);
         ImageIcon imgIcon = new ImageIcon(dImgRectoWagon);
         lblWagon = new JLabel(imgIcon);
-        lblWagon.setBounds(150, 150, 175, 110);
+        // lblWagon.setBounds(150, 150, 175, 110);
         this.add(lblWagon);
-        this.repaint();
+        this.revalidate();
+
+        //this.repaint();
     }
+
+    
 
     public void actionPerformed(ActionEvent e)
     {
@@ -161,5 +171,10 @@ public class PanelInteraction extends JPanel implements ActionListener
                 }
             }
         }
+    }
+
+    public void maj()
+    {
+        this.removeAll();
     }
 }
