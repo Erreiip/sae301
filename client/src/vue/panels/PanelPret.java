@@ -14,10 +14,10 @@ public class PanelPret extends JPanel implements ActionListener
 {
     private Controleur ctrl;
 
-    private BufferedImage fond;
-
     private JSpinner spinner;
     private JButton btnValider;
+
+    private BufferedImage fond;
 
     public PanelPret(Controleur ctrl)
     {
@@ -43,14 +43,23 @@ public class PanelPret extends JPanel implements ActionListener
         this.spinner = new JSpinner(new SpinnerNumberModel(regles.getNbJoueursMini(), regles.getNbJoueursMini(), regles.getNbJoueursMaxi(), 1));
         this.btnValider = new JButton("Valider");
 
-        JPanel pnlInfos = new JPanel(new GridLayout(5, 1));
+        JPanel pnlInfos = new JPanel(new GridLayout(5, 2));
         JPanel pnlSaisis = new JPanel();
 
-        pnlInfos.add(new JLabel("Nombre de joueurs Minimum : " + regles.getNbJoueursMini(), JLabel.CENTER));
-        pnlInfos.add(new JLabel("Nombre de joueurs Maximum : " + regles.getNbJoueursMaxi(), JLabel.CENTER));
-        pnlInfos.add(new JLabel("Nombre de joueurs Pour les voies Doubles : " + regles.getNbJoueursVoieDouble(), JLabel.CENTER));
-        pnlInfos.add(new JLabel("Nombre de wagons pour la fin de partie: " + regles.getNbWagonsFinParties(), JLabel.CENTER));
-        pnlInfos.add(new JLabel("Nombre de wagons par joueurs : " + regles.getNbWagonsParJoueurs(), JLabel.CENTER));
+        pnlInfos.add(new JLabel("Nombre de joueurs Minimum : ", JLabel.RIGHT));
+        pnlInfos.add(new JLabel("" + regles.getNbJoueursMini()));
+
+        pnlInfos.add(new JLabel("Nombre de joueurs Maximum : ", JLabel.RIGHT));
+        pnlInfos.add(new JLabel("" + regles.getNbJoueursMaxi()));
+
+        pnlInfos.add(new JLabel("Nombre de joueurs Pour les voies Doubles : ", JLabel.RIGHT));
+        pnlInfos.add(new JLabel("" + regles.getNbJoueursVoieDouble()));
+
+        pnlInfos.add(new JLabel("Nombre de wagons pour la fin de partie: ", JLabel.RIGHT));
+        pnlInfos.add(new JLabel("" + regles.getNbWagonsFinParties()));
+
+        pnlInfos.add(new JLabel("Nombre de wagons par joueurs : ", JLabel.RIGHT));
+        pnlInfos.add(new JLabel("" + regles.getNbWagonsParJoueurs()));
 
         pnlSaisis.add(new JLabel("Nombre de Joueurs : "));
         pnlSaisis.add(this.spinner);
