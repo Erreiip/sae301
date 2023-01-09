@@ -503,35 +503,14 @@ public class Metier
     
     public void rajouterDefausseW()
     {
-        ArrayList<Wagon> alWagons = new ArrayList<Wagon>();
-        for ( Wagon w : this.alWagons )
-        {
-            alWagons.add(w);
-        }
-
-
-        this.alWagons    = new ArrayList<Wagon>(this.alDefausseW);
+        this.alWagons    = new ArrayList<Wagon>();
         this.alDefausseW = new ArrayList<Wagon>();
 
-        Collections.shuffle(this.alWagons);
+        Collections.shuffle(this.alDefausseW);
 
-        boolean bBon = false;
-        if ( alWagons.size() == 0 ) bBon = true;
-
-        for ( int cpt = 0; cpt < alWagons.size(); cpt++)
+        for ( Wagon w : this.alDefausseW )
         {
-            Wagon w = alWagons.get(0);
-            this.alWagons.remove(w);
-
-            if ( bBon && cpt == 0) this.alWagons.add(w);
-            else if ( bBon )      
-            {
-                this.alWagons.add(cpt-1, w);
-            }
-            else
-            {
-                this.alWagons.add(cpt, w);
-            }
+            this.alWagons.add(w);
         }
     }
     
@@ -716,7 +695,7 @@ public class Metier
 
         if ( this.dernierIndex == null)
         {
-                if ( this.regles.getNbWagonsFinParties() > this.joueurActif.getNbMarqueurs() )
+                if ( this.regles.getNbWagonsFinParties() >= this.joueurActif.getNbMarqueurs() )
                 {
                     this.dernierIndex  = this.index;
                     this.ctrl.afficher("Fin dans 1 tour");
