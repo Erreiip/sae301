@@ -7,6 +7,7 @@ import client.src.vue.mouseAdapter.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -22,19 +23,34 @@ public class PanelPioche extends JPanel
 {
     private Controleur ctrl;
 
-    private JLabel   lblVersoWagon;
-    private JLabel[] lblCartesWagon;
-    private JLabel   lblVersoObjectif;
+    private JPanel panelWagonsVerso;
+        private JLabel lblVersoWagon;
+
+    private JPanel panelWagonsRecto;
+        private JLabel[] lblCartesWagon;
+
+    private JPanel panelObjectifs;
+        private JLabel   lblVersoObjectif;
+   
 
     public PanelPioche(Controleur ctrl)
     {
         this.ctrl = ctrl;
 
-        this.setLayout(new GridLayout(7,1));
+        this.panelWagonsVerso = new JPanel(new GridLayout(1,1));
+        this.panelWagonsRecto = new JPanel(new GridLayout(5,1));
+        this.panelObjectifs   = new JPanel(new GridLayout(1,1));
+
+        this.setLayout(new BorderLayout());
         this.setPreferredSize(new Dimension(180,600));
         
-        Border blackline = BorderFactory.createLineBorder(Color.black);
-        this.setBorder(blackline);
+        Border border = BorderFactory.createLineBorder(Color.BLACK,1);
+        TitledBorder borderWagonsVerso = BorderFactory.createTitledBorder(border,"Cartes Wagons Verso");
+        TitledBorder borderWagonsRecto = BorderFactory.createTitledBorder(border,"Cartes Wagons Recto");
+        TitledBorder borderObjectif = BorderFactory.createTitledBorder(border,"Cartes Objectifs");
+        borderWagonsVerso.setTitleJustification(TitledBorder.CENTER);
+        borderWagonsRecto.setTitleJustification(TitledBorder.CENTER);
+        borderObjectif.setTitleJustification(TitledBorder.CENTER);
 
         // Image verso Wagon & verso Objectif
         BufferedImage imgVersoWagon = null;
@@ -75,14 +91,20 @@ public class PanelPioche extends JPanel
             index++;
         }
 
-        
-        this.add(this.lblVersoWagon);
+        this.panelWagonsVerso.add(this.lblVersoWagon);
 
         for (JLabel lbl : this.lblCartesWagon)
-            this.add(lbl);
+            this.panelWagonsRecto.add(lbl);
 
-        this.add(this.lblVersoObjectif);
+        this.panelObjectifs.add(this.lblVersoObjectif);
         
+        this.add(this.panelWagonsVerso, BorderLayout.NORTH);
+        this.add(this.panelWagonsRecto, BorderLayout.CENTER);
+        this.add(this.panelObjectifs, BorderLayout.SOUTH);
+
+        this.panelWagonsVerso.setBorder(borderWagonsVerso);
+        this.panelWagonsRecto.setBorder(borderWagonsRecto);
+        this.panelObjectifs.setBorder(borderObjectif);
 
         this.lblVersoObjectif.addMouseListener(new MouseAdapterVersoObjectif(this.ctrl));
         this.lblVersoWagon.addMouseListener(new MouseAdapterVersoWagon(ctrl));
