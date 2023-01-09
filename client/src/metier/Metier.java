@@ -270,6 +270,24 @@ public class Metier
         return max;
     }
 
+    public Color chercherPlusGrandCouleur()
+    {
+        HashMap <Color, Integer> hmCount = this.getJetonsCouleurJoueur();
+
+        int max = 0;
+        Color couleur = null;
+        for ( Color c : hmCount.keySet() )
+        {
+            if ( max < hmCount.get(c) ) 
+            {
+                max = hmCount.get(c);
+                couleur = c;                
+            }
+        }
+
+        return couleur;
+    }
+
     public  HashMap <Color, Integer> getJetonsCouleurJoueur()
     {
         HashMap <Color, Integer> hmCount         = new HashMap<Color, Integer>();
@@ -285,16 +303,6 @@ public class Metier
             }
         }
 
-        return hmCount;
-    }
-
-
-    public boolean peutPrendreRoute(Route r, int nb)
-    {
-        if ( r.sontPrises() ) return false;
-        
-        HashMap <Color, Integer> hmCount = this.getJetonsCouleurJoueur();
-
         if ( hmCount.containsKey(Color.LIGHT_GRAY) )
         {
             int nbJetons = hmCount.get(Color.LIGHT_GRAY);
@@ -308,6 +316,17 @@ public class Metier
             hmCount.remove(Color.LIGHT_GRAY);
         }
 
+        return hmCount;
+    }
+
+
+    public boolean peutPrendreRoute(Route r, int nb)
+    {
+        if ( r.sontPrises() ) return false;
+        
+        HashMap <Color, Integer> hmCount = this.getJetonsCouleurJoueur();
+
+        
         if ( nb == 1)
         {
             if ( r.estPrise1() ) return false;
@@ -351,18 +370,26 @@ public class Metier
         
         if ( this.joueurActif.enleverMarqueurs(r.getCout()) ) 
         {
-
+            Integer c = null;
             if (nb == 1) 
             {
                 r.setJoueur1(this.joueurActif);
-                this.joueurActif.enleverJetons(r.getCouleur1(), r.getCout());
+                c = r.getCouleur1();
             }
             else        
             {
                 r.setJoueur2(this.joueurActif);
-                this.joueurActif.enleverJetons(r.getCouleur2(), r.getCout());
-
+                c = r.getCouleur2();
             }
+
+            if ( c == Color.LIGHT_GRAY.getRGB() ) 
+            { 
+                this.joueurActif.enleverJetons(this.chercherPlusGrandCouleur().getRGB(), r.getCout());
+            } else
+            {
+                this.joueurActif.enleverJetons(c, r.getCout());
+            }
+
             
             this.joueurActif.ajouterPV(Route.getPoints(r.getCout()));
 
@@ -678,6 +705,7 @@ public class Metier
 
         if ( this.tour == 1 ) this.setActionEnCours(true);
 
+        this.ctrl.colorier();
         this.ctrl.tourTermine();
     }
 
