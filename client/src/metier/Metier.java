@@ -509,7 +509,6 @@ public class Metier
     
     public void rajouterDefausseW()
     {
-        this.alWagons    = new ArrayList<Wagon>();
         this.alDefausseW = new ArrayList<Wagon>();
 
         Collections.shuffle(this.alDefausseW);
