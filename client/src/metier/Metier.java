@@ -761,7 +761,7 @@ public class Metier
         {
             for( Ville ville : alVilles)
             {
-                coutChemin = CheminLePlusLongVille(joueur, ville, new ArrayList<Route>(), 0);
+                coutChemin = cheminLePlusLongVille(joueur, ville, new ArrayList<Route>(), 0);
                 if(max < coutChemin)
                 {
                     max = coutChemin;
@@ -776,9 +776,9 @@ public class Metier
     }
     
     
-    public int CheminLePlusLongVille(Joueur joueur ,Ville villeCible, ArrayList<Route> chemin, int cout)
+    public int cheminLePlusLongVille(Joueur joueur ,Ville villeCible, ArrayList<Route> chemin, int cout)
     {
-        Ville furturVilleCible; // a suprimer
+        Ville furturVilleCible;
 
         int coutChemin = cout;
         int max = cout;
@@ -797,7 +797,7 @@ public class Metier
                 // met la route dans l'arrayList, Appel la methode et la retire
                 chemin.add(route);
                 coutChemin += route.getCout();
-                coutCheminSuivant = CheminLePlusLongVille(joueur, furturVilleCible, chemin, coutChemin);
+                coutCheminSuivant = cheminLePlusLongVille(joueur, furturVilleCible, chemin, coutChemin);
                 chemin.remove(chemin.size()-1);
 
                 // Verifie que le cout qu'on recois est superieur a celui actuelle

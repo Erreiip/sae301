@@ -15,15 +15,16 @@ public class FrameFin extends JFrame
     private Controleur ctrl;
 
     private JPanel panelHaut;
-    private PanelResultJoueur panelResultJoueur;
+    private JPanel panelClassement;
+        private PanelResultJoueur panelResultJoueur;
 
     public FrameFin(Controleur ctrl)
     {
         this.ctrl = ctrl;
 
         this.setTitle("Fin de la partie");
-        this.setSize(800,700);
-        this.setLayout(new GridLayout((this.ctrl.getNbJoueur() + 1), 1));
+        this.setSize(1200,500);
+        this.setLayout(new BorderLayout());
 
         this.panelHaut = new JPanel(new GridLayout(1, 4));
         this.panelHaut.add(new JLabel("Classement"       , SwingConstants.CENTER));
@@ -31,7 +32,11 @@ public class FrameFin extends JFrame
         this.panelHaut.add(new JLabel("Point de victoire", SwingConstants.CENTER));
         this.panelHaut.add(new JLabel("Objectifs"        , SwingConstants.CENTER));
 
-        this.add(this.panelHaut);
+        this.add(this.panelHaut, BorderLayout.NORTH);
+
+
+
+        this.panelClassement = new JPanel(new GridLayout(this.ctrl.getNbJoueur(), 1));
 
         ArrayList<Joueur> alJoueurs = this.ctrl.getAlJoueurs();
         Collections.sort(alJoueurs);
@@ -40,8 +45,12 @@ public class FrameFin extends JFrame
         {
             this.panelResultJoueur = new PanelResultJoueur(ctrl, j, alJoueurs.indexOf(j) + 1);
 
-            this.add(this.panelResultJoueur);
+            this.panelClassement.add(this.panelResultJoueur);
         }
+
+        this.add(this.panelClassement, BorderLayout.CENTER);
+
+
 
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
