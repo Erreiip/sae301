@@ -389,10 +389,10 @@ public class Metier
 
             if ( c == Color.LIGHT_GRAY.getRGB() ) 
             { 
-                this.joueurActif.enleverJetons(this.chercherPlusGrandCouleur().getRGB(), r.getCout());
+                this.supprimerWagonsToDef(this.joueurActif.enleverJetons(this.chercherPlusGrandCouleur().getRGB(), r.getCout()));
             } else
             {
-                this.joueurActif.enleverJetons(c, r.getCout());
+                this.supprimerWagonsToDef(this.joueurActif.enleverJetons(c, r.getCout()));
             }
 
             
