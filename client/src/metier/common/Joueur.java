@@ -3,7 +3,7 @@ package client.src.metier.common;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public class Joueur
+public class Joueur implements Comparable<Joueur>
 {
     private Integer             couleur;
     
@@ -84,7 +84,16 @@ public class Joueur
     public void ajouterWagon   (Wagon wagon)  { this.alWagons.add(wagon); }
     public void ajouterObjectif(Objectif obj) { this.alObjectifs.add(obj);}
     public void ajouterPV      (Integer pv )  { this.nbPv += pv;  } 
+
+    public void retirerPv      (Integer pv )  { this.nbPv -= pv;  }
+    public void setPv          (Integer pv )  { this.nbPv  = pv;  }
+
     
     public int getId() { return this.id; }
+
+    @Override
+    public int compareTo(Joueur o) {
+        return this.nbPv - o.nbPv;
+    }
     
 }

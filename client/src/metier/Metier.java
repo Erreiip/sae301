@@ -172,12 +172,17 @@ public class Metier
         boolean retour = false;
         alVillesVisitees.add(v);
         if( v == vRecherchee ) return true;
+        
         for ( Route r : v.getAlRoutes())
         {
             if ( r.getVille1() == v && r.getJoueur1() == getJoueur() && !alVillesVisitees.contains(r.getVille2())) retour = rechercheObjectif(r.getVille2(), vRecherchee, alVillesVisitees);
             if ( r.getVille2() == v && r.getJoueur1() == getJoueur() && !alVillesVisitees.contains(r.getVille1())) retour = rechercheObjectif(r.getVille1(), vRecherchee, alVillesVisitees);
+            if ( r.getVille1() == v && r.getJoueur2() == getJoueur() && !alVillesVisitees.contains(r.getVille2())) retour = rechercheObjectif(r.getVille2(), vRecherchee, alVillesVisitees);
+            if ( r.getVille2() == v && r.getJoueur2() == getJoueur() && !alVillesVisitees.contains(r.getVille1())) retour = rechercheObjectif(r.getVille1(), vRecherchee, alVillesVisitees);
+            
             if(retour) break;
         }
+
         return retour;
     }
     
@@ -679,6 +684,7 @@ public class Metier
                 if ( this.regles.getNbWagonsFinParties() > this.joueurActif.getNbMarqueurs() )
                 {
                     this.dernierIndex  = this.index;
+                    this.ctrl.afficher("Fin dans 1 tour");
                 }
         } else
         {
@@ -707,6 +713,22 @@ public class Metier
 
         this.ctrl.colorier();
         this.ctrl.tourTermine();
+    }
+
+    public ArrayList<Joueur> getJoueursFin()
+    {
+        for ( Joueur j : this.alJoueur)
+        {
+            for (Objectif o : j.getObjectifs())
+            {
+                if ( o.isPrit() ) j.ajouterPV(o.getNbPoints());
+                else              j.retirerPv(o.getNbPoints());
+            }
+
+            if (j.getNbPv() < 0 ) j.setPv(0);
+        }
+
+        return this.alJoueur;
     }
 
 

@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import java.awt.image.BufferedImage;
 
 
@@ -123,6 +125,11 @@ public class Controleur
         return this.metier.getAlJoueurs();
     }
 
+    public ArrayList<Joueur> getJoueursFin()
+    {
+        return this.metier.getJoueursFin();
+    }
+
     public Regles getRegles()
     {
         return this.metier.getRegles();
@@ -165,6 +172,14 @@ public class Controleur
         this.metier.routePrise(d.getRoute());
 
         this.tourTermine();
+    }
+
+    public void afficher(String f)
+    {
+        JOptionPane.showMessageDialog(this.ihm, 
+         f,
+         " Information ",
+         JOptionPane.WARNING_MESSAGE);
     }
 
     public void tourTermine() 
