@@ -26,17 +26,17 @@ public class FrameFin extends JFrame
         this.setLayout(new GridLayout((this.ctrl.getNbJoueur() + 1), 1));
 
         this.panelHaut = new JPanel(new GridLayout(1, 4));
-        this.panelHaut.add(new JLabel("Classement"));
-        this.panelHaut.add(new JLabel("Nom"));
-        this.panelHaut.add(new JLabel("Point de victoire"));
-        this.panelHaut.add(new JLabel("Objectifs"));
+        this.panelHaut.add(new JLabel("Classement"       , SwingConstants.CENTER));
+        this.panelHaut.add(new JLabel("Nom"              , SwingConstants.CENTER));
+        this.panelHaut.add(new JLabel("Point de victoire", SwingConstants.CENTER));
+        this.panelHaut.add(new JLabel("Objectifs"        , SwingConstants.CENTER));
+
+        this.add(this.panelHaut);
 
         ArrayList<Joueur> alJoueurs = this.ctrl.getAlJoueurs();
-
         Collections.sort(alJoueurs);
-
         
-        for (Joueur j : this.ctrl.getAlJoueurs())
+        for (Joueur j : alJoueurs)
         {
             this.panelResultJoueur = new PanelResultJoueur(ctrl, j, alJoueurs.indexOf(j) + 1);
 

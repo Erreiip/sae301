@@ -99,7 +99,7 @@ public class Joueur implements Comparable<Joueur>
 
     @Override
     public int compareTo(Joueur o) {
-        return this.nbPv - o.nbPv;
+        return o.nbPv - this.nbPv;
     }
     
 }

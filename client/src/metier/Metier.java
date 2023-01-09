@@ -8,7 +8,6 @@ import java.util.Base64;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 import java.util.Iterator;
 
 import java.awt.image.BufferedImage;
@@ -695,7 +694,7 @@ public class Metier
 
         if ( this.dernierIndex == null)
         {
-                if ( this.regles.getNbWagonsFinParties() > this.joueurActif.getNbMarqueurs() )
+                if ( /*this.regles.getNbWagonsFinParties()*/ 45 > this.joueurActif.getNbMarqueurs() )
                 {
                     this.dernierIndex  = this.index;
                     this.ctrl.afficher("Fin dans 1 tour");
@@ -767,6 +766,7 @@ public class Metier
         }
 
         System.out.println(joueurCheminPlusLong + " : " + max);
+        
         return joueurCheminPlusLong;
     }
     
