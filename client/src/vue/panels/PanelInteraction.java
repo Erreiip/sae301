@@ -52,7 +52,7 @@ public class PanelInteraction extends JPanel implements ActionListener
         for(int cpt = 0; cpt < alObjectifs.length; cpt++)
         {
             if ( alObjectifs[cpt] == null) continue;
-            
+
             // Ajout case a cocher
             JCheckBox choix = new JCheckBox();
             choix.addActionListener(this);

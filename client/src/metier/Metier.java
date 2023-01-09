@@ -551,6 +551,7 @@ public class Metier
         this.joueurActif = this.alJoueur.get(this.index);
 
         this.nbCartePioche = 0;
+        this.derniereCartePioche = null;
 
         this.ctrl.tourTermine();
     }
