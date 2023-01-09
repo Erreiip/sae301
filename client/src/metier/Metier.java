@@ -498,10 +498,10 @@ public class Metier
         {
             alWagons.add(w);
         }
-        
 
-        this.alWagons = new ArrayList<Wagon>(this.alDefausseW);
-        this.alDefausseW= new ArrayList<Wagon>();
+
+        this.alWagons    = new ArrayList<Wagon>(this.alDefausseW);
+        this.alDefausseW = new ArrayList<Wagon>();
 
         Collections.shuffle(this.alWagons);
 

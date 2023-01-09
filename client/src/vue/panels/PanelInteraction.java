@@ -23,10 +23,35 @@ public class PanelInteraction extends JPanel implements ActionListener
     private JButton btnValider;
     private ArrayList<JCheckBox> alCheckBox;
     private Objectif[] alObjectifs;
+
+    JPanel panelDernieresCartes;
+    JLabel[] labelDernieresCartes;
+    
+    private ArrayList<Wagon> dernieresCartes;
     
     public PanelInteraction(Controleur ctrl)
     {
         this.ctrl = ctrl;
+
+        this.setLayout(null);
+
+        this.panelDernieresCartes = new JPanel();
+
+        panelDernieresCartes.setLayout(new GridLayout(1,2, 10,0));
+
+        panelDernieresCartes.setBounds(75, 375, 210, 50);
+
+        JLabel carte1 = new JLabel();
+        JLabel carte2 = new JLabel();
+
+        this.labelDernieresCartes = new JLabel[]{carte1, carte2};
+
+        panelDernieresCartes.add(carte1);
+        panelDernieresCartes.add(carte2);
+
+        this.add(panelDernieresCartes);
+
+        this.dernieresCartes = new ArrayList<Wagon>();
     }
 
     public void afficherWagon(Icon icon)
@@ -43,7 +68,6 @@ public class PanelInteraction extends JPanel implements ActionListener
     public void genererInteractionObj()
     {
         this.removeAll();
-        this.setLayout(null);
         // Variable contenant les 3 premieres cartes objectif
         this.alObjectifs = ctrl.getPiocheVisibleObj();
 
@@ -105,7 +129,8 @@ public class PanelInteraction extends JPanel implements ActionListener
 
     public void genererInteractionWagon(Wagon w)
     {
-        this.setLayout(new GridLayout(2,1));
+        this.dernieresCartes.add(w);
+
         if(this.ctrl.secondWagon())
         {
             this.removeAll();
@@ -120,11 +145,11 @@ public class PanelInteraction extends JPanel implements ActionListener
         Image dImgRectoWagon = imgRectoWagon.getScaledInstance(170, 85, Image.SCALE_SMOOTH);
         ImageIcon imgIcon = new ImageIcon(dImgRectoWagon);
         lblWagon = new JLabel(imgIcon);
-        // lblWagon.setBounds(150, 150, 175, 110);
+        lblWagon.setBounds(100, 150, 175, 110);
         this.add(lblWagon);
         this.revalidate();
 
-        //this.repaint();
+        this.repaint();
     }
 
     
@@ -176,6 +201,30 @@ public class PanelInteraction extends JPanel implements ActionListener
         }
     }
 
+    public void remplissageDerniersWagons()
+    {
+        this.add(panelDernieresCartes);
+
+        panelDernieresCartes.validate();
+
+        for (int i = 0; i < 2; i++) {
+            if(this.dernieresCartes.size()-1 < i) labelDernieresCartes[i].setIcon(null);
+            else { 
+                BufferedImage imgRectoWagon = null;
+                try {
+                    imgRectoWagon = ImageIO.read(new File(dernieresCartes.get(i).getFileRecto()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Image dImgRectoWagon = imgRectoWagon.getScaledInstance(100, 50, Image.SCALE_SMOOTH);
+                ImageIcon imgIcon = new ImageIcon(dImgRectoWagon);
+                labelDernieresCartes[i].setIcon(imgIcon);
+            }
+        }
+        this.dernieresCartes.clear();
+        
+    }
+
     public void maj()
     {
         this.removeAll();
@@ -184,9 +233,10 @@ public class PanelInteraction extends JPanel implements ActionListener
 
         if ( this.ctrl.getTour() == 1)
         {
-
             this.genererInteractionObj();
-            this.ctrl.setActionEnCours(true);
+        }else
+        {
+            remplissageDerniersWagons();
         }
     }
 }
