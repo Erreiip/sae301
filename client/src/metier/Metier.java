@@ -145,8 +145,7 @@ public class Metier
         this.supprimerObjToDef(ajoutDefausse);
 
         Collections.shuffle(this.alObjectifs);
-
-        System.out.println(this.alObjectifs);
+        
     }
     
     public boolean verifierObjectif(Objectif obj)
