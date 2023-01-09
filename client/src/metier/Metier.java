@@ -689,7 +689,7 @@ public class Metier
         if ( bPartieFini ) 
         {
             System.out.println("Paartie fini");
-            this.ctrl.setIhm(new JFrame());
+            this.ctrl.setIhm(new FrameFin(this.ctrl));
             return;
         }
 
