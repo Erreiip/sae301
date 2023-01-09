@@ -442,7 +442,6 @@ public class Metier
 
             this.supprimerWagonsToDef(this.joueurActif.enleverJetons(couleur.getRGB(), r.getCout()));
 
-            
             this.joueurActif.ajouterPV(Route.getPoints(r.getCout()));
 
             return true;
@@ -784,7 +783,10 @@ public class Metier
             if (j.getNbPv() < 0 ) j.setPv(0);
         }
 
-        this.cheminLePlusLongPossible();
+        for ( Joueur j :this.cheminLePlusLongPossible())
+        {
+            j.ajouterPV(10);
+        }
 
         return this.alJoueur;
     }
@@ -807,8 +809,6 @@ public class Metier
                 }
             }
         }
-
-        System.out.println(joueurCheminPlusLong + " : " + max);
         
         return joueurCheminPlusLong;
     }

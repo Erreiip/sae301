@@ -49,9 +49,9 @@ public class PanelCartesInteraction extends JPanel
         this.panelInteraction.genererInteractionWagon(wagonCorrespondant);
     }
 
-    public void genererInteractionCartes(Route r) 
+    public void genererInteractionCartes(Route r, int type) 
     {
-        this.panelInteraction.genererInteractionCartes(r);
+        this.panelInteraction.genererInteractionCartes(r, type);
     }
 
     public void maj()

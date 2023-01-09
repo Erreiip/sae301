@@ -26,16 +26,27 @@ public class PanelInteraction extends JPanel implements ActionListener
     private ArrayList<JCheckBox> alCheckBox;
     private Objectif[] alObjectifs;
 
-    JPanel   panelDernieresCartes;
-    JLabel[] labelDernieresCartes;
-    JLabel   txtDernieresCartes1;
-    JLabel   txtDernieresCartes2;
-    
-    private ArrayList<Wagon> dernieresCartes;
+    private JPanel   panelDernieresCartes;
+    private JLabel[] labelDernieresCartes;
+    private JLabel   txtDernieresCartes1;
+    private JLabel   txtDernieresCartes2;
+
+    private ArrayList<Wagon> alDernieresCartes;
+
+    private ArrayList<Color> alCouleurs;
+    private ButtonGroup buttonGroup;
+    private ArrayList<JRadioButton> alRadioButtons;
+    private JButton btnInteractionCartes;
+
+    private Route r;
+    private int type;
     
     public PanelInteraction(Controleur ctrl)
     {
         this.ctrl = ctrl;
+
+        this.r    = null;
+        this.type = 0;
 
         this.setLayout(null);
 
@@ -66,7 +77,7 @@ public class PanelInteraction extends JPanel implements ActionListener
 
         this.add(panelDernieresCartes);
 
-        this.dernieresCartes = new ArrayList<Wagon>();
+        this.alDernieresCartes = new ArrayList<Wagon>();
     }
 
     public void afficherWagon(Icon icon)
@@ -144,7 +155,7 @@ public class PanelInteraction extends JPanel implements ActionListener
 
     public void genererInteractionWagon(Wagon w)
     {
-        this.dernieresCartes.add(w);
+        this.alDernieresCartes.add(w);
 
         if(this.ctrl.secondWagon())
         {
@@ -167,32 +178,59 @@ public class PanelInteraction extends JPanel implements ActionListener
         this.repaint();
     }
 
-    public void genererInteractionCartes( Route r )        
+    public void genererInteractionCartes( Route r , int type)        
     { 
+        this.alRadioButtons = new ArrayList<JRadioButton>();
+
+        this.r = r;
+        this.type = type;
+
         this.removeAll();
 
         HashMap<Color, Integer> hmCount = this.ctrl.getJetonsCouleurJoueur();
 
-        ArrayList<Color> alCouleur = new ArrayList<Color>();
+        alCouleurs = new ArrayList<Color>();
 
         for ( Color c : hmCount.keySet() )
         {
             if ( hmCount.get(c) >= r.getCout() )
             {
-                alCouleur.add(c);
+                alCouleurs.add(c);
             }
         }
 
-        this.setLayout(new GridLayout(alCouleur.size(), 1));
+        this.setLayout(new GridLayout(alCouleurs.size() + 1 , 2));
+
+       this.buttonGroup = new ButtonGroup();
         
-        for (Color c : alCouleur )
+        for (Color c : alCouleurs )
         {
             JLabel lbl = new JLabel();
-            lbl.setBackground(c);
+
+            JRadioButton rb = new JRadioButton();
+            this.buttonGroup.add(rb);
+            
+            this.alRadioButtons.add(rb);
+
+            Wagon w = ctrl.getWagonCouleur(c);
+
+            BufferedImage imgRectoWagon = null;
+            try {
+                imgRectoWagon = ImageIO.read(new File(w.getFileRecto()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Image dImgRectoWagon = imgRectoWagon.getScaledInstance(150, 85, Image.SCALE_SMOOTH);
+            ImageIcon imgIcon = new ImageIcon(dImgRectoWagon);
+            lbl.setIcon(imgIcon);
             lbl.setOpaque(true);
-            lbl.setText("shesh");
             this.add(lbl);
+            this.add(rb);
         }
+
+        this.btnInteractionCartes = new JButton("Valider");
+        this.btnInteractionCartes.addActionListener(this);
+        this.add(this.btnInteractionCartes);
 
         this.revalidate();
     }
@@ -250,6 +288,19 @@ public class PanelInteraction extends JPanel implements ActionListener
 
             if ( nbChecked > 1 ) this.btnValider.setEnabled(true);
         }
+
+        if(e.getSource() == this.btnInteractionCartes)
+        {
+            for (int i = 0; i < this.alRadioButtons.size(); i++) {
+                if (this.alRadioButtons.get(i).isSelected()) 
+                {
+                    this.ctrl.ajouterRoute( this.r, this.alCouleurs.get(i), this.type);
+                    this.r = null;
+                    this.type = 0;
+                    this.ctrl.setActionEnCours(false);
+                }
+            }
+        }
     }
 
     public void remplissageDerniersWagons()
@@ -263,12 +314,12 @@ public class PanelInteraction extends JPanel implements ActionListener
         boolean vide = true;
 
         for (int i = 0; i < 2; i++) {
-            if(this.dernieresCartes.size()-1 < i) labelDernieresCartes[i].setIcon(null);
+            if(this.alDernieresCartes.size()-1 < i) labelDernieresCartes[i].setIcon(null);
             else {
                 vide = false;
                 BufferedImage imgRectoWagon = null;
                 try {
-                    imgRectoWagon = ImageIO.read(new File(dernieresCartes.get(i).getFileRecto()));
+                    imgRectoWagon = ImageIO.read(new File(alDernieresCartes.get(i).getFileRecto()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -289,7 +340,7 @@ public class PanelInteraction extends JPanel implements ActionListener
             this.txtDernieresCartes1.setText("cartes piochées");
             this.txtDernieresCartes2.setText("par le joueur précédent");
         }   
-        this.dernieresCartes.clear();
+        this.alDernieresCartes.clear();
         
     }
 
