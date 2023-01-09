@@ -62,9 +62,9 @@ public class FramePrincipale extends JFrame
         this.panelCartesInteraction.genererInteractionObj();
     }
 
-    public void genererInteractionCartes( Route r)        
+    public void genererInteractionCartes( Route r, int type)        
     { 
-        this.panelCartesInteraction.genererInteractionCartes(r);
+        this.panelCartesInteraction.genererInteractionCartes(r, type);
     }
 
 
@@ -81,6 +81,7 @@ public class FramePrincipale extends JFrame
     public void maj()
     {
         this.panelMap.majMap();
+        this.panelPioche.majPioche();
         this.panelJoueurs.majInfos();
         this.panelCartesInteraction.maj();
     }

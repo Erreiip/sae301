@@ -235,7 +235,7 @@ public class PanelMap extends JPanel
                                     PanelMap.this.ctrl.setActionEnCours(true);
                                     if ( r.getCouleur1() == Color.LIGHT_GRAY.getRGB() )
                                     {
-                                        PanelMap.this.ctrl.genererInteractionCartes(r);
+                                        PanelMap.this.ctrl.genererInteractionCartes(r, 1);
                                     }
                                     else
                                     {
@@ -252,7 +252,7 @@ public class PanelMap extends JPanel
                                     PanelMap.this.ctrl.setActionEnCours(true);
                                     if ( r.getCouleur2() == Color.LIGHT_GRAY.getRGB() )
                                     {
-                                        PanelMap.this.ctrl.genererInteractionCartes(r);
+                                        PanelMap.this.ctrl.genererInteractionCartes(r, 2);
                                     }
                                     else
                                     {
@@ -269,7 +269,7 @@ public class PanelMap extends JPanel
                                 PanelMap.this.ctrl.setActionEnCours(true);
                                 if ( r.getCouleur1() == Color.LIGHT_GRAY.getRGB() )
                                 {
-                                    PanelMap.this.ctrl.genererInteractionCartes(r);
+                                    PanelMap.this.ctrl.genererInteractionCartes(r, 1);
                                 }
                                 else
                                 {

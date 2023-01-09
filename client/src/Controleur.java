@@ -100,7 +100,7 @@ public class Controleur
     public boolean secondWagon        ()        { return this.metier.secondWagon  (); }
 
     public void genererInteractionObj   ()        { ((FramePrincipale)this.ihm).genererInteractionObj();    }
-    public void genererInteractionCartes(Route r) { ((FramePrincipale)this.ihm).genererInteractionCartes(r); }
+    public void genererInteractionCartes(Route r, int type) { ((FramePrincipale)this.ihm).genererInteractionCartes(r, type); }
     public void genererInteractionWagon(Wagon w)  { ((FramePrincipale)this.ihm).genererInteractionWagon(w); }
     public void majPioche               ()        { ((FramePrincipale)this.ihm).majPioche();                }
 
