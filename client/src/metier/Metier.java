@@ -493,22 +493,23 @@ public class Metier
     
     public void rajouterDefausseW()
     {
+        ArrayList<Wagon> alWagons = new ArrayList<Wagon>();
         for ( Wagon w : this.alWagons )
         {
-            this.alDefausseW.add(w);
+            alWagons.add(w);
         }
         
-        Wagon[] w = this.getPiocheVisible();
 
         this.alWagons = new ArrayList<Wagon>(this.alDefausseW);
         this.alDefausseW= new ArrayList<Wagon>();
 
         Collections.shuffle(this.alWagons);
 
-        for ( int cpt = 0; cpt < w.length; cpt++)
+        for ( int cpt = 0; cpt < alWagons.size(); cpt++)
         {
-            this.alWagons.remove(w[cpt]);
-            this.alWagons.add(cpt, w[cpt]);
+            Wagon w = alWagons.get(0);
+            this.alWagons.remove(w);
+            this.alWagons.add(cpt, w);
         }
     }
     
