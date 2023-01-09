@@ -28,6 +28,7 @@ public class ImageRenderer extends JLabel implements TableCellRenderer
         setIcon(icon);
 
         if ( o.isPrit() ) this.setBackground(Color.GREEN);
+        else              this.setBackground(null);
         
         return this;
     }

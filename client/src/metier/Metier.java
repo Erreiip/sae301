@@ -172,7 +172,7 @@ public class Metier
         boolean retour = false;
         alVillesVisitees.add(v);
         if( v == vRecherchee ) return true;
-        
+
         for ( Route r : v.getAlRoutes())
         {
             if ( r.getVille1() == v && r.getJoueur1() == getJoueur() && !alVillesVisitees.contains(r.getVille2())) retour = rechercheObjectif(r.getVille2(), vRecherchee, alVillesVisitees);
@@ -715,7 +715,7 @@ public class Metier
         this.ctrl.tourTermine();
     }
 
-    public ArrayList<Joueur> getJoueursFin()
+    public List<Joueur> getJoueursFin()
     {
         for ( Joueur j : this.alJoueur)
         {
@@ -728,7 +728,71 @@ public class Metier
             if (j.getNbPv() < 0 ) j.setPv(0);
         }
 
+        this.CheminLePlusLongPossible();
+
         return this.alJoueur;
+    }
+
+    public Joueur CheminLePlusLongPossible()
+    {
+        int coutChemin;
+        int max = 0;
+        Joueur joueurCheminPlusLong = null;
+
+        for( Joueur joueur : alJoueur)
+        {
+            for( Ville ville : alVilles)
+            {
+                coutChemin = CheminLePlusLongVille(joueur, ville, new ArrayList<Route>(), 0);
+                if(max < coutChemin)
+                {
+                    max = coutChemin;
+                    joueurCheminPlusLong = joueur;
+                }
+            }
+        }
+
+        System.out.println(joueurCheminPlusLong + " : " + max);
+        return joueurCheminPlusLong;
+    }
+    
+    
+    public int CheminLePlusLongVille(Joueur joueur ,Ville villeCible, ArrayList<Route> chemin, int cout)
+    {
+        Ville furturVilleCible; // a suprimer
+
+        int coutChemin = cout;
+        int max = cout;
+        int coutCheminSuivant;
+        
+        // cherche toutes les routes de la ville
+        for(Route route : villeCible.getAlRoutes())
+        {
+            // Verifie que la route est valide (non utilisé durant cette instance et qu'il lui appartient)
+            if(!(chemin.contains(route)) && (route.getJoueur1() == joueur || route.getJoueur2() == joueur))
+            {
+                // recupere la ville suivante
+                if( villeCible == route.getVille1() ) { furturVilleCible = route.getVille2(); }
+                else { furturVilleCible = route.getVille1(); }
+                
+                // met la route dans l'arrayList, Appel la methode et la retire
+                chemin.add(route);
+                coutChemin += route.getCout();
+                coutCheminSuivant = CheminLePlusLongVille(joueur, furturVilleCible, chemin, coutChemin);
+                chemin.remove(chemin.size()-1);
+
+                // Verifie que le cout qu'on recois est superieur a celui actuelle
+                if( max < coutCheminSuivant ) { max = coutCheminSuivant; }
+                
+                coutChemin -= route.getCout();
+            }
+        }
+
+        coutChemin = 0;
+        for(Route route : chemin) { coutChemin =+ route.getCout(); }
+        if( max < coutChemin ) { max = coutChemin; }
+
+        return max;
     }
 
 
@@ -992,6 +1056,7 @@ public class Metier
             Metier.colorier(o, ctrl);
         }
 
+        Collections.shuffle(this.alObjectifs);
 
         Route.setPpWagon(ppWagons);
         /*
