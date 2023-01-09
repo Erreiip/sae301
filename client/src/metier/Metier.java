@@ -63,9 +63,11 @@ public class Metier
 
     private boolean              actionEnCours;
 
-    private Regles regles;
+    private Regles                regles;
 
-    private int tour;
+    private int                   tour;
+
+    private ArrayList<Color>      alColor;
     /*
     private ActionSuppr          actionSuppr;
     private ActionDef            actionDef;
@@ -314,7 +316,7 @@ public class Metier
             int nbJetons = hmCount.get(Color.LIGHT_GRAY);
             for ( int cpt2 = 0; cpt2 < nbJetons; cpt2++)
             {
-                for ( Color c : hmCount.keySet())
+                for ( Color c : this.alColor)
                 {
                     hmCount.replace(c, hmCount.get(c) + 1);
                 }
@@ -458,9 +460,10 @@ public class Metier
             nbJoker = 0;
             for ( int cpt = 0; cpt < tabWagonVisible.length; cpt++ )
             {
+                if ( cpt > this.alWagons.size() -1 ) continue;
+
                 if ( this.alWagons.get(cpt).getCouleur() == Color.LIGHT_GRAY.getRGB() ) nbJoker++;
 
-                if ( cpt > this.alWagons.size() -1 ) continue;
 
                 tabWagonVisible[cpt] = this.alWagons.get(cpt);
             }
