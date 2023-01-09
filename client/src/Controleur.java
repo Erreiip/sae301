@@ -2,12 +2,15 @@ package client.src;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import java.awt.image.BufferedImage;
+import java.awt.Color;
+
 
 
 import client.src.metier.*;
@@ -74,6 +77,8 @@ public class Controleur
 
     public void setJoueurActif(Joueur j) { this.metier.setJoueurActif(j); }
     public void setJoueur    (Joueur j) { this.metier.setJoueur(j); }
+
+    public  HashMap <Color, Integer> getJetonsCouleurJoueur() { return this.metier.getJetonsCouleurJoueur(); }
     
 
     public boolean ajouterRoute    (Route r, int nb)  { return this.metier.ajouterRoute(r, nb);    }

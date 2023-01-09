@@ -293,6 +293,7 @@ public class Metier
         return couleur;
     }
 
+
     public  HashMap <Color, Integer> getJetonsCouleurJoueur()
     {
         HashMap <Color, Integer> hmCount         = new HashMap<Color, Integer>();
@@ -694,7 +695,7 @@ public class Metier
 
         if ( this.dernierIndex == null)
         {
-                if ( /*this.regles.getNbWagonsFinParties()*/ 45 > this.joueurActif.getNbMarqueurs() )
+                if ( this.regles.getNbWagonsFinParties() > this.joueurActif.getNbMarqueurs() )
                 {
                     this.dernierIndex  = this.index;
                     this.ctrl.afficher("Fin dans 1 tour");
