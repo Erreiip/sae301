@@ -1,6 +1,7 @@
 package client.src.vue;
 
 import client.src.Controleur;
+import client.src.metier.common.Route;
 import client.src.metier.common.Ville;
 import client.src.metier.common.Wagon;
 import client.src.vue.panels.*;
@@ -61,9 +62,20 @@ public class FramePrincipale extends JFrame
         this.panelCartesInteraction.genererInteractionObj();
     }
 
+    public void genererInteractionCartes( Route r)        
+    { 
+        this.panelCartesInteraction.genererInteractionCartes(r);
+    }
+
+
     public void genererInteractionWagon(Wagon wagonCorrespondant) 
     {
         this.panelCartesInteraction.genererInteractionWagon(wagonCorrespondant);
+    }
+
+    public void suppBtnPiocheObj() 
+    {
+        this.panelPioche.suppBtnPiocheObj();
     }
 
     public void maj()

@@ -7,12 +7,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import client.src.Controleur;
 import client.src.metier.common.Objectif;
+import client.src.metier.common.Route;
 import client.src.metier.common.Wagon;
 
 
@@ -165,6 +167,35 @@ public class PanelInteraction extends JPanel implements ActionListener
         this.repaint();
     }
 
+    public void genererInteractionCartes( Route r )        
+    { 
+        HashMap<Color, Integer> hmCount = this.ctrl.getJetonsCouleurJoueur();
+
+        ArrayList<Color> alCouleur = new ArrayList<Color>();
+
+        for ( Color c : hmCount.keySet() )
+        {
+            if ( hmCount.get(c) >= r.getCout() )
+            {
+                alCouleur.add(c);
+            }
+        }
+
+        this.setLayout(new GridLayout(alCouleur.size(), 1));
+        
+        for (Color c : alCouleur )
+        {
+            JLabel lbl = new JLabel();
+            lbl.setBackground(c);
+            lbl.setText("shesh");
+            this.add(lbl);
+        }
+
+        this.revalidate();
+
+
+    }
+
     
 
     public void actionPerformed(ActionEvent e)
@@ -193,7 +224,13 @@ public class PanelInteraction extends JPanel implements ActionListener
             this.repaint();
 
             this.ctrl.piocheObjectif(alObjectifsGardes, alObjectifsDefausse);
+
+            Objectif[] obj = this.ctrl.getPiocheVisibleObj();
+            
+            if(obj[0] == null){ctrl.suppBtnPiocheObj();}
+
             this.ctrl.setActionEnCours(false);
+            
         }
 
         if(e.getSource() instanceof JCheckBox)

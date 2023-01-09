@@ -125,4 +125,10 @@ public class PanelPioche extends JPanel
             lblVersoWagon.removeMouseListener(lblVersoWagon.getMouseListeners()[0]);
         }
     }
+
+    public void suppBtnPiocheObj() 
+    {
+        lblVersoObjectif.setIcon(null);
+        lblVersoObjectif.removeMouseListener(lblVersoObjectif.getMouseListeners()[0]);
+    }
 }
