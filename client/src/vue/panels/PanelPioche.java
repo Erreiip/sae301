@@ -96,11 +96,12 @@ public class PanelPioche extends JPanel
         int index = 0;
         for (JLabel l : lblCartesWagon)
         {
-            if(index>piocheVisible.length-1)
+            if(piocheVisible[index] == null)
             {
                 if(l.getMouseListeners().length>0)
                 {
                     l.setIcon(null);
+                    System.out.println(index + "----" + piocheVisible[index]);
                     l.removeMouseListener(l.getMouseListeners()[0]);
                 }
             }else

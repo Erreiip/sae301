@@ -1,6 +1,7 @@
 package client.src.vue.panels;
 
 import client.src.Controleur;
+import client.src.metier.common.Route;
 import client.src.metier.common.Wagon;
 import client.src.vue.common.ImageRenderer;
 import client.src.vue.common.ModelTableObjectifs;
@@ -46,6 +47,11 @@ public class PanelCartesInteraction extends JPanel
     public void genererInteractionWagon(Wagon wagonCorrespondant) 
     {
         this.panelInteraction.genererInteractionWagon(wagonCorrespondant);
+    }
+
+    public void genererInteractionCartes(Route r) 
+    {
+        this.panelInteraction.genererInteractionCartes(r);
     }
 
     public void maj()
