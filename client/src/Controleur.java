@@ -2,6 +2,7 @@ package client.src;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -115,7 +116,7 @@ public class Controleur
         this.metier.setNbJoueurs(i);
     }
 
-    public int getNbJoueur() // nz
+    public int getNbJoueur()
     {
         return this.metier.getNbJoueur();
     }
@@ -125,7 +126,7 @@ public class Controleur
         return this.metier.getAlJoueurs();
     }
 
-    public ArrayList<Joueur> getJoueursFin()
+    public List<Joueur> getJoueursFin()
     {
         return this.metier.getJoueursFin();
     }

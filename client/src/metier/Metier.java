@@ -33,6 +33,7 @@ import client.src.metier.common.Route;
 import client.src.metier.common.Ville;
 import client.src.metier.common.Wagon;
 import client.src.metier.reseau.Client;
+import client.src.vue.FrameFin;
 import common.*;
 import server.src.Serveur;
 
@@ -88,7 +89,7 @@ public class Metier
     {
         this.ctrl                = ctrl;
     
-        this.alJoueur              = null; 
+        this.alJoueur            = null; 
         this.joueurActif         = null;
     
     
@@ -606,11 +607,11 @@ public class Metier
 
     public int getTour() { return this.tour; }
 
-    public int getNbJoueur() { return this.alJoueur.size(); } //nz
+    public int getNbJoueur() { return this.alJoueur.size(); }
     public boolean peutDessinerDouble()  { return this.alJoueur.size() >= this.regles.getNbJoueursVoieDouble(); }
 
 
-    public ArrayList<Joueur> getAlJoueurs() { return this.alJoueur; } // nz
+    public ArrayList<Joueur> getAlJoueurs() { return this.alJoueur; }
         
     public boolean actionPossible() { return true;/*this.joueur.getId() == this.joueurActif.getId();*/ }
         
@@ -690,8 +691,8 @@ public class Metier
         {
             if ( this.index == this.dernierIndex )
             {
-                System.out.println("Paartie fini");
-                this.ctrl.setIhm(new JFrame());
+                System.out.println("Partie fini");
+                this.ctrl.setIhm(new FrameFin(this.ctrl));
                 return;
             }
         }
@@ -728,12 +729,12 @@ public class Metier
             if (j.getNbPv() < 0 ) j.setPv(0);
         }
 
-        this.CheminLePlusLongPossible();
+        this.cheminLePlusLongPossible();
 
         return this.alJoueur;
     }
 
-    public Joueur CheminLePlusLongPossible()
+    public Joueur cheminLePlusLongPossible()
     {
         int coutChemin;
         int max = 0;

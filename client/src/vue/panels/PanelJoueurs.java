@@ -20,7 +20,6 @@ public class PanelJoueurs extends JPanel
 
         alPnlInfosJoueurs = new ArrayList<PanelInfosJoueurs>();
 
-        //this.setLayout(new GridLayout(1 , this.ctrl.getNbJoueur()));
         this.setLayout(new FlowLayout());
 
         for (Joueur j : this.ctrl.getAlJoueurs())

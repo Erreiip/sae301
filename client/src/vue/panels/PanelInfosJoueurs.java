@@ -32,7 +32,7 @@ public class PanelInfosJoueurs extends JPanel
         this.ctrl = ctrl;
         this.joueur = j;
 
-        this.setPreferredSize(new Dimension(200,135));
+        this.setPreferredSize(new Dimension(200,125));
 
         this.panelGridBag = new JPanel(new GridBagLayout());          // GridBagLayout pour 1 joueur
         this.panelLbl     = new JPanel();                             // Panel pour nom/numéro du joueur
