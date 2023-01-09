@@ -269,9 +269,10 @@ public class PanelMap extends JPanel
                                 else
                                 {
                                     PanelMap.this.ctrl.ajouterRoute(r, 1);
+                                    PanelMap.this.ctrl.setActionEnCours(false);
                                 }
 
-                                PanelMap.this.ctrl.setActionEnCours(false);
+                                
                             }
                         }
                         

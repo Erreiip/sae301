@@ -169,6 +169,8 @@ public class PanelInteraction extends JPanel implements ActionListener
 
     public void genererInteractionCartes( Route r )        
     { 
+        this.removeAll();
+
         HashMap<Color, Integer> hmCount = this.ctrl.getJetonsCouleurJoueur();
 
         ArrayList<Color> alCouleur = new ArrayList<Color>();
@@ -187,13 +189,12 @@ public class PanelInteraction extends JPanel implements ActionListener
         {
             JLabel lbl = new JLabel();
             lbl.setBackground(c);
+            lbl.setOpaque(true);
             lbl.setText("shesh");
             this.add(lbl);
         }
 
         this.revalidate();
-
-
     }
 
     

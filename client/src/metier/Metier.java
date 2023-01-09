@@ -707,7 +707,8 @@ public class Metier
                 }
         } else
         {
-            if ( this.index == this.dernierIndex )
+            
+            if ( ((this.index + 1) % this.alJoueur.size()) == this.dernierIndex )
             {
                 this.ctrl.setIhm(new FrameFin(this.ctrl));
                 return;
@@ -716,11 +717,9 @@ public class Metier
 
         this.index++;
 
-        if ( this.index == this.alJoueur.size() )
-        {
-            this.index = 0;
-            this.tour++;
-        }
+        this.index = this.index % this.alJoueur.size();
+        
+        if  ( this.index == 0) this.tour++;
 
         this.joueurActif = this.alJoueur.get(this.index);
 
