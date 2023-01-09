@@ -86,7 +86,7 @@ public class Route implements Comparable<Route>
 
     public static int getPoints(int i)
     {
-        return Route.ppWagons[i];
+        return Route.ppWagons[i-1];
     }
 
     
