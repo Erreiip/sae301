@@ -233,15 +233,15 @@ public class PanelMap extends JPanel
                                 if ( PanelMap.this.ctrl.peutPrendreRoute(r, 1) )
                                 {
                                     PanelMap.this.ctrl.setActionEnCours(true);
-                                
-                                    //PanelMap.this.ctrl.ajouterRoute(r, 1);
-                                    
                                     if ( r.getCouleur1() == Color.LIGHT_GRAY.getRGB() )
                                     {
                                         PanelMap.this.ctrl.genererInteractionCartes(r);
                                     }
-
-                                    PanelMap.this.ctrl.setActionEnCours(false);
+                                    else
+                                    {
+                                        PanelMap.this.ctrl.ajouterRoute(r, 1);
+                                        PanelMap.this.ctrl.setActionEnCours(false);
+                                    }
                                 }
                             }
                             else
@@ -250,10 +250,15 @@ public class PanelMap extends JPanel
                                 if ( PanelMap.this.ctrl.peutPrendreRoute(r, 2) )
                                 {
                                     PanelMap.this.ctrl.setActionEnCours(true);
-                                
-                                    PanelMap.this.ctrl.ajouterRoute(r, 2);
-
-                                    PanelMap.this.ctrl.setActionEnCours(false);
+                                    if ( r.getCouleur2() == Color.LIGHT_GRAY.getRGB() )
+                                    {
+                                        PanelMap.this.ctrl.genererInteractionCartes(r);
+                                    }
+                                    else
+                                    {
+                                        PanelMap.this.ctrl.ajouterRoute(r, 2);
+                                        PanelMap.this.ctrl.setActionEnCours(false);
+                                    }
                                 }
                             }
                         }
@@ -269,9 +274,8 @@ public class PanelMap extends JPanel
                                 else
                                 {
                                     PanelMap.this.ctrl.ajouterRoute(r, 1);
-                                }
-
-                                PanelMap.this.ctrl.setActionEnCours(false);
+                                    PanelMap.this.ctrl.setActionEnCours(false);
+                                }  
                             }
                         }
                         

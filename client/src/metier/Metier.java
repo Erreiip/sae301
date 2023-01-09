@@ -195,6 +195,19 @@ public class Metier
     //   WAGON      //
     //--------------//
     
+    public Wagon getWagonCouleur ( Color c)
+    {
+        ArrayList<Wagon> alWagon = this.joueurActif.getMain();
+
+        for ( Wagon w : alWagon)
+        {
+            if (w.getCouleur() == c.getRGB()) return w;
+        }
+
+        return null;
+    }
+
+
     public boolean piocherWagon(Wagon w)
     {
         ArrayList<Wagon> alWAgon = new ArrayList<Wagon>();
@@ -402,6 +415,32 @@ public class Metier
             {
                 this.supprimerWagonsToDef(this.joueurActif.enleverJetons(c, r.getCout()));
             }
+
+            
+            this.joueurActif.ajouterPV(Route.getPoints(r.getCout()));
+
+            return true;
+        }
+    
+        return false;
+    }
+
+    public boolean ajouterRoute(Route r, Color couleur, int nb)
+    {
+        if ( r.sontPrises() ) return false;
+        
+        if ( this.joueurActif.enleverMarqueurs(r.getCout()) ) 
+        {
+            if (nb == 1) 
+            {
+                r.setJoueur1(this.joueurActif);
+            }
+            else        
+            {
+                r.setJoueur2(this.joueurActif);
+            }
+
+            this.supprimerWagonsToDef(this.joueurActif.enleverJetons(couleur.getRGB(), r.getCout()));
 
             
             this.joueurActif.ajouterPV(Route.getPoints(r.getCout()));
@@ -707,7 +746,8 @@ public class Metier
                 }
         } else
         {
-            if ( this.index == this.dernierIndex )
+            
+            if ( ((this.index + 1) % this.alJoueur.size()) == this.dernierIndex )
             {
                 this.ctrl.setIhm(new FrameFin(this.ctrl));
                 return;
@@ -716,11 +756,9 @@ public class Metier
 
         this.index++;
 
-        if ( this.index == this.alJoueur.size() )
-        {
-            this.index = 0;
-            this.tour++;
-        }
+        this.index = this.index % this.alJoueur.size();
+        
+        if  ( this.index == 0) this.tour++;
 
         this.joueurActif = this.alJoueur.get(this.index);
 
