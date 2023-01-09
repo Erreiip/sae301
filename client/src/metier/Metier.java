@@ -100,6 +100,8 @@ public class Metier
     
         this.alDefausseO         = new ArrayList<Objectif>();
         this.alDefausseW         = new ArrayList<Wagon>   ();
+
+        this.alColor             = new ArrayList<Color>();
     
         this.actionEnCours       = false;
     
@@ -318,7 +320,10 @@ public class Metier
             {
                 for ( Color c : this.alColor)
                 {
-                    hmCount.replace(c, hmCount.get(c) + 1);
+                    if ( hmCount.containsKey(c) )
+                        hmCount.replace(c, hmCount.get(c) + 1);
+                    else 
+                        hmCount.put(c, 1);
                 }
             }
             hmCount.remove(Color.LIGHT_GRAY);
@@ -418,6 +423,8 @@ public class Metier
         for ( int cpt = 0; cpt < taille; cpt++ )
         {
             Wagon w = this.alWagons.get(cpt);
+            this.alColor.add(new Color(w.getCouleur()));
+
             int taille2;
     
             if ( w.getCouleur() != Color.LIGHT_GRAY.getRGB() ) taille2 = Metier.COULEUR;
