@@ -109,7 +109,6 @@ public class PanelInteraction extends JPanel implements ActionListener
         if(this.ctrl.secondWagon())
         {
             this.removeAll();
-            //this.setLayout(new GridLayout(2,1));
         }
         JLabel lblWagon = new JLabel();
         BufferedImage imgRectoWagon = null;
@@ -128,10 +127,7 @@ public class PanelInteraction extends JPanel implements ActionListener
         //this.repaint();
     }
 
-    public void maj()
-    {
-        this.removeAll();
-    }
+    
 
     public void actionPerformed(ActionEvent e)
     {
@@ -175,5 +171,10 @@ public class PanelInteraction extends JPanel implements ActionListener
                 }
             }
         }
+    }
+
+    public void maj()
+    {
+        this.removeAll();
     }
 }
