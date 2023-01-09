@@ -4,7 +4,6 @@ import client.src.Controleur;
 import client.src.metier.common.Joueur;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 
 import java.awt.*;
 import java.util.ArrayList;

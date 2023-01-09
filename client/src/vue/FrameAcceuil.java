@@ -14,29 +14,31 @@ public class FrameAcceuil extends JFrame implements ActionListener
     private Controleur ctrl;
     
     private JButton btnCreerServeur;
-    private JButton btnRejoindre;
-
 
     public FrameAcceuil(Controleur ctrl)
     {
         this.ctrl = ctrl;
 
-        this.setLayout(new GridLayout(2,1));
-        this.setTitle("Accueil");
+        this.setTitle("Choix du plateau");
         this.setLocationRelativeTo(null);
-        this.setSize(500, 500);
+        this.setSize(800, 500);
 
-        this.btnCreerServeur = new JButton("Créer");
-        //this.btnRejoindre = new JButton("Rejoindre");
+        this.setLayout(new BorderLayout());
 
+        JPanel panelHaut = new JPanel(new FlowLayout());
+        JPanel panelBtn = new JPanel(new GridBagLayout());
 
-        this.add(this.btnCreerServeur);
-        //this.add(this.btnRejoindre);
+        this.btnCreerServeur = new JButton("Choix du plateau (Fichier XML)");
+        this.btnCreerServeur.setPreferredSize(new Dimension(400, 100));
+        
+        panelHaut.add(new JLabel(new ImageIcon("./client/src/data/jeu_de_plateau.png")));
+        panelBtn.add(this.btnCreerServeur, new GridBagConstraints());
+
+        this.add(panelHaut, BorderLayout.NORTH);
+        this.add(panelBtn, BorderLayout.CENTER);
 
         this.btnCreerServeur.addActionListener(this);
-        //this.btnRejoindre   .addActionListener(this);
-    
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+  
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
@@ -62,9 +64,9 @@ public class FrameAcceuil extends JFrame implements ActionListener
             
         }
 
-        if (e.getSource() == this.btnRejoindre)
+        /*if (e.getSource() == this.btnRejoindre)
         {
             this.ctrl.creerClient();
-        }
+        }*/
     }
 }

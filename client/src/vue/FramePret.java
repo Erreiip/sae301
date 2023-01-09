@@ -1,7 +1,6 @@
 package client.src.vue;
 
 import java.awt.*;
-import java.util.concurrent.Flow;
 
 import javax.swing.*;
 
@@ -17,6 +16,7 @@ public class FramePret extends JFrame
     public FramePret(Controleur ctrl)
     {
         this.ctrl = ctrl;
+        this.setTitle("Rappel des règles");
         this.setLayout(new BorderLayout());
         this.setSize(new Dimension(800, 500));
 
