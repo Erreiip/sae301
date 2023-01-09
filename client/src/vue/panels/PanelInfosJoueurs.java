@@ -1,6 +1,8 @@
 package client.src.vue.panels;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 
 import client.src.Controleur;
 import client.src.metier.common.Joueur;
@@ -22,6 +24,9 @@ public class PanelInfosJoueurs extends JPanel
     private JLabel lblNbWagons;
     private JLabel lblNbPv;
 
+    private Border border;
+    private TitledBorder borderActif;
+
     public PanelInfosJoueurs(Joueur j, Controleur ctrl)
     {
         this.ctrl = ctrl;
@@ -30,11 +35,17 @@ public class PanelInfosJoueurs extends JPanel
         this.panelGridBag = new JPanel(new GridBagLayout());      // GridBagLayout pour 1 joueur
         this.panelLbl     = new JPanel();                             // Panel pour nom/numéro du joueur
 
-        if (this.ctrl.getJoueurActif() == j)
-            this.lbl = new JLabel("Joueur " + j.getId() + " (actif)", SwingConstants.CENTER); // nom/numéro du joueur
+        this.border = BorderFactory.createLineBorder(Color.BLACK,3);
+        this.borderActif = BorderFactory.createTitledBorder(border,"Joueur actif");
+        this.borderActif.setTitleJustification(TitledBorder.CENTER);
+
+
+        if (this.ctrl.getJoueurActif() == this.joueur)
+            this.setBorder(this.borderActif);
         else
-            this.lbl = new JLabel("Joueur " + j.getId() + "", SwingConstants.CENTER); // nom/numéro du joueur
-    
+            this.setBorder(null);    
+
+        this.lbl = new JLabel("Joueur " + j.getId() + "", SwingConstants.CENTER); // nom/numéro du joueur
         this.panelCouleur = new PanelCouleur(this.ctrl, j.getCouleur()); // Panel pour la couleur du joueur
         this.panelInfos = new JPanel(new GridLayout(2,1));        // Panel pour les infos du joueur
         this.lblNbWagons = new JLabel("Nb wagons : " + j.getNbMarqueurs()); // Nombre de wagons du joueur
@@ -75,8 +86,8 @@ public class PanelInfosJoueurs extends JPanel
         this.lblNbPv.setText("Nb PV : " + this.joueur.getNbPv());
 
         if (this.ctrl.getJoueurActif() == this.joueur)
-            this.lbl.setText("Joueur " + this.joueur.getId() + " (actif)"); // nom/numéro du joueur
+            this.setBorder(this.borderActif);
         else
-            this.lbl.setText("Joueur " + this.joueur.getId() + ""); 
+            this.setBorder(null);
     }
 }
