@@ -7,7 +7,7 @@ import client.src.metier.common.Joueur;
 import client.src.vue.panels.PanelResultJoueur;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Collections;
 
 public class FrameFin extends JFrame
@@ -38,7 +38,7 @@ public class FrameFin extends JFrame
 
         this.panelClassement = new JPanel(new GridLayout(this.ctrl.getNbJoueur(), 1));
 
-        ArrayList<Joueur> alJoueurs = this.ctrl.getAlJoueurs();
+        List<Joueur> alJoueurs = this.ctrl.getJoueursFin();
         Collections.sort(alJoueurs);
         
         for (Joueur j : alJoueurs)

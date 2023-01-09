@@ -30,7 +30,7 @@ public class PanelResultJoueur extends JPanel implements ActionListener
         {
             case 1 : this.setBackground(new Color(255,215,0  )); break; // couleur or 
             case 2 : this.setBackground(new Color(192,192,192)); break; // couleur argent
-            case 3 : this.setBackground(new Color(88 ,41 ,0  )); break; // couleur bronze
+            case 3 : this.setBackground(new Color(222,184,135)); break; // couleur bronze
             default : break;
         }
     
@@ -41,13 +41,15 @@ public class PanelResultJoueur extends JPanel implements ActionListener
 
         JPanel panelObjectifs = new JPanel(new BorderLayout());
             JButton btnGauche = new JButton("<");
-            this.lblImage = new JLabel(this.joueur.getObjectifs().get(this.indexObjectif).getV1().getNom() + " - " + 
-                                       this.joueur.getObjectifs().get(this.indexObjectif).getV2().getNom() + " / " + this.joueur.getObjectifs().size());
+            this.lblImage = new JLabel(new ImageIcon(this.joueur.getObjectifs().get(this.indexObjectif).getFileRecto()));
             JButton btnDroite = new JButton(">");
 
-        panelObjectifs.add(btnGauche, BorderLayout.WEST);
-        panelObjectifs.add(lblImage, BorderLayout.CENTER);
-        panelObjectifs.add(btnDroite, BorderLayout.EAST);
+        panelObjectifs.add(btnGauche, BorderLayout.WEST  );
+        panelObjectifs.add(lblImage , BorderLayout.CENTER);
+        panelObjectifs.add(btnDroite, BorderLayout.EAST  );
+
+        btnGauche.addActionListener(this);
+        btnDroite.addActionListener(this);
 
 
         this.add(panelObjectifs);        // Liste des objectifs du joueurs (background vert = réussi, rouge = échoué)
@@ -62,17 +64,18 @@ public class PanelResultJoueur extends JPanel implements ActionListener
 
             if (btn.getText().equals("<"))
             {
-                if ( this.indexObjectif == 0) { this.indexObjectif = this.joueur.getObjectifs().size(); }
+                if ( this.indexObjectif == 0) { this.indexObjectif = (this.joueur.getObjectifs().size()-1); }
                 else                          { this.indexObjectif--;                                   }
             }
             else if (btn.getText().equals(">"))
             {
-                if ( this.indexObjectif == this.joueur.getObjectifs().size()) { this.indexObjectif = 0; }
+                if ( this.indexObjectif == (this.joueur.getObjectifs().size()-1)) { this.indexObjectif = 0; }
                 else                                                          { this.indexObjectif++;   }
             }
 
-            this.lblImage.setText(this.joueur.getObjectifs().get(this.indexObjectif).getV1().getNom() + " - " + 
-                                  this.joueur.getObjectifs().get(this.indexObjectif).getV2().getNom() + " / " + this.joueur.getObjectifs().size());
+            this.lblImage.setIcon(null);
+
+            System.out.println(this.indexObjectif);
         }
     }
 }
