@@ -206,7 +206,7 @@ public class Metier
 
         return null;
     }
-    
+
 
     public boolean piocherWagon(Wagon w)
     {
@@ -415,6 +415,32 @@ public class Metier
             {
                 this.supprimerWagonsToDef(this.joueurActif.enleverJetons(c, r.getCout()));
             }
+
+            
+            this.joueurActif.ajouterPV(Route.getPoints(r.getCout()));
+
+            return true;
+        }
+    
+        return false;
+    }
+
+    public boolean ajouterRoute(Route r, Color couleur, int nb)
+    {
+        if ( r.sontPrises() ) return false;
+        
+        if ( this.joueurActif.enleverMarqueurs(r.getCout()) ) 
+        {
+            if (nb == 1) 
+            {
+                r.setJoueur1(this.joueurActif);
+            }
+            else        
+            {
+                r.setJoueur2(this.joueurActif);
+            }
+
+            this.supprimerWagonsToDef(this.joueurActif.enleverJetons(couleur.getRGB(), r.getCout()));
 
             
             this.joueurActif.ajouterPV(Route.getPoints(r.getCout()));

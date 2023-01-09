@@ -81,7 +81,9 @@ public class Controleur
     public  HashMap <Color, Integer> getJetonsCouleurJoueur() { return this.metier.getJetonsCouleurJoueur(); }
     
 
-    public boolean ajouterRoute    (Route r, int nb)  { return this.metier.ajouterRoute(r, nb);    }
+    public boolean ajouterRoute    (Route r, int nb)         { return this.metier.ajouterRoute(r, nb);    }
+    public boolean ajouterRoute    (Route r,Color c,int nb)  { return this.metier.ajouterRoute(r, c, nb); }
+
     public boolean peutPrendreRoute(Route r, int nb)  { return this.metier.peutPrendreRoute(r, nb);}
     public boolean peutDessinerDouble()  { return this.metier.peutDessinerDouble();}
 
