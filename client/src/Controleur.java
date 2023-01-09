@@ -93,18 +93,14 @@ public class Controleur
     public void genererInteractionWagon(Wagon w)  { ((FramePrincipale)this.ihm).genererInteractionWagon(w); }
     public void majPioche               ()        { ((FramePrincipale)this.ihm).majPioche();                }
 
-    public void    setActionEnCours(boolean action) { this.metier.setActionEnCours(action);  }
+    public void    setActionEnCours(boolean action) {  this.metier.setActionEnCours(action);  }
     public boolean getActionEnCours()               { return this.metier.getActionEnCours(); }
+
+    public int     getTour() { return this.metier.getTour(); }
 
     public boolean verifierObjectif(Objectif o)
     {
-        if ( this.metier.verifierObjectif(o) ) 
-        {
-            //((FramePrincipale) this.ihm).majIHM();
-            return true;
-        }
-
-        return false;
+        return this.metier.verifierObjectif(o);
     }
     
     public void piocheObjectif( ArrayList<Objectif> ajoutJoueur, ArrayList<Objectif> ajoutDefausse)

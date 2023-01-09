@@ -52,9 +52,11 @@ public class Metier
 
     private BufferedImage        fond;
 
-    private ArrayList<Joueur> alJoueur;
-    private int               index;
-    private Joueur               joueurActif;
+    private ArrayList<Joueur>       alJoueur;
+    private int                     index;
+    private Integer                 dernierIndex;
+
+    private Joueur                  joueurActif;
 
     private Wagon                derniereCartePioche;
     private int                  nbCartePioche;
@@ -62,6 +64,8 @@ public class Metier
     private boolean              actionEnCours;
 
     private Regles regles;
+
+    private int tour;
     /*
     private ActionSuppr          actionSuppr;
     private ActionDef            actionDef;
@@ -95,10 +99,13 @@ public class Metier
         this.alDefausseO         = new ArrayList<Objectif>();
         this.alDefausseW         = new ArrayList<Wagon>   ();
     
-        this.actionEnCours = false;
+        this.actionEnCours       = false;
     
-        this.index = 0;
-        
+        this.index               = 0;
+        this.dernierIndex        = null;
+
+        this.tour                = 1;
+
         this.nbCartePioche       = 0;
         this.derniereCartePioche = null;
     
@@ -271,7 +278,7 @@ public class Metier
     public boolean peutPrendreRoute(Route r, int nb)
     {
         if ( r.sontPrises() ) return false;
-
+        
         HashMap <Color, Integer> hmCount = this.getJetonsCouleurJoueur();
 
         if ( hmCount.containsKey(Color.LIGHT_GRAY) )
@@ -292,6 +299,7 @@ public class Metier
             if ( r.estPrise1() ) return false;
             if ( !hmCount.containsKey(new Color(r.getCouleur1()))) return false;
             if ( hmCount.get(new Color(r.getCouleur1())) < r.getCout() ) return false;
+            if ( r.estDouble() && r.getJoueur2() == this.joueurActif ) return false;
             return this.joueurActif.getNbMarqueurs() >=  r.getCout();
         }
         else 
@@ -299,6 +307,7 @@ public class Metier
             if ( r.estPrise2() ) return false;
             if ( !hmCount.containsKey(new Color(r.getCouleur2()))) return false;
             if ( hmCount.get(new Color(r.getCouleur2())) < r.getCout() ) return false;
+            if ( r.getJoueur1() == this.joueurActif ) return false;
             return this.joueurActif.getNbMarqueurs() >=  r.getCout();
         }
         
@@ -355,6 +364,18 @@ public class Metier
     
         Collections.shuffle(this.alWagons);
     }
+
+    public void initMainJoueurs()
+    {
+        for (Joueur j : this.alJoueur )
+        {
+            for ( int cpt = 0; cpt < 4; cpt++)
+            {
+                j.ajouterWagon(this.alWagons.get(cpt));
+                this.alWagons.remove(cpt);
+            }
+        }
+    }
     
     
     //--------------//
@@ -376,6 +397,8 @@ public class Metier
 
                 tabWagonVisible[cpt] = this.alWagons.get(cpt);
             }
+
+            if ( nbJoker >= 3 ) Collections.shuffle(this.alWagons);
         }while(nbJoker >= 3);
     
         return tabWagonVisible;
@@ -513,7 +536,11 @@ public class Metier
         }
         
         this.joueurActif = this.alJoueur.get(this.index);
+
+        this.initMainJoueurs();
     }
+
+    public int getTour() { return this.tour; }
 
     public int getNbJoueur() { return this.alJoueur.size(); } //nz
     public boolean peutDessinerDouble()  { return this.alJoueur.size() >= this.regles.getNbJoueursVoieDouble(); }
@@ -588,17 +615,36 @@ public class Metier
             return;
         }
 
-
+        if ( this.dernierIndex == null)
+        {
+                if ( this.regles.getNbWagonsFinParties() > this.joueurActif.getNbMarqueurs() )
+                {
+                    this.dernierIndex  = this.index;
+                }
+        } else
+        {
+            if ( this.index == this.dernierIndex )
+            {
+                System.out.println("Paartie fini");
+                this.ctrl.setIhm(new JFrame());
+                return;
+            }
+        }
 
         this.index++;
 
         if ( this.index == this.alJoueur.size() )
+        {
             this.index = 0;
+            this.tour++;
+        }
 
         this.joueurActif = this.alJoueur.get(this.index);
 
         this.nbCartePioche = 0;
         this.derniereCartePioche = null;
+
+        if ( this.tour == 1 ) this.setActionEnCours(true);
 
         this.ctrl.tourTermine();
     }
@@ -863,6 +909,7 @@ public class Metier
         {
             Metier.colorier(o, ctrl);
         }
+
 
         Route.setPpWagon(ppWagons);
         /*

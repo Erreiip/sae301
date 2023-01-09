@@ -162,19 +162,29 @@ public class PanelInteraction extends JPanel implements ActionListener
         {
             // On verifie si au moins une case est cochee
             btnValider.setEnabled(false);
+            int nbChecked = 0;
             for (JCheckBox checkBox : this.alCheckBox)
             {
                 if( checkBox.isSelected() )
                 {
-                    btnValider.setEnabled(true);
-                    break;
-                }
+                    if ( this.ctrl.getTour() == 1) nbChecked++;
+                    else                           btnValider.setEnabled(true);
+                } 
             }
+
+            if ( nbChecked > 1 ) this.btnValider.setEnabled(true);
         }
     }
 
     public void maj()
     {
         this.removeAll();
+        this.validate();
+        this.repaint();
+
+        if ( this.ctrl.getTour() == 1)
+        {
+            this.genererInteractionObj();
+        }
     }
 }

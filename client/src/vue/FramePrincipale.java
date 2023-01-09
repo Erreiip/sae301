@@ -43,6 +43,8 @@ public class FramePrincipale extends JFrame
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
+
+        this.maj();
     }
 
     public void majPioche() { this.panelPioche.majPioche(); }

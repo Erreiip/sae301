@@ -18,7 +18,8 @@ public class MouseAdapterVersoWagon extends MouseAdapter
     @Override
     public void mouseClicked(MouseEvent e) 
     {
-        if( ctrl.actionPossible() && (ctrl.secondWagon() || ! ctrl.getActionEnCours()))
+
+        if( ctrl.actionPossible() && (ctrl.secondWagon() || ! ctrl.getActionEnCours()) && this.ctrl.getTour() != 1)
         {
             ctrl.setActionEnCours(true);
             
