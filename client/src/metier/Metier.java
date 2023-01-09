@@ -688,7 +688,6 @@ public class Metier
 
         if ( bPartieFini ) 
         {
-            System.out.println("Paartie fini");
             this.ctrl.setIhm(new FrameFin(this.ctrl));
             return;
         }
@@ -704,7 +703,6 @@ public class Metier
         {
             if ( this.index == this.dernierIndex )
             {
-                System.out.println("Partie fini");
                 this.ctrl.setIhm(new FrameFin(this.ctrl));
                 return;
             }
