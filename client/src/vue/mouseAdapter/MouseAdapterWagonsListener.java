@@ -33,18 +33,14 @@ public class MouseAdapterWagonsListener extends MouseAdapter
                 if((this.lblCartesWagon[i] == e.getSource())){ indexLabel = i; }
             }
 
-            System.out.println("en cours d'ajout");
-            
+
             Wagon wagonCorrespondant = wagons[indexLabel];
             if(ctrl.ajouterWagonAJoueur(wagonCorrespondant))
             {
                 ctrl.setActionEnCours(true);
 
-                System.out.println("ajouté");
-
                 if(!ctrl.secondWagon())
                 {
-                    System.out.println("change l'action");
                     ctrl.setActionEnCours(false);
                 }
                 
