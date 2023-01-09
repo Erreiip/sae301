@@ -36,8 +36,10 @@ public class Joueur implements Comparable<Joueur>
         return true;
     }
 
-    public void enleverJetons(int couleur, int nb)
+    public ArrayList<Wagon> enleverJetons(int couleur, int nb)
     {
+        ArrayList<Wagon> alWagon = new ArrayList<Wagon>();
+
         for ( int cpt = 0; cpt < this.alWagons.size(); cpt++)
         {
             Wagon j = this.alWagons.get(cpt);
@@ -45,11 +47,12 @@ public class Joueur implements Comparable<Joueur>
             if ( j.getCouleur() == couleur) 
             {
                 this.alWagons.remove(j);
+                alWagon.add(j);
                 nb--;
                 cpt--;
             }
 
-            if (nb == 0 ) return;
+            if (nb == 0 ) return alWagon;
         }
 
         for ( int cpt = 0; cpt < this.alWagons.size(); cpt++)
@@ -59,12 +62,15 @@ public class Joueur implements Comparable<Joueur>
             if ( j.getCouleur() == Color.LIGHT_GRAY.getRGB() )
             {
                 this.alWagons.remove(j);
+                alWagon.add(j);
                 nb--;
                 cpt--;
             }
 
-            if (nb == 0 ) return;
+            if (nb == 0 ) return alWagon;
         }
+
+        return null;
     }
 
 
