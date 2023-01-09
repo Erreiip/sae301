@@ -234,7 +234,12 @@ public class PanelMap extends JPanel
                                 {
                                     PanelMap.this.ctrl.setActionEnCours(true);
                                 
-                                    PanelMap.this.ctrl.ajouterRoute(r, 1);
+                                    //PanelMap.this.ctrl.ajouterRoute(r, 1);
+                                    
+                                    if ( r.getCouleur1() == Color.LIGHT_GRAY.getRGB() )
+                                    {
+                                        PanelMap.this.ctrl.genererInteractionCartes();
+                                    }
 
                                     PanelMap.this.ctrl.setActionEnCours(false);
                                 }

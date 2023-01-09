@@ -24,8 +24,10 @@ public class PanelInteraction extends JPanel implements ActionListener
     private ArrayList<JCheckBox> alCheckBox;
     private Objectif[] alObjectifs;
 
-    JPanel panelDernieresCartes;
+    JPanel   panelDernieresCartes;
     JLabel[] labelDernieresCartes;
+    JLabel   txtDernieresCartes1;
+    JLabel   txtDernieresCartes2;
     
     private ArrayList<Wagon> dernieresCartes;
     
@@ -37,17 +39,28 @@ public class PanelInteraction extends JPanel implements ActionListener
 
         this.panelDernieresCartes = new JPanel();
 
-        panelDernieresCartes.setLayout(new GridLayout(1,2, 10,0));
+        panelDernieresCartes.setLayout(null);
 
-        panelDernieresCartes.setBounds(75, 375, 210, 50);
+        panelDernieresCartes.setBounds(75, 300, 210, 100);
 
-        JLabel carte1 = new JLabel();
-        JLabel carte2 = new JLabel();
+        JLabel carte1   = new JLabel();
+        carte1.setBounds(0,50,100,50);
+
+        JLabel carte2   = new JLabel();
+        carte2.setBounds(110,50,100,50);
+
+        this.txtDernieresCartes1 = new JLabel("");
+        this.txtDernieresCartes1.setBounds(50,5,150,20);
+
+        this.txtDernieresCartes2 = new JLabel("");
+        this.txtDernieresCartes2.setBounds(25,25,160,20);
 
         this.labelDernieresCartes = new JLabel[]{carte1, carte2};
 
         panelDernieresCartes.add(carte1);
         panelDernieresCartes.add(carte2);
+        panelDernieresCartes.add(this.txtDernieresCartes1);
+        panelDernieresCartes.add(this.txtDernieresCartes2);
 
         this.add(panelDernieresCartes);
 
@@ -205,11 +218,16 @@ public class PanelInteraction extends JPanel implements ActionListener
     {
         this.add(panelDernieresCartes);
 
+        panelDernieresCartes.setBorder(BorderFactory.createLineBorder(Color.black));
+
         panelDernieresCartes.validate();
+
+        boolean vide = true;
 
         for (int i = 0; i < 2; i++) {
             if(this.dernieresCartes.size()-1 < i) labelDernieresCartes[i].setIcon(null);
-            else { 
+            else {
+                vide = false;
                 BufferedImage imgRectoWagon = null;
                 try {
                     imgRectoWagon = ImageIO.read(new File(dernieresCartes.get(i).getFileRecto()));
@@ -221,6 +239,18 @@ public class PanelInteraction extends JPanel implements ActionListener
                 labelDernieresCartes[i].setIcon(imgIcon);
             }
         }
+
+        if(vide){
+            panelDernieresCartes.setBorder(null);
+            this.txtDernieresCartes1.setText(null);
+            this.txtDernieresCartes2.setText(null);
+        }
+        else 
+        {
+            panelDernieresCartes.setBorder(BorderFactory.createLineBorder(Color.black));
+            this.txtDernieresCartes1.setText("cartes piochées");
+            this.txtDernieresCartes2.setText("par le joueur précédent");
+        }   
         this.dernieresCartes.clear();
         
     }

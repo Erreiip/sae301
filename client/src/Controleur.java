@@ -180,6 +180,11 @@ public class Controleur
         this.tourTermine();
     }
 
+    public void genererInteractionCartes()
+    {
+        
+    }
+
     public void afficher(String f)
     {
         JOptionPane.showMessageDialog(this.ihm, 

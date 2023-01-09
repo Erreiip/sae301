@@ -462,6 +462,7 @@ public class Metier
         
         Wagon[] tabWagonVisible = new Wagon[5];
         int nbJoker;
+        int nbTentatives = 0;
         do 
         {
             nbJoker = 0;
@@ -475,8 +476,13 @@ public class Metier
                 tabWagonVisible[cpt] = this.alWagons.get(cpt);
             }
 
-            if ( nbJoker >= 3 ) Collections.shuffle(this.alWagons);
-        }while(nbJoker >= 3);
+            if ( nbJoker >= 3 )
+            {
+                Collections.shuffle(this.alWagons);
+                nbTentatives++;
+            }
+
+        }while(nbJoker >= 3 && nbTentatives < 5);
     
         return tabWagonVisible;
     } 
