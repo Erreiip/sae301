@@ -145,6 +145,8 @@ public class Metier
         this.supprimerObjToDef(ajoutDefausse);
 
         Collections.shuffle(this.alObjectifs);
+
+        System.out.println(this.alObjectifs);
     }
     
     public boolean verifierObjectif(Objectif obj)
@@ -217,6 +219,7 @@ public class Metier
         alWAgon.add(w);
     
         this.joueurActif.ajouterWagon(w);
+        this.derniereCartePioche = w;
         this.nbCartePioche++;
     
         this.supprimerWagons(alWAgon);
@@ -245,7 +248,7 @@ public class Metier
     
     public void routePrise(Route route)
     {
-        route.setJoueur1(this.joueurActif);
+        //route.setJoueur1(this.joueurActif);
     }
 
     public boolean peutPrendreRoute(Route r, int nb)
@@ -317,22 +320,31 @@ public class Metier
         if ( this.alWagons.size() < 7 ) { rajouterDefausseW(); }        
         
         Wagon[] tabWagonVisible = new Wagon[5];
-        for ( int cpt = 0; cpt < tabWagonVisible.length; cpt++ )
+        int nbJoker;
+        do 
         {
-            tabWagonVisible[cpt] = this.alWagons.get(cpt);
-        }
+            nbJoker = 0;
+            for ( int cpt = 0; cpt < tabWagonVisible.length; cpt++ )
+            {
+                if ( this.alWagons.get(cpt).getCouleur() == Color.LIGHT_GRAY.getRGB() ) nbJoker++;
+
+                tabWagonVisible[cpt] = this.alWagons.get(cpt);
+            }
+        }while(nbJoker >= 3);
     
         return tabWagonVisible;
     } 
     
     public Objectif[] getPiocheVisibleObj() 
     { 
-        if ( this.alObjectifs.size() < 5 ) { rajouterDefausseO(); } 
+        if ( this.alObjectifs.size() < 4 ) { rajouterDefausseO(); } 
     
         Objectif[] tabObjectif = new Objectif[3];
         for ( int cpt = 0; cpt < tabObjectif.length; cpt++ )
         {
-            tabObjectif[cpt] =this.alObjectifs.get(cpt);
+            if ( cpt > this.alObjectifs.size() -1) continue;
+            
+            tabObjectif[cpt] = this.alObjectifs.get(cpt);
         }
     
         return tabObjectif;
@@ -351,6 +363,7 @@ public class Metier
         }
     
         this.alWagons = new ArrayList<Wagon>(this.alDefausseW);
+        this.alDefausseW= new ArrayList<Wagon>();
     }
     
     public void rajouterDefausseO()
@@ -361,6 +374,7 @@ public class Metier
         }
     
         this.alObjectifs = new ArrayList<Objectif>(this.alDefausseO);
+        this.alDefausseO = new ArrayList<Objectif>();
     }
     
     
@@ -511,7 +525,7 @@ public class Metier
         boolean bPartieFini = true;
         for ( Route r : alRoute)
         {
-            if ( r.estDouble() ) 
+            if ( r.estDouble() && this.ctrl.peutDessinerDouble()) 
             {
                 if ( !r.sontPrises() ) bPartieFini = false;
             }
