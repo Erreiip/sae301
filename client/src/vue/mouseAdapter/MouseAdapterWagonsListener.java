@@ -23,7 +23,7 @@ public class MouseAdapterWagonsListener extends MouseAdapter
     @Override
     public void mouseClicked(MouseEvent e) 
     {
-        if(ctrl.actionPossible() && (ctrl.secondWagon() || ! ctrl.getActionEnCours()) && this.ctrl.getTour() != 1)
+        if(ctrl.actionPossible() && (ctrl.secondWagon() || ! ctrl.getActionEnCours()))
         {
             Wagon[] wagons = ctrl.getPiocheVisible();
             int indexLabel = 0;
@@ -38,13 +38,14 @@ public class MouseAdapterWagonsListener extends MouseAdapter
             if(ctrl.ajouterWagonAJoueur(wagonCorrespondant))
             {
                 ctrl.setActionEnCours(true);
+                
+                ctrl.genererInteractionWagon(wagonCorrespondant);
 
                 if(!ctrl.secondWagon())
                 {
                     ctrl.setActionEnCours(false);
                 }
                 
-                ctrl.genererInteractionWagon(wagonCorrespondant);
                 ctrl.majPioche();
             }
         }

@@ -460,6 +460,8 @@ public class Metier
             {
                 if ( this.alWagons.get(cpt).getCouleur() == Color.LIGHT_GRAY.getRGB() ) nbJoker++;
 
+                if ( cpt > this.alWagons.size() -1 ) continue;
+
                 tabWagonVisible[cpt] = this.alWagons.get(cpt);
             }
 
@@ -495,9 +497,19 @@ public class Metier
         {
             this.alDefausseW.add(w);
         }
-    
+        
+        Wagon[] w = this.getPiocheVisible();
+
         this.alWagons = new ArrayList<Wagon>(this.alDefausseW);
         this.alDefausseW= new ArrayList<Wagon>();
+
+        Collections.shuffle(this.alWagons);
+
+        for ( int cpt = 0; cpt < w.length; cpt++)
+        {
+            this.alWagons.remove(w[cpt]);
+            this.alWagons.add(cpt, w[cpt]);
+        }
     }
     
     public void rajouterDefausseO()

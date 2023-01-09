@@ -184,7 +184,9 @@ public class PanelInteraction extends JPanel implements ActionListener
 
         if ( this.ctrl.getTour() == 1)
         {
+
             this.genererInteractionObj();
+            this.ctrl.setActionEnCours(true);
         }
     }
 }
