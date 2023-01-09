@@ -1,5 +1,6 @@
 package client.src.metier.common;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class Joueur
@@ -34,6 +35,38 @@ public class Joueur
         this.nbMarqueurs -= nbMarqueurs;  
         return true;
     }
+
+    public void enleverJetons(int couleur, int nb)
+    {
+        for ( int cpt = 0; cpt < this.alWagons.size(); cpt++)
+        {
+            Wagon j = this.alWagons.get(cpt);
+
+            if ( j.getCouleur() == couleur) 
+            {
+                this.alWagons.remove(j);
+                nb--;
+                cpt--;
+            }
+
+            if (nb == 0 ) return;
+        }
+
+        for ( int cpt = 0; cpt < this.alWagons.size(); cpt++)
+        {
+            Wagon j = this.alWagons.get(cpt);
+
+            if ( j.getCouleur() == Color.LIGHT_GRAY.getRGB() )
+            {
+                this.alWagons.remove(j);
+                nb--;
+                cpt--;
+            }
+
+            if (nb == 0 ) return;
+        }
+    }
+
 
 
 

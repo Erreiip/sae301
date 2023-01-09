@@ -250,18 +250,55 @@ public class Metier
         //route.setJoueur1(this.joueurActif);
     }
 
+    public  HashMap <Color, Integer> getJetonsCouleurJoueur()
+    {
+        HashMap <Color, Integer> hmCount         = new HashMap<Color, Integer>();
+
+        for( Wagon w : this.joueurActif.getMain())
+        {
+            Color  c = new Color(w.getCouleur());
+
+            if (hmCount.containsKey(c)){
+                hmCount.put(c, hmCount.get(c) + 1);
+            }else{
+                hmCount.put(c, 1);
+            }
+        }
+
+        return hmCount;
+    }
+
     public boolean peutPrendreRoute(Route r, int nb)
     {
         if ( r.sontPrises() ) return false;
 
+        HashMap <Color, Integer> hmCount = this.getJetonsCouleurJoueur();
+
+        if ( hmCount.containsKey(Color.LIGHT_GRAY) )
+        {
+            int nbJetons = hmCount.get(Color.LIGHT_GRAY);
+            for ( int cpt2 = 0; cpt2 < nbJetons; cpt2++)
+            {
+                for ( Color c : hmCount.keySet())
+                {
+                    hmCount.replace(c, hmCount.get(c) + 1);
+                }
+            }
+            hmCount.remove(Color.LIGHT_GRAY);
+        }
+
         if ( nb == 1)
         {
             if ( r.estPrise1() ) return false;
+            if ( !hmCount.containsKey(new Color(r.getCouleur1()))) return false;
+            if ( hmCount.get(new Color(r.getCouleur1())) < r.getCout() ) return false;
             return this.joueurActif.getNbMarqueurs() >=  r.getCout();
         }
         else 
         {
             if ( r.estPrise2() ) return false;
+            if ( !hmCount.containsKey(new Color(r.getCouleur2()))) return false;
+            if ( hmCount.get(new Color(r.getCouleur2())) < r.getCout() ) return false;
             return this.joueurActif.getNbMarqueurs() >=  r.getCout();
         }
         
@@ -273,8 +310,18 @@ public class Metier
         
         if ( this.joueurActif.enleverMarqueurs(r.getCout()) ) 
         {
-            if (nb == 1) r.setJoueur1(this.joueurActif);
-            else         r.setJoueur2(this.joueurActif);
+
+            if (nb == 1) 
+            {
+                r.setJoueur1(this.joueurActif);
+                this.joueurActif.enleverJetons(r.getCouleur1(), r.getCout());
+            }
+            else        
+            {
+                r.setJoueur2(this.joueurActif);
+                this.joueurActif.enleverJetons(r.getCouleur2(), r.getCout());
+
+            }
             
             this.joueurActif.ajouterPV(Route.getPoints(r.getCout()));
 
