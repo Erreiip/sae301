@@ -65,11 +65,11 @@ public class PanelCarte extends JPanel implements ListSelectionListener, ChangeL
 
         spTabObjectifs.add(this.tableObjectifs);
         spTabObjectifs.setViewportView(this.tableObjectifs);
-        spTabObjectifs.setPreferredSize(new Dimension(330, 380));
+        spTabObjectifs.setPreferredSize(new Dimension(330, 350));
 
         spTabWagons.add(this.lstWagon);
         spTabWagons.setViewportView(this.lstWagon);
-        spTabWagons.setPreferredSize(new Dimension(330, 380));
+        spTabWagons.setPreferredSize(new Dimension(330, 350));
 
         this.tpCartes.addTab("Wagons", this.panelWagons);
         this.tpCartes.addTab("Objectifs", this.panelObjectifs);
