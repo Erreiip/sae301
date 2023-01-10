@@ -43,14 +43,21 @@ public class PanelResultJoueur extends JPanel implements ActionListener
     
         Font font = new Font("Arial", Font.BOLD, 20);
 
-        JLabel lblRank = new JLabel("" + rank, SwingConstants.CENTER);                      // Classement
-        lblRank.setFont(new Font("Arial", Font.BOLD, (30-(rank*2))));
+        JLabel lblRank = new JLabel("" + rank, SwingConstants.CENTER);                     // Classement
+
+        if (rank <= 6)
+            lblRank.setFont(new Font("Arial", Font.BOLD, (30-(rank*2))));
+        else 
+            lblRank.setFont(new Font("Arial", Font.BOLD, 18));
+
         this.add(lblRank);
+
 
         JLabel lblNom = new JLabel("Joueur " + this.joueur.getId(), SwingConstants.CENTER); // Joueur X
         lblNom.setFont(font);
         lblNom.setForeground(new Color(this.joueur.getCouleur()));
         this.add(lblNom);
+
 
         JLabel lblRlpl = new JLabel("", SwingConstants.CENTER);                             // Route la plus longue
         if (this.ctrl.getJoueursCheminPlusLong().contains(this.joueur))

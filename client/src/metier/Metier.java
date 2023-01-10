@@ -764,7 +764,7 @@ public class Metier
 
         if ( this.dernierIndex == null)
         {
-                if ( this.regles.getNbWagonsFinParties() >= this.joueurActif.getNbMarqueurs() )
+                if ( /*this.regles.getNbWagonsFinParties()*/48 >= this.joueurActif.getNbMarqueurs() )
                 {
                     this.dernierIndex  = this.index;
                     this.ctrl.afficher("Fin dans 1 tour");
