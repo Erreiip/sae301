@@ -139,6 +139,9 @@ public class Controleur
         return this.metier.getJoueursFin();
     }
 
+    public ArrayList<Joueur> getJoueursCheminPlusLong() { return this.metier.getJoueursCheminPlusLong(); }
+
+
     public Regles getRegles()
     {
         return this.metier.getRegles();
