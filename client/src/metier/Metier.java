@@ -496,9 +496,7 @@ public class Metier
     
     public Wagon[] getPiocheVisible  () 
     { 
-        if ( this.alWagons.size() < 7 ) { rajouterDefausseW(); }        
-
-        System.out.println(this.alWagons);
+        if ( this.alWagons.size() < 7 ) { rajouterDefausseW(); }
         
         Wagon[] tabWagonVisible = new Wagon[5];
         int nbJoker;
