@@ -194,7 +194,7 @@ public class PanelInteraction extends JPanel implements ActionListener
         alCouleurs = new ArrayList<Color>();
 
         for ( Color c : hmCount.keySet() )
-        {
+        {            
             if ( hmCount.get(c) >= r.getCout() )
             {
                 alCouleurs.add(c);

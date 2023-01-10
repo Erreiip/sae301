@@ -199,7 +199,25 @@ public class Metier
     {
         ArrayList<Wagon> alWagon = this.joueurActif.getMain();
 
+        for ( Wagon w : this.alWagons)
+        {
+            if (w.getCouleur() == c.getRGB()) return w;
+        }
+
         for ( Wagon w : alWagon)
+        {
+            if (w.getCouleur() == c.getRGB()) return w;
+        }
+
+        for ( Joueur j : this.alJoueur )
+        {
+            for ( Wagon w : j.getMain())
+            {
+                if (w.getCouleur() == c.getRGB()) return w;
+            }
+        }
+
+        for ( Wagon w : this.alDefausseW)
         {
             if (w.getCouleur() == c.getRGB()) return w;
         }
@@ -339,6 +357,7 @@ public class Metier
                         hmCount.put(c, 1);
                 }
             }
+
             hmCount.remove(Color.LIGHT_GRAY);
         }
 
