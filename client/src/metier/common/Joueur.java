@@ -112,10 +112,10 @@ public class Joueur implements Comparable<Joueur>
             for ( Objectif obj : this.alObjectifs)
                 if (obj.isPrit()) nbObjectifs++;
 
-            for ( Objectif obj : autreJoueur.getObjectifs())
+            for ( Objectif obj : autreJoueur.alObjectifs )
                 if (obj.isPrit()) nbObjectifsAutreJoueur++;
 
-            return nbObjectifs - nbObjectifsAutreJoueur;
+            return nbObjectifsAutreJoueur - nbObjectifs;
         }
 
         return autreJoueur.nbPv - this.nbPv;
