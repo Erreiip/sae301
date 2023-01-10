@@ -109,9 +109,9 @@ public class Controleur
 
     public int     getTour() { return this.metier.getTour(); }
 
-    public boolean verifierObjectif(Objectif o)
+    public boolean verifierObjectif(Objectif o, Joueur j)
     {
-        return this.metier.verifierObjectif(o);
+        return this.metier.verifierObjectif(o, j);
     }
     
     public void piocheObjectif( ArrayList<Objectif> ajoutJoueur, ArrayList<Objectif> ajoutDefausse)

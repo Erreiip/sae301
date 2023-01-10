@@ -161,19 +161,19 @@ public class Metier
         
     }
     
-    public boolean verifierObjectif(Objectif obj)
+    public boolean verifierObjectif(Objectif obj, Joueur j)
     {
         Ville v1 = obj.getV1();
         Ville v2 = obj.getV2();
         ArrayList<Ville> alVillesVisitees = new ArrayList<Ville>();
     
-        boolean b = rechercheObjectif(v1, v2, alVillesVisitees);
+        boolean b = rechercheObjectif(v1, v2, alVillesVisitees, j);
     
         obj.setPrit(b); 
         return b;
     }
     
-    public boolean rechercheObjectif(Ville v, Ville vRecherchee, ArrayList<Ville> alVillesVisitees)
+    public boolean rechercheObjectif(Ville v, Ville vRecherchee, ArrayList<Ville> alVillesVisitees, Joueur j)
     {
         boolean retour = false;
         alVillesVisitees.add(v);
@@ -181,10 +181,10 @@ public class Metier
 
         for ( Route r : v.getAlRoutes())
         {
-            if ( r.getVille1() == v && r.getJoueur1() == getJoueur() && !alVillesVisitees.contains(r.getVille2())) retour = rechercheObjectif(r.getVille2(), vRecherchee, alVillesVisitees);
-            if ( r.getVille2() == v && r.getJoueur1() == getJoueur() && !alVillesVisitees.contains(r.getVille1())) retour = rechercheObjectif(r.getVille1(), vRecherchee, alVillesVisitees);
-            if ( r.getVille1() == v && r.getJoueur2() == getJoueur() && !alVillesVisitees.contains(r.getVille2())) retour = rechercheObjectif(r.getVille2(), vRecherchee, alVillesVisitees);
-            if ( r.getVille2() == v && r.getJoueur2() == getJoueur() && !alVillesVisitees.contains(r.getVille1())) retour = rechercheObjectif(r.getVille1(), vRecherchee, alVillesVisitees);
+            if ( r.getVille1() == v && r.getJoueur1() == j && !alVillesVisitees.contains(r.getVille2())) retour = rechercheObjectif(r.getVille2(), vRecherchee, alVillesVisitees, j);
+            if ( r.getVille2() == v && r.getJoueur1() == j && !alVillesVisitees.contains(r.getVille1())) retour = rechercheObjectif(r.getVille1(), vRecherchee, alVillesVisitees, j);
+            if ( r.getVille1() == v && r.getJoueur2() == j && !alVillesVisitees.contains(r.getVille2())) retour = rechercheObjectif(r.getVille2(), vRecherchee, alVillesVisitees, j);
+            if ( r.getVille2() == v && r.getJoueur2() == j && !alVillesVisitees.contains(r.getVille1())) retour = rechercheObjectif(r.getVille1(), vRecherchee, alVillesVisitees, j);
             
             if(retour) break;
         }
@@ -802,12 +802,10 @@ public class Metier
         {
             for (Objectif o : j.getObjectifs())
             {
-                System.out.println(o);
                 if ( o.isPrit() ) j.ajouterPV(o.getNbPoints());
                 else              
                 {
-                    this.verifierObjectif(o);
-                    System.out.println(o.isPrit());
+                    this.verifierObjectif(o, j);
 
                     if ( !o.isPrit() ) j.retirerPv(o.getNbPoints());
                 }
@@ -846,9 +844,6 @@ public class Metier
                 }
             }
         }
-
-        for( Joueur joueur : joueurCheminPlusLong)
-            System.out.println(joueur.getId() + " : " + max);
         
         return joueurCheminPlusLong;
     }
