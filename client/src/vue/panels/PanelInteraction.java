@@ -221,6 +221,8 @@ public class PanelInteraction extends JPanel implements ActionListener
             
             Wagon w = ctrl.getWagonCouleur(c);
 
+            if ( w == null ) continue;
+
             BufferedImage imgRectoWagon = null;
             try {
                 imgRectoWagon = ImageIO.read(new File(w.getFileRecto()));
