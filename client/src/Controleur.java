@@ -94,6 +94,8 @@ public class Controleur
 
     public int     getTour() { return this.metier.getTour(); }
 
+    public void modeDebut() { this.metier.modeDebug(); }
+
     public boolean verifierObjectif(Objectif o, Joueur j)
     {
         return this.metier.verifierObjectif(o, j);

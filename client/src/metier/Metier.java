@@ -822,6 +822,17 @@ public class Metier
         return this.alJoueur;
     }
 
+    public void modeDebug() 
+    { 
+        for ( Joueur j : this.alJoueur )
+        {
+            for ( Wagon w : this.alWagons )
+            {
+                j.ajouterWagon(w);
+            }
+        } 
+    }
+
     public ArrayList<Joueur> getJoueursCheminPlusLong() { return this.cheminLePlusLongPossible(); }
 
     private ArrayList<Joueur> cheminLePlusLongPossible()
