@@ -749,8 +749,7 @@ public class Metier
             {
                 if ( r.estDouble() )
                 {
-                    if ( r.estPrise1() && !r.estPrise2() ) bPartieFini = false;
-                    if ( !r.estPrise1() && r.estPrise2() ) bPartieFini = false;
+                    if ( !r.estPrise1() && !r.estPrise2() ) bPartieFini = false;
                 }else
                 {
                     if ( !r.estPrise1() ) bPartieFini = false;
