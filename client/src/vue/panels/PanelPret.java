@@ -19,6 +19,7 @@ public class PanelPret extends JPanel implements ActionListener
     private JButton btnValider;
 
     private JCheckBox cbModeDebug;
+    private JCheckBox cbColorierObjectifs;
 
     private BufferedImage fond;
 
@@ -45,7 +46,8 @@ public class PanelPret extends JPanel implements ActionListener
 
         this.spinner = new JSpinner(new SpinnerNumberModel(regles.getNbJoueursMini(), regles.getNbJoueursMini(), regles.getNbJoueursMaxi(), 1));
         this.btnValider = new JButton("Valider");
-        this.cbModeDebug = new JCheckBox();
+        this.cbModeDebug = new JCheckBox("Mode debug : ");
+        this.cbColorierObjectifs = new JCheckBox("Colorier les cartes Objectifs : ");
 
         JPanel pnlInfos = new JPanel(new GridLayout(5, 2));
         JPanel pnlSaisis = new JPanel();
@@ -69,6 +71,7 @@ public class PanelPret extends JPanel implements ActionListener
         pnlSaisis.add(this.spinner);
         pnlSaisis.add(this.btnValider);
         pnlSaisis.add(this.cbModeDebug);
+        pnlSaisis.add(this.cbColorierObjectifs);
 
         pnlInfos.setOpaque(false);
         pnlSaisis.setOpaque(false);
@@ -98,6 +101,9 @@ public class PanelPret extends JPanel implements ActionListener
 
             if (this.cbModeDebug.isSelected())
                 this.ctrl.modeDebug();
+
+            if (this.cbColorierObjectifs.isSelected())
+                // methode ctrl
 
             this.ctrl.setIhm(new FrameNomsCouleursJoueurs(this.ctrl));
         }
