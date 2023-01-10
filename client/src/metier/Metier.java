@@ -802,10 +802,13 @@ public class Metier
         {
             for (Objectif o : j.getObjectifs())
             {
+                System.out.println(o);
                 if ( o.isPrit() ) j.ajouterPV(o.getNbPoints());
                 else              
                 {
                     this.verifierObjectif(o);
+                    System.out.println(o.isPrit());
+
                     if ( !o.isPrit() ) j.retirerPv(o.getNbPoints());
                 }
             }
