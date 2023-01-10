@@ -21,9 +21,6 @@ import client.src.metier.common.Route;
 import client.src.metier.common.Ville;
 import client.src.metier.common.Wagon;
 import client.src.vue.*;
-import common.ActionDef;
-import common.ActionRoute;
-import common.ActionSuppr;
 
 public class Controleur 
 {
@@ -45,16 +42,6 @@ public class Controleur
     public void lireXml(File f, boolean creeServeurClient)
     {
         this.metier.lectureXML(f, creeServeurClient);
-    }
-
-    public void creerClient()
-    {
-        this.metier.creerClient();
-    }
-
-    public void supprimerClient()
-    {
-        this.metier.supprimerClient();
     }
 
     public BufferedImage getFond    () { return this.metier.getFond(); }
@@ -153,46 +140,6 @@ public class Controleur
     }
 
     public Wagon getWagonCouleur ( Color c) { return this.metier.getWagonCouleur(c); }
-    
-
-    public void setAction(ActionDef d)
-    {
-        if (actionPossible()) {
-            this.tourTermine();
-            return;
-        }
-
-        this.supprimerWagonsToDef(d.getAlWAgonsDef());
-        this.supprimerObjToDef(d.getAlObjectifsDef());
-
-        this.tourTermine();
-    }
-    
-    public void setAction(ActionSuppr d)
-    {
-        if (actionPossible()) {
-            this.tourTermine();
-            return;
-        }
-
-        this.supprimerWagons(d.getAlWAgonsSuppr());
-        this.supprimerObj(d.getAlObjectifsSuppr());
-
-        this.tourTermine();
-    }
-    
-    public void setAction(ActionRoute d)
-    {   
-        if (actionPossible())
-        {
-            this.tourTermine();
-            return;
-        } 
-        
-        this.metier.routePrise(d.getRoute());
-
-        this.tourTermine();
-    }
 
 
     public void afficher(String f)

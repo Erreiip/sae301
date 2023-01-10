@@ -33,10 +33,7 @@ import client.src.metier.common.Regles;
 import client.src.metier.common.Route;
 import client.src.metier.common.Ville;
 import client.src.metier.common.Wagon;
-import client.src.metier.reseau.Client;
 import client.src.vue.FrameFin;
-import common.*;
-import server.src.Serveur;
 
 public class Metier 
 {
@@ -70,14 +67,6 @@ public class Metier
     private int                   tour;
 
     private ArrayList<Color>      alColor;
-    /*
-    private ActionSuppr          actionSuppr;
-    private ActionDef            actionDef;
-    private ActionRoute          actionRoute;
-    */
-    
-    
-    private Client               client;
     
     public final static String IMG_FOND  = "fond";
     public final static String IMG_JOKER = "joker";
@@ -117,7 +106,6 @@ public class Metier
     
         this.fond                = null;
         this.regles              = null;
-        this.client              = null;
     }
     
     
@@ -700,9 +688,6 @@ public class Metier
         
     public Joueur getJoueurActif() { return this.joueurActif; }
     public Joueur getJoueur() { return this.joueurActif; }
-    
-    public void creerClient           () { this.client = new Client(this.ctrl); }
-    public void supprimerClient       () { this.client = null; }
     
     public boolean getActionEnCours()               { return this.actionEnCours; }
     
