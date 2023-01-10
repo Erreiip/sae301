@@ -606,9 +606,12 @@ public class Metier
                 this.alWagons.remove(w);
                 this.alWagons.remove(w2);
                 this.alWagons.add(index, w2);
+            }else
+            {
+            this.alWagons.remove(w);
+
             }
 
-            this.alWagons.remove(w);
         }
     }
     
