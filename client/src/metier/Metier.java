@@ -1204,8 +1204,8 @@ public class Metier
         if ( v2X > widthRecto - 230 ) { v2X = widthRecto - 230; }
         if ( v1X > widthRecto - 230 ) { v1X = widthRecto - 230; }
 
-        if ( v2Y < 50 ) { v2Y = 50; }
-        if ( v1Y < 50 ) { v1Y = 50; }
+        if ( v2Y < 80 ) { v2Y = 80; }
+        if ( v1Y < 80 ) { v1Y = 80; }
         
         double taille = v1.getWidth() / (propotionsWidth / 2);
 
