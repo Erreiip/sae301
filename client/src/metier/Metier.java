@@ -599,6 +599,7 @@ public class Metier
     {
         for ( Wagon w : alWagons )
         {
+            /*
             if ( this.alWagons.size() > 5)  
             {   
                 index = this.alWagons.indexOf(w);
@@ -608,9 +609,11 @@ public class Metier
                 this.alWagons.add(index, w2);
             }else
             {
-            this.alWagons.remove(w);
 
             }
+            */
+            this.alWagons.remove(w);
+
 
         }
     }
