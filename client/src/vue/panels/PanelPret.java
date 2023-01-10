@@ -23,7 +23,7 @@ public class PanelPret extends JPanel implements ActionListener
     {
         this.ctrl = ctrl;
 
-        this.setLayout(null);
+        this.setLayout(new GridLayout(2,1));
         this.setSize(new Dimension(800, 500));
 
         BufferedImage input = this.ctrl.getFond();
@@ -68,8 +68,6 @@ public class PanelPret extends JPanel implements ActionListener
         pnlInfos.setOpaque(false);
         pnlSaisis.setOpaque(false);
 
-        pnlInfos.setBounds(200,0, 400, 200);
-        pnlSaisis.setBounds(200,200,400,200);
         this.add(pnlInfos);
         this.add(pnlSaisis);
 

@@ -41,7 +41,10 @@ public class PanelResultJoueur extends JPanel implements ActionListener
     
 
         this.add(new JLabel("" + rank        , SwingConstants.CENTER));                  // Classement
-        this.add(new JLabel("Joueur " + this.joueur.getId()   , SwingConstants.CENTER)); // Joueur X
+        JLabel lblNom = new JLabel("Joueur " + this.joueur.getId(), SwingConstants.CENTER);  // Joueur X
+        lblNom.setFont(new Font("Arial", Font.BOLD, 20));
+        lblNom.setForeground(new Color(this.joueur.getCouleur()));
+        this.add(lblNom);
         this.add(new JLabel("" + this.joueur.getNbPv() , SwingConstants.CENTER));        // Point de victoire
 
         JButton btnGauche = new JButton("<");
@@ -53,9 +56,9 @@ public class PanelResultJoueur extends JPanel implements ActionListener
         this.lblImage = new JLabel(icon);
 
         if (this.joueur.getObjectifs().get(this.indexObjectif).isPrit())
-            this.panelObjectifs.setBackground(new Color(0,215,0));
+            this.panelObjectifs.setBackground(new Color(0,190,0));
         else
-            this.panelObjectifs.setBackground(new Color(215,0,0));
+            this.panelObjectifs.setBackground(new Color(190,0,0));
 
         JButton btnDroite = new JButton(">");
 
