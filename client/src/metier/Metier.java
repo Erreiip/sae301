@@ -224,7 +224,7 @@ public class Metier
         if (derniereCartePioche == null) {
             this.joueurActif.ajouterWagon(w);
            
-            this.supprimerWagons(alWAgon);
+            this.supprimerWagons(alWAgon, true);
             //this.actionSuppr.getAlWAgonsSuppr().add(w);
     
             this.derniereCartePioche = w;
@@ -238,7 +238,7 @@ public class Metier
         if (derniereCartePioche != null && w.getCouleur() != Color.LIGHT_GRAY.getRGB()) {
             this.joueurActif.ajouterWagon(w);
     
-            this.supprimerWagons(alWAgon);
+            this.supprimerWagons(alWAgon, true);
             //this.actionSuppr.getAlWAgonsSuppr().add(w);
     
             derniereCartePioche = w;
@@ -258,7 +258,7 @@ public class Metier
         this.derniereCartePioche = w;
         this.nbCartePioche++;
     
-        this.supprimerWagons(alWAgon);
+        this.supprimerWagons(alWAgon, false);
     }
     
     public Wagon getWagonVerso        ()        
@@ -595,11 +595,11 @@ public class Metier
         }
     }
     
-    public void supprimerWagons(ArrayList<Wagon> alWagons) 
+    public void supprimerWagons(ArrayList<Wagon> alWagons, boolean bRecto) 
     {
         for ( Wagon w : alWagons )
         {
-            if ( this.alWagons.size() > 5)  
+            if ( this.alWagons.size() > 5 && bRecto)  
             {   
                 int index = this.alWagons.indexOf(w);
                 Wagon w2 = this.alWagons.get(5);
@@ -747,7 +747,15 @@ public class Metier
             }
             else
             {
-                if ( !r.estPrise1() || !r.estPrise2() ) bPartieFini = false;
+                if ( r.estDouble() )
+                {
+                    if ( !r.estPrise1() ) bPartieFini = false;
+                    if ( !r.estPrise2() ) bPartieFini = false;
+
+                }else
+                {
+
+                }
             } 
         }
 

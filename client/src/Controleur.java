@@ -48,8 +48,6 @@ public class Controleur
     //public File getImgJoker() { return this.metier.getImgJoker(); }
 
     public Wagon[] getPiocheVisible                       () { return this.metier.getPiocheVisible();  }
-    public void supprimerWagonsToDef(ArrayList<Wagon> alObj) { this.metier.supprimerWagonsToDef(alObj);}
-    public void supprimerWagons     (ArrayList<Wagon> alObj) { this.metier.supprimerWagons     (alObj);}
 
     public Objectif[] getPiocheVisibleObj                 () { return this.metier.getPiocheVisibleObj();   }
     public void supprimerObjToDef(ArrayList<Objectif> alObj) { this.metier.supprimerObjToDef(alObj);       }
