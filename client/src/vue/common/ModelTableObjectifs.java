@@ -5,7 +5,6 @@ import client.src.metier.common.*;
 
 import javax.swing.table.AbstractTableModel;
 
-import java.awt.Color;
 import java.util.ArrayList;
 
 public class ModelTableObjectifs extends AbstractTableModel

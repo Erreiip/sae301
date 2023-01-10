@@ -1,6 +1,5 @@
 package client.src.metier.common;
 
-import java.util.ArrayList;
 
 public class Regles 
 {

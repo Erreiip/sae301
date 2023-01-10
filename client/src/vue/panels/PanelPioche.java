@@ -11,8 +11,6 @@ import javax.swing.border.TitledBorder;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 import javax.imageio.ImageIO;
 

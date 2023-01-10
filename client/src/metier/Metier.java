@@ -14,7 +14,6 @@ import java.awt.BasicStroke;
 
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 
 import java.awt.geom.Ellipse2D;
 import java.awt.Graphics;
@@ -140,7 +139,6 @@ public class Metier
         {
             this.joueurActif.getObjectifs().add(o);
             this.alObjectifs.remove(o);
-            //this.actionSuppr.getAlObjectifsSuppr().add(o);
         }
     
         this.supprimerObjToDef(ajoutDefausse);
@@ -225,7 +223,6 @@ public class Metier
             this.joueurActif.ajouterWagon(w);
            
             this.supprimerWagons(alWAgon, true);
-            //this.actionSuppr.getAlWAgonsSuppr().add(w);
     
             this.derniereCartePioche = w;
     
@@ -239,7 +236,6 @@ public class Metier
             this.joueurActif.ajouterWagon(w);
     
             this.supprimerWagons(alWAgon, true);
-            //this.actionSuppr.getAlWAgonsSuppr().add(w);
     
             derniereCartePioche = w;
             this.nbCartePioche++;
@@ -280,11 +276,6 @@ public class Metier
     //--------------//
     //   ROUTE      //
     //--------------//
-    
-    public void routePrise(Route route)
-    {
-        //route.setJoueur1(this.joueurActif);
-    }
 
     public int chercherPlusGrand()
     {
@@ -653,19 +644,6 @@ public class Metier
         return alRet;
     }
 
-    public void setJoueurActif(Joueur j) 
-    {
-        //this.joueurActif = j;    
-        //this.tourTermine();
-    }
-    
-    public void setJoueur(Joueur j) 
-    {
-        /*
-        this.joueur = j;
-        */
-    }
-
     public void setNbJoueurs(int nbJoueurs)
     {
         this.alJoueur = new ArrayList<Joueur>();
@@ -694,8 +672,6 @@ public class Metier
 
     public ArrayList<Joueur> getAlJoueurs() { return this.alJoueur; }
         
-    public boolean actionPossible() { return true;/*this.joueur.getId() == this.joueurActif.getId();*/ }
-        
     public Joueur getJoueurActif() { return this.joueurActif; }
     public Joueur getJoueur() { return this.joueurActif; }
     
@@ -703,20 +679,6 @@ public class Metier
     
     public void setActionEnCours(boolean action) 
     {
-        /*
-        if (action == false)
-        {
-        this.client.sendTCP(this.actionDef);
-        this.client.sendTCP(this.actionSuppr);
-        this.client.sendTCP(this.actionRoute);
-        }
-        
-        this.actionEnCours = action;
-        this.actionRoute = new ActionRoute(1);
-        this.actionSuppr = new ActionSuppr("");
-        this.actionDef = new ActionDef("");
-        */
-
         if (action == false) {
             this.tourTermine();
         }

@@ -19,7 +19,7 @@ public class MouseAdapterVersoObjectif extends MouseAdapter
     public void mouseClicked(MouseEvent e) 
     {
 
-        if(!ctrl.getActionEnCours() && ctrl.actionPossible() && this.ctrl.getTour() != 1 )
+        if(!ctrl.getActionEnCours() && this.ctrl.getTour() != 1 )
         {
             boolean bBon = false;
             for ( Objectif o : this.ctrl.getPiocheVisibleObj())

@@ -45,7 +45,6 @@ public class Controleur
     }
 
     public BufferedImage getFond    () { return this.metier.getFond(); }
-    //public File getImgJoker() { return this.metier.getImgJoker(); }
 
     public Wagon[] getPiocheVisible                       () { return this.metier.getPiocheVisible();  }
 
@@ -60,9 +59,6 @@ public class Controleur
 
     public Joueur getJoueur() { return this.metier.getJoueur(); }
 
-    public void setJoueurActif(Joueur j) { this.metier.setJoueurActif(j); }
-    public void setJoueur    (Joueur j) { this.metier.setJoueur(j); }
-
     public  HashMap <Color, Integer> getJetonsCouleurJoueur() { return this.metier.getJetonsCouleurJoueur(); }
     
 
@@ -71,10 +67,6 @@ public class Controleur
 
     public boolean peutPrendreRoute(Route r, int nb)  { return this.metier.peutPrendreRoute(r, nb);}
     public boolean peutDessinerDouble()  { return this.metier.peutDessinerDouble();}
-
-
-    public boolean actionPossible() { return this.metier.actionPossible(); }
-
 
     public void colorier( Ville v1, Ville v2) { ((FramePrincipale)this.ihm).colorier(v1,v2); }
     public void colorier()                    { ((FramePrincipale)this.ihm).colorier(); }

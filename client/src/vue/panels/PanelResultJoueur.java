@@ -1,7 +1,6 @@
 package client.src.vue.panels;
 
 import javax.swing.*;
-import javax.swing.text.StyledEditorKit.FontSizeAction;
 
 import java.awt.*;
 import java.awt.event.*;

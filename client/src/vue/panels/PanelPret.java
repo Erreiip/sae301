@@ -3,7 +3,6 @@ package client.src.vue.panels;
 import client.src.Controleur;
 import client.src.metier.common.Regles;
 import client.src.vue.FrameNomsCouleursJoueurs;
-import client.src.vue.FramePrincipale;
 
 import javax.swing.*;
 
@@ -81,8 +80,6 @@ public class PanelPret extends JPanel implements ActionListener
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        
-        Graphics2D g2d = (Graphics2D) g;
 
         g.drawImage(this.fond, 0, 0, this.fond.getWidth(), this.fond.getHeight(), null);
     }

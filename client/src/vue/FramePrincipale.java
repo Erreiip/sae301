@@ -26,10 +26,10 @@ public class FramePrincipale extends JFrame
         this.setSize(1400, 800);
         this.setLayout(new BorderLayout());
 
-        this.panelJoueurs           = new PanelJoueurs(ctrl);
-        this.panelPioche            = new PanelPioche(ctrl);
-        this.panelMap               = new PanelMap(ctrl);
-        this.panelCartesInteraction = new PanelCartesInteraction(ctrl);
+        this.panelJoueurs           = new PanelJoueurs(this.ctrl);
+        this.panelPioche            = new PanelPioche(this.ctrl);
+        this.panelMap               = new PanelMap(this.ctrl);
+        this.panelCartesInteraction = new PanelCartesInteraction(this.ctrl);
 
         JScrollPane jspJoueurs = new JScrollPane(this.panelJoueurs);
         jspJoueurs.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);

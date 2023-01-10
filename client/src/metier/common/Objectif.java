@@ -1,7 +1,5 @@
 package client.src.metier.common;
 
-import client.src.Controleur;
-
 public class Objectif
 {
     private Ville v1;

@@ -3,18 +3,12 @@ package client.src.vue.panels;
 import java.awt.*;
 import javax.swing.*;
 
-import client.src.Controleur;
-
 public class PanelCouleur extends JPanel
 {
-    private Controleur ctrl;
-    
     private Integer couleur;
 
-    public PanelCouleur(Controleur ctrl, Integer couleur)
+    public PanelCouleur(Integer couleur)
     {
-        this.ctrl = ctrl;
-
         this.couleur = couleur;
 
         this.setLayout(null);
