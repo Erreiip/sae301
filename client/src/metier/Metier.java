@@ -370,6 +370,11 @@ public class Metier
     public boolean peutPrendreRoute(Route r, int nb)
     {
         if ( r.sontPrises() ) return false;
+
+        if ( !this.peutDessinerDouble() )
+        {
+            if ( r.estPrise1() || r.estPrise2() ) return false;
+        }
         
         HashMap <Color, Integer> hmCount = this.getJetonsCouleurJoueur();
 
@@ -1249,7 +1254,6 @@ public class Metier
 
 
         int widthRecto  = img.getWidth();
-        int heightRecto = img.getHeight();
 
         double propotionsWidth  = (widthRecto  + 0d) / 100;
 
@@ -1261,7 +1265,7 @@ public class Metier
         g.setColor(new Color(w.getCouleur()));
         g.fill(pastille);
 
-        g.setStroke(new BasicStroke(2));
+        g.setStroke(new BasicStroke((int) propotionsWidth));
         g.setColor(Color.BLACK);
         g.draw(pastille);
 

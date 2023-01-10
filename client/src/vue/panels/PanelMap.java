@@ -118,7 +118,7 @@ public class PanelMap extends JPanel
 
                 this.hmRoutesShapes.get(r).add(fig3);
 
-                if ( r.estDouble() && this.ctrl.peutDessinerDouble() )
+                if ( r.estDouble())
                 {
                     AffineTransform t2 = new AffineTransform();
                     t2.rotate(angle, fig2.getCenterX(), fig2.getCenterY());
@@ -225,7 +225,7 @@ public class PanelMap extends JPanel
                 {
                     if ( s.contains(x, y) )
                     {
-                        if ( r.estDouble() && PanelMap.this.ctrl.peutDessinerDouble() )
+                        if ( r.estDouble() )
                         {
                             if ( cpt % 2 == 0)
                             {
@@ -246,7 +246,6 @@ public class PanelMap extends JPanel
                             }
                             else
                             {
-
                                 if ( PanelMap.this.ctrl.peutPrendreRoute(r, 2) )
                                 {
                                     PanelMap.this.ctrl.setActionEnCours(true);
