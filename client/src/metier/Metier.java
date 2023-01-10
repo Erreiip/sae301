@@ -400,7 +400,7 @@ public class Metier
         {
             if ( r.estPrise2() ) return false;
 
-            if ( r.getCouleur1() == Color.LIGHT_GRAY.getRGB())
+            if ( r.getCouleur2() == Color.LIGHT_GRAY.getRGB())
             {
                 int max = this.chercherPlusGrand();
                 if ( max < r.getCout() ) return false;
