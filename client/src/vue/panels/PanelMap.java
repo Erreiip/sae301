@@ -210,7 +210,7 @@ public class PanelMap extends JPanel
         public void mouseClicked(MouseEvent e)
         { 
 
-            if (PanelMap.this.ctrl.getActionEnCours() || !PanelMap.this.ctrl.actionPossible())
+            if (PanelMap.this.ctrl.getActionEnCours() || PanelMap.this.ctrl.getTour() == 1)
             {
                 return;
             }
