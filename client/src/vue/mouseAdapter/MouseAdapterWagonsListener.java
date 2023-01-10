@@ -40,13 +40,13 @@ public class MouseAdapterWagonsListener extends MouseAdapter
                 ctrl.setActionEnCours(true);
                 
                 ctrl.genererInteractionWagon(wagonCorrespondant);
+                ctrl.majPioche();
 
                 if(!ctrl.secondWagon())
                 {
                     ctrl.setActionEnCours(false);
                 }
                 
-                ctrl.majPioche();
             }
         }
     }    
