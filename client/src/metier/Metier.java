@@ -817,7 +817,9 @@ public class Metier
         return this.alJoueur;
     }
 
-    public ArrayList<Joueur> cheminLePlusLongPossible()
+    public ArrayList<Joueur> getJoueursCheminPlusLong() { return this.cheminLePlusLongPossible(); }
+
+    private ArrayList<Joueur> cheminLePlusLongPossible()
     {
         int coutChemin;
         int max = 0;
@@ -844,7 +846,7 @@ public class Metier
     }
     
     
-    public int cheminLePlusLongVille(Joueur joueur ,Ville villeCible, ArrayList<Route> chemin, int cout)
+    private int cheminLePlusLongVille(Joueur joueur ,Ville villeCible, ArrayList<Route> chemin, int cout)
     {
         Ville furturVilleCible;
 
