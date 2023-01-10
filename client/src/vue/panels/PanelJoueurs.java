@@ -18,7 +18,7 @@ public class PanelJoueurs extends JPanel
     {
         this.ctrl = ctrl;
 
-        alPnlInfosJoueurs = new ArrayList<PanelInfosJoueurs>();
+        this.alPnlInfosJoueurs = new ArrayList<PanelInfosJoueurs>();
 
         this.setLayout(new FlowLayout());
 

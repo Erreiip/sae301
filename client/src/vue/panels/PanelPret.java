@@ -2,9 +2,11 @@ package client.src.vue.panels;
 
 import client.src.Controleur;
 import client.src.metier.common.Regles;
+import client.src.vue.FrameNomsCouleursJoueurs;
 import client.src.vue.FramePrincipale;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -46,19 +48,19 @@ public class PanelPret extends JPanel implements ActionListener
         JPanel pnlInfos = new JPanel(new GridLayout(5, 2));
         JPanel pnlSaisis = new JPanel();
 
-        pnlInfos.add(new JLabel("Nombre de joueurs Minimum : ", JLabel.RIGHT));
+        pnlInfos.add(new JLabel("Nombre de joueurs Minimum : "               , JLabel.RIGHT));
         pnlInfos.add(new JLabel("" + regles.getNbJoueursMini()));
 
-        pnlInfos.add(new JLabel("Nombre de joueurs Maximum : ", JLabel.RIGHT));
+        pnlInfos.add(new JLabel("Nombre de joueurs Maximum : "               , JLabel.RIGHT));
         pnlInfos.add(new JLabel("" + regles.getNbJoueursMaxi()));
 
         pnlInfos.add(new JLabel("Nombre de joueurs Pour les voies Doubles : ", JLabel.RIGHT));
         pnlInfos.add(new JLabel("" + regles.getNbJoueursVoieDouble()));
 
-        pnlInfos.add(new JLabel("Nombre de wagons pour la fin de partie: ", JLabel.RIGHT));
+        pnlInfos.add(new JLabel("Nombre de wagons pour la fin de partie: "   , JLabel.RIGHT));
         pnlInfos.add(new JLabel("" + regles.getNbWagonsFinParties()));
 
-        pnlInfos.add(new JLabel("Nombre de wagons par joueurs : ", JLabel.RIGHT));
+        pnlInfos.add(new JLabel("Nombre de wagons par joueurs : "            , JLabel.RIGHT));
         pnlInfos.add(new JLabel("" + regles.getNbWagonsParJoueurs()));
 
         pnlSaisis.add(new JLabel("Nombre de Joueurs : "));
@@ -92,7 +94,7 @@ public class PanelPret extends JPanel implements ActionListener
         if ( e.getSource() == this.btnValider)
         {
             this.ctrl.setNbJoueurs((Integer) this.spinner.getValue());
-            this.ctrl.setIhm(new FramePrincipale(this.ctrl));
+            this.ctrl.setIhm(new FrameNomsCouleursJoueurs(this.ctrl));
         }
     }
 }
