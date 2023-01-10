@@ -102,8 +102,22 @@ public class Joueur implements Comparable<Joueur>
     public void   setNom(String nom) { this.nom = nom;  }
 
     @Override
-    public int compareTo(Joueur o) {
-        return o.nbPv - this.nbPv;
+    public int compareTo(Joueur autreJoueur) 
+    {
+        if ( autreJoueur.nbPv == this.nbPv)
+        {
+            int nbObjectifs = 0;
+            int nbObjectifsAutreJoueur = 0;
+
+            for ( Objectif obj : this.alObjectifs)
+                if (obj.isPrit()) nbObjectifs++;
+
+            for ( Objectif obj : autreJoueur.getObjectifs())
+                if (obj.isPrit()) nbObjectifsAutreJoueur++;
+
+            return nbObjectifs - nbObjectifsAutreJoueur;
+        }
+
+        return autreJoueur.nbPv - this.nbPv;
     }
-    
 }

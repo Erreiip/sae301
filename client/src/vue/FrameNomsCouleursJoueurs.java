@@ -68,11 +68,8 @@ public class FrameNomsCouleursJoueurs extends JFrame implements ActionListener
         {
             if (e.getSource() == b)
             {
-                int re = (int)(Math.random() * 255);
-                int gr = (int)(Math.random() * 255);
-                int bl = (int)(Math.random() * 255);
-
-                b.setBackground(new Color(re,gr,bl));
+                Color color=JColorChooser.showDialog(this, "Choisir une couleur", b.getBackground());
+                b.setBackground(color);
             }
         }
 
