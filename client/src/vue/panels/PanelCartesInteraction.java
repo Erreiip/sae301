@@ -3,19 +3,10 @@ package client.src.vue.panels;
 import client.src.Controleur;
 import client.src.metier.common.Route;
 import client.src.metier.common.Wagon;
-import client.src.vue.common.ImageRenderer;
-import client.src.vue.common.ModelTableObjectifs;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import java.awt.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PanelCartesInteraction extends JPanel
 {
