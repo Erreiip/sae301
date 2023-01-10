@@ -796,7 +796,11 @@ public class Metier
             for (Objectif o : j.getObjectifs())
             {
                 if ( o.isPrit() ) j.ajouterPV(o.getNbPoints());
-                else              j.retirerPv(o.getNbPoints());
+                else             
+                {
+                    this.verifierObjectif(o);
+                    j.retirerPv(o.getNbPoints());
+                }
             }
 
             if (j.getNbPv() < 0 ) j.setPv(0);
