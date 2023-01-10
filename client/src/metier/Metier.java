@@ -1131,14 +1131,17 @@ public class Metier
             if ( fWagons[cpt] != null )
                 this.alWagons.add(new Wagon(Integer.parseInt(cWagons[cpt]), fWagons[cpt].getAbsolutePath()));
         }
-        this.alWagons.add(new Wagon(Color.LIGHT_GRAY.getRGB(), fImageJoker.getAbsolutePath()));
-
-        this.regles = new Regles(nbWagonsParJoueur, nbWagonsFinParties, tabReglesJoueur);
 
         for ( Wagon w : this.alWagons)
         {
             Metier.colorierWagon(w, this.ctrl);
         }
+
+        this.alWagons.add(new Wagon(Color.LIGHT_GRAY.getRGB(), fImageJoker.getAbsolutePath()));
+
+        this.regles = new Regles(nbWagonsParJoueur, nbWagonsFinParties, tabReglesJoueur);
+
+        
 
         this.initCarteWagons();
         
@@ -1242,7 +1245,13 @@ public class Metier
             img = ImageIO.read(new File(w.getFileRecto()));
         }catch (Exception e) { e.printStackTrace();  }
 
-        Ellipse2D pastille = new Ellipse2D.Double(10, 10, 25, 25 );
+
+        int widthRecto  = img.getWidth();
+        int heightRecto = img.getHeight();
+
+        double propotionsWidth  = (widthRecto  + 0d) / 100;
+
+        Ellipse2D pastille = new Ellipse2D.Double(10, 10, propotionsWidth * 10, propotionsWidth * 10 );
 
         Graphics2D g = (Graphics2D) img.getGraphics();
 
