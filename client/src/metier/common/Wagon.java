@@ -18,6 +18,8 @@ public class Wagon
 
     public int getCouleur() { return this.couleur; }
     public String getFileRecto() { return this.recto; }
+    public void setFileRecto(String path) { this.recto = path; }
+
 
     public String toString()
     {

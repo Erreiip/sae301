@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Iterator;
 
+import java.awt.BasicStroke;
+
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -485,7 +487,7 @@ public class Metier
             int taille2;
     
             if ( w.getCouleur() != Color.LIGHT_GRAY.getRGB() ) taille2 = Metier.COULEUR;
-            else                                      taille2 = Metier.JOKER;
+            else                                               taille2 = Metier.JOKER;
             
             for ( int cpt2 = 0; cpt2 < taille2; cpt2++)
             {
@@ -1133,6 +1135,11 @@ public class Metier
 
         this.regles = new Regles(nbWagonsParJoueur, nbWagonsFinParties, tabReglesJoueur);
 
+        for ( Wagon w : this.alWagons)
+        {
+            Metier.colorierWagon(w, this.ctrl);
+        }
+
         this.initCarteWagons();
         
         //a enlever
@@ -1225,6 +1232,36 @@ public class Metier
         } catch (Exception e ) { e.printStackTrace(); }
 
         obj.setFileRecto(file.getAbsolutePath());
+    }
+
+    private static void colorierWagon(Wagon w, Controleur ctrl)
+    {
+        BufferedImage img = null;
+
+        try{
+            img = ImageIO.read(new File(w.getFileRecto()));
+        }catch (Exception e) { e.printStackTrace();  }
+
+        Ellipse2D pastille = new Ellipse2D.Double(10, 10, 25, 25 );
+
+        Graphics2D g = (Graphics2D) img.getGraphics();
+
+        g.setStroke(new BasicStroke(1));
+        g.setColor(new Color(w.getCouleur()));
+        g.fill(pastille);
+
+        g.setStroke(new BasicStroke(2));
+        g.setColor(Color.BLACK);
+        g.draw(pastille);
+
+
+        File file = new File("./assets/recto" + Metier.nbRecto++ + ".png");
+        try {
+            file.createNewFile();
+            ImageIO.write(img, "png", file);
+        } catch (Exception e ) { e.printStackTrace(); }
+
+        w.setFileRecto(file.getAbsolutePath());
     }
 
 }

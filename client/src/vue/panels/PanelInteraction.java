@@ -129,8 +129,8 @@ public class PanelInteraction extends JPanel implements ActionListener
             JLabel textePoints = new JLabel("("+alObjectifs[cpt].getNbPoints()+")");
 
             texteVille1.setBounds(90,cpt*42 + 160,120,40);
-            texteVille2.setBounds(215,cpt*42 + 160,120,40);
-            textePoints.setBounds(320,cpt*42 + 160,30,40);
+            texteVille2.setBounds(213,cpt*42 + 160,120,40);
+            textePoints.setBounds(330,cpt*42 + 160,30,40);
 
             // Les ajoute au panel
             this.add(choix);
@@ -186,8 +186,24 @@ public class PanelInteraction extends JPanel implements ActionListener
         this.r = r;
         this.type = type;
 
+        JPanel panelInteractionCartes = new JPanel();
+
+        panelInteractionCartes.setLayout(null);
+
+        JScrollPane sp = new JScrollPane(panelInteractionCartes,
+        JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+        JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        sp.setBounds(0, 0, 150, 430);
+
+        sp.setBorder(BorderFactory.createTitledBorder("Choix des cartes"));
+
+
         this.removeAll();
         this.repaint();
+
+        this.add(sp);
+
 
         HashMap<Color, Integer> hmCount = this.ctrl.getJetonsCouleurJoueur();
 
@@ -201,6 +217,8 @@ public class PanelInteraction extends JPanel implements ActionListener
             }
         }
 
+        panelInteractionCartes.setPreferredSize(new Dimension(150, 60 * alCouleurs.size() + 10));
+
         //this.setLayout(new GridLayout(alCouleurs.size() + 1 , 2));
 
         this.buttonGroup = new ButtonGroup();
@@ -210,10 +228,10 @@ public class PanelInteraction extends JPanel implements ActionListener
         for (Color c : alCouleurs )
         {
             JLabel lbl = new JLabel();
-            lbl.setBounds(30, 10 + 60 * (i+1), 75, 42);
+            lbl.setBounds(30, 10 + 60 * i, 75, 42);
 
             JRadioButton rb = new JRadioButton();
-            rb.setBounds(5, 25 + 60 *  (i+1) , 20, 20);
+            rb.setBounds(5, 21 + 60 * i , 20, 20);
             this.buttonGroup.add(rb);
             
             this.alRadioButtons.add(rb);
@@ -233,15 +251,17 @@ public class PanelInteraction extends JPanel implements ActionListener
             ImageIcon imgIcon = new ImageIcon(dImgRectoWagon);
             lbl.setIcon(imgIcon);
             lbl.setOpaque(true);
-            this.add(lbl);
-            this.add(rb);
+            panelInteractionCartes.add(lbl);
+            panelInteractionCartes.add(rb);
             i++;
         }
 
         this.btnInteractionCartes = new JButton("Valider");
-        this.btnInteractionCartes.setBounds(200, 200, 150, 30);
+        this.btnInteractionCartes.setBounds(175, 200, 150, 30);
         this.btnInteractionCartes.addActionListener(this);
         this.add(this.btnInteractionCartes);
+        this.revalidate();
+        this.repaint();
         i++;
     }
 

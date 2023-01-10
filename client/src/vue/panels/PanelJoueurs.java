@@ -35,12 +35,6 @@ public class PanelJoueurs extends JPanel
     public void majInfos()
     {
         this.majInfosJoueur();
-        this.majPanel();
-    }
-
-    public void majPanel()
-    {
-        // 
     }
 
     public void majInfosJoueur()
