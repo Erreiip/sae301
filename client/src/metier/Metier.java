@@ -599,6 +599,15 @@ public class Metier
     {
         for ( Wagon w : alWagons )
         {
+            if ( this.alWagons.size() > 5)  
+            {   
+                index = this.alWagons.indexOf(w);
+                Wagon w2 = this.alWagons.get(5);
+                this.alWagons.remove(w);
+                this.alWagons.remove(w2);
+                this.alWagons.add(index, w2);
+            }
+
             this.alWagons.remove(w);
         }
     }
