@@ -497,6 +497,8 @@ public class Metier
     public Wagon[] getPiocheVisible  () 
     { 
         if ( this.alWagons.size() < 7 ) { rajouterDefausseW(); }        
+
+        System.out.println(this.alWagons);
         
         Wagon[] tabWagonVisible = new Wagon[5];
         int nbJoker;
@@ -547,14 +549,14 @@ public class Metier
     
     public void rajouterDefausseW()
     {
-        this.alDefausseW = new ArrayList<Wagon>();
-
         Collections.shuffle(this.alDefausseW);
 
         for ( Wagon w : this.alDefausseW )
         {
             this.alWagons.add(w);
         }
+
+        this.alDefausseW = new ArrayList<Wagon>();
     }
     
     public void rajouterDefausseO()
@@ -782,33 +784,38 @@ public class Metier
 
             if (j.getNbPv() < 0 ) j.setPv(0);
         }
-
-        for ( Joueur j :this.cheminLePlusLongPossible())
+        
+        for ( Joueur j : this.cheminLePlusLongPossible())
         {
             j.ajouterPV(10);
         }
+        
 
         return this.alJoueur;
     }
 
-    public Joueur cheminLePlusLongPossible()
+    public ArrayList<Joueur> cheminLePlusLongPossible()
     {
         int coutChemin;
         int max = 0;
-        Joueur joueurCheminPlusLong = null;
+        ArrayList<Joueur> joueurCheminPlusLong = new ArrayList<Joueur>();
 
         for( Joueur joueur : alJoueur)
         {
             for( Ville ville : alVilles)
             {
                 coutChemin = cheminLePlusLongVille(joueur, ville, new ArrayList<Route>(), 0);
-                if(max < coutChemin)
+                if(max <= coutChemin)
                 {
+                    if( max != coutChemin ){ joueurCheminPlusLong.clear(); }
                     max = coutChemin;
-                    joueurCheminPlusLong = joueur;
+                    if ( !(joueurCheminPlusLong.contains(joueur)) ) { joueurCheminPlusLong.add(joueur); }
                 }
             }
         }
+
+        for( Joueur joueur : joueurCheminPlusLong)
+            System.out.println(joueur.getId() + " : " + max);
         
         return joueurCheminPlusLong;
     }

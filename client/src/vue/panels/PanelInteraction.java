@@ -39,14 +39,15 @@ public class PanelInteraction extends JPanel implements ActionListener
     private JButton btnInteractionCartes;
 
     private Route r;
-    private int type;
+    private Integer type;
+
     
     public PanelInteraction(Controleur ctrl)
     {
         this.ctrl = ctrl;
 
-        this.r    = null;
-        this.type = 0;
+        this.r = null;
+        this.type = null;
 
         this.setLayout(null);
 
@@ -178,7 +179,7 @@ public class PanelInteraction extends JPanel implements ActionListener
         this.repaint();
     }
 
-    public void genererInteractionCartes( Route r , int type)        
+    public void genererInteractionCartes( Route r, int type )        
     { 
         this.alRadioButtons = new ArrayList<JRadioButton>();
 
@@ -186,6 +187,7 @@ public class PanelInteraction extends JPanel implements ActionListener
         this.type = type;
 
         this.removeAll();
+        this.repaint();
 
         HashMap<Color, Integer> hmCount = this.ctrl.getJetonsCouleurJoueur();
 
@@ -199,19 +201,24 @@ public class PanelInteraction extends JPanel implements ActionListener
             }
         }
 
-        this.setLayout(new GridLayout(alCouleurs.size() + 1 , 2));
+        //this.setLayout(new GridLayout(alCouleurs.size() + 1 , 2));
 
-       this.buttonGroup = new ButtonGroup();
+        this.buttonGroup = new ButtonGroup();
+
+        int i = 0;
         
         for (Color c : alCouleurs )
         {
             JLabel lbl = new JLabel();
+            lbl.setBounds(30, 10 + 60 * (i+1), 75, 42);
 
             JRadioButton rb = new JRadioButton();
+            rb.setBounds(5, 25 + 60 *  (i+1) , 20, 20);
             this.buttonGroup.add(rb);
             
             this.alRadioButtons.add(rb);
 
+            
             Wagon w = ctrl.getWagonCouleur(c);
 
             BufferedImage imgRectoWagon = null;
@@ -220,19 +227,20 @@ public class PanelInteraction extends JPanel implements ActionListener
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Image dImgRectoWagon = imgRectoWagon.getScaledInstance(150, 85, Image.SCALE_SMOOTH);
+            Image dImgRectoWagon = imgRectoWagon.getScaledInstance(75, 42, Image.SCALE_SMOOTH);
             ImageIcon imgIcon = new ImageIcon(dImgRectoWagon);
             lbl.setIcon(imgIcon);
             lbl.setOpaque(true);
             this.add(lbl);
             this.add(rb);
+            i++;
         }
 
         this.btnInteractionCartes = new JButton("Valider");
+        this.btnInteractionCartes.setBounds(200, 200, 150, 30);
         this.btnInteractionCartes.addActionListener(this);
         this.add(this.btnInteractionCartes);
-
-        this.revalidate();
+        i++;
     }
 
     

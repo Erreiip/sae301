@@ -123,7 +123,6 @@ public class PanelPioche extends JPanel
                 if(l.getMouseListeners().length>0)
                 {
                     l.setIcon(null);
-                    System.out.println(index + "----" + piocheVisible[index]);
                     l.removeMouseListener(l.getMouseListeners()[0]);
                 }
             }else
@@ -138,7 +137,13 @@ public class PanelPioche extends JPanel
                 Image dImgRectoWagon = imgRectoWagon.getScaledInstance(170, 85, Image.SCALE_SMOOTH);
     
                 l.setIcon(new ImageIcon(dImgRectoWagon));
+
+                if ( l.getMouseListeners().length == 0)
+                {
+                    l.addMouseListener(new MouseAdapterWagonsListener(ctrl, lblCartesWagon));
+                }
             }
+
             index++;
         }
 
@@ -146,6 +151,22 @@ public class PanelPioche extends JPanel
             lblVersoWagon.setIcon(null);
             lblVersoWagon.removeMouseListener(lblVersoWagon.getMouseListeners()[0]);
         }
+        else if (ctrl.getWagonVerso() != null && lblVersoWagon.getMouseListeners().length == 0)
+        {
+            BufferedImage imgVersoWagon = null;
+            try {
+                imgVersoWagon = ImageIO.read(new File(Wagon.getFileVerso()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Image dImgVersoWagon = imgVersoWagon.getScaledInstance(170, 85, Image.SCALE_SMOOTH);
+
+            lblVersoWagon.setIcon(new ImageIcon(dImgVersoWagon));
+
+            lblVersoWagon.addMouseListener(new MouseAdapterVersoWagon(ctrl));
+        }
+        
     }
 
     public void suppBtnPiocheObj() 
