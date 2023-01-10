@@ -747,7 +747,7 @@ public class Metier
             }
             else
             {
-                if ( !r.estPrise1() ) bPartieFini = false;
+                if ( !r.estPrise1() || r.estPrise2() ) bPartieFini = false;
             } 
         }
 
