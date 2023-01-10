@@ -8,6 +8,7 @@ public class Joueur implements Comparable<Joueur>
     private Integer             couleur;
     
     private int                 id;
+    private String              nom;
 
     private int                 nbMarqueurs;
     private int                 nbPv;
@@ -96,6 +97,9 @@ public class Joueur implements Comparable<Joueur>
 
     
     public int getId() { return this.id; }
+
+    public String getNom()           { return this.nom; }
+    public void   setNom(String nom) { this.nom = nom;  }
 
     @Override
     public int compareTo(Joueur o) {

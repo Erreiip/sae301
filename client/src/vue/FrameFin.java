@@ -23,14 +23,15 @@ public class FrameFin extends JFrame
         this.ctrl = ctrl;
 
         this.setTitle("Fin de la partie");
-        this.setSize(1200, (this.ctrl.getNbJoueur() * 100));
+        this.setSize(1200, (50+(this.ctrl.getNbJoueur() * 100)));
         this.setLayout(new BorderLayout());
 
-        this.panelHaut = new JPanel(new GridLayout(1, 4));
-        this.panelHaut.add(new JLabel("Classement"       , SwingConstants.CENTER));
-        this.panelHaut.add(new JLabel("Nom"              , SwingConstants.CENTER));
-        this.panelHaut.add(new JLabel("Point de victoire", SwingConstants.CENTER));
-        this.panelHaut.add(new JLabel("Objectifs"        , SwingConstants.CENTER));
+        this.panelHaut = new JPanel(new GridLayout(1, 5));
+        this.panelHaut.add(new JLabel("Classement"          , SwingConstants.CENTER));
+        this.panelHaut.add(new JLabel("Nom"                 , SwingConstants.CENTER));
+        this.panelHaut.add(new JLabel("Route la plus longue", SwingConstants.CENTER));
+        this.panelHaut.add(new JLabel("Point de victoire"   , SwingConstants.CENTER));
+        this.panelHaut.add(new JLabel("Objectifs"           , SwingConstants.CENTER));
 
         this.add(this.panelHaut, BorderLayout.NORTH);
 

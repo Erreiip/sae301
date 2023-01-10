@@ -47,11 +47,11 @@ public class PanelInfosJoueurs extends JPanel
         else
             this.setBorder(null);    
 
-        this.lbl = new JLabel("Joueur " + j.getId() + "", SwingConstants.CENTER); // Numéro du joueur
-        this.panelCouleur = new PanelCouleur(this.ctrl, j.getCouleur());          // Panel pour la couleur du joueur
-        this.panelInfos = new JPanel(new GridLayout(2,1));             // Panel pour les infos du joueur
-        this.lblNbWagons = new JLabel("Nb wagons : " + j.getNbMarqueurs());       // Nombre de wagons du joueur
-        this.lblNbPv = new JLabel("Nb PV : " + j.getNbPv());                      // Nombre de points de victoire du joueur
+        this.lbl = new JLabel(j.getNom() + "", SwingConstants.CENTER);      // Nom du joueur
+        this.panelCouleur = new PanelCouleur(this.ctrl, j.getCouleur());    // Panel pour la couleur du joueur
+        this.panelInfos = new JPanel(new GridLayout(2,1));                  // Panel pour les infos du joueur
+        this.lblNbWagons = new JLabel("Nb wagons : " + j.getNbMarqueurs()); // Nombre de wagons du joueur
+        this.lblNbPv = new JLabel("Nb PV : " + j.getNbPv());                // Nombre de points de victoire du joueur
 
         this.panelLbl.add(this.lbl);
 

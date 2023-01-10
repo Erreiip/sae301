@@ -1,6 +1,8 @@
 package client.src.vue.panels;
 
 import javax.swing.*;
+import javax.swing.text.StyledEditorKit.FontSizeAction;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -29,7 +31,7 @@ public class PanelResultJoueur extends JPanel implements ActionListener
 
         this.indexObjectif = 0;
 
-        this.setLayout(new GridLayout(1, 4));
+        this.setLayout(new GridLayout(1, 5));
 
         switch (rank)
         {
@@ -39,14 +41,34 @@ public class PanelResultJoueur extends JPanel implements ActionListener
             default : break;
         }
     
+        Font font = new Font("Arial", Font.BOLD, 20);
 
-        this.add(new JLabel("" + rank        , SwingConstants.CENTER));                  // Classement
-        JLabel lblNom = new JLabel("Joueur " + this.joueur.getId(), SwingConstants.CENTER);  // Joueur X
-        lblNom.setFont(new Font("Arial", Font.BOLD, 20));
+        JLabel lblRank = new JLabel("" + rank, SwingConstants.CENTER);                      // Classement
+        lblRank.setFont(new Font("Arial", Font.BOLD, (30-(rank*2))));
+        this.add(lblRank);
+
+        JLabel lblNom = new JLabel("Joueur " + this.joueur.getId(), SwingConstants.CENTER); // Joueur X
+        lblNom.setFont(font);
         lblNom.setForeground(new Color(this.joueur.getCouleur()));
         this.add(lblNom);
-        this.add(new JLabel("" + this.joueur.getNbPv() , SwingConstants.CENTER));        // Point de victoire
 
+        JLabel lblRlpl = new JLabel("", SwingConstants.CENTER);                             // Route la plus longue
+        if (this.ctrl.getJoueursCheminPlusLong().contains(this.joueur))
+        {
+            ImageIcon imageIcon = new ImageIcon("./client/src/data/rlpl.png");
+            Image image = imageIcon.getImage();
+            Image newimg = image.getScaledInstance(75, 75,  java.awt.Image.SCALE_SMOOTH);
+            lblRlpl.setIcon(new ImageIcon(newimg));
+        }
+
+
+        this.add(lblRlpl, BorderLayout.CENTER);
+
+        JLabel lblPv = new JLabel("" + this.joueur.getNbPv() , SwingConstants.CENTER);      // Point de victoire
+        lblPv.setFont(font);
+        this.add(lblPv);        
+
+        //JButton btnGauche = new JButton(new ImageIcon("./client/src/data/gauche.png"));
         JButton btnGauche = new JButton("<");
 
         ImageIcon icon = new ImageIcon(this.joueur.getObjectifs().get(this.indexObjectif).getFileRecto());
@@ -60,6 +82,7 @@ public class PanelResultJoueur extends JPanel implements ActionListener
         else
             this.panelObjectifs.setBackground(new Color(190,0,0));
 
+        //JButton btnDroite = new JButton(new ImageIcon("./client/src/data/rlpl.png"));
         JButton btnDroite = new JButton(">");
 
         panelObjectifs.add(btnGauche, BorderLayout.WEST  );
