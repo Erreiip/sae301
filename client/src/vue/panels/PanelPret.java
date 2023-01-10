@@ -102,8 +102,7 @@ public class PanelPret extends JPanel implements ActionListener
             if (this.cbModeDebug.isSelected())
                 this.ctrl.modeDebug();
 
-            if (this.cbColorierObjectifs.isSelected())
-                // methode ctrl
+            this.ctrl.colorier(this.cbColorierObjectifs.isSelected());
 
             this.ctrl.setIhm(new FrameNomsCouleursJoueurs(this.ctrl));
         }
