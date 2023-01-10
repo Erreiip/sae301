@@ -737,8 +737,6 @@ public class Metier
 
     private void tourTermine() 
     {
-        System.out.println("tour Termine");
-
         ArrayList<Route> alRoute = this.getAlRoutes();
         boolean bPartieFini = true;
         for ( Route r : alRoute)
