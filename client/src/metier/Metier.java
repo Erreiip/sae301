@@ -259,7 +259,6 @@ public class Metier
         this.nbCartePioche++;
     
         this.supprimerWagons(alWAgon);
-        //this.actionSuppr.getAlWAgonsSuppr().add(w);
     }
     
     public Wagon getWagonVerso        ()        
@@ -534,11 +533,12 @@ public class Metier
                 nbTentatives++;
             }
 
-        }while(nbJoker >= 3 && nbTentatives < 5);
+        }while(nbJoker >= 3 && nbTentatives < 3);
     
         return tabWagonVisible;
     } 
     
+
     public Objectif[] getPiocheVisibleObj() 
     { 
         if ( this.alObjectifs.size() < 4 ) { rajouterDefausseO(); } 
@@ -599,22 +599,17 @@ public class Metier
     {
         for ( Wagon w : alWagons )
         {
-            /*
             if ( this.alWagons.size() > 5)  
             {   
-                index = this.alWagons.indexOf(w);
+                int index = this.alWagons.indexOf(w);
                 Wagon w2 = this.alWagons.get(5);
                 this.alWagons.remove(w);
                 this.alWagons.remove(w2);
                 this.alWagons.add(index, w2);
             }else
             {
-
+                this.alWagons.remove(w);
             }
-            */
-            this.alWagons.remove(w);
-
-
         }
     }
     
@@ -742,6 +737,8 @@ public class Metier
 
     private void tourTermine() 
     {
+        System.out.println("tour Termine");
+
         ArrayList<Route> alRoute = this.getAlRoutes();
         boolean bPartieFini = true;
         for ( Route r : alRoute)
@@ -779,9 +776,7 @@ public class Metier
             }
         }
 
-        this.index++;
-
-        this.index = this.index % this.alJoueur.size();
+        this.index = (this.index+1) % this.alJoueur.size();
         
         if  ( this.index == 0) this.tour++;
 
