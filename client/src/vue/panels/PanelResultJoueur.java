@@ -52,7 +52,7 @@ public class PanelResultJoueur extends JPanel implements ActionListener
         this.add(lblRank);
 
 
-        JLabel lblNom = new JLabel("Joueur " + this.joueur.getId(), SwingConstants.CENTER); // Joueur X
+        JLabel lblNom = new JLabel(this.joueur.getNom(), SwingConstants.CENTER); // Joueur X
         lblNom.setFont(font);
         lblNom.setForeground(new Color(this.joueur.getCouleur()));
         this.add(lblNom);
@@ -126,9 +126,9 @@ public class PanelResultJoueur extends JPanel implements ActionListener
             icon = new ImageIcon(newimg);
 
             if (this.joueur.getObjectifs().get(this.indexObjectif).isPrit())
-                this.panelObjectifs.setBackground(new Color(0,215,0));
+                this.panelObjectifs.setBackground(new Color(0,190,0));
             else
-                this.panelObjectifs.setBackground(new Color(215,0,0));
+                this.panelObjectifs.setBackground(new Color(190,0,0));
 
             this.lblImage.setIcon(icon);
         }

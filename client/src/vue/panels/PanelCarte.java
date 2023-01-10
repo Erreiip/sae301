@@ -167,11 +167,12 @@ public class PanelCarte extends JPanel implements ListSelectionListener, ChangeL
             Image     image  = icon.getImage();
             Image     newImg = image.getScaledInstance(80, 50,  java.awt.Image.SCALE_SMOOTH);
             icon             = new ImageIcon(newImg);
-            
+
             label.setIcon(icon);
             label.setPreferredSize(new Dimension(200, 60));
             label.setText(nbWagon + "");
-            label.setHorizontalTextPosition(JLabel.RIGHT);
+            label.setFont(new Font("Arial", Font.BOLD, 18));
+            label.setHorizontalAlignment(JLabel.LEFT);
             return label;
         }
     }

@@ -34,7 +34,7 @@ public class PanelPret extends JPanel implements ActionListener
         BufferedImage resized = new BufferedImage(800,500, input.getType());
         
         Graphics2D g = resized.createGraphics();
-        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
         g.drawImage(input,0,0,800,500,null);
         g.dispose();
 
@@ -46,11 +46,17 @@ public class PanelPret extends JPanel implements ActionListener
 
         this.spinner = new JSpinner(new SpinnerNumberModel(regles.getNbJoueursMini(), regles.getNbJoueursMini(), regles.getNbJoueursMaxi(), 1));
         this.btnValider = new JButton("Valider");
-        this.cbModeDebug = new JCheckBox("Mode debug : ");
-        this.cbColorierObjectifs = new JCheckBox("Colorier les cartes Objectifs : ");
+        this.cbModeDebug = new JCheckBox("Activer le mode debug");
+        this.cbColorierObjectifs = new JCheckBox("Colorier les cartes objectifs");
 
         JPanel pnlInfos = new JPanel(new GridLayout(5, 2));
-        JPanel pnlSaisis = new JPanel();
+        JPanel pnlSaisis = new JPanel(new BorderLayout());
+            JPanel panelChoix = new JPanel(new BorderLayout());
+                JPanel panelNbJoueur = new JPanel(new GridBagLayout());
+                JPanel panelCb = new JPanel(new GridLayout(1,2));
+                    JPanel panelCb1 = new JPanel();
+                    JPanel panelCb2 = new JPanel();
+            JPanel panelValider = new JPanel();
 
         pnlInfos.add(new JLabel("Nombre de joueurs Minimum : "               , JLabel.RIGHT));
         pnlInfos.add(new JLabel("" + regles.getNbJoueursMini()));
@@ -67,14 +73,31 @@ public class PanelPret extends JPanel implements ActionListener
         pnlInfos.add(new JLabel("Nombre de wagons par joueurs : "            , JLabel.RIGHT));
         pnlInfos.add(new JLabel("" + regles.getNbWagonsParJoueurs()));
 
-        pnlSaisis.add(new JLabel("Nombre de Joueurs : "));
-        pnlSaisis.add(this.spinner);
-        pnlSaisis.add(this.btnValider);
-        pnlSaisis.add(this.cbModeDebug);
-        pnlSaisis.add(this.cbColorierObjectifs);
+        panelNbJoueur.add(new JLabel("Nombre de joueurs : "));
+        panelNbJoueur.add(this.spinner);
+
+        panelCb1.add(this.cbModeDebug);
+        panelCb2.add(this.cbColorierObjectifs);
+
+        panelCb.add(panelCb1);
+        panelCb.add(panelCb2);
+
+        panelChoix.add(panelNbJoueur, BorderLayout.CENTER);
+        panelChoix.add(panelCb, BorderLayout.SOUTH);
+
+        panelValider.add(this.btnValider);
+  
+        pnlSaisis.add(panelChoix, BorderLayout.CENTER);
+        pnlSaisis.add(panelValider, BorderLayout.SOUTH);
 
         pnlInfos.setOpaque(false);
         pnlSaisis.setOpaque(false);
+        panelChoix.setOpaque(false);
+        panelNbJoueur.setOpaque(false);
+        panelCb.setOpaque(false);
+        panelCb1.setOpaque(false);
+        panelCb2.setOpaque(false);
+        panelValider.setOpaque(false);
 
         this.add(pnlInfos);
         this.add(pnlSaisis);
