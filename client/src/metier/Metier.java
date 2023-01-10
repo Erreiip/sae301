@@ -495,7 +495,7 @@ public class Metier
 
     public void colorier(boolean colorier)
     {
-        
+
         for ( Objectif o : this.alObjectifs )
         {
             Metier.colorier(o, ctrl, colorier);
@@ -1213,13 +1213,15 @@ public class Metier
         g.fill(ville1);
         g.fill(ville2);
 
+        ((Graphics)g).setFont(new Font("TimesRoman", Font.PLAIN, 30)); 
+            String s = v1.getNom() + " - " + v2.getNom();
+            g.drawString(s, 80, 80);
+        
+
         if ( colorier )
         {
             ((Graphics)g).setFont(new Font("TimesRoman", Font.PLAIN, 100)); 
             g.drawString(coutObj, widthRecto - 170 , heightRecto - 70);
-            ((Graphics)g).setFont(new Font("TimesRoman", Font.PLAIN, 30)); 
-            String s = v1.getNom() + " - " + v2.getNom();
-            g.drawString(s, 80, 80);
         }
 
         File file = new File("./assets/recto" + Metier.nbRecto++ + ".png");
