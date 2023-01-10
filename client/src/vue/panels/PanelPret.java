@@ -19,6 +19,8 @@ public class PanelPret extends JPanel implements ActionListener
     private JSpinner spinner;
     private JButton btnValider;
 
+    private JCheckBox cbModeDebug;
+
     private BufferedImage fond;
 
     public PanelPret(Controleur ctrl)
@@ -44,6 +46,7 @@ public class PanelPret extends JPanel implements ActionListener
 
         this.spinner = new JSpinner(new SpinnerNumberModel(regles.getNbJoueursMini(), regles.getNbJoueursMini(), regles.getNbJoueursMaxi(), 1));
         this.btnValider = new JButton("Valider");
+        this.cbModeDebug = new JCheckBox();
 
         JPanel pnlInfos = new JPanel(new GridLayout(5, 2));
         JPanel pnlSaisis = new JPanel();
@@ -66,6 +69,7 @@ public class PanelPret extends JPanel implements ActionListener
         pnlSaisis.add(new JLabel("Nombre de Joueurs : "));
         pnlSaisis.add(this.spinner);
         pnlSaisis.add(this.btnValider);
+        pnlSaisis.add(this.cbModeDebug);
 
         pnlInfos.setOpaque(false);
         pnlSaisis.setOpaque(false);
@@ -94,6 +98,10 @@ public class PanelPret extends JPanel implements ActionListener
         if ( e.getSource() == this.btnValider)
         {
             this.ctrl.setNbJoueurs((Integer) this.spinner.getValue());
+
+            if (this.cbModeDebug.isSelected())
+                this.ctrl.modeDebug();
+
             this.ctrl.setIhm(new FrameNomsCouleursJoueurs(this.ctrl));
         }
     }
