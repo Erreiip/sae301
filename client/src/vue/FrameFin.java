@@ -44,12 +44,12 @@ public class FrameFin extends JFrame
         int rank = 1;
         for (int i=0; i<alJoueurs.size(); i++)
         {
+            if (i != 0 && (alJoueurs.get(i).compareTo(alJoueurs.get(i-1)) != 0))
+                rank++;
+
             this.panelResultJoueur = new PanelResultJoueur(ctrl, alJoueurs.get(i), rank);
 
             this.panelClassement.add(this.panelResultJoueur);
-
-            if (i != 0 && !(alJoueurs.get(i).compareTo(alJoueurs.get(i-1)) == 0))
-                rank++;
         }
 
         this.add(this.panelClassement, BorderLayout.CENTER);
