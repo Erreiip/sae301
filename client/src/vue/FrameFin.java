@@ -42,14 +42,17 @@ public class FrameFin extends JFrame
         Collections.sort(alJoueurs);
         
         int rank = 1;
-        for (int i=0; i<alJoueurs.size(); i++)
+        int i = 0;
+        for (Joueur j : alJoueurs)
         {
-            if (i != 0 && (alJoueurs.get(i).compareTo(alJoueurs.get(i-1)) != 0))
+            if (i != 0 && (j.compareTo(alJoueurs.get(i-1)) != 0))
                 rank++;
 
-            this.panelResultJoueur = new PanelResultJoueur(ctrl, alJoueurs.get(i), rank);
+            this.panelResultJoueur = new PanelResultJoueur(ctrl, j, rank);
 
             this.panelClassement.add(this.panelResultJoueur);
+            
+            i++;
         }
 
         this.add(this.panelClassement, BorderLayout.CENTER);

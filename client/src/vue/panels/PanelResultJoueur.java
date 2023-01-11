@@ -76,17 +76,26 @@ public class PanelResultJoueur extends JPanel implements ActionListener
 
         //JButton btnGauche = new JButton(new ImageIcon("./client/src/data/gauche.png"));
         JButton btnGauche = new JButton("<");
+        
+        
+        if ( this.joueur.getObjectifs().size() > 0)
+        {
+            ImageIcon icon = new ImageIcon(this.joueur.getObjectifs().get(this.indexObjectif).getFileRecto());
+            Image image = icon.getImage();
+            Image newimg = image.getScaledInstance(150, 80,  java.awt.Image.SCALE_SMOOTH);
+            icon = new ImageIcon(newimg);
+            this.lblImage = new JLabel(icon);
 
-        ImageIcon icon = new ImageIcon(this.joueur.getObjectifs().get(this.indexObjectif).getFileRecto());
-        Image image = icon.getImage();
-        Image newimg = image.getScaledInstance(150, 80,  java.awt.Image.SCALE_SMOOTH);
-        icon = new ImageIcon(newimg);
-        this.lblImage = new JLabel(icon);
-
-        if (this.joueur.getObjectifs().get(this.indexObjectif).isPrit())
-            this.panelObjectifs.setBackground(new Color(0,190,0));
+            if (this.joueur.getObjectifs().get(this.indexObjectif).isPrit())
+                this.panelObjectifs.setBackground(new Color(0,190,0));
+            else
+                this.panelObjectifs.setBackground(new Color(190,0,0));
+        }
         else
-            this.panelObjectifs.setBackground(new Color(190,0,0));
+        {
+            this.lblImage = new JLabel();
+        }
+        
 
         //JButton btnDroite = new JButton(new ImageIcon("./client/src/data/rlpl.png"));
         JButton btnDroite = new JButton(">");
@@ -105,7 +114,7 @@ public class PanelResultJoueur extends JPanel implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getSource() instanceof JButton)
+        if (e.getSource() instanceof JButton &&  this.joueur.getObjectifs().size() > 0)
         {
             JButton btn = (JButton) e.getSource();
 
@@ -116,10 +125,10 @@ public class PanelResultJoueur extends JPanel implements ActionListener
             }
             else if (btn.getText().equals(">"))
             {
-                if ( this.indexObjectif == (this.joueur.getObjectifs().size()-1)) { this.indexObjectif = 0; }
-                else                                                          { this.indexObjectif++;   }
+                this.indexObjectif = ( this.indexObjectif + 1 ) % this.joueur.getObjectifs().size();
             }
 
+            
             ImageIcon icon = new ImageIcon(this.joueur.getObjectifs().get(this.indexObjectif).getFileRecto());
             Image image = icon.getImage();
             Image newimg = image.getScaledInstance(150, 80,  java.awt.Image.SCALE_SMOOTH);

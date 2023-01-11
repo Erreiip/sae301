@@ -813,6 +813,8 @@ public class Metier
                 j.ajouterWagon(w);
             }
         } 
+
+        this.tour = 2;
     }
 
     public ArrayList<Joueur> getJoueursCheminPlusLong() { return this.cheminLePlusLongPossible(); }
